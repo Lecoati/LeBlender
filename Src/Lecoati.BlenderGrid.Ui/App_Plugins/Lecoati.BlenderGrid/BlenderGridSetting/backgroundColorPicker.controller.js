@@ -10,6 +10,6 @@
         }
 
         // Load css asset
-        assetsService.loadCss("/App_Plugins/Lecoati.GridStarterKit/GridSettings/assets/backgroundColorPicker.css");
+        assetsService.loadCss("/App_Plugins/Lecoati.BlenderGrid/BlenderGridSetting/assets/backgroundColorPicker.css");
 
     });
