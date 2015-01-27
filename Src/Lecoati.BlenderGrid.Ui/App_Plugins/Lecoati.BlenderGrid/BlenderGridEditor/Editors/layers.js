@@ -4,7 +4,7 @@
         $scope.openLayersEditor = function () {
 
             var dialog = dialogService.open({
-                template: '/App_Plugins/Lecoati.GridStarterKit/ListEditor/Editors/LayersEditor.html',
+                template: '/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/Editors/LayersEditor.html',
                 show: true,
                 dialogData: {
                     value: $scope.property.value,
