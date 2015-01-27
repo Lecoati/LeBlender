@@ -5,9 +5,21 @@
             dialogService.mediaPicker({
                 multiPicker: false,
                 callback: function (data) {
-                    $scope.property.value = mediaHelper.resolveFile(data, false);
+                    $scope.property.value = [];
+                    $scope.property.value.push({
+                        id: data.id,
+                        url: mediaHelper.resolveFile(data, false),
+                    });
                 }
             });
         };
+
+        $scope.getUrl = function () {
+
+            if ($scope.property.value && $scope.property.value.length > 0) {
+                return $scope.property.value[0].url;
+            }
+
+        }
 
     });

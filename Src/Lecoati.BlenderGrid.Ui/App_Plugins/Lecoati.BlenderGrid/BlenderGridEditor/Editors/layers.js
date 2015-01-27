@@ -4,12 +4,12 @@
         $scope.openLayersEditor = function () {
 
             var dialog = dialogService.open({
-                template: '/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/Editors/LayersEditor.html',
+                template: '/App_Plugins/Lecoati.GridStarterKit/ListEditor/Editors/LayersEditor.html',
                 show: true,
                 dialogData: {
                     value: $scope.property.value,
                     slide: {
-                        image: $scope.item["image"] && $scope.item["image"].value ? $scope.item["image"].value : "",
+                        image: $scope.item["image"] && $scope.item["image"].value && $scope.item["image"].value.length > 0 ? $scope.item["image"].value[0].url : "",
                         color: $scope.item["color"] && $scope.item["color"].value ? $scope.item["color"].value : ""
                     }
                 },

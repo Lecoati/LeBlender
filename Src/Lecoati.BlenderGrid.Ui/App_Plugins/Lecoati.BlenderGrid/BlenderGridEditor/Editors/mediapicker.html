@@ -6,7 +6,7 @@
                 <i class="icon icon-add large"></i>
                 <small>Choose {{property.editorName}}...</small>
             </a>
-            <img ng-src="{{property.value}}" alt="" ng-show="property.value">
+            <img ng-src="{{getUrl()}}" alt="" ng-show="getUrl()">
             <a href class="picked-image" ng-click="property.value = null" ng-show="property.value"><i class="icon icon-delete"></i></a>
         </li>
     </ul>
