@@ -1,0 +1,25 @@
+﻿@model dynamic
+@using Umbraco.Web.Templates
+
+@if (Model.value != null)
+{
+    <div id="tabs-generic" role="tabpanel">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            @foreach (var item in Model.value)
+            {
+                <li role="presentation" class="@(Model.value.IndexOf(item) == 0 ? "active" : "")"><a href="#tab-@Model.value.IndexOf(item)" aria-controls="home" role="tab" data-toggle="tab">@item.title.value</a></li>
+            }
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+        @foreach (var item in Model.value)
+            {
+                <div role="tabpanel" class="tab-pane @(Model.value.IndexOf(item) == 0 ? "active" : "")" id="tab-@Model.value.IndexOf(item)">@item.content.value</div>
+            }
+        </div>
+
+    </div>
+}

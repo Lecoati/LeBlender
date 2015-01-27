@@ -1,0 +1,9 @@
+﻿<div class="list-editor list-editor-{{control.editor.alias}}" ng-click="openListParameter()" ng-controller="BlenderGridEditor.controller">
+
+    <div ng-if="preview" ng-bind-html-unsafe="preview"></div>
+
+    <div class="empty-item" ng-hide="control.value && control.value.length > 0 && preview">
+        <h2 style="display:none">Loading {{control.editor.name}} ...</h2>
+    </div>
+
+</div>

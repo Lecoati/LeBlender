@@ -1,0 +1,18 @@
+﻿@model dynamic
+@using Umbraco.Web.Templates
+
+@if (Model.value != null)
+{
+    foreach (var item in Model.value)
+    {
+        <div id="addresse-generic">
+            <address>
+                <strong class="title">@item.title.value</strong><br>
+                <span class="addresse">@item.addresse.value</span><br>
+                <span class="telfax">@item.telfax.value</span><br>
+                <span class="email">@item.email.value</span><br>
+            </address>
+        </div>
+    }
+}
+
