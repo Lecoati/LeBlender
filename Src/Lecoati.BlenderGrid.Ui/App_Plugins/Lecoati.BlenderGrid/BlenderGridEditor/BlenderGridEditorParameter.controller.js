@@ -36,8 +36,8 @@
 
         $scope.initEditorPath = function (property) {
             if (property.$editor) {
-                if (property.$editor.Gridview && _.indexOf(property.$editor.Gridview, "/") >= 0) {
-                    return property.$editor.Gridview;
+                if (property.$editor.view && _.indexOf(property.$editor.view, "/") >= 0) {
+                    return property.$editor.view;
                 } else {
                     return "/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/editors/" + property.$editor.view + ".html";
                 }
