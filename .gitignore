@@ -17,3 +17,4 @@
 /Src/Lecoati.BlenderGrid.Extension/App_Data
 /BlenderGrid.v12.suo
 /packages
+/build/*.nupkg

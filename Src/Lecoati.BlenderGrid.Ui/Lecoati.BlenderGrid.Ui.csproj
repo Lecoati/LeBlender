@@ -237,6 +237,7 @@
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Editors\mediapicker.js" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Editors\textarea.html" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Editors\textstring.html" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\grid.editors.config.sample.js" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridSetting\assets\backgroundColorPicker.css" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridSetting\assets\pngSimu.png" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridSetting\backgroundColorPicker.controller.js" />
@@ -267,7 +268,6 @@
     <Content Include="default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="masterpages\dummy.txt" />
-    <Content Include="media\dummy.txt" />
     <Content Include="scripts\dummy.txt" />
     <Content Include="usercontrols\dummy.txt" />
     <Content Include="Views\Partials\dummy.txt" />

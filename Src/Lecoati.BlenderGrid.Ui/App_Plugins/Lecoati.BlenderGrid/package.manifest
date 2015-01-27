@@ -4,7 +4,7 @@
             alias: "blenderGridInjector",
             name: "Blender Grid Injector",
             editor: {
-                view: "~/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/GridInjector.html"
+                view: "~/App_Plugins/Lecoati.BlenderGrid/BlenderGridSetting/GridInjector.html"
             },
 			prevalues: {
 				fields: [{
