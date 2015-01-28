@@ -3,16 +3,18 @@
     list-style: none;
     padding: 20px 0 0 10px;
     margin: 0;
+    overflow:hidden;
 }
 
 #uSky-GridSettings-backgroundColorPicker ul li {
     display: inline-block;
     height: 50px;
     border: 3px solid rgb(194, 194, 194);
-    width: 177px;
+    width: 50px;
     margin-right: 10px;
     margin-bottom: 8px;
     cursor: pointer;
+    float: left;
 }
 
 #uSky-GridSettings-backgroundColorPicker ul li:hover, 

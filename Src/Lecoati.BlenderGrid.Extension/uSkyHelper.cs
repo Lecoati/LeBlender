@@ -46,5 +46,6 @@ namespace Lecoati.BlenderGrid.Extension
         {
             return (new UmbracoHelper(UmbracoContext.Current)).TypedMedia(mediaId);
         }
+
     }
 }

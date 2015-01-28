@@ -5,7 +5,7 @@
         $scope.rteConfig = angular.element($(".usky-grid")).scope().model.config.rte;
 
         /* oups, just need some more space :) */
-        $('.umb-modal.fade.in').attr('style', 'width: 880px !important; margin-left: -880px');
+        $('.umb-modal.fade.in').attr('style', 'width: 1100px !important; margin-left: -1100px');
 
         angular.extend($scope, {
             model: {
@@ -140,7 +140,7 @@
                 $scope.editLayer($scope.model.value[0]);
                 $scope.$apply();
             }
-        }, 500, false);
+        }, 800, false);
 
         // Load css asset
         assetsService.loadCss("/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/assets/LayersEditor.css");

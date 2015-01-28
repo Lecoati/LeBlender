@@ -18,16 +18,18 @@
                     return scope.layer;
                 }, function (modelValue) {
 
-                    var percentage = function(position) {
-
-                        var widthPer = 100 / scope.parentwidth;
-                        var heightPer = 100 / scope.parentheight;
-
+                    var setPosition = function(position) {
                         scope.layer.dataX = position.left;
                         scope.layer.dataY = position.top;
-                        scope.layer.dataXPer = widthPer * scope.layer.dataX;
-                        scope.layer.dataYPer = heightPer * scope.layer.dataY;
+                        scope.layer.dataXPer = (100 / scope.parentwidth) * scope.layer.dataX;
+                        scope.layer.dataYPer = (100 / scope.parentheight) * scope.layer.dataY;
+                    }
 
+                    var setSize = function (size) {
+                        scope.layer.width = size.width;
+                        scope.layer.height = size.height;
+                        scope.layer.widthPer = (100 / scope.parentwidth) * size.width;
+                        scope.layer.heightPer = (100 / scope.parentheight) * size.height;
                     }
 
                     element.draggable({
@@ -38,7 +40,7 @@
                         distance: 10,
                         cancel: ".text",
                         stop: function (event, ui) {
-                            percentage(ui.position);
+                            setPosition(ui.position);
                         }
                     })
 
@@ -46,10 +48,8 @@
                         element.resizable({
                             aspectRatio: scope.aspectratio,
                             stop: function (event, ui) {
-
-                                percentage(ui.position);
-                                scope.layer.width =  ui.size.width;
-                                scope.layer.height = ui.size.height;
+                                setPosition(ui.position);
+                                setSize(ui.size);
                             }
                         });
                     }

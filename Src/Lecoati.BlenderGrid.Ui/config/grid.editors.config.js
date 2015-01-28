@@ -77,6 +77,44 @@
         }   
     },
     {
+        "name": "Slider",
+        "alias": "slider",
+        "view": "/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditor.html",
+        "render": "/Views/Partials/Grid/Editors/slider.cshtml",
+        "icon": "icon-slideshow",
+        "config": {
+            "limit": "10",
+            "fixed": "false",
+            "editors": [
+                {
+                    "name": "Title",
+                    "alias": "title",
+                    "view": "textstring"
+                },
+                {
+                    "name": "Color",
+                    "alias": "color",
+                    "view": "colorPicker"
+                },
+                {
+                    "name": "Image",
+                    "alias": "image",
+                    "view": "mediapicker"
+                },
+                {
+                    "name": "Content",
+                    "alias": "content",
+                    "view": "contentpicker"
+                },
+                {
+                    "name": "Layers",
+                    "alias": "layers",
+                    "view": "layers"
+                }
+            ]
+        }
+    },
+    {
         "name": "Thumbnail",
         "alias": "thumbnail",
         "view": "/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditor.html",
