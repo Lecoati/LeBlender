@@ -52,7 +52,7 @@
         }
 
         $scope.setPreview = function () {
-            if ($scope.control.value) {
+        	if ($scope.control.value || !$scope.control.editor.config) {
                 BlenderGridRequestHelper.GetPartialViewResultAsHtmlForEditor($scope.control).success(function (htmlResult) {
                     $scope.preview = htmlResult;
                 });
