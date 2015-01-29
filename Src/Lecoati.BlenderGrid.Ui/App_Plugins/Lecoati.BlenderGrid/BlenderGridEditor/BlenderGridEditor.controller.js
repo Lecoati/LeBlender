@@ -4,19 +4,21 @@
         $scope.preview = "";
 
         $scope.openListParameter = function () {
-            var dialog = dialogService.open({
-                template: '/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditorParameter.html',
-                show: true,
-                dialogData: {
-                    name: $scope.control.editor.name,
-                    value: angular.copy($scope.control.value),
-                    config: $scope.control.editor.config
-                },
-                callback: function (data) {
-                    $scope.control.value = data;
-                    $scope.setPreview();
-                }
-            });
+        	if ($scope.control.editor.config) {
+        		var dialog = dialogService.open({
+        			template: '/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditorParameter.html',
+        			show: true,
+        			dialogData: {
+        				name: $scope.control.editor.name,
+        				value: angular.copy($scope.control.value),
+        				config: $scope.control.editor.config
+        			},
+        			callback: function (data) {
+        				$scope.control.value = data;
+        				$scope.setPreview();
+        			}
+        		});
+        	}
         }
 
         if (!$scope.control.value || $scope.control.value.length == 0) {
@@ -50,7 +52,7 @@
         }
 
         $scope.setPreview = function () {
-            if ($scope.control.value) {
+        	if ($scope.control.value || !$scope.control.editor.config) {
                 BlenderGridRequestHelper.GetPartialViewResultAsHtmlForEditor($scope.control).success(function (htmlResult) {
                     $scope.preview = htmlResult;
                 });

@@ -18,3 +18,5 @@
 /BlenderGrid.v12.suo
 /packages
 /build/*.nupkg
+/*.sln.ide
+*.suo
