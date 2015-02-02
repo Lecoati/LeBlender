@@ -2,8 +2,8 @@
 
     <div ng-if="preview" ng-bind-html-unsafe="preview"></div>
 
-	<div class="empty-item" ng-hide="control.value && control.value.length > 0 && preview && control.editor.config">
-		<h2 style="display:none">Loading {{control.editor.name}} ...</h2>
-	</div>
+    <div class="empty-item" ng-hide="(control.value && control.value.length > 0 && preview) || !control.editor.config">
+        <h2 style="display:none">Loading {{control.editor.name}} ...</h2>
+    </div>
 
 </div>
