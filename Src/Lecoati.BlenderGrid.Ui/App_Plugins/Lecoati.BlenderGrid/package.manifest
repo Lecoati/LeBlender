@@ -4,14 +4,20 @@
             alias: "blenderGridInjector",
             name: "Blender Grid Injector",
             editor: {
-                view: "~/App_Plugins/Lecoati.BlenderGrid/BlenderGridSetting/GridInjector.html"
+                view: "~/App_Plugins/Lecoati.BlenderGrid/blendergridsetting/GridInjector.html"
             },
 			prevalues: {
 				fields: [{
-						label: "Stylesheet Path",
-						description: "Backend injected stylesheet file",
-						key: "cssBackendPath",
-						view: "textstring"
+					label: "Grid editor config",
+					description: "Grid editor config",
+					key: "grideditorConfig",
+					view: "~/App_Plugins/Lecoati.BlenderGrid/blendergridsetting/grideditor.prevalues.html"
+				},
+				{
+					label: "Stylesheet Path",
+					description: "Backend injected stylesheet file",
+					key: "cssBackendPath",
+					view: "textstring"
 				}]
 			}
         }
@@ -22,11 +28,14 @@
 		'~/App_Plugins/Lecoati.BlenderGrid/Common/Filter/OrderObjectBy.filter.js',
 		'~/App_Plugins/Lecoati.BlenderGrid/Common/Directive/LayersResizableDraggable.js',
 
-		'~/App_Plugins/Lecoati.BlenderGrid/BlenderGridSetting/GridInjector.controller.js',
-		'~/App_Plugins/Lecoati.BlenderGrid/BlenderGridSetting/backgroundColorPicker.controller.js',
+		'~/App_Plugins/Lecoati.BlenderGrid/blendergridsetting/gridinjector.controller.js',
+		'~/App_Plugins/Lecoati.BlenderGrid/blendergridsetting/grideditor.prevalues.controller.js',
+		'~/App_Plugins/Lecoati.BlenderGrid/blendergridsetting/dialogs/editorconfig.controller.js',
+		'~/App_Plugins/Lecoati.BlenderGrid/blendergridsetting/dialogs/parameterconfig.controller.js',
+		'~/App_Plugins/Lecoati.BlenderGrid/blendergridsetting/backgroundColorPicker.controller.js',
         
-		'~/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditor.controller.js',
-		'~/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditorParameter.controller.js',
+		'~/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/blendergrideditor.controller.js',
+		'~/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/dialogs/parameterconfig.controller.js',
 		'~/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/editors/mediapicker.js',
 		'~/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/editors/contentpicker.js',
 		'~/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/editors/layers.js',

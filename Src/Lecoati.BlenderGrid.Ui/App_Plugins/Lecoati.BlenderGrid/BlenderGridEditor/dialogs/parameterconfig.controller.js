@@ -1,4 +1,4 @@
-﻿angular.module("umbraco").controller("BlenderGridEditorParameter.controller",
+﻿angular.module("umbraco").controller("Blendergrid.Parameterconfig.Controller",
     function ($scope, assetsService, $http, dialogService, mediaHelper, $timeout) {
 
         angular.extend($scope, {
@@ -68,7 +68,7 @@
     	};
 
     	$scope.updateTemplate = function () {
-    	    if ($scope.config.fixed === 'true') {
+    	    if ($scope.config.fixed) {
     	        while ($scope.model.value.length < $scope.config.limit) {
     	            $scope.add();
     	        }
@@ -81,6 +81,6 @@
     	$scope.updateTemplate();
 
     	// Load css asset
-    	assetsService.loadCss("/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/assets/BlenderGridEditoParameter.css");
+    	assetsService.loadCss("/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/assets/parameterconfig.css");
 
     });

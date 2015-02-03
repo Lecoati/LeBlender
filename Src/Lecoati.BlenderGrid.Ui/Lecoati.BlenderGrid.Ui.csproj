@@ -223,13 +223,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Assets\BlenderGridEditoParameter.css" />
-    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Assets\BlenderGridEditor.css" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Assets\parameterconfig.css" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Assets\blendergrideditor.css" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Assets\layersEditor.css" />
-    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\BlenderGridEditor.controller.js" />
-    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\BlenderGridEditor.html" />
-    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\BlenderGridEditorParameter.controller.js" />
-    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\BlenderGridEditorParameter.html" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\blendergrideditor.controller.js" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\blendergrideditor.html" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\dialogs\parameterconfig.controller.js" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\dialogs\parameterconfig.html" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Editors\boolean.html" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Editors\colorPicker.html" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Editors\colorPicker.js" />
@@ -244,12 +244,18 @@
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Editors\textarea.html" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Editors\textstring.html" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\grid.editors.config.sample.js" />
-    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridSetting\assets\backgroundColorPicker.css" />
-    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridSetting\assets\pngSimu.png" />
-    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridSetting\backgroundColorPicker.controller.js" />
-    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridSetting\backgroundColorPicker.html" />
-    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridSetting\GridInjector.controller.js" />
-    <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridSetting\GridInjector.html" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\blendergridsetting\assets\backgroundColorPicker.css" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\blendergridsetting\assets\pngSimu.png" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\blendergridsetting\dialogs\parameterconfig.html" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\blendergridsetting\dialogs\parameterconfig.controller.js" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\blendergridsetting\grideditor.prevalues.controller.js" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\blendergridsetting\dialogs\editorconfig.html" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\blendergridsetting\grideditor.prevalues.html" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\blendergridsetting\dialogs\editorconfig.controller.js" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\blendergridsetting\backgroundColorPicker.controller.js" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\blendergridsetting\backgroundColorPicker.html" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\blendergridsetting\GridInjector.controller.js" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\blendergridsetting\GridInjector.html" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\Common\Directive\LayersResizableDraggable.js" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\Common\Filter\OrderObjectBy.filter.js" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\Common\Services\requestHelper.Service.js" />
@@ -269,6 +275,7 @@
     <Content Include="App_Plugins\Lecoati.BlenderGrid\lib\jquery-ui-1.10.4.custom\css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\lib\jquery-ui-1.10.4.custom\css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\lib\jquery-ui-1.10.4.custom\css\ui-lightness\jquery-ui-1.10.4.custom.min.css" />
+    <Content Include="config\grid.editors.config - Copy.js" />
     <Content Include="config\grid.editors.config.js" />
     <Content Include="css\dummy.txt" />
     <Content Include="default.aspx" />
@@ -319,6 +326,7 @@
     <Content Include="App_Plugins\Lecoati.BlenderGrid\BlenderGridEditor\Views\Thumbnail.cshtml" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\package.manifest" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\Web.config" />
+    <Content Include="Views\Partials\Grid\Editors\test2.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -333,6 +341,7 @@
       <Name>Lecoati.BlenderGrid.Extension</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

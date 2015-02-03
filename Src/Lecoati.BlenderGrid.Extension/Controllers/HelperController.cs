@@ -18,6 +18,7 @@ namespace Lecoati.BlenderGrid.Extension.Controllers
     {
 
         [ValidateInput(false)]
+        [HttpPost]
         public ActionResult GetPartialViewResultAsHtmlForEditor()
         {
 
@@ -34,6 +35,35 @@ namespace Lecoati.BlenderGrid.Extension.Controllers
             {
                 return new HttpUnauthorizedResult();
             }
+
+        }
+
+        [ValidateInput(false)]
+        [HttpPost]
+        public ActionResult SaveEditorConfig()
+        {
+
+            umbraco.BusinessLogic.User u = umbraco.helper.GetCurrentUmbracoUser();
+
+            if (u != null)
+            {
+
+                var config = Request["config"];
+                var configPath = Request["configPath"];
+
+                using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.Web.HttpContext.Current.Server.MapPath(configPath)))
+                {
+                    file.Write(new JSonPresentationFormatter().Format(config));
+                }
+
+                return Json(new { Message = "Saved" }); ;
+
+            }
+            else
+            {
+                return new HttpUnauthorizedResult();
+            }
+
         }
 
     }

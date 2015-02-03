@@ -1,4 +1,4 @@
-﻿angular.module("umbraco").controller("UtilGridSettings.GridInjector",
+﻿angular.module("umbraco").controller("BlenderGrid.GridInjector",
     function ($scope, assetsService, $http, $timeout) {
 
         // Here we can apply settings and styles on the current grid row element
