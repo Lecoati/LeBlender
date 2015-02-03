@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Lecoati.BlenderGrid</id>
-        <version>1.0.10</version>
+        <version>0.9.1</version>
         <title>Lecoati.BlenderGrid</title>
         <authors>LECOATI</authors>
         <owners>LECOATI</owners>
@@ -12,6 +12,7 @@
         <language>en-US</language>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>LECOATI</tags>
+		<iconUrl>http://lecoati.com/images/Logo_BlenderGrid.png</iconUrl>
 		<dependencies />
     </metadata>
 	<files>
