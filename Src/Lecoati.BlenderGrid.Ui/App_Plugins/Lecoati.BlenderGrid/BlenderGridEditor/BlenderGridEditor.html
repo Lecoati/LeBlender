@@ -3,7 +3,7 @@
     <div ng-if="preview" ng-bind-html-unsafe="preview"></div>
 
     <div class="usky-editor-placeholder" ng-hide="preview">
-        <i class="icon icon-playing-cards"></i>
+        <i class="icon {{control.editor.icon}}"></i>
         <div class="help-text ng-binding">{{control.editor.name}}</div>
     </div>
 

@@ -1,43 +1,40 @@
 [
 	{
-		"name":"Blender",
-		"alias":"Blender",
+		"name":"Adresss",
+		"alias":"Adresss",
 		"view":"/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditor.html",
-		"icon":"icon-playing-cards"
-	},
-	{
-		"name":"Rte",
-		"alias":"rte",
-		"view":"rte",
-		"icon":"icon-trash"
-	},
-	{
-		"name":"Image",
-		"alias":"media",
-		"view":"media",
-		"icon":"icon-picture"
-	},
-	{
-		"name":"Macro",
-		"alias":"macro",
-		"view":"macro",
-		"icon":"icon-settings-alt"
-	},
-	{
-		"name":"Embed",
-		"alias":"embed",
-		"view":"embed",
-		"icon":"icon-movie-alt"
-	},
-	{
-		"name":"Headline",
-		"alias":"headline",
-		"view":"textstring",
-		"icon":"icon-coin",
+		"icon":"icon-map",
 		"config":{
-			"style":"font-size: 36px; line-height: 45px; font-weight: bold",
-			"markup":"<h1>#value#</h1>"
+			"editors":[
+				{
+					"name":"test",
+					"alias":"test",
+					"view":"textstring"
+				}
+			],
+			"fixed":false,
+			"limit":null,
+			"renderInGrid":false
 		}
+	},
+	{
+		"name":"test 2",
+		"alias":"test2",
+		"view":"/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditor.html",
+		"icon":"icon-user-female",
+		"config":{
+			"fixed":true,
+			"limit":2,
+			"editors":[
+				{
+					"name":"layer",
+					"alias":"layer",
+					"view":"layers"
+				}
+			],
+			"renderInGrid":true
+		},
+		"render":"test2"
 	},
 	{
 		"name":"Quote",
@@ -83,6 +80,79 @@
 		}
 	},
 	{
+		"name":"Thumbnail",
+		"alias":"thumbnail",
+		"view":"/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditor.html",
+		"render":"/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/Views/Thumbnail.cshtml",
+		"icon":"icon-thumbnail-list",
+		"config":{
+			"limit":"4",
+			"fixed":"true",
+			"editors":[
+				{
+					"name":"Title",
+					"alias":"title",
+					"view":"textstring"
+				},
+				{
+					"name":"Summary",
+					"alias":"summary",
+					"view":"textarea"
+				},
+				{
+					"name":"Image",
+					"alias":"image",
+					"view":"mediapicker"
+				},
+				{
+					"name":"Content",
+					"alias":"content",
+					"view":"contentpicker"
+				}
+			]
+		}
+	},
+	{
+		"name":"Blender",
+		"alias":"Blender",
+		"view":"/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditor.html",
+		"icon":"icon-playing-cards"
+	},
+	{
+		"name":"Rte",
+		"alias":"rte",
+		"view":"rte",
+		"icon":"icon-trash"
+	},
+	{
+		"name":"Image",
+		"alias":"media",
+		"view":"media",
+		"icon":"icon-picture"
+	},
+	{
+		"name":"Macro",
+		"alias":"macro",
+		"view":"macro",
+		"icon":"icon-settings-alt"
+	},
+	{
+		"name":"Embed",
+		"alias":"embed",
+		"view":"embed",
+		"icon":"icon-movie-alt"
+	},
+	{
+		"name":"Headline",
+		"alias":"headline",
+		"view":"textstring",
+		"icon":"icon-coin",
+		"config":{
+			"style":"font-size: 36px; line-height: 45px; font-weight: bold",
+			"markup":"<h1>#value#</h1>"
+		}
+	},
+	{
 		"name":"Slider",
 		"alias":"slider",
 		"view":"/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditor.html",
@@ -116,39 +186,6 @@
 					"name":"Layers",
 					"alias":"layers",
 					"view":"layers"
-				}
-			]
-		}
-	},
-	{
-		"name":"Thumbnail",
-		"alias":"thumbnail",
-		"view":"/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditor.html",
-		"render":"/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/Views/Thumbnail.cshtml",
-		"icon":"icon-thumbnail-list",
-		"config":{
-			"limit":"4",
-			"fixed":"true",
-			"editors":[
-				{
-					"name":"Title",
-					"alias":"title",
-					"view":"textstring"
-				},
-				{
-					"name":"Summary",
-					"alias":"summary",
-					"view":"textarea"
-				},
-				{
-					"name":"Image",
-					"alias":"image",
-					"view":"mediapicker"
-				},
-				{
-					"name":"Content",
-					"alias":"content",
-					"view":"contentpicker"
 				}
 			]
 		}
@@ -235,25 +272,6 @@
 		"config":{
 			"renderInGrid":true,
 			"fixed":true
-		},
-		"render":"test2"
-	},
-	{
-		"name":"test 2",
-		"alias":"test2",
-		"view":"/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditor.html",
-		"icon":"icon-user-female",
-		"config":{
-			"fixed":true,
-			"limit":2,
-			"editors":[
-				{
-					"name":"layer",
-					"alias":"layer",
-					"view":"layers"
-				}
-			],
-			"renderInGrid":true
 		},
 		"render":"test2"
 	}

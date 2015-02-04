@@ -32,7 +32,7 @@
             /*********************/
             /*********************/
             getGridEditors: function () {
-                return $http.get(configPath);
+                return $http.get(configPath + "?" + ((Math.random() * 100) + 1));
             },
 
             /*********************/

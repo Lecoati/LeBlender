@@ -17,8 +17,8 @@
                 </div>
             </div>
         </div>
-
-        <div ng-show="config.fixed === 'false' && config.limit > model.value.length" class="list-add-row">
+ 
+        <div ng-show="!config.fixed && config.limit > model.value.length" class="list-add-row">
             <i ng-click="add()" class="icon right icon-add"></i>
         </div>
 

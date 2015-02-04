@@ -275,7 +275,6 @@
     <Content Include="App_Plugins\Lecoati.BlenderGrid\lib\jquery-ui-1.10.4.custom\css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\lib\jquery-ui-1.10.4.custom\css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\lib\jquery-ui-1.10.4.custom\css\ui-lightness\jquery-ui-1.10.4.custom.min.css" />
-    <Content Include="config\grid.editors.config - Copy.js" />
     <Content Include="config\grid.editors.config.js" />
     <Content Include="css\dummy.txt" />
     <Content Include="default.aspx" />

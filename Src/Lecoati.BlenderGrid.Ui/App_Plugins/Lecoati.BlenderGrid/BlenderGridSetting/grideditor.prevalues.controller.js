@@ -22,7 +22,8 @@
                 editor = $scope.model.value[$scope.model.value.length -1];
             }
 
-            var dialog = dialogService.open({
+            dialogService.closeAll();
+            dialogService.open({
                 template: '/App_Plugins/Lecoati.BlenderGrid/BlenderGridSetting/dialogs/editorconfig.html',
                 show: true,
                 dialogData: {

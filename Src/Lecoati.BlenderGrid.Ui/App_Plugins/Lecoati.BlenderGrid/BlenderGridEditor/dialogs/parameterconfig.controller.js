@@ -7,7 +7,7 @@
                 value: []
             },
             config:{
-                limit: 999,
+                limit: 1,
                 fixed: false,
                 editors: []
             }     
@@ -69,6 +69,7 @@
 
     	$scope.updateTemplate = function () {
     	    if ($scope.config.fixed) {
+
     	        while ($scope.model.value.length < $scope.config.limit) {
     	            $scope.add();
     	        }
