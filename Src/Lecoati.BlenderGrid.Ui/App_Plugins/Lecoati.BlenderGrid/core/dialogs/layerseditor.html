@@ -1,0 +1,98 @@
+﻿
+<div class="list-panel slider-revolution" ng-controller="BlenderGrid.Dialog.LayersEditor.controller">
+
+    <div id="slideFluid" class="layer-show" ng-style="setSlideStyle()">
+
+        <div ng-repeat="layer in model.value"
+             blandergriddraggable
+             class="slider-revolution-layer"
+             ng-class="{ selected: layer == $parent.currentLayer , hover: layer == $parent.overLayer }"
+             ng-style="$parent.setLayerStyle(layer)"
+             aspectratio="layer.type=='image'"
+             resize="layer.type=='image'"
+             layer="layer"
+             data-ng-click="editLayer(layer)"
+             data-ng-mouseover="setOverLayer(layer)"
+             data-ng-mouseleave="initOverLayer()"
+             parentwidth="1040"
+             parentheight="400">
+
+            <div data-ng-click="handlerClick()" data-ng-mouseover="handlerMouseOver()" data-ng-mouseleave="handlerMouseLeave()">
+
+                <div ng-if="layer.type=='text'" ng-bind-html-unsafe="layer.content"></div>
+                <img ng-if="layer.type=='image'" class="layer-img" ng-src="{{layer.src}}" />
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="umb-panel-body with-footer">
+        <div class="layer-panel">
+
+            <div class="layer-properties" ng-show="currentLayer">
+                <div ng-show="currentLayer.type=='text'">
+                    <div class="property">
+                        <div unique-id="'layerTinyMce'"
+                             value="currentLayer.content"
+                             grid-rte configuration="rteConfig">
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="currentLayer.type=='image'">
+                    <div class="property property-img">
+                        <img ng-click="updatePictureLayer(currentLayer)" ng-src="{{currentLayer.src}}" />
+                    </div>
+                </div>
+
+                <input ng-model="currentLayer.horizontalCentered" type="checkbox"><label>force horizontal centered</label>
+
+            </div>
+
+            <div class="layer-order">
+
+                <div ui-sortable="sortableOptions" ng-model="model.value">
+                    <div ng-repeat="layer in model.value"
+                         class="layer-list"
+                         ng-class="{ selected: layer == currentLayer , hover: layer == overLayer }"
+                         ng-mouseover="setOverLayer(layer)"
+                         ng-mouseleave="initOverLayer()"
+                         ng-click="editLayer(layer)">
+
+                        <i class="icon {{layer.icon}} medium"></i>
+                        <span>{{layer.type}} {{layer.name}}</span>
+                        <i class="icon icon-navigation right medium"></i>
+                        <i class="icon icon-trash right medium" ng-click="removeLayer($index)"></i>
+
+                    </div>
+                </div>
+
+                <br />
+
+                <i class="icon icon-picture medium" ng-click="addPictureLayer()"></i>
+                <i class="icon icon-font medium" ng-click="addTextLayer()"></i>
+
+                <br />
+
+                <div class="help-text dark">Add new layer</div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="umb-panel-footer">
+        <div class="umb-el-wrap umb-panel-buttons">
+            <div class="btn-toolbar umb-btn-toolbar pull-right">
+                <a ng-click="cancel()" class="btn btn-link">
+                    <localize key="general_cancel" class="ng-isolate-scope ng-scope">Cancel</localize>
+                </a>
+                <a ng-click="save()" class="btn btn-primary">
+                    <localize key="buttons_save" class="ng-isolate-scope ng-scope">Save</localize>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>

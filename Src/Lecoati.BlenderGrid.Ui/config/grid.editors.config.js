@@ -2,37 +2,33 @@
 	{
 		"name":"Adresss",
 		"alias":"Adresss",
-		"view":"/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditor.html",
+		"view":"/App_Plugins/Lecoati.BlenderGrid/core/blendergrideditor.html",
 		"icon":"icon-map",
 		"config":{
+			"renderInGrid":false,
+			"fixed":true,
+			"limit":5,
 			"editors":[
+				{
+					"name":"icon",
+					"alias":"icon",
+					"view":"iconpicker"
+				},
 				{
 					"name":"test",
 					"alias":"test",
 					"view":"textstring"
 				}
-			],
-			"fixed":false,
-			"limit":null,
-			"renderInGrid":false
+			]
 		}
 	},
 	{
 		"name":"test 2",
 		"alias":"test2",
-		"view":"/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditor.html",
+		"view":"/App_Plugins/Lecoati.BlenderGrid/core/blendergrideditor.html",
 		"icon":"icon-user-female",
 		"config":{
-			"fixed":true,
-			"limit":2,
-			"editors":[
-				{
-					"name":"layer",
-					"alias":"layer",
-					"view":"layers"
-				}
-			],
-			"renderInGrid":true
+			
 		},
 		"render":"test2"
 	},

@@ -1,0 +1,9 @@
+﻿
+<div id="iconPicker" ng-controller="BlenderGrid.Editor.IconPicker.controller">
+
+    <a ng-click="openIconDialog()">
+        <i ng-show="!property.value || property.value == ''" ng-click="openIconDialog()" class="icon blue icon-add smaller left"></i>
+        <i ng-hide="!property.value || property.value == ''" class="{{config.defaultClass}} {{property.value}}"></i>Choose an Icon...
+    </a>
+
+</div>
