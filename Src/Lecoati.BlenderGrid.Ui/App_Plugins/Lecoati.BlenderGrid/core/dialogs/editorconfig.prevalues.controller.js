@@ -102,7 +102,9 @@
             }
         }
 
-        $scope.save = function(){
+        $scope.save = function () {
+            $scope.dialogData.editor.render = "/App_Plugins/Lecoati.BlenderGrid/core/views/Base.cshtml";
+
             angular.extend($scope.dialogData.editor, $scope.model.value);
             $scope.close();
         }

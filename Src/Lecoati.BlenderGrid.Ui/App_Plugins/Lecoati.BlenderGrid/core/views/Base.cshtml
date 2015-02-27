@@ -1,0 +1,6 @@
+﻿@using System.Web.Mvc.Html;
+
+@if (Model.editor != null)
+{
+    @(Html.Action("RenderEditor", "Blender", new { editor = Model.editor.frontView.Value }))
+}

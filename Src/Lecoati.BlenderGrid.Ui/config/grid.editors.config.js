@@ -1,35 +1,5 @@
 [
 	{
-		"name":"antoine",
-		"alias":"antoine",
-		"view":"/App_Plugins/Lecoati.BlenderGrid/core/blendergrideditor.html",
-		"icon":"icon-umbrella",
-		"config":{
-			"editors":[
-				{
-					"name":"booleano",
-					"alias":"booleano",
-					"view":"/umbraco/Views/propertyeditors/boolean/boolean.html",
-					"config":{
-						"multiPicker":true
-					}
-				},
-				{
-					"name":"color picker",
-					"alias":"colorpicker",
-					"view":"/umbraco/Views/propertyeditors/colorpicker/colorpicker.html"
-				},
-				{
-					"name":"content",
-					"alias":"content",
-					"view":"/umbraco/Views/propertyeditors/contentpicker/contentpicker.html"
-				}
-			],
-			"renderInGrid":true
-		},
-		"render":"antoine"
-	},
-	{
 		"name":"Adresss",
 		"alias":"Adresss",
 		"view":"/App_Plugins/Lecoati.BlenderGrid/core/blendergrideditor.html",
@@ -300,5 +270,22 @@
 			"fixed":true
 		},
 		"render":"test2"
+	},
+	{
+		"name":"Custom",
+		"alias":"custom",
+		"view":"/App_Plugins/Lecoati.BlenderGrid/core/blendergrideditor.html",
+		"icon":"icon-wall-plug",
+		"config":{
+			"editors":[
+				{
+					"name":"text",
+					"alias":"text",
+					"view":"textstring"
+				}
+			]
+		},
+		"render":"/App_Plugins/Lecoati.BlenderGrid/core/views/Base.cshtml",
+		"frontView":"/Views/Partials/Grid/Editors/TestBlender.cshtml"
 	}
 ]

@@ -333,6 +333,7 @@
     <Content Include="App_Plugins\Lecoati.BlenderGrid\Web.config" />
     <Content Include="Views\Partials\Grid\Editors\test2.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\antoine.cshtml" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\core\views\Base.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
