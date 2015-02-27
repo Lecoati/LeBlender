@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").factory("BlenderGridRequestHelper",
-    function ($rootScope, $q, $http, $parse) {
+    function ($rootScope, $q, $http, $parse, $routeParams) {
 
         var configPath = "/config/grid.editors.config.js";
 
@@ -11,7 +11,7 @@
 
                 var view = "grid/editors/base";
                 var url = "/umbraco/surface/Helper/GetPartialViewResultAsHtmlForEditor";
-                var resultParameters = { model: angular.toJson(control, false), view: view };
+                var resultParameters = { model: angular.toJson(control, false), view: view, id: $routeParams.id };
 
                 //$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
                 var promise = $http.post(url, resultParameters, {

@@ -1,0 +1,15 @@
+﻿@model dynamic
+@using Umbraco.Web.Templates
+@using Lecoati.BlenderGrid.Extension
+
+
+@{
+
+    
+    UmbracoHelper test = Helper.GetUmbracoHelper();
+
+    var content = Helper.GetCurrentContent();
+
+}
+
+<h1>@content.Name</h1>

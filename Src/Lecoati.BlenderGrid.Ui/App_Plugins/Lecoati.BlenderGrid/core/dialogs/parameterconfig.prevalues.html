@@ -11,7 +11,7 @@
                     <div class="umb-el-wrap">
                         <label class="control-label"><strong>Type</strong></label>
                         <div class="controls">
-                            <select ng-options="type.view as type.name for type in defaultParameterList" ng-model="model.value.view">
+                            <select ng-change="change()" ng-options="type.view as type.name for type in defaultParameterList" ng-model="model.value.view">
                                 <option value="">- - custom - -</option>
                             </select>
                         </div>
@@ -34,7 +34,7 @@
                             <input type="text" ng-model="model.value.view" />
                         </div>
                     </div>
-                    <div class="umb-el-wrap">
+                    <div class="umb-el-wrap" ng-show="hasConfig() || isCustom()">
                         <label class="control-label">Config</label>
                         <div class="controls">
                             <textarea type="text" style="width: 386px; height: 228px;" ng-model="textAreaconfig" />

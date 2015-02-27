@@ -13,7 +13,18 @@
                     <i ng-show="(!config.fixed || config.fixed === 'false')" ng-click=" remove($index)" class="icon right icon-delete"></i>
                 </span>
                 <div class="list-field" ng-repeat="property in item | BlenderGridOrderObjectBy:'$order':false">
-                    <div ng-include="initEditorPath(property)"></div>
+                    <!--<div ng-include="initEditorPath(property)"></div>-->
+
+                    <blender-editor-wrapper property="property" item="item"></blender-editor-wrapper>
+
+
+                    <!--<ng-form >
+                        <umb-control-group label="{{property.name}}">
+                            <umb-editor model="property"></umb-editor>
+                        </umb-control-group>
+                    </ng-form>-->
+
+
                 </div>
             </div>
         </div>

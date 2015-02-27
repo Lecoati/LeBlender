@@ -10,6 +10,33 @@ namespace Lecoati.BlenderGrid.Extension
     public class Helper
     {
 
+        public static UmbracoHelper GetUmbracoHelper() {
+            return new UmbracoHelper(UmbracoContext.Current);
+        }
+
+        public static dynamic GetFirstValue(dynamic values) {
+            if (values != null && System.Linq.Enumerable.Any(values)) {
+                return System.Linq.Enumerable.First(values);
+            }
+            else {
+                return null;
+            }
+        }
+
+        public static bool IsFrontEnd() {
+            return UmbracoContext.Current.IsFrontEndUmbracoRequest;
+        }
+
+        public static IPublishedContent GetCurrentContent()
+        {
+            if (UmbracoContext.Current.IsFrontEndUmbracoRequest) {
+                return GetUmbracoHelper().AssignedContentItem;
+            }
+            else {
+                return GetUmbracoHelper().TypedContent(HttpContext.Current.Request["id"].ToString());
+            }
+        }
+
         public static IPublishedContent GetFirstContent(dynamic contentPicker)
         {
             if (contentPicker != null
@@ -18,7 +45,7 @@ namespace Lecoati.BlenderGrid.Extension
                 && System.Linq.Enumerable.First(contentPicker.value).id != null)
             {
                 var id = System.Linq.Enumerable.First(contentPicker.value).id.Value;
-                return (new UmbracoHelper(UmbracoContext.Current)).TypedContent(id.ToString());
+                return GetUmbracoHelper().TypedContent(id.ToString());
             }
             else
             {
@@ -44,7 +71,7 @@ namespace Lecoati.BlenderGrid.Extension
 
         public static IPublishedContent GetFirstMedia(string mediaId)
         {
-            return (new UmbracoHelper(UmbracoContext.Current)).TypedMedia(mediaId);
+            return GetUmbracoHelper().TypedMedia(mediaId);
         }
 
     }

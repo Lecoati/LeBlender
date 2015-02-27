@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").
-    directive('blandergriddraggable', function () {
+    directive('blendergriddraggable', function () {
         return {
             restrict: 'A',
             scope: {

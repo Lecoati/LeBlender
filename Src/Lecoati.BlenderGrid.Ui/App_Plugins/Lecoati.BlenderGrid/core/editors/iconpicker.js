@@ -4,12 +4,12 @@ angular.module("umbraco").controller("BlenderGrid.Editor.IconPicker.controller",
 
         $scope.config = {
             cssPath: "",
-            prefixe: "",
+            prefix: "",
             defaultClass: ""
         }
 
-        if ($scope.property.$editor.config) {
-            angular.extend($scope.config, $scope.property.$editor.config);
+        if ($scope.model.config) {
+            angular.extend($scope.config, $scope.model.config);
         }
 
         $scope.openIconDialog = function () {
@@ -17,11 +17,11 @@ angular.module("umbraco").controller("BlenderGrid.Editor.IconPicker.controller",
                 template: '/App_Plugins/Lecoati.BlenderGrid/core/dialogs/iconpickereditor.html',
                 show: true,
                 dialogData: {
-                    icon: $scope.property.value,
+                    icon: $scope.model.value,
                     config: $scope.config
                 },
                 callback: function (data) {
-                    $scope.property.value = data;
+                    $scope.model.value = data;
                 }
             });
         }

@@ -27,6 +27,7 @@
 		'~/App_Plugins/Lecoati.BlenderGrid/Common/Services/requestHelper.Service.js',
 		'~/App_Plugins/Lecoati.BlenderGrid/Common/Filter/OrderObjectBy.filter.js',
 		'~/App_Plugins/Lecoati.BlenderGrid/Common/Directive/LayersResizableDraggable.js',
+		'~/App_Plugins/Lecoati.BlenderGrid/Common/Directive/blendereditorwrapper.js',
 
 		'~/App_Plugins/Lecoati.BlenderGrid/core/blendergrid.controller.js',
 		'~/App_Plugins/Lecoati.BlenderGrid/core/blendergrid.prevalues.controller.js',

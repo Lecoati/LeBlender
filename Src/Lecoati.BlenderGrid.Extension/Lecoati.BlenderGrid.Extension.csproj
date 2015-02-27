@@ -224,6 +224,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="JSonPresentationFormatter.cs" />
+    <Compile Include="Models\IBlenderPropertyModel.cs" />
+    <Compile Include="Models\IBlenderModel.cs" />
+    <Compile Include="Models\BlenderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="uSkyHelper.cs" />
   </ItemGroup>
@@ -241,7 +244,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="App_Start\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -2,8 +2,8 @@
 angular.module("umbraco").controller("BlenderGrid.Editor.Contentpicker.controller",
     function ($scope, assetsService, $http, dialogService, mediaHelper) {
 
-        if (!$scope.property.value) {
-            $scope.property.value = [];
+        if (!$scope.model.value) {
+            $scope.model.value = [];
         }
 
         $scope.config = {
@@ -12,8 +12,8 @@ angular.module("umbraco").controller("BlenderGrid.Editor.Contentpicker.controlle
             maxNumber:1
         }
 
-        if ($scope.property.$editor.config) {
-            angular.extend($scope.config, $scope.property.$editor.config);
+        if ($scope.model.config) {
+            angular.extend($scope.config, $scope.model.config);
         }
 
         $scope.openContentPicker = function () {
@@ -23,12 +23,12 @@ angular.module("umbraco").controller("BlenderGrid.Editor.Contentpicker.controlle
                 callback: function (data) {
                     if ($scope.multiPicker) {
                         data.forEach(function (data) {
-                            var existsNode = $scope.property.value.some(function (node) {
+                            var existsNode = $scope.model.value.some(function (node) {
                                 return node.id === data.id;
                             });
 
                             if (!existsNode) {
-                                $scope.property.value.push({
+                                $scope.model.value.push({
                                     id: data.id,
                                     name: data.name,
                                     icon: data.icon
@@ -37,7 +37,7 @@ angular.module("umbraco").controller("BlenderGrid.Editor.Contentpicker.controlle
                         });
                     }
                     else {
-                        $scope.property.value.push({
+                        $scope.model.value.push({
                             name: data.name,
                             id: data.id,
                             icon: data.icon
@@ -48,7 +48,7 @@ angular.module("umbraco").controller("BlenderGrid.Editor.Contentpicker.controlle
         };
 
         $scope.remove = function (index) {
-            $scope.property.value.splice(index, 1);
+            $scope.model.value.splice(index, 1);
         };
 
         $scope.sortableOptions = {

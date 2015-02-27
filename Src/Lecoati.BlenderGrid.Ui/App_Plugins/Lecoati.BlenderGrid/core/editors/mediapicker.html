@@ -2,12 +2,12 @@
 <div class="umb-mediapicker" ng-controller="BlenderGrid.Editor.Mediapicker.controller">
     <ul class="umb-sortable-thumbnails">
         <li style="width: 120px; height: 100px; overflow: hidden;">
-            <a href ng-click="pick()" class="icon-holder" ng-hide="property.value">
+            <a href ng-click="pick()" class="icon-holder" ng-hide="model.value">
                 <i class="icon icon-add large"></i>
-                <small>Choose {{property.editorName}}...</small>
+                <small>Choose {{model.label}}...</small>
             </a>
             <img ng-src="{{getUrl()}}" alt="" ng-show="getUrl()">
-            <a href class="picked-image" ng-click="property.value = null" ng-show="property.value"><i class="icon icon-delete"></i></a>
+            <a href class="picked-image" ng-click="model.value = null" ng-show="model.value"><i class="icon icon-delete"></i></a>
         </li>
     </ul>
 </div>

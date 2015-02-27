@@ -13,7 +13,7 @@ angular.module("umbraco").controller("BlenderGrid.Dialog.IconPickerEditor.contro
             var parser = new CSSParser();
             angular.forEach(parser.parse(data, false, false).cssRules, function (nclass, key) {
                 if (nclass && nclass.mSelectorText) {
-                    if ($scope.config.prefixe === "" || nclass.mSelectorText.indexOf($scope.config.prefixe) === 0)
+                    if ($scope.config.prefix === "" || nclass.mSelectorText.indexOf($scope.config.prefix) === 0)
                     {
                         $scope.icons.push(nclass.mSelectorText.replace(/\./g, '').replace(/\:before/g, ''));
                     }

@@ -223,6 +223,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\common\directive\blendereditorwrapper.js" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\core\assets\iconpicker.css" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\core\assets\parameterconfig.css" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\core\assets\blendergrideditor.css" />
@@ -263,6 +264,7 @@
     <Content Include="App_Plugins\Lecoati.BlenderGrid\common\directive\layersresizabledraggable.js" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\common\filter\orderobjectby.filter.js" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\common\services\requesthelper.service.js" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\lib\cssParser.js" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\lib\jquery-ui-1.10.4.custom\css\ui-lightness\images\animated-overlay.gif" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\lib\jquery-ui-1.10.4.custom\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\lib\jquery-ui-1.10.4.custom\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
@@ -330,6 +332,7 @@
     <Content Include="App_Plugins\Lecoati.BlenderGrid\package.manifest" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\Web.config" />
     <Content Include="Views\Partials\Grid\Editors\test2.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\antoine.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

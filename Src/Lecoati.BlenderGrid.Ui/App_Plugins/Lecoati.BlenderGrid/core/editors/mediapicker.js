@@ -5,8 +5,8 @@
             dialogService.mediaPicker({
                 multiPicker: false,
                 callback: function (data) {
-                    $scope.property.value = [];
-                    $scope.property.value.push({
+                    $scope.model.value = [];
+                    $scope.model.value.push({
                         id: data.id,
                         url: mediaHelper.resolveFile(data, false),
                     });
@@ -16,8 +16,8 @@
 
         $scope.getUrl = function () {
 
-            if ($scope.property.value && $scope.property.value.length > 0) {
-                return $scope.property.value[0].url;
+            if ($scope.model.value && $scope.model.value.length > 0) {
+                return $scope.model.value[0].url;
             }
 
         }

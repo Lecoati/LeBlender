@@ -4,7 +4,7 @@
     <div id="slideFluid" class="layer-show" ng-style="setSlideStyle()">
 
         <div ng-repeat="layer in model.value"
-             blandergriddraggable
+             blendergriddraggable
              class="slider-revolution-layer"
              ng-class="{ selected: layer == $parent.currentLayer , hover: layer == $parent.overLayer }"
              ng-style="$parent.setLayerStyle(layer)"

@@ -7,7 +7,7 @@
 
             var elem = $element.find("input");
             elem.spectrum({
-                color: $scope.property.value,
+                color: $scope.model.value,
                 allowEmpty: true,
                 showInitial: false,
                 chooseText: "choose",
@@ -18,10 +18,10 @@
                 change: function (color) {
                     angularHelper.safeApply($scope, function () {
                         if (color) {
-                            $scope.property.value = color.toHexString(); 
+                            $scope.model.value = color.toHexString(); 
                         }
                         else {
-                            $scope.property.value = '';
+                            $scope.model.value = '';
                         }
                     });
                 }

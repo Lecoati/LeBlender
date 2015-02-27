@@ -1,5 +1,7 @@
-#iconPicker i {
-    margin-right:10px;
+
+#iconPicker i:before {
+    margin-right:0;
+    margin-left:0;
 }
 
 #iconPickerEditor .umb-panel-body {
@@ -7,12 +9,18 @@
 }
 
 #iconPickerEditor span  {
-    cursor:pointer;
-    margin: 15px 10px;
-    display: inline-flex;
-    font-size: 25px;
+    cursor: pointer;
+    margin: 15px 0;
+    display: inline-block;
+    font-size: 36px;
+    width: 63px;
 }
 
-#iconPickerEditor span:before  {
-    font-size: 25px;
+#iconPicker i.result {
+    font-size: 36px;
+}
+
+#iconPickerEditor span:before, #iconPicker i.result:before  {
+    font-size: 36px;
+    margin:0;
 }
