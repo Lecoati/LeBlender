@@ -322,6 +322,6 @@
 			]
 		},
 		"render":"/App_Plugins/Lecoati.BlenderGrid/core/views/Base.cshtml",
-		"frontView":"/Views/Partials/Grid/Editors/TestBlender.cshtml"
+		"frontView":"TestBlender"
 	}
 ]

@@ -220,10 +220,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BlenderController.cs" />
+    <Compile Include="Controllers\CustomController.cs" />
     <Compile Include="Controllers\HelperController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="JSonPresentationFormatter.cs" />
     <Compile Include="Models\BlenderModel.cs" />
     <Compile Include="Models\BlenderPropertyModel.cs" />
@@ -232,7 +230,6 @@
     <Compile Include="uSkyHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

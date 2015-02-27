@@ -2,5 +2,5 @@
 
 @if (Model.editor != null)
 {
-    @(Html.Action("RenderEditor", "Blender", new { editor = Model.editor.frontView.Value }))
+    @(Html.Action("RenderEditor", "Blender", new { editorAlias = Model.editor.alias, frontView = Model.editor.frontView.Value }))
 }
