@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Lecoati.BlenderGrid.Extension.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -72,6 +74,10 @@ namespace Lecoati.BlenderGrid.Extension
         public static IPublishedContent GetFirstMedia(string mediaId)
         {
             return GetUmbracoHelper().TypedMedia(mediaId);
+        }
+
+        public static BlenderRootModel GetBlender(dynamic model) {
+            return JsonConvert.DeserializeObject<BlenderRootModel>(model.ToString());
         }
 
     }

@@ -1,5 +1,41 @@
 [
 	{
+		"name":"antoine",
+		"alias":"antoine",
+		"view":"/App_Plugins/Lecoati.BlenderGrid/core/blendergrideditor.html",
+		"icon":"icon-umbrella",
+		"config":{
+			"editors":[
+				{
+					"name":"Campo1",
+					"alias":"campo1",
+					"view":"textstring",
+					"config":{
+						"multiPicker":true
+					}
+				},
+				{
+					"name":"colorpicker",
+					"alias":"colorpicker",
+					"view":"colorpicker"
+				},
+				{
+					"name":"Bool",
+					"alias":"Bool",
+					"view":"boolean"
+				},
+				{
+					"name":"contentpicker",
+					"alias":"contentpicker",
+					"view":"contentpicker"
+				}
+			],
+			"renderInGrid":true,
+			"limit":10
+		},
+		"render":"antoine"
+	},
+	{
 		"name":"Adresss",
 		"alias":"Adresss",
 		"view":"/App_Plugins/Lecoati.BlenderGrid/core/blendergrideditor.html",
