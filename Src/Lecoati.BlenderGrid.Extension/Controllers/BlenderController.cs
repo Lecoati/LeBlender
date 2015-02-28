@@ -31,7 +31,15 @@ namespace Lecoati.BlenderGrid.Extension.Controllers
                 var parts = frontView.Split(new char[] { '/', '\\' });
                 var method = parts.Last().Split('.').First();
 
-                var actionResult = (ViewResult)controllerType.GetMethod(method).Invoke(controllerInstance, new[] { blenderModel });
+                var actionMethod = controllerType.GetMethod(method);
+                var parameter = actionMethod.GetParameters().First();
+
+                var type = parameter.ParameterType.UnderlyingSystemType;
+                var typeInstance = (BlenderModel)Activator.CreateInstance(type);
+
+                typeInstance.Items = blenderModel.Items;
+
+                var actionResult = (ViewResult)controllerType.GetMethod(method).Invoke(controllerInstance, new[] { typeInstance });
 
                 actionResult.ViewName = frontView;
                 
