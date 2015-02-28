@@ -7,27 +7,25 @@
 		"config":{
 			"editors":[
 				{
-					"name":"Campo1",
-					"alias":"campo1",
-					"view":"textstring",
-					"config":{
-						"multiPicker":true
+					"name":"test",
+					"alias":"test",
+					"view":"",
+					"propretyType":{
+						"name":"Boolean",
+						"view":"boolean"
 					}
 				},
 				{
-					"name":"colorpicker",
-					"alias":"colorpicker",
-					"view":"colorpicker"
-				},
-				{
-					"name":"Bool",
-					"alias":"Bool",
-					"view":"boolean"
-				},
-				{
-					"name":"contentpicker",
-					"alias":"contentpicker",
-					"view":"contentpicker"
+					"name":"mediapicker",
+					"alias":"mediapicker",
+					"view":"",
+					"propretyType":{
+						"name":"Media Picker",
+						"view":"/umbraco/Views/propertyeditors/mediapicker/mediapicker.html",
+						"config":{
+							"multiPicker":false
+						}
+					}
 				}
 			],
 			"renderInGrid":true,

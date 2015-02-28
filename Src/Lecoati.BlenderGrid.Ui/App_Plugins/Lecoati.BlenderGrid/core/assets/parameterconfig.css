@@ -14,19 +14,23 @@
 }
 
 #blender-grid-editor-parameter {
-    border-bottom: 1px solid #dbdbdb;
-    background:#ffffff;
+    /*border-bottom: 1px solid #dbdbdb;
+    background:#ffffff;*/
 }
 
 #blender-grid-editor-parameter .list {
     border-top: 1px solid #dbdbdb;
-    padding: 27px 0 5px 0;
-    text-align: center;
+    padding: 0px 0 5px 0;
+    /*text-align: center;*/
     cursor:pointer;
     height:0;
     position:relative;
     background:#fff;
     overflow:hidden;
+}
+
+#blender-grid-editor-parameter .multiple {
+    padding: 27px 0 5px 0;
 }
 
 #blender-grid-editor-parameter .list:hover {
@@ -40,7 +44,19 @@
 }
 
 #blender-grid-editor-parameter .list-open .list-field {
+    padding: 0 10px;
     margin-bottom: 10px !important;
+}
+
+#blender-grid-editor-parameter .list-open .list-field h5 {
+}
+
+#blender-grid-editor-parameter .list-open .list-field > div {
+    text-align: center;
+}
+
+#blender-grid-editor-parameter .umb-editor {
+    width: 100% !important;
 }
 
 #blender-grid-editor-parameter a:hover, a:focus {
@@ -59,7 +75,7 @@
     margin-bottom: 10px;
     display: block;
     margin-top: -22px;
-    padding: 0 5px;
+    padding: 0 10px;
 }
 
 
@@ -85,9 +101,9 @@
 
 #blender-grid-editor-parameter .list-add-row {
     border-top: 1px solid #dbdbdb;
-    float: right;
     padding: 5px;
     color: #aaaaaa;
+    text-align: right;
 }
 
 #blender-grid-editor-parameter .list-add-row i {

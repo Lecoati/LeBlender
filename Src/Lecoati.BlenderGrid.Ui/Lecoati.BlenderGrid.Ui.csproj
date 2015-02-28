@@ -233,6 +233,8 @@
     <Content Include="App_Plugins\Lecoati.BlenderGrid\core\blendergrideditor.html" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\core\dialogs\parameterconfig.controller.js" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\core\dialogs\parameterconfig.html" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\core\editors\datepicker.html" />
+    <Content Include="App_Plugins\Lecoati.BlenderGrid\core\editors\integer.html" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\core\editors\boolean.html" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\core\editors\colorpicker.html" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\core\editors\colorpicker.js" />

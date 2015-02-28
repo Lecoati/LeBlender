@@ -27,19 +27,26 @@
             $scope.selected = index;
         };
 
-        $scope.remove = function ($index) {
-            if ($index > 0) {
-                $scope.selected = $scope.model.value[$index - 1];
+        $scope.remove = function (item, $index, $event) {
+
+            if (item === $scope.selected) {
+                if ($index === 0) {
+                    $scope.selected = $scope.model.value[1];
+                }
+                else if ($index >= 0) {
+                    $scope.selected = $scope.model.value[$index - 1];
+                }
             }
-        	$scope.model.value.splice($index, 1);
+            $scope.model.value.splice($index, 1);
+
         };
 
         $scope.initEditorPath = function (property) {
-            if (property && property.$editor) {
-                if (property.$editor.view && _.indexOf(property.$editor.view, "/") >= 0) {
-                    return property.$editor.view;
+            if (property && property.$editor && property.$editor.propretyType) {
+                if (property.$editor.propretyType.view && _.indexOf(property.$editor.propretyType.view, "/") >= 0) {
+                    return property.$editor.propretyType.view;
                 } else {
-                    return "/App_Plugins/Lecoati.BlenderGrid/core/editors/" + property.$editor.view + ".html";
+                    return "/App_Plugins/Lecoati.BlenderGrid/core/editors/" + property.$editor.propretyType.view + ".html";
                 }
             }
         };
