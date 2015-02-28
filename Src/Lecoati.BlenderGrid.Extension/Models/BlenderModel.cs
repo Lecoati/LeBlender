@@ -10,9 +10,8 @@ using Umbraco.Web;
 namespace Lecoati.BlenderGrid.Extension.Models
 {
     [JsonConverter(typeof(BlenderModelMatchingConverter))]
-    public class BlenderModel
+    public class BlenderValue
     {
-
         internal IEnumerable<BlenderPropertyModel> Properties { get; set; }
 
         #region Helper Methods

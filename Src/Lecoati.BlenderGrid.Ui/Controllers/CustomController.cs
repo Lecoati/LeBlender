@@ -11,7 +11,7 @@ namespace Lecoati.BlenderGrid.Ui.Controllers
 {
     public class CustomController : BlenderController
     {
-        public ActionResult TestBlender(BlenderRootModel model)
+        public ActionResult TestBlender(BlenderModel model)
         {
             return View(model);
         }

@@ -16,7 +16,7 @@ namespace Lecoati.BlenderGrid.Extension.Controllers
         [ChildActionOnly]
         public ActionResult RenderEditor(string editorAlias, string frontView, dynamic model)
         {
-            BlenderRootModel blenderModel = JsonConvert.DeserializeObject<BlenderRootModel>(model.ToString());
+            BlenderModel blenderModel = JsonConvert.DeserializeObject<BlenderModel>(model.ToString());
 
             var baseType = typeof(BlenderController);
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();

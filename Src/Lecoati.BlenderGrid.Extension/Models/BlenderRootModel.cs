@@ -6,24 +6,10 @@ using System.Web;
 
 namespace Lecoati.BlenderGrid.Extension.Models
 {
-
     [JsonObject]
-    public class BlenderRootModel : IEnumerable<BlenderModel>
+    public class BlenderModel
     {
-
         [JsonProperty("value")]
-        public IEnumerable<BlenderModel> Items { get; set; }
-
-        public IEnumerator<BlenderModel> GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            throw new NotImplementedException();
-        }
-    
-    }   
-
+        public IEnumerable<BlenderValue> Items { get; set; }
+    }
 }

@@ -36,7 +36,7 @@ namespace Lecoati.BlenderGrid.Extension.Models
                 }
             }
 
-            return new BlenderModel
+            return new BlenderValue
             {
                 Properties = bpml,
             };
