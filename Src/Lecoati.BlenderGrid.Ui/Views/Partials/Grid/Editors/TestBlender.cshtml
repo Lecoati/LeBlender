@@ -1,2 +1,9 @@
-﻿
-<p>Hello!</p>
+﻿@using Lecoati.BlenderGrid.Extension.Models;
+
+@inherits UmbracoViewPage<BlenderRootModel>
+
+@{
+    var model = Model;
+}
+
+<p>Hello! @(Model.Items.ElementAt(0).GetValue<string>("text"))</p>

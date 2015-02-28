@@ -75,10 +75,5 @@ namespace Lecoati.BlenderGrid.Extension
         {
             return GetUmbracoHelper().TypedMedia(mediaId);
         }
-
-        public static BlenderRootModel GetBlender(dynamic model) {
-            return JsonConvert.DeserializeObject<BlenderRootModel>(model.ToString());
-        }
-
     }
 }

@@ -9,7 +9,6 @@ using Umbraco.Web;
 
 namespace Lecoati.BlenderGrid.Extension.Models
 {
-
     [JsonConverter(typeof(BlenderModelMatchingConverter))]
     public class BlenderModel
     {
@@ -46,48 +45,6 @@ namespace Lecoati.BlenderGrid.Extension.Models
         }
 
         #endregion
-
-    }
-
-    public class BlenderModelMatchingConverter : JsonConverter
-    {
-
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType.IsClass;
-        }
-
-        public override bool CanWrite
-        {
-            get { return false; }
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            
-            JObject jsonObject = JObject.Load(reader);
-            var properties = jsonObject.Properties().ToList();
-
-            IList<BlenderPropertyModel> bpml = new List<BlenderPropertyModel>();
-
-            foreach (var property in properties)
-            {
-                if (property.Any()) {
-                    bpml.Add(JsonConvert.DeserializeObject<BlenderPropertyModel>(property.First().ToString()));
-                }
-            }
-
-            return new BlenderModel
-            {
-                Properties = bpml,
-            };
-
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            throw new NotImplementedException();
-        }
 
     }
 

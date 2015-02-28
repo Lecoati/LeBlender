@@ -7,15 +7,16 @@ using System.Web.Mvc;
 using Umbraco.Web.Mvc;
 
 using Lecoati.BlenderGrid.Extension.Models;
+using Newtonsoft.Json;
 
 namespace Lecoati.BlenderGrid.Extension.Controllers
 {
     public class BlenderController : SurfaceController
     {
         [ChildActionOnly]
-        public ActionResult RenderEditor(string editorAlias, string frontView)
+        public ActionResult RenderEditor(string editorAlias, string frontView, dynamic model)
         {
-            var model = new BlenderModel();
+            BlenderRootModel blenderModel = JsonConvert.DeserializeObject<BlenderRootModel>(model.ToString());
 
             var baseType = typeof(BlenderController);
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
@@ -30,14 +31,14 @@ namespace Lecoati.BlenderGrid.Extension.Controllers
                 var parts = frontView.Split(new char[] { '/', '\\' });
                 var method = parts.Last().Split('.').First();
 
-                var actionResult = (ViewResult)controllerType.GetMethod(method).Invoke(controllerInstance, new[] { model });
+                var actionResult = (ViewResult)controllerType.GetMethod(method).Invoke(controllerInstance, new[] { blenderModel });
 
                 actionResult.ViewName = frontView;
                 
                 return actionResult;
             }
 
-            return View(frontView, model);
+            return View(frontView, blenderModel);
         }
     }
 }

@@ -223,6 +223,7 @@
     <Compile Include="Controllers\HelperController.cs" />
     <Compile Include="JSonPresentationFormatter.cs" />
     <Compile Include="Models\BlenderModel.cs" />
+    <Compile Include="Models\BlenderModelMatchingConverter.cs" />
     <Compile Include="Models\BlenderPropertyModel.cs" />
     <Compile Include="Models\BlenderRootModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

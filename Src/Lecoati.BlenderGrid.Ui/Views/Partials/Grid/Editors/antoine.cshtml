@@ -1,23 +1,12 @@
-﻿@inherits UmbracoViewPage<dynamic>
+﻿@inherits UmbracoViewPage<BlenderRootModel>
 
 @using Umbraco.Web.Templates
 @using Lecoati.BlenderGrid.Extension
 @using Lecoati.BlenderGrid.Extension.Models
 
-
-@{
-    
-    BlenderRootModel c = Helper.GetBlender(Model);
-    
-}
-
-@foreach (var i in c.Items) {
-
-
+@foreach (var i in Model.Items) {
     <h2>@(i.GetValue<string>("Campo1"))</h2>
     <p>@(i.GetValue<string>("colorpicker"))</p>
     <p>@(i.GetValue("contentpicker"))</p>
-
-
 }
 

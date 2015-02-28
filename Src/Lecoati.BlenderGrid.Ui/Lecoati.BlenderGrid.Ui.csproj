@@ -290,7 +290,9 @@
     <Content Include="scripts\dummy.txt" />
     <Content Include="usercontrols\dummy.txt" />
     <Content Include="Views\Partials\dummy.txt" />
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -335,6 +337,9 @@
     <Content Include="Views\Partials\Grid\Editors\test2.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\antoine.cshtml" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\core\views\Base.cshtml" />
+    <Content Include="Views\Partials\Grid\Editors\TestBlender.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -349,7 +354,6 @@
       <Name>Lecoati.BlenderGrid.Extension</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
