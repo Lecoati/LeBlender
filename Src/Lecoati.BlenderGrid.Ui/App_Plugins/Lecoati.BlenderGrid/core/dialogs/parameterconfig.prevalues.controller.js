@@ -8,7 +8,7 @@
 	        },
             {
                 name: "Textstring",
-                view: "textbox",
+                view: "textstring",
             },
             {
             	name: "Boolean",
@@ -183,6 +183,41 @@
             }    
         });
 
+        $scope.autoPopulateAlias = function (name) {
+            var s = name.replace(/[^a-zA-Z0-9\s\.-]+/g, '');
+            return s.toCamelCase();
+        }
+
+        var toCamelCase = function (name) {
+            var s = name.toPascalCase();
+            if ($.trim(s) == "")
+                return "";
+            if (s.length > 1)
+                s = s.substr(0, 1).toLowerCase() + s.substr(1);
+            else
+                s = s.toLowerCase();
+            return s;
+        };
+
+        var toPascalCase = function (name) {
+            var s = "";
+            angular.each($.trim(name).split(/[\s\.-]+/g), function (val, idx) {
+                if ($.trim(val) == "")
+                    return;
+                if (val.length > 1)
+                    s += val.substr(0, 1).toUpperCase() + val.substr(1);
+                else
+                    s += val.toUpperCase();
+            });
+            return s;
+        };
+
         $scope.init();
+
+        if ($scope.model.value.name === "" && $scope.model.value.name === "") {
+            $scope.$watch("model.value.name", function () {
+                $scope.model.value.alias = $scope.autoPopulateAlias($scope.model.value.name);
+            })
+        }
 
     });

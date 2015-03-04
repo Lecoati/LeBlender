@@ -42,68 +42,74 @@
                             <input type="text" ng-model="model.value.view" />
                         </div>
                     </div>
-                    <div class="umb-el-wrap">
-                        <label class="control-label">Render</label>
-                        <div class="controls">
-                            <input ng-if="isBlenderEditor()" type="text" ng-model="model.value.frontView" />
-                            <input ng-if="!isBlenderEditor()" type="text" ng-model="model.value.render" />
-                        </div>
+                    
+                    <div class="umb-el-wrap" style="margin-bottom: 20px;">
+                        <input type="checkbox" ng-model="model.value.adv" name="adv" id="adv" style="margin-top: 12px;margin-right: 5px;float: left;" />
+                        <label class="control-label" for="adv" style="float: left;"><strong>Advanced settings</strong></label>
                     </div>
-                    <div ng-show="!isBlenderEditor()" class="umb-el-wrap">
-                        <label class="control-label">Config</label>
-                        <div class="controls">
-                            <textarea type="text" style="width: 386px; height: 228px;" ng-model="textAreaconfig" />
-                        </div>
-                    </div>
+
                 </div>
             </div>
 
-            <div ng-show="isBlenderEditor()">
-
-                <h4>Blender editor setting</h4>
-
-                <div class="umb-property" label="@general_name">
-                    <div class="control-group umb-control-group">
-                        <div class="umb-el-wrap">
-                            <div class="controls" style="overflow: hidden;">
-                                <input type="checkbox" ng-model="model.value.config.renderInGrid" style="float: left;height: 30px;" /><label style="margin-left: 5px;float: left;" class="control-label">Render in the grid</label>
-                            </div>
-                        </div>
-                        <div class="umb-el-wrap">
-                            <div class="controls" style="overflow: hidden;">
-                                <input type="checkbox" ng-model="model.value.config.fixed" style="float: left;height: 30px;" /><label style="margin-left: 5px;float: left;" class="control-label">Fixed</label>
-                            </div>
-                        </div>
-                        <div class="umb-el-wrap">
-                            <label class="control-label">Limit</label>
-                            <div class="controls">
-                                <input type="number" ng-model="model.value.config.limit" />
-                            </div>
-                        </div>
-                        <div class="umb-el-wrap">
-                            <label class="control-label">Parameters</label>
-                            <div class="controls">
-                                <ul class="unstyled list-icons umb-contentpicker" ui-sortable="" ng-model="model.value.config.editors">
-                                    <li ng-repeat="parameter in model.value.config.editors track by $index">
-                                        <i class="icon icon-navigation handle"></i>
-                                        <i class="icon icon-delete red pull-right" ng-click="remove($index)"></i>
-                                        <a href="#" prevent-default="" ng-click="openParameterConfig(parameter)">
-                                            {{parameter.name}}
-                                        </a> <!--<small class="ng-binding">({{parameter.propretyType.name}})</small>-->
-                                    </li>
-                                </ul>
-                                <ul class="unstyled list-icons">
-                                    <li>
-                                        <i class="icon icon-add blue"></i>
-                                        <a href="#" ng-click="openParameterConfig()" prevent-default="">Add</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
+            <div ng-show="model.value.adv" style="clear: both;">
+                <div class="umb-el-wrap">
+                    <label class="control-label">Render</label>
+                    <div class="controls">
+                        <input ng-if="isBlenderEditor()" type="text" ng-model="model.value.frontView" />
+                        <input ng-if="!isBlenderEditor()" type="text" ng-model="model.value.render" />
                     </div>
                 </div>
+                <div ng-show="!isBlenderEditor()" class="umb-el-wrap">
+                    <label class="control-label">Config</label>
+                    <div class="controls">
+                        <textarea type="text" style="width: 386px; height: 228px;" ng-model="textAreaconfig" />
+                    </div>
+                </div>
+                <div ng-show="isBlenderEditor()">
 
+                    <div class="umb-property" label="@general_name">
+                        <div class="control-group umb-control-group">
+                            <div class="umb-el-wrap">
+                                <div class="controls" style="overflow: hidden;">
+                                    <input type="checkbox" ng-model="model.value.config.renderInGrid" style="float: left;height: 30px;" /><label style="margin-left: 5px;float: left;" class="control-label">Render in the grid</label>
+                                </div>
+                            </div>
+                            <div class="umb-el-wrap">
+                                <div class="controls" style="overflow: hidden;">
+                                    <input type="checkbox" ng-model="model.value.config.fixed" style="float: left;height: 30px;" /><label style="margin-left: 5px;float: left;" class="control-label">Fixed</label>
+                                </div>
+                            </div>
+                            <div class="umb-el-wrap">
+                                <label class="control-label">Limit</label>
+                                <div class="controls">
+                                    <input type="number" ng-model="model.value.config.limit" />
+                                </div>
+                            </div>
+                            <div class="umb-el-wrap">
+                                <label class="control-label">Parameters</label>
+                                <div class="controls">
+                                    <ul class="unstyled list-icons umb-contentpicker" ui-sortable="" ng-model="model.value.config.editors">
+                                        <li ng-repeat="parameter in model.value.config.editors track by $index">
+                                            <i class="icon icon-navigation handle"></i>
+                                            <i class="icon icon-delete red pull-right" ng-click="remove($index)"></i>
+                                            <a href="#" prevent-default="" ng-click="openParameterConfig(parameter)">
+                                                {{parameter.name}}
+                                            </a> <!--<small class="ng-binding">({{parameter.propretyType.name}})</small>-->
+                                        </li>
+                                    </ul>
+                                    <ul class="unstyled list-icons">
+                                        <li>
+                                            <i class="icon icon-add blue"></i>
+                                            <a href="#" ng-click="openParameterConfig()" prevent-default="">Add</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
         </div>

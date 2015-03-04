@@ -222,10 +222,10 @@
     <Compile Include="Controllers\BlenderController.cs" />
     <Compile Include="Controllers\HelperController.cs" />
     <Compile Include="JSonPresentationFormatter.cs" />
-    <Compile Include="Models\BlenderModel.cs" />
+    <Compile Include="Models\BlenderValue.cs" />
     <Compile Include="Models\BlenderModelMatchingConverter.cs" />
     <Compile Include="Models\BlenderPropertyModel.cs" />
-    <Compile Include="Models\BlenderRootModel.cs" />
+    <Compile Include="Models\BlenderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="uSkyHelper.cs" />
   </ItemGroup>

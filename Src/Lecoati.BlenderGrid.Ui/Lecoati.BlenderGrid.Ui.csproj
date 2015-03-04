@@ -220,7 +220,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\CustomController.cs" />
+    <Compile Include="Controllers\LastTweetsController.cs" />
+    <Compile Include="Models\LastTweetsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -336,12 +337,11 @@
     <Content Include="App_Plugins\Lecoati.BlenderGrid\core\views\Thumbnail.cshtml" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\package.manifest" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\Web.config" />
-    <Content Include="Views\Partials\Grid\Editors\test2.cshtml" />
-    <Content Include="Views\Partials\Grid\Editors\antoine.cshtml" />
     <Content Include="App_Plugins\Lecoati.BlenderGrid\core\views\Base.cshtml" />
     <Content Include="Views\Partials\Grid\Editors\TestBlender.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Partials\Grid\Editors\LastTweets.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -356,6 +356,7 @@
       <Name>Lecoati.BlenderGrid.Extension</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,0 +1,17 @@
+﻿@using Lecoati.BlenderGrid.Extension.Models;
+
+@inherits UmbracoViewPage<Lecoati.BlenderGrid.Ui.Models.LastTweetsModel>
+
+@{
+    var tweets = Model.Tweets;
+}
+
+@Model.Items.First().GetValue("account")
+
+@foreach (var tweet in tweets) { 
+    <p>@tweet</p>
+}
+
+
+
+

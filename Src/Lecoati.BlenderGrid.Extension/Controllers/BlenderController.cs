@@ -22,6 +22,11 @@ namespace Lecoati.BlenderGrid.Extension.Controllers
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
             var types = assemblies.SelectMany(a => a.GetTypes().Where(t => t.BaseType == baseType && t.Name.Equals(editorAlias + "Controller", StringComparison.InvariantCultureIgnoreCase)));
 
+            if (frontView.IndexOf("/") < 0)
+            {
+                frontView = string.Format("/Views/Partials/Grid/Editors/{0}.cshtml", frontView);
+            }
+
             if (types.Any()) {
                 var controllerType = types.First();
 
