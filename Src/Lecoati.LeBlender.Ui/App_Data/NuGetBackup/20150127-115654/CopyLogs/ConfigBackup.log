@@ -1,0 +1,48 @@
+
+-------------------------------------------------------------------------------
+   ROBOCOPY     ::     Robust File Copy for Windows                              
+-------------------------------------------------------------------------------
+
+  Started : 27 January 2015 11:56:54
+   Source : C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\Config\
+     Dest : C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\NuGetBackup\20150127-115654\Config\
+
+    Files : *.*
+	    
+  Options : *.* /S /E /DCOPY:DA /COPY:DAT /R:1000000 /W:30 
+
+------------------------------------------------------------------------------
+
+	                  18	C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\Config\
+	    New File  		     305	404handlers.config  0%  100%  
+	    New File  		     681	applications.config  0%  100%  
+	    New File  		     739	BaseRestExtensions.config  0%  100%  
+	    New File  		    3981	ClientDependency.config  0%  100%  
+	    New File  		    2393	Dashboard.config  0%  100%  
+	    New File  		    4032	EmbeddedMedia.config  0%  100%  
+	    New File  		    1260	ExamineIndex.config  0%  100%  
+	    New File  		    1833	ExamineSettings.config  0%  100%  
+	    New File  		     429	feedProxy.config  0%  100%  
+	    New File  		     286	FileSystemProviders.config  0%  100%  
+	    New File  		    1070	grid.editors.config.js  0%  100%  
+	    New File  		     879	log4net.config  0%  100%  
+	    New File  		      72	metablogConfig.config  0%  100%  
+	    New File  		     837	scripting.config  0%  100%  
+	    New File  		   11921	tinyMceConfig.config  0%  100%  
+	    New File  		    5721	trees.config  0%  100%  
+	    New File  		    7233	umbracoSettings.config  0%  100%  
+	    New File  		    1337	UrlRewriting.config  0%  100%  
+
+------------------------------------------------------------------------------
+
+               Total    Copied   Skipped  Mismatch    FAILED    Extras
+    Dirs :         1         0         0         0         0         0
+   Files :        18        18         0         0         0         0
+   Bytes :    43.9 k    43.9 k         0         0         0         0
+   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
+
+
+   Speed :              192346 Bytes/sec.
+   Speed :              11.006 MegaBytes/min.
+   Ended : 27 January 2015 11:56:54
+

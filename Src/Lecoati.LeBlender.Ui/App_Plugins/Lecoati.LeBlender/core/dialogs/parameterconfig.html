@@ -1,0 +1,65 @@
+﻿<div class="list-panel" ng-controller="LeBlender.Dialog.Parameterconfig.Controller">
+
+
+    <div id="blender-grid-editor-parameter">
+
+
+        <div class="umb-panel-body no-header with-footer">
+            <div class="umb-forms-settings">
+
+
+                <h3>{{name}}</h3>
+                <em>Edit your content here</em>
+
+                <div ui-sortable="sortableOptions" ng-model="model.value">
+                    <div class="list list-field" ng-class="{'list-open':selected === item, 'multiple':model.value.length > 1}" ng-click="select(item)" ng-repeat="item in model.value track by $index">
+                        <span ng-show="model.value.length > 1" class="list-number">
+                            {{$index + 1}}
+                            <i ng-show="model.value.length > 1" class="icon right icon-navigation"></i>
+                            <i ng-show="(!config.fixed || config.fixed === 'false')" ng-click=" remove(item, $index);$event.stopPropagation()" class="icon right icon-delete"></i>
+                        </span>
+                        <div class="list-field" ng-repeat="property in item | LeBlenderOrderObjectBy:'$order':false">
+                            <!--<div ng-include="initEditorPath(property)"></div>-->
+
+                            <h5>{{property.$editor.name}}</h5>
+
+                            <blender-editor-wrapper property="property" item="item"></blender-editor-wrapper>
+
+
+                            <!--<ng-form >
+                                <umb-control-group label="{{property.name}}">
+                                    <umb-editor model="property"></umb-editor>
+                                </umb-control-group>
+                            </ng-form>-->
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="!config.fixed && config.limit > model.value.length" class="list-add-row">
+                <i ng-click="add()" class="icon right icon-add"></i>
+            </div>
+
+        </div>
+
+        <div class="umb-panel-footer">
+            <div class="umb-el-wrap umb-panel-buttons">
+                <div class="btn-toolbar umb-btn-toolbar pull-right">
+                    <a ng-click="close()" class="btn btn-link">
+                        <localize key="general_cancel" class="ng-isolate-scope ng-scope">Cancel</localize>
+                    </a>
+                    <a ng-click="submit(model.value)" class="btn btn-primary">
+                        <localize key="buttons_save" class="ng-isolate-scope ng-scope">Save</localize>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+            </div>
+        </div>

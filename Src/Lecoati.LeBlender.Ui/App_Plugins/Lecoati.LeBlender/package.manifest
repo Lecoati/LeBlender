@@ -1,0 +1,51 @@
+﻿{   
+	propertyEditors: [      
+		{
+            alias: "LeBlender",
+            name: "LeBlender",
+            editor: {
+                view: "~/App_Plugins/Lecoati.LeBlender/core/LeBlender.html"
+            },
+			prevalues: {
+				fields: [{
+					label: "Grid editor config",
+					description: "Grid editor config",
+					key: "grideditorConfig",
+					view: "~/App_Plugins/Lecoati.LeBlender/core/LeBlender.prevalues.html"
+				},
+				{
+					label: "Stylesheet Path",
+					description: "Backend injected stylesheet file",
+					key: "cssBackendPath",
+					view: "textstring"
+				}]
+			}
+        }
+    ],
+    javascript: [
+		
+		'~/App_Plugins/Lecoati.LeBlender/Common/Services/requestHelper.Service.js',
+		'~/App_Plugins/Lecoati.LeBlender/Common/Filter/OrderObjectBy.filter.js',
+		'~/App_Plugins/Lecoati.LeBlender/Common/Directive/LayersResizableDraggable.js',
+		'~/App_Plugins/Lecoati.LeBlender/Common/Directive/blendereditorwrapper.js',
+
+		'~/App_Plugins/Lecoati.LeBlender/core/LeBlender.controller.js',
+		'~/App_Plugins/Lecoati.LeBlender/core/LeBlender.prevalues.controller.js',
+		'~/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.controller.js',
+
+		'~/App_Plugins/Lecoati.LeBlender/core/dialogs/editorconfig.prevalues.controller.js',
+		'~/App_Plugins/Lecoati.LeBlender/core/dialogs/parameterconfig.prevalues.controller.js',
+		'~/App_Plugins/Lecoati.LeBlender/core/dialogs/parameterconfig.controller.js',
+		'~/App_Plugins/Lecoati.LeBlender/core/dialogs/iconpickereditor.js',
+		'~/App_Plugins/Lecoati.LeBlender/core/dialogs/layerseditor.js',
+        		
+		'~/App_Plugins/Lecoati.LeBlender/core/editors/mediapicker.js',
+		'~/App_Plugins/Lecoati.LeBlender/core/editors/contentpicker.js',
+		'~/App_Plugins/Lecoati.LeBlender/core/editors/layers.js',
+		'~/App_Plugins/Lecoati.LeBlender/core/editors/colorpicker.js',
+		'~/App_Plugins/Lecoati.LeBlender/core/editors/iconpicker.js',
+
+		'~/App_Plugins/Lecoati.LeBlender/core/settings/backgroundColorPicker.controller.js',
+
+    ]
+}

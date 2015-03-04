@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<map>
+  <item key="L3VtYnJhY28vYXNzZXRzL2Nzcy91bWJyYWNvLmNzczsvdW1icmFjb19jbGllbnQvdHJlZS90cmVlaWNvbnMuY3NzOw" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_21a77f1e1fbb49278d111b51bfb94e41.cdC" compression="gzip" version="1459900169">
+    <files>
+      <file name="/umbraco/assets/css/umbraco.css" />
+      <file name="/umbraco_client/tree/treeicons.css" />
+    </files>
+  </item>
+  <item key="L3VtYnJhY28vbGliL2pxdWVyeS9qcXVlcnktMi4wLjMubWluLmpzOy91bWJyYWNvL2xpYi9hbmd1bGFyLzEuMS41L2FuZ3VsYXIubWluLmpzOy91bWJyYWNvL2xpYi91bmRlcnNjb3JlL3VuZGVyc2NvcmUuanM7L3VtYnJhY28vbGliL2pxdWVyeS9qcXVlcnktdWktMS4xMC4zLmN1c3RvbS5taW4uanM7L3VtYnJhY28vbGliL2FuZ3VsYXIvMS4xLjUvYW5ndWxhci1jb29raWVzLm1pbi5qczsvdW1icmFjby9saWIvYW5ndWxhci8xLjEuNS9hbmd1bGFyLW1vYmlsZS5qczsvdW1icmFjby9saWIvYW5ndWxhci8xLjEuNS9hbmd1bGFyLXNhbml0aXplLm1pbi5qczsvdW1icmFjby9saWIvYW5ndWxhci9hbmd1bGFyLXVpLXNvcnRhYmxlLmpzOy91bWJyYWNvL2xpYi9hbmd1bGFyL3RtaER5bmFtaWNMb2NhbGUuanM7L3VtYnJhY28vbGliL2pxdWVyeS9qcXVlcnkudXBsb2FkL2pzL2pxdWVyeS5maWxldXBsb2FkLmpzOy91bWJyYWNvL2xpYi9qcXVlcnkvanF1ZXJ5LnVwbG9hZC9qcy9sb2FkLWltYWdlLm1pbi5qczsvdW1icmFjby9saWIvanF1ZXJ5L2pxdWVyeS51cGxvYWQvanMvanF1ZXJ5LmZpbGV1cGxvYWQtcHJvY2Vzcy5qczsvdW1icmFjby9saWIvanF1ZXJ5L2pxdWVyeS51cGxvYWQvanMvanF1ZXJ5LmZpbGV1cGxvYWQtaW1hZ2UuanM7L3VtYnJhY28vbGliL2pxdWVyeS9qcXVlcnkudXBsb2FkL2pzL2pxdWVyeS5maWxldXBsb2FkLWFuZ3VsYXIuanM7L3VtYnJhY28vbGliL2Jvb3RzdHJhcC9qcy9ib290c3RyYXAuMi4zLjIubWluLmpzOy91bWJyYWNvL2xpYi91bWJyYWNvL0V4dGVuc2lvbnMuanM7L3VtYnJhY28vbGliL3VtYnJhY28vTmFtZXNwYWNlTWFuYWdlci5qczsvdW1icmFjby9saWIvdW1icmFjby9MZWdhY3lVbWJDbGllbnRNZ3IuanM7L3VtYnJhY28vbGliL3VtYnJhY28vTGVnYWN5U3BlZWNoQnViYmxlLmpzOy91bWJyYWNvL2pzL2FwcC5qczsvdW1icmFjby9qcy91bWJyYWNvLnJlc291cmNlcy5qczsvdW1icmFjby9qcy91bWJyYWNvLmRpcmVjdGl2ZXMuanM7L3VtYnJhY28vanMvdW1icmFjby5maWx0ZXJzLmpzOy91bWJyYWNvL2pzL3VtYnJhY28uc2VydmljZXMuanM7L3VtYnJhY28vanMvdW1icmFjby5zZWN1cml0eS5qczsvdW1icmFjby9qcy91bWJyYWNvLmNvbnRyb2xsZXJzLmpzOy91bWJyYWNvL2pzL3JvdXRlcy5qczsvdW1icmFjby9qcy9pbml0LmpzOy91bWJyYWNvL2RldmVsb3Blci9SZWxhdGlvblR5cGVzL1RyZWVNZW51L0FjdGlvbkRlbGV0ZVJlbGF0aW9uVHlwZS5qczsvdW1icmFjby9kZXZlbG9wZXIvUmVsYXRpb25UeXBlcy9UcmVlTWVudS9BY3Rpb25OZXdSZWxhdGlvblR5cGUuanM7" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_a15f64675a754d10863f95205b3ee223.cdJ" compression="gzip" version="1459900169">
+    <files>
+      <file name="/umbraco/lib/jquery/jquery-2.0.3.min.js" />
+      <file name="/umbraco/lib/angular/1.1.5/angular.min.js" />
+      <file name="/umbraco/lib/underscore/underscore.js" />
+      <file name="/umbraco/lib/jquery/jquery-ui-1.10.3.custom.min.js" />
+      <file name="/umbraco/lib/angular/1.1.5/angular-cookies.min.js" />
+      <file name="/umbraco/lib/angular/1.1.5/angular-mobile.js" />
+      <file name="/umbraco/lib/angular/1.1.5/angular-sanitize.min.js" />
+      <file name="/umbraco/lib/angular/angular-ui-sortable.js" />
+      <file name="/umbraco/lib/angular/tmhDynamicLocale.js" />
+      <file name="/umbraco/lib/jquery/jquery.upload/js/jquery.fileupload.js" />
+      <file name="/umbraco/lib/jquery/jquery.upload/js/load-image.min.js" />
+      <file name="/umbraco/lib/jquery/jquery.upload/js/jquery.fileupload-process.js" />
+      <file name="/umbraco/lib/jquery/jquery.upload/js/jquery.fileupload-image.js" />
+      <file name="/umbraco/lib/jquery/jquery.upload/js/jquery.fileupload-angular.js" />
+      <file name="/umbraco/lib/bootstrap/js/bootstrap.2.3.2.min.js" />
+      <file name="/umbraco/lib/umbraco/Extensions.js" />
+      <file name="/umbraco/lib/umbraco/NamespaceManager.js" />
+      <file name="/umbraco/lib/umbraco/LegacyUmbClientMgr.js" />
+      <file name="/umbraco/lib/umbraco/LegacySpeechBubble.js" />
+      <file name="/umbraco/js/app.js" />
+      <file name="/umbraco/js/umbraco.resources.js" />
+      <file name="/umbraco/js/umbraco.directives.js" />
+      <file name="/umbraco/js/umbraco.filters.js" />
+      <file name="/umbraco/js/umbraco.services.js" />
+      <file name="/umbraco/js/umbraco.security.js" />
+      <file name="/umbraco/js/umbraco.controllers.js" />
+      <file name="/umbraco/js/routes.js" />
+      <file name="/umbraco/js/init.js" />
+      <file name="/umbraco/developer/RelationTypes/TreeMenu/ActionDeleteRelationType.js" />
+      <file name="/umbraco/developer/RelationTypes/TreeMenu/ActionNewRelationType.js" />
+    </files>
+  </item>
+  <item key="L3VtYnJhY29fY2xpZW50L0FwcGxpY2F0aW9uL05hbWVzcGFjZU1hbmFnZXIuanM7L3VtYnJhY29fY2xpZW50L0FwcGxpY2F0aW9uL1VtYnJhY29VdGlscy5qczsvdW1icmFjb19jbGllbnQvdWkvanNvbjIuanM7L3VtYnJhY29fY2xpZW50L3VpL2Jhc2UyLmpzOy91bWJyYWNvX2NsaWVudC9VSS9rbm9ja291dC5qczsvdW1icmFjb19jbGllbnQvVUkva25vY2tvdXQubWFwcGluZy5qczs" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_d199c17307ee4c699561bb27a0155fa7.cdJ" compression="gzip" version="1459900169">
+    <files>
+      <file name="/umbraco_client/Application/NamespaceManager.js" />
+      <file name="/umbraco_client/Application/UmbracoUtils.js" />
+      <file name="/umbraco_client/ui/json2.js" />
+      <file name="/umbraco_client/ui/base2.js" />
+      <file name="/umbraco_client/UI/knockout.js" />
+      <file name="/umbraco_client/UI/knockout.mapping.js" />
+    </files>
+  </item>
+  <item key="L3VtYnJhY28vYXNzZXRzL2Nzcy91bWJyYWNvLmNzczs" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_065f5779590c44fd9b8d98c54d7e6402.cdC" compression="gzip" version="1459900169">
+    <files>
+      <file name="/umbraco/assets/css/umbraco.css" />
+    </files>
+  </item>
+  <item key="L3VtYnJhY29fY2xpZW50L0FwcGxpY2F0aW9uL0V4dGVuc2lvbnMuanM7L3VtYnJhY29fY2xpZW50L0FwcGxpY2F0aW9uL1VtYnJhY29BcHBsaWNhdGlvbkFjdGlvbnMuanM7L3VtYnJhY29fY2xpZW50L0FwcGxpY2F0aW9uL0hpc3RvcnlNYW5hZ2VyLmpzOw" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_87daa2cfcecd455ea8bb472f575a5c0b.cdJ" compression="gzip" version="1459900169">
+    <files>
+      <file name="/umbraco_client/Application/Extensions.js" />
+      <file name="/umbraco_client/Application/UmbracoApplicationActions.js" />
+      <file name="/umbraco_client/Application/HistoryManager.js" />
+    </files>
+  </item>
+  <item key="L3VtYnJhY29fY2xpZW50L3VpL2RlZmF1bHQuanM7" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_dad5eaa1593d401581c540bbfff643df.cdJ" compression="gzip" version="1459900169">
+    <files>
+      <file name="/umbraco_client/ui/default.js" />
+    </files>
+  </item>
+  <item key="L3VtYnJhY29fY2xpZW50L0FwcGxpY2F0aW9uL1VtYnJhY29DbGllbnRNYW5hZ2VyLmpzOw" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_3ecfe821449f40b5a410a8d868a7c8c7.cdJ" compression="gzip" version="1459900169">
+    <files>
+      <file name="/umbraco_client/Application/UmbracoClientManager.js" />
+    </files>
+  </item>
+  <item key="L3VtYnJhY29fY2xpZW50L3VpL2pxdWVyeS5qczsvdW1icmFjb19jbGllbnQvdWkvanF1ZXJ5dWkuanM7" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_15779ba8ca824370872c740ab636cf50.cdJ" compression="gzip" version="1459900169">
+    <files>
+      <file name="/umbraco_client/ui/jquery.js" />
+      <file name="/umbraco_client/ui/jqueryui.js" />
+    </files>
+  </item>
+  <item key="L3VtYnJhY28vYXNzZXRzL2Nzcy91bWJyYWNvLmNzczsvdW1icmFjb19jbGllbnQvR2VuZXJpY1Byb3BlcnR5L2dlbmVyaWNwcm9wZXJ0eS5jc3M7L3VtYnJhY29fY2xpZW50L3VpL2RkLmNzczs" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_d2b21ab47c5947eb93e7bebd797297f5.cdC" compression="gzip" version="1459900169">
+    <files>
+      <file name="/umbraco/assets/css/umbraco.css" />
+      <file name="/umbraco_client/GenericProperty/genericproperty.css" />
+      <file name="/umbraco_client/ui/dd.css" />
+    </files>
+  </item>
+  <item key="L3VtYnJhY29fY2xpZW50L0FwcGxpY2F0aW9uL2pRdWVyeS9qcXVlcnkuYmEtYmJxLm1pbi5qczsvdW1icmFjb19jbGllbnQvdWkvalF1ZXJ5V3Jlc2l6ZS5qczsvdW1icmFjb19jbGllbnQvbW9kYWwvanF1ZXJ5LnNpbXBsZW1vZGFsLjEuNC4xLmN1c3RvbS5qczsvdW1icmFjb19jbGllbnQvQXBwbGljYXRpb24valF1ZXJ5L2pxdWVyeS5jb29raWUuanM7L3VtYnJhY29fY2xpZW50L0FwcGxpY2F0aW9uL0pRdWVyeS9qcXVlcnkubWV0YWRhdGEubWluLmpzOy91bWJyYWNvX2NsaWVudC9BcHBsaWNhdGlvbi9qUXVlcnkvanF1ZXJ5LmhvdGtleXMuanM7" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_d71b4baa6fb146a28082efbc525e8174.cdJ" compression="gzip" version="1459900169">
+    <files>
+      <file name="/umbraco_client/Application/jQuery/jquery.ba-bbq.min.js" />
+      <file name="/umbraco_client/ui/jQueryWresize.js" />
+      <file name="/umbraco_client/modal/jquery.simplemodal.1.4.1.custom.js" />
+      <file name="/umbraco_client/Application/jQuery/jquery.cookie.js" />
+      <file name="/umbraco_client/Application/JQuery/jquery.metadata.min.js" />
+      <file name="/umbraco_client/Application/jQuery/jquery.hotkeys.js" />
+    </files>
+  </item>
+  <item key="L3VtYnJhY29fY2xpZW50L21vZGFsL21vZGFsLmpzOy91bWJyYWNvX2NsaWVudC91aS9kZWZhdWx0LmpzOy91bWJyYWNvL2xpYi9ib290c3RyYXAvanMvYm9vdHN0cmFwLjIuMy4yLm1pbi5qczsvdW1icmFjby9saWIvdW1icmFjby9jb21wYXQuanM7" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_622654fb8c414974804ebac2828f29ba.cdJ" compression="gzip" version="1459900169">
+    <files>
+      <file name="/umbraco_client/modal/modal.js" />
+      <file name="/umbraco_client/ui/default.js" />
+      <file name="/umbraco/lib/bootstrap/js/bootstrap.2.3.2.min.js" />
+      <file name="/umbraco/lib/umbraco/compat.js" />
+    </files>
+  </item>
+  <item key="L3VtYnJhY29fY2xpZW50L0dlbmVyaWNQcm9wZXJ0eS9nZW5lcmljcHJvcGVydHkuanM7L3VtYnJhY29fY2xpZW50L0VkaXRvcnMvRWRpdENvbnRlbnRUeXBlLmpzOy91bWJyYWNvX2NsaWVudC91aS9qcXVlcnkuZGQuanM7" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_7d37a20db2ba4edcb9bef381274550ee.cdJ" compression="gzip" version="1459900169">
+    <files>
+      <file name="/umbraco_client/GenericProperty/genericproperty.js" />
+      <file name="/umbraco_client/Editors/EditContentType.js" />
+      <file name="/umbraco_client/ui/jquery.dd.js" />
+    </files>
+  </item>
+  <item key="L0FwcF9QbHVnaW5zL0xlY29hdGkuQmxlbmRlckdyaWQvQmxlbmRlckdyaWRTZXR0aW5nL2JhY2tncm91bmRDb2xvclBpY2tlci5jb250cm9sbGVyLmpzOy9BcHBfUGx1Z2lucy9MZWNvYXRpLkJsZW5kZXJHcmlkL0JsZW5kZXJHcmlkRWRpdG9yL0JsZW5kZXJHcmlkRWRpdG9yLmNvbnRyb2xsZXIuanM7L0FwcF9QbHVnaW5zL0xlY29hdGkuQmxlbmRlckdyaWQvQmxlbmRlckdyaWRFZGl0b3IvQmxlbmRlckdyaWRFZGl0b3JQYXJhbWV0ZXIuY29udHJvbGxlci5qczsvQXBwX1BsdWdpbnMvTGVjb2F0aS5CbGVuZGVyR3JpZC9CbGVuZGVyR3JpZEVkaXRvci9lZGl0b3JzL21lZGlhcGlja2VyLmpzOy9BcHBfUGx1Z2lucy9MZWNvYXRpLkJsZW5kZXJHcmlkL0JsZW5kZXJHcmlkRWRpdG9yL2VkaXRvcnMvY29udGVudHBpY2tlci5qczsvQXBwX1BsdWdpbnMvTGVjb2F0aS5CbGVuZGVyR3JpZC9CbGVuZGVyR3JpZEVkaXRvci9lZGl0b3JzL2xheWVycy5qczsvQXBwX1BsdWdpbnMvTGVjb2F0aS5CbGVuZGVyR3JpZC9CbGVuZGVyR3JpZEVkaXRvci9lZGl0b3JzL2xheWVyc0VkaXRvci5qczsvQXBwX1BsdWdpbnMvTGVjb2F0aS5CbGVuZGVyR3JpZC9CbGVuZGVyR3JpZEVkaXRvci9lZGl0b3JzL2NvbG9yUGlja2VyLmpzOy91bWJyYWNvL2RldmVsb3Blci9SZWxhdGlvblR5cGVzL1RyZWVNZW51L0FjdGlvbkRlbGV0ZVJlbGF0aW9uVHlwZS5qczsvdW1icmFjby9kZXZlbG9wZXIvUmVsYXRpb25UeXBlcy9UcmVlTWVudS9BY3Rpb25OZXdSZWxhdGlvblR5cGUuanM7" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_999295d9a48541c984d241c49f6f61ce.cdJ" compression="gzip" version="1459900169">
+    <files>
+      <file name="/App_Plugins/Lecoati.BlenderGrid/BlenderGridSetting/backgroundColorPicker.controller.js" />
+      <file name="/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditor.controller.js" />
+      <file name="/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/BlenderGridEditorParameter.controller.js" />
+      <file name="/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/editors/mediapicker.js" />
+      <file name="/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/editors/contentpicker.js" />
+      <file name="/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/editors/layers.js" />
+      <file name="/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/editors/layersEditor.js" />
+      <file name="/App_Plugins/Lecoati.BlenderGrid/BlenderGridEditor/editors/colorPicker.js" />
+      <file name="/umbraco/developer/RelationTypes/TreeMenu/ActionDeleteRelationType.js" />
+      <file name="/umbraco/developer/RelationTypes/TreeMenu/ActionNewRelationType.js" />
+    </files>
+  </item>
+  <item key="L3VtYnJhY28vbGliL2pxdWVyeS9qcXVlcnktMi4wLjMubWluLmpzOy91bWJyYWNvL2xpYi9hbmd1bGFyLzEuMS41L2FuZ3VsYXIubWluLmpzOy91bWJyYWNvL2xpYi91bmRlcnNjb3JlL3VuZGVyc2NvcmUuanM7L3VtYnJhY28vbGliL2pxdWVyeS9qcXVlcnktdWktMS4xMC4zLmN1c3RvbS5taW4uanM7L3VtYnJhY28vbGliL2FuZ3VsYXIvMS4xLjUvYW5ndWxhci1jb29raWVzLm1pbi5qczsvdW1icmFjby9saWIvYW5ndWxhci8xLjEuNS9hbmd1bGFyLW1vYmlsZS5qczsvdW1icmFjby9saWIvYW5ndWxhci8xLjEuNS9hbmd1bGFyLXNhbml0aXplLm1pbi5qczsvdW1icmFjby9saWIvYW5ndWxhci9hbmd1bGFyLXVpLXNvcnRhYmxlLmpzOy91bWJyYWNvL2xpYi9hbmd1bGFyL3RtaER5bmFtaWNMb2NhbGUuanM7L3VtYnJhY28vbGliL2pxdWVyeS9qcXVlcnkudXBsb2FkL2pzL2pxdWVyeS5maWxldXBsb2FkLmpzOy91bWJyYWNvL2xpYi9qcXVlcnkvanF1ZXJ5LnVwbG9hZC9qcy9sb2FkLWltYWdlLm1pbi5qczsvdW1icmFjby9saWIvanF1ZXJ5L2pxdWVyeS51cGxvYWQvanMvanF1ZXJ5LmZpbGV1cGxvYWQtcHJvY2Vzcy5qczsvdW1icmFjby9saWIvanF1ZXJ5L2pxdWVyeS51cGxvYWQvanMvanF1ZXJ5LmZpbGV1cGxvYWQtaW1hZ2UuanM7L3VtYnJhY28vbGliL2pxdWVyeS9qcXVlcnkudXBsb2FkL2pzL2pxdWVyeS5maWxldXBsb2FkLWFuZ3VsYXIuanM7L3VtYnJhY28vbGliL2Jvb3RzdHJhcC9qcy9ib290c3RyYXAuMi4zLjIubWluLmpzOy91bWJyYWNvL2xpYi91bWJyYWNvL0V4dGVuc2lvbnMuanM7L3VtYnJhY28vbGliL3VtYnJhY28vTmFtZXNwYWNlTWFuYWdlci5qczsvdW1icmFjby9saWIvdW1icmFjby9MZWdhY3lVbWJDbGllbnRNZ3IuanM7L3VtYnJhY28vbGliL3VtYnJhY28vTGVnYWN5U3BlZWNoQnViYmxlLmpzOy91bWJyYWNvL2pzL2FwcC5qczsvdW1icmFjby9qcy91bWJyYWNvLnJlc291cmNlcy5qczsvdW1icmFjby9qcy91bWJyYWNvLmRpcmVjdGl2ZXMuanM7L3VtYnJhY28vanMvdW1icmFjby5maWx0ZXJzLmpzOy91bWJyYWNvL2pzL3VtYnJhY28uc2VydmljZXMuanM7L3VtYnJhY28vanMvdW1icmFjby5zZWN1cml0eS5qczsvdW1icmFjby9qcy91bWJyYWNvLmNvbnRyb2xsZXJzLmpzOy91bWJyYWNvL2pzL3JvdXRlcy5qczsvdW1icmFjby9qcy9pbml0LmpzOy9BcHBfUGx1Z2lucy9MZWNvYXRpLkJsZW5kZXJHcmlkL0NvbW1vbi9TZXJ2aWNlcy9yZXF1ZXN0SGVscGVyLlNlcnZpY2UuanM7L0FwcF9QbHVnaW5zL0xlY29hdGkuQmxlbmRlckdyaWQvQ29tbW9uL0ZpbHRlci9PcmRlck9iamVjdEJ5LmZpbHRlci5qczsvQXBwX1BsdWdpbnMvTGVjb2F0aS5CbGVuZGVyR3JpZC9Db21tb24vRGlyZWN0aXZlL0xheWVyc1Jlc2l6YWJsZURyYWdnYWJsZS5qczsvQXBwX1BsdWdpbnMvTGVjb2F0aS5CbGVuZGVyR3JpZC9CbGVuZGVyR3JpZFNldHRpbmcvR3JpZEluamVjdG9yLmNvbnRyb2xsZXIuanM7" file="C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\TEMP\ClientDependency\1459900169_95bf6ff672ba4baaa287671ae91a553d.cdJ" compression="gzip" version="1459900169">
+    <files>
+      <file name="/umbraco/lib/jquery/jquery-2.0.3.min.js" />
+      <file name="/umbraco/lib/angular/1.1.5/angular.min.js" />
+      <file name="/umbraco/lib/underscore/underscore.js" />
+      <file name="/umbraco/lib/jquery/jquery-ui-1.10.3.custom.min.js" />
+      <file name="/umbraco/lib/angular/1.1.5/angular-cookies.min.js" />
+      <file name="/umbraco/lib/angular/1.1.5/angular-mobile.js" />
+      <file name="/umbraco/lib/angular/1.1.5/angular-sanitize.min.js" />
+      <file name="/umbraco/lib/angular/angular-ui-sortable.js" />
+      <file name="/umbraco/lib/angular/tmhDynamicLocale.js" />
+      <file name="/umbraco/lib/jquery/jquery.upload/js/jquery.fileupload.js" />
+      <file name="/umbraco/lib/jquery/jquery.upload/js/load-image.min.js" />
+      <file name="/umbraco/lib/jquery/jquery.upload/js/jquery.fileupload-process.js" />
+      <file name="/umbraco/lib/jquery/jquery.upload/js/jquery.fileupload-image.js" />
+      <file name="/umbraco/lib/jquery/jquery.upload/js/jquery.fileupload-angular.js" />
+      <file name="/umbraco/lib/bootstrap/js/bootstrap.2.3.2.min.js" />
+      <file name="/umbraco/lib/umbraco/Extensions.js" />
+      <file name="/umbraco/lib/umbraco/NamespaceManager.js" />
+      <file name="/umbraco/lib/umbraco/LegacyUmbClientMgr.js" />
+      <file name="/umbraco/lib/umbraco/LegacySpeechBubble.js" />
+      <file name="/umbraco/js/app.js" />
+      <file name="/umbraco/js/umbraco.resources.js" />
+      <file name="/umbraco/js/umbraco.directives.js" />
+      <file name="/umbraco/js/umbraco.filters.js" />
+      <file name="/umbraco/js/umbraco.services.js" />
+      <file name="/umbraco/js/umbraco.security.js" />
+      <file name="/umbraco/js/umbraco.controllers.js" />
+      <file name="/umbraco/js/routes.js" />
+      <file name="/umbraco/js/init.js" />
+      <file name="/App_Plugins/Lecoati.BlenderGrid/Common/Services/requestHelper.Service.js" />
+      <file name="/App_Plugins/Lecoati.BlenderGrid/Common/Filter/OrderObjectBy.filter.js" />
+      <file name="/App_Plugins/Lecoati.BlenderGrid/Common/Directive/LayersResizableDraggable.js" />
+      <file name="/App_Plugins/Lecoati.BlenderGrid/BlenderGridSetting/GridInjector.controller.js" />
+    </files>
+  </item>
+</map>

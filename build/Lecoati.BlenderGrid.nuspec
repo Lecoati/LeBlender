@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
-        <id>Lecoati.BlenderGrid</id>
-        <version>0.9.10</version>
-        <title>Lecoati.BlenderGrid</title>
+        <id>Lecoati.LeBlender</id>
+        <version>0.9.11</version>
+        <title>Umbarco LeBlender</title>
         <authors>LECOATI</authors>
         <owners>LECOATI</owners>
         <projectUrl>http://www.lecoati.com/</projectUrl>
-        <description>Umbraco BlenderGrid</description>
-        <summary>Umbraco BlenderGrid</summary>
+        <description>Umbarco LeBlender</description>
+        <summary>Umbarco LeBlender</summary>
         <language>en-US</language>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>LECOATI</tags>
@@ -16,7 +16,7 @@
 		<dependencies />
     </metadata>
 	<files>
-		<file src="..\src\Lecoati.BlenderGrid.Ui\App_Plugins\Lecoati.BlenderGrid\**\*.*" target="Content\App_Plugins\Lecoati.BlenderGrid" /> 
-		<file src="..\src\Lecoati.BlenderGrid.Extension\bin\Lecoati.BlenderGrid.Extension.dll" target="lib\Lecoati.BlenderGrid.Extension.dll" /> 
+		<file src="..\src\Lecoati.LeBlender.Ui\App_Plugins\Lecoati.LeBlender\**\*.*" target="Content\App_Plugins\Lecoati.LeBlender" /> 
+		<file src="..\src\Lecoati.LeBlender.Extension\bin\Lecoati.LeBlender.Extension.dll" target="lib\Lecoati.LeBlender.Extension.dll" /> 
 	</files>
 </package>

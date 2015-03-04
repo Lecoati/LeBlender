@@ -1,0 +1,18 @@
+﻿
+<div id="iconPickerEditor" ng-controller="LeBlender.Dialog.IconPickerEditor.controller" >
+
+    <div class="umb-panel-body with-footer">
+        <span class="{{config.defaultClass}} {{icon}}" aria-hidden="true" ng-click="submit(icon)" ng-repeat="icon in icons"></span>
+    </div>
+
+    <div class="umb-panel-footer">
+        <div class="umb-el-wrap umb-panel-buttons">
+            <div class="btn-toolbar umb-btn-toolbar pull-right">
+                <a href="" ng-click="close()" class="btn btn-link">
+                    <localize key="general_cancel" class="ng-isolate-scope ng-scope">Cancel</localize>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
