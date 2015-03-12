@@ -227,16 +227,9 @@
     <Compile Include="Models\BlenderPropertyModel.cs" />
     <Compile Include="Models\BlenderModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="uSkyHelper.cs" />
+    <Compile Include="LeBlenderHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
