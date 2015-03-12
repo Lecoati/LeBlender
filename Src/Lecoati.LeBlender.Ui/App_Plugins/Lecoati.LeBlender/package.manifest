@@ -8,16 +8,10 @@
             },
 			prevalues: {
 				fields: [{
-					label: "Grid editor config",
-					description: "Grid editor config",
+					label: "Editors Manager",
+					description: "Here you can manage your grid's editors",
 					key: "grideditorConfig",
 					view: "~/App_Plugins/Lecoati.LeBlender/core/LeBlender.prevalues.html"
-				},
-				{
-					label: "Stylesheet Path",
-					description: "Backend injected stylesheet file",
-					key: "cssBackendPath",
-					view: "textstring"
 				}]
 			}
         }

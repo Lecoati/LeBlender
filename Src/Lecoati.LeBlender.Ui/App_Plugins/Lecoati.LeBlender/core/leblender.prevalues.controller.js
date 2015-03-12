@@ -17,7 +17,6 @@
                     alias: "",
                     view: "",
                     icon: "",
-                    config: {}
                 });
                 editor = $scope.model.value[$scope.model.value.length -1];
             }

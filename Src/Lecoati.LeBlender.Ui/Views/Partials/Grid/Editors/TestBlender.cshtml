@@ -1,9 +1,0 @@
-﻿@using Lecoati.LeBlender.Extension.Models;
-
-@inherits UmbracoViewPage<BlenderModel>
-
-@{
-    var model = Model;
-}
-
-<p>Hello! @(Model.Items.ElementAt(0).GetValue<string>("text"))</p>

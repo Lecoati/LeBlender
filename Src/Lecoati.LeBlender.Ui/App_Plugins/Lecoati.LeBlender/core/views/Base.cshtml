@@ -1,6 +1,8 @@
 ﻿@using System.Web.Mvc.Html;
 
 @if (Model.editor != null)
-{   
-    @(Html.Action("RenderEditor", "Blender", new { editorAlias = Model.editor.alias, frontView = Model.editor.frontView.Value, model = Model }))
+{
+    var frontView = Model.editor.frontView == null || String.IsNullOrEmpty(Model.editor.frontView.Value) ? 
+        String.Format("/views/partials/grid/editors/{0}.cshtml", Model.editor.alias) : Model.editor.frontView.Value;
+    @(Html.Action("RenderEditor", "Blender", new { editorAlias = Model.editor.alias, frontView = frontView, model = Model }))
 }

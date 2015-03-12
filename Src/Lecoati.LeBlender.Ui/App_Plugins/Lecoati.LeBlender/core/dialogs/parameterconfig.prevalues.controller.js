@@ -2,14 +2,14 @@
     function ($scope, assetsService, $http, LeBlenderRequestHelper, dialogService) {
 
         $scope.defaultParameterList = [
-	        {
-	            name: "Textarea",
-	            view: "textarea",
-	        },
             {
                 name: "Textstring",
                 view: "textstring",
             },
+            {
+	            name: "Textarea",
+	            view: "textarea",
+	        },
             {
             	name: "Boolean",
             	view: "boolean"

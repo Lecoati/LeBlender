@@ -1,42 +1,0 @@
-
--------------------------------------------------------------------------------
-   ROBOCOPY     ::     Robust File Copy for Windows                              
--------------------------------------------------------------------------------
-
-  Started : 27 January 2015 11:56:52
-   Source : C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\bin\
-     Dest : C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\App_Data\NuGetBackup\20150127-115652\bin\
-
-    Files : *.*
-	    
-  Options : *.* /S /E /DCOPY:DA /COPY:DAT /R:1000000 /W:30 
-
-------------------------------------------------------------------------------
-
-	                  12	C:\Project\Github\BlenderGrid\Src\Lecoati.BlenderGrid.Ui\bin\
-	    New File  		   45416	Microsoft.Web.Infrastructure.dll  0%  100%  
-	    New File  		   23640	Microsoft.Web.Mvc.FixedDisplayModes.dll  0%  100%  
-	    New File  		  391680	Newtonsoft.Json.dll  0%   33%   66%  100%  
-	    New File  		  168520	System.Net.Http.Formatting.dll  0%   77%  100%  
-	    New File  		  138432	System.Web.Helpers.dll  0%   94%  100%  
-	    New File  		  323240	System.Web.Http.dll  0%   40%   81%  100%  
-	    New File  		   73384	System.Web.Http.WebHost.dll  0%  100%  
-	    New File  		  507048	System.Web.Mvc.dll  0%   25%   51%   77%  100%  
-	    New File  		  266944	System.Web.Razor.dll  0%   49%   98%  100%  
-	    New File  		   41152	System.Web.WebPages.Deployment.dll  0%  100%  
-	    New File  		  204480	System.Web.WebPages.dll  0%   64%  100%  
-	    New File  		   39616	System.Web.WebPages.Razor.dll  0%  100%  
-
-------------------------------------------------------------------------------
-
-               Total    Copied   Skipped  Mismatch    FAILED    Extras
-    Dirs :         1         0         0         0         0         0
-   Files :        12        12         0         0         0         0
-   Bytes :    2.12 m    2.12 m         0         0         0         0
-   Times :   0:00:00   0:00:00                       0:00:00   0:00:00
-
-
-   Speed :            12927627 Bytes/sec.
-   Speed :             739.724 MegaBytes/min.
-   Ended : 27 January 2015 11:56:53
-

@@ -113,3 +113,12 @@
 #blender-grid-editor-parameter .list-add-row i:hover {
     color: #2e8aea;
 }
+
+#blender-grid-editor-parameter textarea {
+    width: 367px;
+    height: 134px;
+}
+
+#blender-grid-editor-parameter input {
+    width: 367px;
+}

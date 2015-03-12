@@ -59,11 +59,33 @@
         }
 
         $scope.update = function () {
-            $scope.model.value.config = {}
+            $scope.model.value.config = "";
+            $scope.textAreaconfig = "";
+            if ($scope.isBlenderEditor()) {
+                $scope.model.value.config = {
+                    fixed: true,
+                    limit:1
+                }
+            }
         }
 
         $scope.getConfigAsText = function () {
-            $scope.textAreaconfig = JSON.stringify($scope.model.value.config, null, 4);
+
+            $scope.textAreaconfig = "";
+
+            if ($scope.model.value.config) {
+
+                var config = JSON.stringify($scope.model.value.config, null, 4)
+
+                if (config && config != {}) {
+                    $scope.textAreaconfig = config;
+                }
+                else {
+                    $scope.textAreaconfig = "";
+                }
+                
+
+            }
             $scope.$watch('textAreaconfig', function () {
                 try {
                     $scope.model.value.config = JSON.parse($scope.textAreaconfig);
@@ -133,7 +155,6 @@
 
         $scope.save = function () {
             $scope.dialogData.editor.render = "/App_Plugins/Lecoati.LeBlender/core/views/Base.cshtml";
-
             angular.extend($scope.dialogData.editor, $scope.model.value);
             $scope.close();
         }
@@ -148,6 +169,7 @@
 
         if ($scope.model.value.name === "" && $scope.model.value.name === "") {
             $scope.$watch("model.value.name", function () {
+                $scope.model.value.alias = $scope.autoPopulateAlias($scope.model.value.name);
                 $scope.model.value.alias = $scope.autoPopulateAlias($scope.model.value.name);
             })
         }

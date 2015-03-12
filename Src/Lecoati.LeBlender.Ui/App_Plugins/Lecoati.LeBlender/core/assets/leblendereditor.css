@@ -111,6 +111,11 @@
 
     #jumbotron-generic {
         padding:10px;
+        max-width: 400px;
+    }
+
+        #jumbotron-generic img {
+        width:100%;
     }
 
     #jumbotron-generic .jumbotron {
