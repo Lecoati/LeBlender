@@ -33,11 +33,10 @@
 		'~/App_Plugins/Lecoati.LeBlender/core/dialogs/iconpickereditor.js',
 		'~/App_Plugins/Lecoati.LeBlender/core/dialogs/layerseditor.js',
         		
-		'~/App_Plugins/Lecoati.LeBlender/core/editors/mediapicker.js',
-		'~/App_Plugins/Lecoati.LeBlender/core/editors/contentpicker.js',
 		'~/App_Plugins/Lecoati.LeBlender/core/editors/layers.js',
 		'~/App_Plugins/Lecoati.LeBlender/core/editors/colorpicker.js',
 		'~/App_Plugins/Lecoati.LeBlender/core/editors/iconpicker.js',
+		'~/App_Plugins/Lecoati.LeBlender/core/editors/rte.js',
 
 		'~/App_Plugins/Lecoati.LeBlender/core/settings/backgroundColorPicker.controller.js',
 

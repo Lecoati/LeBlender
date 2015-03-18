@@ -71,7 +71,13 @@
     		handle: ".icon-navigation",
     		axis: "y",
     		delay: 150,
-    		distance: 5
+    		distance: 5,
+    		stop: function (e, ui) {
+    		    ui.item.parents("#blender-grid-editor-parameter").find('.mceNoEditor').each(function () {
+    		        tinyMCE.execCommand('mceRemoveEditor', false, $(this).attr('id'));
+    		        tinyMCE.execCommand('mceAddEditor', false, $(this).attr('id'));
+    		    });
+    		}
     	};
 
     	$scope.searchEditor = function (alias) {

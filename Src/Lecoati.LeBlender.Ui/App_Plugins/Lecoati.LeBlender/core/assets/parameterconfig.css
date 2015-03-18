@@ -19,7 +19,7 @@
 }
 
 #blender-grid-editor-parameter .list {
-    border-top: 1px solid #dbdbdb;
+    border: 1px solid #DBDBDB;
     padding: 0px 0 5px 0;
     /*text-align: center;*/
     cursor:pointer;
@@ -30,30 +30,32 @@
 }
 
 #blender-grid-editor-parameter .multiple {
-    padding: 27px 0 5px 0;
+    padding: 22px 0 5px 0;
+    margin-bottom: 5px;
 }
 
 #blender-grid-editor-parameter .list:hover {
-    background-color:rgba(251, 251, 251, 1);
+    /*background-color:rgba(251, 251, 251, 1);*/
 }
 
 #blender-grid-editor-parameter .list-open {
     height:auto;
-    background-color:rgba(251, 251, 251, 1);
+    /*background-color:rgba(251, 251, 251, 1);*/
     overflow:initial;
 }
 
 #blender-grid-editor-parameter .list-open .list-field {
-    padding: 0 10px;
-    margin-bottom: 10px !important;
+    padding: 0 15px;
+    margin-bottom: 15px !important;
 }
 
 #blender-grid-editor-parameter .list-open .list-field h5 {
+    color: #7F7F7F;
 }
 
-#blender-grid-editor-parameter .list-open .list-field > div {
+/*#blender-grid-editor-parameter .list-open .list-field > div {
     text-align: center;
-}
+}*/
 
 #blender-grid-editor-parameter .umb-editor {
     width: 100% !important;
@@ -64,18 +66,19 @@
 }
 
 #blender-grid-editor-parameter .umb-sortable-thumbnails li {
-    border: 1px solid #D8D8D8;
+    border: 1px solid #EBEBEB;
 }
 
 #blender-grid-editor-parameter .list-number {
     right: 0;
     left: 0;
-    color: #aaaaaa;
     font-weight: bolder;
     margin-bottom: 10px;
     display: block;
     margin-top: -22px;
-    padding: 0 10px;
+    padding: 4px 10px;
+    color: #555;
+    background: #f8f8f8;
 }
 
 
@@ -95,8 +98,8 @@
     float:right;
 }
 
-#blender-grid-editor-parameter .list:hover .list-number {
-    color: #2e8aea;
+#blender-grid-editor-parameter .list .list-number:hover {
+    background-color:#EBEBEB;
 }
 
 #blender-grid-editor-parameter .list-add-row {
@@ -115,10 +118,30 @@
 }
 
 #blender-grid-editor-parameter textarea {
-    width: 367px;
-    height: 134px;
+    width: 353px;
+    height: 100px;
+    margin-bottom: 0px;
 }
 
-#blender-grid-editor-parameter input {
-    width: 367px;
+#blender-grid-editor-parameter input[type='text'] {
+    width: 353px;
+    margin-bottom: 0px;
+}
+
+#blender-grid-editor-parameter .umb-sortable-thumbnails {
+    text-align:center;
+}
+
+#blender-grid-editor-parameter .mce-container,
+#blender-grid-editor-parameter .mce-container-body {
+    visibility:visible;
+}
+
+#blender-grid-editor-parameter .mce-stack-layout-item {
+    display: block;
+    margin-top: 0px !important;
+}
+
+#blender-grid-editor-parameter .list-icons li {
+    padding-left: 0px;
 }

@@ -9,7 +9,11 @@
             {
 	            name: "Textarea",
 	            view: "textarea",
-	        },
+            },
+            {
+                name: "Rich Text Editor",
+                view: "rte"
+            },
             {
             	name: "Boolean",
             	view: "boolean"
@@ -72,14 +76,6 @@
             //	config: {
             //	    multiPicker: true
             //	}
-            //},
-            //{
-            //	name: "Boolean",
-            //	view: "boolean"
-            //},
-            //{
-            //    name: "datepicker",
-            //    view: "datepicker"
             //},
             //{
             //    name: "integer",
