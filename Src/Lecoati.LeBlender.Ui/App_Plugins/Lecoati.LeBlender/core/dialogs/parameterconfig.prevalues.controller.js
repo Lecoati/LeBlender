@@ -44,20 +44,18 @@
                 name: "Content Picker",
                 view: "/umbraco/Views/propertyeditors/contentpicker/contentpicker.html",
                 config: {
-                    multiPicker: false,
-                    minNumber: 1,
-                    maxNumber: 1
+                    multiPicker: "0",
+                    showEditButton: "0"
                 }
             },
-            //{
-            //    name: "Multi Content Picker",
-            //    view: "/umbraco/Views/propertyeditors/contentpicker/contentpicker.html",
-            //    config: {
-            //        multiPicker: true,
-            //        minNumber: 1,
-            //        maxNumber: 100
-            //    }
-            //},
+            {
+                name: "Multi Content Picker",
+                view: "/umbraco/Views/propertyeditors/contentpicker/contentpicker.html",
+                config: {
+                    multiPicker: "1",
+                    showEditButton: "0"
+                }
+            },
             {
                 name: "- - custom - -",
             }
