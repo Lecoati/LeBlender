@@ -140,8 +140,10 @@
 #blender-grid-editor-parameter .mce-stack-layout-item {
     display: block;
     margin-top: 0px !important;
+    position: static !important;
 }
 
 #blender-grid-editor-parameter .list-icons li {
     padding-left: 0px;
+
 }

@@ -10,8 +10,9 @@
     }
 
     .list-editor .preview-LeBlender {
-        background:transparent;
-        border: 1px dashed #d9d9d9;
+          background: rgb(248, 248, 248);
+          border: 0px dashed #d9d9d9;
+          border-radius: 13px;
     }
 
     .list-editor .empty-item h2 {
