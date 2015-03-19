@@ -53,7 +53,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
 
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.Web.HttpContext.Current.Server.MapPath(configPath)))
                 {
-                    file.Write(new JSonPresentationFormatter().Format(config));
+                    file.Write(config);
                 }
 
                 return Json(new { Message = "Saved" }); ;

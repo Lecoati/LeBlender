@@ -42,7 +42,7 @@
 
 
                 var url = "/umbraco/surface/Helper/SaveEditorConfig";
-                var resultParameters = { config: angular.toJson(data, false), configPath: configPath };
+                var resultParameters = { config: JSON.stringify(data, null, 4), configPath: configPath };
 
                 //$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
                 var promise = $http.post(url, resultParameters, {
