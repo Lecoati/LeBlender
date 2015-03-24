@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("LeBlender.Dialog.Parameterconfig.Controller",
-    function ($scope, assetsService, $http, dialogService, mediaHelper, $timeout) {
+    function ($scope, assetsService, $http, dialogService, mediaHelper, $timeout, LeBlenderRequestHelper, umbPropEditorHelper) {
 
         angular.extend($scope, {
             name: $scope.dialogData.name,
@@ -7,8 +7,8 @@
                 value: []
             },
             config:{
-                limit: 1,
-                fixed: false,
+                min: 1,
+                max: 1,
                 editors: []
             }     
         });
@@ -21,6 +21,23 @@
 
         if ($scope.model.value.length > 0) {
             $scope.selected = $scope.model.value[0];
+        }
+
+        /***************************************/
+        /* legacy adaptor 0.9.15 */
+        /***************************************/
+        if ($scope.config.fixed != undefined &&
+            $scope.config.limit) {
+            if ($scope.config.fixed) {
+                $scope.config.min = $scope.config.limit;
+                $scope.config.max = $scope.config.limit;
+            }
+            else {
+                $scope.config.min = 1;
+                $scope.config.max = $scope.config.limit;
+            }
+            delete $scope.config.fixed;
+            delete $scope.config.limit;
         }
 
         $scope.select = function (index) {
@@ -39,16 +56,6 @@
             }
             $scope.model.value.splice($index, 1);
 
-        };
-
-        $scope.initEditorPath = function (property) {
-            if (property && property.$editor && property.$editor.propretyType) {
-                if (property.$editor.propretyType.view && _.indexOf(property.$editor.propretyType.view, "/") >= 0) {
-                    return property.$editor.propretyType.view;
-                } else {
-                    return "/App_Plugins/Lecoati.LeBlender/core/editors/" + property.$editor.propretyType.view + ".html";
-                }
-            }
         };
 
         $scope.add = function () {
@@ -102,52 +109,143 @@
     	    return sProperty;
     	}
 
+    	var initEditor = function () {
+
+    	    _.each($scope.model.value, function (item, itemIndex) {
+    	        var order = 0;
+    	        if ($scope.config.editors) {
+    	            _.each($scope.config.editors, function (editor, editorIndex) {
+    	                var property = $scope.searchPropertyItem(item, editor.alias);
+    	                if (property) {
+    	                    property.$editor = editor;
+    	                    property.$order = order;
+    	                }
+    	                else {
+    	                    var newProperty = {
+    	                        value: null,
+    	                        editorAlias: editor.alias,
+    	                        editorName: editor.name,
+    	                        $editor: editor,
+    	                        $order: order
+    	                    };
+    	                    item[editor.alias] = newProperty;
+    	                }
+    	                order++;
+    	            })
+    	        }
+    	        _.each(item, function (property, propertyIndex) {
+    	            if (!$scope.searchEditor(property.editorAlias)) {
+    	                delete item[property.editorAlias];
+    	            }
+    	        })
+
+    	    })
+
+    	}
+
     	$scope.updateEditor = function () {
     	    if ($scope.model.value) {
-    	        _.each($scope.model.value, function (item, itemIndex) {
-    	            var order = 0;
 
-    	            if ($scope.config.editors) {
-    	                _.each($scope.config.editors, function (editor, editorIndex) {
-    	                    var property = $scope.searchPropertyItem(item, editor.alias);
-    	                    if (property) {
-    	                        property.$editor = editor;
-    	                        property.$order = order;
-    	                    }
-    	                    else {
-    	                        var newProperty = {
-    	                            value: null,
-    	                            editorAlias: editor.alias,
-    	                            editorName: editor.name,
-    	                            $editor: editor,
-    	                            $order: order
-    	                        };
-    	                        item[editor.alias] = newProperty;
-    	                    }
-    	                    order++;
-    	                })
-    	            }
+    	        /***************************************/
+    	        /* load dataType Info */
+    	        /***************************************/
+    	        var watchAppStart = $scope.$watch(function () {
+    	            var isLoadedCounter = 0
+    	            _.each($scope.config.editors, function (editor, editorIndex) {
+    	                if (editor.$isLoaded){
+    	                    isLoadedCounter ++
+    	                }
+    	            });
+    	            return isLoadedCounter; }, function (newValue, oldValue) {
+    	                if (newValue === $scope.config.editors.length) {
+    	                    initEditor();
+    	                    watchAppStart();
+    	                    $scope.configLoaded = true;
+    	                }
+    	        }, true);
+    	        /***************************************/
 
-    	            _.each(item, function (property, propertyIndex) {
-    	                if (!$scope.searchEditor(property.editorAlias)) {
-    	                    item[property.editorAlias] = undefined;
+    	        /***************************************/
+                /* load dataType Info */
+    	        /***************************************/
+    	        if ($scope.config.editors) {
+    	            _.each($scope.config.editors, function (editor, editorIndex) {
+
+    	                if (!$scope.model.value.propretyType) {
+    	                    $scope.model.value.propretyType = {};
+    	                }
+
+    	                /***************************************/
+    	                /* legacy adaptor 0.9.15 */
+    	                /***************************************/
+    	                if (!editor.dataType) {
+    	                    switch (editor.propretyType.name) {
+    	                        case "Textstring": editor.dataType = "0cc0eba1-9960-42c9-bf9b-60e150b429ae";
+    	                            editor.propretyType = {};
+    	                            break;
+    	                        case "Textarea": editor.dataType = "c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3";
+    	                            editor.propretyType = {};
+    	                            break;
+    	                        case "Rich Text Editor": editor.dataType = "ca90c950-0aff-4e72-b976-a30b1ac57dad";
+    	                            editor.propretyType = {};
+    	                            break;
+    	                        case "Boolean": editor.dataType = "92897bc6-a5f3-4ffe-ae27-f2e7e33dda49";
+    	                            editor.propretyType = {};
+    	                            break;
+    	                        case "Media Picker": editor.dataType = "93929b9a-93a2-4e2a-b239-d99334440a59";
+    	                            editor.propretyType = {};
+    	                            break;
+    	                        case "Multi Media Picker": editor.dataType = "7e3962cc-ce20-4ffc-b661-5897a894ba7e";
+    	                            editor.propretyType = {};
+    	                            break;
+    	                        case "Content Picker": editor.dataType = "a6857c73-d6e9-480c-b6e6-f15f6ad11125";
+    	                            editor.propretyType = {};
+    	                            break;
+    	                        case "Multi Content Picker":
+    	                            editor.dataType = "";
+    	                            break;
+    	                    }
+    	                }
+    	                
+    	                if (editor.dataType && !editor.$isLoaded) {
+    	                    LeBlenderRequestHelper.getDataType(editor.dataType).then(function (data) {
+    	                        var configObj = {};
+    	                        _.each(data.preValues, function (p) {
+    	                            configObj[p.key] = p.value;
+    	                        });
+    	                        editor.$isLoaded = true;
+    	                        editor.propretyType.config = configObj;
+    	                        editor.propretyType.view = umbPropEditorHelper.getViewPath(data.view);
+    	                    });
+    	                }
+    	                else {
+    	                    editor.$isLoaded = true;
     	                }
     	            })
-
-    	        })
+    	        }
+    	        /***************************************/
+ 
     	    }
+
     	}
 
     	$scope.updateTemplate = function () {
-    	    if ($scope.config.fixed) {
 
-    	        while ($scope.model.value.length < $scope.config.limit) {
+    	    // Clean for fixed config
+    	    if ($scope.model.value.length < $scope.config.min) {
+    	        while ($scope.model.value.length < $scope.config.min) {
     	            $scope.add();
     	        }
-    	        while ($scope.model.value.length > $scope.config.limit) {
-    	            $scope.remove($scope.model.value.length -1);
+    	    }
+    	    if ($scope.model.value.length > $scope.config.max) {
+    	        while ($scope.model.value.length > $scope.config.max) {
+    	            $scope.remove($scope.model.value.length - 1);
     	        }
     	    }
+    	    if ($scope.config.max == $scope.config.min) {
+    	        $scope.fixed = true;
+    	    }
+
     	}
 
     	$scope.updateTemplate();

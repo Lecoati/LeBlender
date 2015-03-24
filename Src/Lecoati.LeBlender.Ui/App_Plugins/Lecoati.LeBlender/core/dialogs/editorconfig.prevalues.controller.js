@@ -43,6 +43,26 @@
         }
 
         $scope.isBlenderEditor = function () {
+
+            /***************************************/
+            /* legacy adaptor 0.9.15 */
+            /***************************************/
+            if ($scope.model.value.config.fixed != undefined &&
+                $scope.model.value.config.limit &&
+                !$scope.model.value.config.min &&
+                !$scope.model.value.config.max) {
+                if ($scope.model.value.config.fixed) {
+                    $scope.model.value.config.min = $scope.model.value.config.limit;
+                    $scope.model.value.config.max = $scope.model.value.config.limit;
+                }
+                else {
+                    $scope.model.value.config.min = 1;
+                    $scope.model.value.config.max = $scope.model.value.config.limit;
+                }
+                delete $scope.model.value.config.fixed;
+                delete $scope.model.value.config.limit;
+            }
+
             if ("/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html" === $scope.model.value.view) {
                 return true;
             }
@@ -63,8 +83,8 @@
             $scope.textAreaconfig = "";
             if ($scope.isBlenderEditor()) {
                 $scope.model.value.config = {
-                    fixed: true,
-                    limit:1
+                    min: 1,
+                    max: 1
                 }
             }
         }
@@ -106,7 +126,6 @@
                 $scope.model.value.config.editors.splice($scope.model.value.config.editors.length + 1, 0, {
                     name: "",
                     alias: "",
-                    view: ""
                 });
                 parameter = $scope.model.value.config.editors[$scope.model.value.config.editors.length - 1];
             }
@@ -116,7 +135,8 @@
                     template: '/App_Plugins/Lecoati.LeBlender/core/Dialogs/parameterconfig.prevalues.html',
                     show: true,
                     dialogData: {
-                        parameter: parameter
+                        parameter: parameter,
+                        availableDataTypes: $scope.dialogData.availableDataTypes
                     },
                     callback: function (data) {
                     }

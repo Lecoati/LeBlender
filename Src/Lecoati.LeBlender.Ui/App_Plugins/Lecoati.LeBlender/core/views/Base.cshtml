@@ -1,8 +1,36 @@
 ﻿@using System.Web.Mvc.Html;
+@using Lecoati.leblender.Extension
+@using Lecoati.LeBlender.Extension.Models
 
-@if (Model.editor != null)
+@try
 {
-    var frontView = Model.editor.frontView == null || String.IsNullOrEmpty(Model.editor.frontView.Value) ? 
+
+    var cacheEnable = false;
+    string guid = Model.guid != null && Model.guid.Value != null ? Model.guid.Value.ToString() : "";
+    
+    BlenderModel blenderModel = Newtonsoft.Json.JsonConvert.DeserializeObject<BlenderModel>(Model.ToString());
+    
+    var frontView = Model.editor.frontView == null || String.IsNullOrEmpty(Model.editor.frontView.Value) ?
         String.Format("/views/partials/grid/editors/{0}.cshtml", Model.editor.alias) : Model.editor.frontView.Value;
-    @(Html.Action("RenderEditor", "Blender", new { editorAlias = Model.editor.alias, frontView = frontView, model = Model }))
+
+    ViewDataDictionary datas = new ViewDataDictionary { { "editorAlias", Model.editor.alias }, { "frontView", frontView } };
+    
+    if (cacheEnable)
+    {
+        <text>
+            @Html.LeBlenderCachedPartial("/App_Plugins/Lecoati.LeBlender/core/views/Blender.cshtml", blenderModel, 0, guid, datas)
+        </text>
+    }
+    else
+    {
+        <text>
+            @Html.Partial("/App_Plugins/Lecoati.LeBlender/core/views/Blender.cshtml", blenderModel, datas)
+        </text>
+    }
+
 }
+catch (Exception ex)
+{
+    <pre>@ex.ToString()</pre>
+} 
+

@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").
-    directive('blenderEditorWrapper', function () {
+    directive('blenderEditorWrapper', function ($timeout) {
         return {
             scope: {
                 property: "=",
@@ -7,30 +7,41 @@
             },
             restrict: 'E',
             replace: true,
-            template: '<div ng-include="model.view"></div>',
+            template: '<ng-form name="propertyForm"><div ng-include="model.view"></div></ng-form>',
 
             controller: function ($scope) {
               
                 var initEditorPath = function (property) {
                     if (property && property.$editor && property.$editor.propretyType) {
-                        if (property.$editor.propretyType.view && _.indexOf(property.$editor.propretyType.view, "/") >= 0) {
-                            return property.$editor.propretyType.view;
-                        } else {
-                            return "/App_Plugins/Lecoati.LeBlender/core/editors/" + property.$editor.propretyType.view + ".html";
-                        }
+                        return property.$editor.propretyType.view;
                     }
                 };
 
                 $scope.model = {
-                    alias: $scope.property.$editor ? $scope.property.$editor.alias : "",
-                    label: $scope.property.$editor ? $scope.property.$editor.name : "",
-                    config: $scope.property.$editor ? $scope.property.$editor.propretyType.config : {},
-                    value: $scope.property.value,
+                    alias: $scope.property.$editor ? angular.copy($scope.property.$editor.alias) : "",
+                    label: $scope.property.$editor ? angular.copy($scope.property.$editor.name) : "",
+                    config: $scope.property.$editor ? angular.copy($scope.property.$editor.propretyType.config) : {},
+                    validation: {
+                        mandatory:false
+                    },
+                    value: angular.copy($scope.property.value),
                     view: initEditorPath($scope.property)
                 }
 
+                $scope.validateMandatory = false;
+
                 $scope.$watch("model.value", function (newValue, oldValue) {
-                    $scope.property.value = newValue;
+                    if (newValue) {
+
+                        /* TODO HACK FOR TAG PROPERTY EDITOR */
+                        if ($scope.model.view == "views/propertyeditors/tags/tags.html" && newValue.join) {
+                            $scope.property.value = angular.copy(newValue.join());
+                        }
+                        else {
+                            $scope.property.value = newValue;
+                        }
+
+                    }
                 }, true);
 
             }

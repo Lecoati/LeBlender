@@ -13,15 +13,8 @@
     margin-left:5px;
 }
 
-#blender-grid-editor-parameter {
-    /*border-bottom: 1px solid #dbdbdb;
-    background:#ffffff;*/
-}
-
 #blender-grid-editor-parameter .list {
-    border: 1px solid #DBDBDB;
     padding: 0px 0 5px 0;
-    /*text-align: center;*/
     cursor:pointer;
     height:0;
     position:relative;
@@ -30,35 +23,22 @@
 }
 
 #blender-grid-editor-parameter .multiple {
+    border: 1px solid #DBDBDB;
     padding: 22px 0 5px 0;
     margin-bottom: 5px;
 }
 
-#blender-grid-editor-parameter .list:hover {
-    /*background-color:rgba(251, 251, 251, 1);*/
+#blender-grid-editor-parameter .multiple .umb-control-group {
+    padding: 0 15px 15px 15px;
+}
+
+#blender-grid-editor-parameter .twitter-typeahead input {
+    width: 336px;
 }
 
 #blender-grid-editor-parameter .list-open {
     height:auto;
-    /*background-color:rgba(251, 251, 251, 1);*/
     overflow:initial;
-}
-
-#blender-grid-editor-parameter .list-open .list-field {
-    padding: 0 15px;
-    margin-bottom: 15px !important;
-}
-
-#blender-grid-editor-parameter .list-open .list-field h5 {
-    color: #7F7F7F;
-}
-
-/*#blender-grid-editor-parameter .list-open .list-field > div {
-    text-align: center;
-}*/
-
-#blender-grid-editor-parameter .umb-editor {
-    width: 100% !important;
 }
 
 #blender-grid-editor-parameter a:hover, a:focus {
@@ -103,7 +83,6 @@
 }
 
 #blender-grid-editor-parameter .list-add-row {
-    border-top: 1px solid #dbdbdb;
     padding: 5px;
     color: #aaaaaa;
     text-align: right;
@@ -115,17 +94,6 @@
 
 #blender-grid-editor-parameter .list-add-row i:hover {
     color: #2e8aea;
-}
-
-#blender-grid-editor-parameter textarea {
-    width: 353px;
-    height: 100px;
-    margin-bottom: 0px;
-}
-
-#blender-grid-editor-parameter input[type='text'] {
-    width: 353px;
-    margin-bottom: 0px;
 }
 
 #blender-grid-editor-parameter .umb-sortable-thumbnails {

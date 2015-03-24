@@ -14,9 +14,8 @@ namespace Lecoati.LeBlender.Extension.Controllers
     public class BlenderController : SurfaceController
     {
         [ChildActionOnly]
-        public ActionResult RenderEditor(string editorAlias, string frontView, dynamic model)
+        public ActionResult RenderEditor(string editorAlias, string frontView, BlenderModel model)
         {
-            BlenderModel blenderModel = JsonConvert.DeserializeObject<BlenderModel>(model.ToString());
 
             var baseType = typeof(BlenderController);
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
@@ -28,6 +27,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
             }
 
             if (types.Any()) {
+
                 var controllerType = types.First();
 
                 var controllerInstance = (BlenderController)Activator.CreateInstance(controllerType);
@@ -42,7 +42,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
                 var type = parameter.ParameterType.UnderlyingSystemType;
                 var typeInstance = (BlenderModel)Activator.CreateInstance(type);
 
-                typeInstance.Items = blenderModel.Items;
+                typeInstance.Items = model.Items;
 
                 var actionResult = (ViewResult)controllerType.GetMethod(method).Invoke(controllerInstance, new[] { typeInstance });
 
@@ -51,7 +51,8 @@ namespace Lecoati.LeBlender.Extension.Controllers
                 return actionResult;
             }
 
-            return View(frontView, blenderModel);
+            return View(frontView, model);
+            
         }
     }
 }

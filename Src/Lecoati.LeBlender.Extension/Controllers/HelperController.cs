@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Umbraco.Core.Models;
 using Umbraco.Web;
+using Umbraco.Web.Editors;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.UI.Pages;
@@ -17,6 +18,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
     public class HelperController : SurfaceController
     {
 
+        //TODO: move this to a secure API controller 
         [ValidateInput(false)]
         [HttpPost]
         public ActionResult GetPartialViewResultAsHtmlForEditor()
@@ -38,6 +40,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
 
         }
 
+        //TODO: move this to a secure API controller 
         [ValidateInput(false)]
         [HttpPost]
         public ActionResult SaveEditorConfig()

@@ -1,121 +1,11 @@
 ﻿angular.module("umbraco").controller("LeBlender.Dialog.ParameterConfig.Prevalues.Controller",
     function ($scope, assetsService, $http, LeBlenderRequestHelper, dialogService) {
 
-        $scope.defaultParameterList = [
-            {
-                name: "Textstring",
-                view: "textstring",
-            },
-            {
-	            name: "Textarea",
-	            view: "textarea",
-            },
-            {
-                name: "Rich Text Editor",
-                view: "rte"
-            },
-            {
-            	name: "Boolean",
-            	view: "boolean"
-            },
-            //{
-            //    name: "Integer",
-            //    view: "/umbraco/Views/propertyeditors/integer/integer.html"
-            //},
-            //{
-            //    name: "datepicker",
-            //    view: "/umbraco/Views/propertyeditors/datepicker/datepicker.html"
-            //},
-            {
-                name: "Media Picker",
-                view: "/umbraco/Views/propertyeditors/mediapicker/mediapicker.html",
-                config: {
-                    multiPicker: false
-                }
-            },
-            {
-                name: "Multi Media Picker",
-                view: "/umbraco/Views/propertyeditors/mediapicker/mediapicker.html",
-                config: {
-                    multiPicker: true
-                }
-            },
-            {
-                name: "Content Picker",
-                view: "/umbraco/Views/propertyeditors/contentpicker/contentpicker.html",
-                config: {
-                    multiPicker: "0",
-                    showEditButton: "0"
-                }
-            },
-            {
-                name: "Multi Content Picker",
-                view: "/umbraco/Views/propertyeditors/contentpicker/contentpicker.html",
-                config: {
-                    multiPicker: "1",
-                    showEditButton: "0"
-                }
-            },
-            {
-                name: "- - custom - -",
-            }
-
-
-
-
-
-            //{
-            //    name: "multivalues",
-            //    view: "/umbraco/Views/prevalueeditors/multivalues.html"
-            //},
-            //{
-            //	name: "Simple Media Picker",
-            //	view: "/umbraco/Views/propertyeditors/mediapicker/mediapicker.html",
-            //	config: {
-            //	    multiPicker: true
-            //	}
-            //},
-            //{
-            //    name: "integer",
-            //    view: "integer"
-            //},
-            //{
-            //    name: "markdowneditor",
-            //    view: "markdowneditor"
-            //},
-	        //{
-	        //    name: "Color Picker",
-	        //    view: "colorpicker"
-	        //},
-            //{
-            //    name: "Icon Picker",
-            //    view: "iconpicker",
-            //},
-	        //{
-	        //    name: "Content Picker",
-	        //    view: "contentpicker"
-	        //},
-	        //{
-	        //    name: "Media Picker",
-	        //    view: "/umbraco/Views/propertyeditors/mediapicker/mediapicker.html",
-            //    config: {
-	        //        multiPicker: false
-            //    }
-	        //},
-	        //{
-	        //    name: "Textarea",
-	        //    view: "/umbraco/Views/propertyeditors/textarea/textarea.html",
-	        //},
-            //{
-            //    name: "Textstring",
-            //    view: "/umbraco/Views/propertyeditors/textbox/textbox.html",
-            //},
-            //{
-            //    name: "Layers",
-            //    view: "layers",
-            //}
-
-        ]
+        $scope.availableDataTypes = angular.copy($scope.dialogData.availableDataTypes);
+        $scope.availableDataTypes.push({
+            guid: "",
+            name: "- - custom - -"
+        })
 
         // Change property type
         $scope.change = function () {
@@ -130,35 +20,57 @@
 
         // Control if the property is custom 
         $scope.isCustom = function () {
-            if ($scope.model.value.propretyType) {
-                return $scope.model.value.propretyType.name === "- - custom - -";
+            if ($scope.model.value.dataType === "") {
+                return true;
             }
             else {
                 return false;
             }
-            
         }
 
         // Stringify the current config config
         $scope.init = function () {
 
             if (!$scope.model.value.propretyType) {
-                $scope.model.value.propretyType = $scope.defaultParameterList[0];
+                $scope.model.value.propretyType = {};
             }
 
-            $scope.selectedPropertyType = _.find($scope.defaultParameterList, function (item) {
-                return item.view === $scope.model.value.propretyType.view &&
-                       item.name === $scope.model.value.propretyType.name
-                       JSON.stringify(item.config) === JSON.stringify($scope.model.value.propretyType.config)
-            });
+            switch ($scope.model.value.propretyType.name) {
+                case "Textstring": $scope.model.value.dataType = "0cc0eba1-9960-42c9-bf9b-60e150b429ae"; 
+                    $scope.model.value.propretyType = {};
+                    break;
+                case "Textarea": $scope.model.value.dataType = "c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3";
+                    $scope.model.value.propretyType = {};
+                    break;
+                case "Rich Text Editor": $scope.model.value.dataType = "ca90c950-0aff-4e72-b976-a30b1ac57dad";
+                    $scope.model.value.propretyType = {};
+                    break;
+                case "Boolean": $scope.model.value.dataType = "92897bc6-a5f3-4ffe-ae27-f2e7e33dda49";
+                    $scope.model.value.propretyType = {};
+                    break;
+                case "Media Picker": $scope.model.value.dataType = "93929b9a-93a2-4e2a-b239-d99334440a59";
+                    $scope.model.value.propretyType = {};
+                    break;
+                case "Multi Media Picker": $scope.model.value.dataType = "7e3962cc-ce20-4ffc-b661-5897a894ba7e";
+                    $scope.model.value.propretyType = {};
+                    break;
+                case "Content Picker": $scope.model.value.dataType = "a6857c73-d6e9-480c-b6e6-f15f6ad11125";
+                    $scope.model.value.propretyType = {};       
+                    break;
+                case "Multi Content Picker":
+                    $scope.model.value.dataType = "";
+                    break;
+            }
 
-            $scope.textAreaconfig = JSON.stringify($scope.model.value.propretyType.config, null, 4);
+            if (!$scope.model.value.dataType && $scope.model.value.propretyType) {
+                $scope.textAreaconfig = JSON.stringify($scope.model.value.propretyType.config, null, 4);
+            }
 
             $scope.$watch('textAreaconfig', function () {
                 try {
                     $scope.model.value.propretyType.config = JSON.parse($scope.textAreaconfig);
                 } catch (exp) {
-                    $scope.model.value.propretyType.config = undefined;
+                    delete $scope.model.value.propretyType.config;
                 };
             });
 
@@ -215,3 +127,55 @@
         }
 
     });
+
+//$scope.defaultParameterList = [
+//    {
+//        name: "Textstring",
+//        view: "textstring",
+//    },
+//    {
+//        name: "Textarea",
+//        view: "textarea",
+//    },
+//    {
+//        name: "Rich Text Editor",
+//        view: "rte"
+//    },
+//    {
+//        name: "Boolean",
+//        view: "boolean"
+//    },
+//    {
+//        name: "Media Picker",
+//        view: "/umbraco/Views/propertyeditors/mediapicker/mediapicker.html",
+//        config: {
+//            multiPicker: false
+//        }
+//    },
+//    {
+//        name: "Multi Media Picker",
+//        view: "/umbraco/Views/propertyeditors/mediapicker/mediapicker.html",
+//        config: {
+//            multiPicker: true
+//        }
+//    },
+//    {
+//        name: "Content Picker",
+//        view: "/umbraco/Views/propertyeditors/contentpicker/contentpicker.html",
+//        config: {
+//            multiPicker: "0",
+//            showEditButton: "0"
+//        }
+//    },
+//    {
+//        name: "Multi Content Picker",
+//        view: "/umbraco/Views/propertyeditors/contentpicker/contentpicker.html",
+//        config: {
+//            multiPicker: "1",
+//            showEditButton: "0"
+//        }
+//    },
+//    {
+//        name: "- - custom - -",
+//    }
+//]

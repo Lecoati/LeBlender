@@ -26,7 +26,8 @@
                 template: '/App_Plugins/Lecoati.LeBlender/core/dialogs/editorconfig.prevalues.html',
                 show: true,
                 dialogData: {
-                    editor: editor
+                    editor: editor,
+                    availableDataTypes : $scope.availableDataTypes
                 },
                 callback: function (data) {
                 }
@@ -42,5 +43,12 @@
         });
 
         $scope.getSetting();
+
+        // Get a list of datatype
+        LeBlenderRequestHelper.getAllDataTypes().then(function (data) {
+            $scope.availableDataTypes = data;
+        });
+
+
 
     });
