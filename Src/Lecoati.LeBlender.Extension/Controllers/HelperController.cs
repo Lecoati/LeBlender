@@ -54,10 +54,17 @@ namespace Lecoati.LeBlender.Extension.Controllers
                 var config = Request["config"];
                 var configPath = Request["configPath"];
 
+                // Update
                 using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.Web.HttpContext.Current.Server.MapPath(configPath)))
                 {
                     file.Write(config);
                 }
+
+                // Refrech GridConfig for next use
+                HttpContext.Cache.Remove("LeBlenderControllers");
+                HttpContext.Cache.Remove("LeBlenderGridEditorsList");
+                ApplicationContext.ApplicationCache.ClearCacheByKeySearch(Lecoati.LeBlender.Extension.LeBlenderPartialCacher.PARTIAL_CACHE_PREFIX);
+                ApplicationContext.ApplicationCache.RuntimeCache.ClearCacheItem(typeof(BackOfficeController) + "GetGridConfig");
 
                 return Json(new { Message = "Saved" }); ;
 

@@ -42,6 +42,13 @@
                             <input type="text" ng-model="model.value.view" />
                         </div>
                     </div>
+                    <div class="umb-el-wrap">
+                        <label class="control-label">Render (optional)<small>MVC Partial view</small></label>
+                        <div class="controls">
+                            <input ng-if="isBlenderEditor()" type="text" ng-model="model.value.frontView" />
+                            <input ng-if="!isBlenderEditor()" type="text" ng-model="model.value.render" />
+                        </div>
+                    </div>
 
                     <div class="umb-el-wrap" ng-show="isBlenderEditor()">
                         <label class="control-label"><strong>Properties</strong><small>LeBlender's set of properties</small></label>
@@ -95,13 +102,12 @@
                                 <input type="number" ng-model="model.value.config.max" />
                             </div>
                         </div>
-                    </div>
-                    <div class="umb-el-wrap">
-                        <label class="control-label">Render<small>MVC Partial view</small></label>
-                        <div class="controls">
-                            <input ng-if="isBlenderEditor()" type="text" ng-model="model.value.frontView" />
-                            <input ng-if="!isBlenderEditor()" type="text" ng-model="model.value.render" />
-                        </div>
+                        <!--<div class="umb-el-wrap">
+                            <label class="control-label">Cache period<small>Cache period in seconds (by page).<br/>Content publish event clear the cache.</small></label>
+                            <div class="controls">
+                                <input type="number" ng-model="model.value.config.expiration" />
+                            </div>
+                        </div>-->
                     </div>
                     <div ng-show="!isBlenderEditor()" class="umb-el-wrap">
                         <label class="control-label">Config<small>Optional editor config</small></label>

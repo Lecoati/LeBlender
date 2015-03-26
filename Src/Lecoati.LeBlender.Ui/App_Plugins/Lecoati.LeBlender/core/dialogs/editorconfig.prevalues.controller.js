@@ -47,20 +47,22 @@
             /***************************************/
             /* legacy adaptor 0.9.15 */
             /***************************************/
-            if ($scope.model.value.config.fixed != undefined &&
-                $scope.model.value.config.limit &&
-                !$scope.model.value.config.min &&
-                !$scope.model.value.config.max) {
-                if ($scope.model.value.config.fixed) {
-                    $scope.model.value.config.min = $scope.model.value.config.limit;
-                    $scope.model.value.config.max = $scope.model.value.config.limit;
+            if ($scope.model.value.config) {
+                if ($scope.model.value.config.fixed != undefined &&
+                    $scope.model.value.config.limit &&
+                    !$scope.model.value.config.min &&
+                    !$scope.model.value.config.max) {
+                    if ($scope.model.value.config.fixed) {
+                        $scope.model.value.config.min = $scope.model.value.config.limit;
+                        $scope.model.value.config.max = $scope.model.value.config.limit;
+                    }
+                    else {
+                        $scope.model.value.config.min = 1;
+                        $scope.model.value.config.max = $scope.model.value.config.limit;
+                    }
+                    delete $scope.model.value.config.fixed;
+                    delete $scope.model.value.config.limit;
                 }
-                else {
-                    $scope.model.value.config.min = 1;
-                    $scope.model.value.config.max = $scope.model.value.config.limit;
-                }
-                delete $scope.model.value.config.fixed;
-                delete $scope.model.value.config.limit;
             }
 
             if ("/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html" === $scope.model.value.view) {

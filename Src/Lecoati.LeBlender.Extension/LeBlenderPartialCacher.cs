@@ -20,7 +20,6 @@ namespace Lecoati.LeBlender.Extension
 
         public const string PARTIAL_CACHE_PREFIX = "LeBlender";
 
-        //an extension method is created to be used in the views
         public static IHtmlString LeBlenderCachedPartial(
                         this HtmlHelper htmlHelper,
                         string partialViewName,
@@ -31,8 +30,6 @@ namespace Lecoati.LeBlender.Extension
             )
         {
 
-            //the key will determine the uniqueness of the cache
-            //the key ends up looking like this {prefix-url-customkey}
             var cacheKey = new StringBuilder();
             cacheKey.Append(PARTIAL_CACHE_PREFIX);
 
@@ -43,7 +40,6 @@ namespace Lecoati.LeBlender.Extension
 
             var finalCacheKey = cacheKey.ToString().ToLower();
 
-            //this code was lifted from the Umbraco Core and does the actual caching/retrieval of html
             return ApplicationContext.Current.ApplicationCache.GetCacheItem(
                     finalCacheKey,
                     CacheItemPriority.NotRemovable, //not removable, the same as macros (apparently issue #27610)

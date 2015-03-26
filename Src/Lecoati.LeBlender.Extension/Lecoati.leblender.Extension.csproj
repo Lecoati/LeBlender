@@ -235,8 +235,10 @@
     <Compile Include="Controllers\BlenderController.cs" />
     <Compile Include="Controllers\HelperController.cs" />
     <Compile Include="Controllers\LeBlenderDataTypeController.cs" />
+    <Compile Include="Events\UmbracoEvents.cs" />
     <Compile Include="JSonPresentationFormatter.cs" />
     <Compile Include="LeBlenderPartialCacher.cs" />
+    <Compile Include="Models\GridEditor.cs" />
     <Compile Include="Models\BlenderValue.cs" />
     <Compile Include="Models\BlenderModelMatchingConverter.cs" />
     <Compile Include="Models\BlenderPropertyModel.cs" />
@@ -244,13 +246,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LeBlenderHelper.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Web.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="App_Start\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
