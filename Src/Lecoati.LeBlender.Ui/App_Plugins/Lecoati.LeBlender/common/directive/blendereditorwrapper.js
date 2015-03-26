@@ -31,7 +31,7 @@
                 $scope.validateMandatory = false;
 
                 $scope.$watch("model.value", function (newValue, oldValue) {
-                    if (newValue) {
+                    if (newValue != undefined) {
 
                         /* TODO HACK FOR TAG PROPERTY EDITOR */
                         if ($scope.model.view == "views/propertyeditors/tags/tags.html" && newValue.join) {
