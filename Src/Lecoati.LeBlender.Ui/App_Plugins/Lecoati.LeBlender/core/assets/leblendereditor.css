@@ -1,4 +1,8 @@
 
+    .leblender-exception {
+        overflow: hidden;
+    }
+
     .list-editor {
         cursor:pointer;
         /*border:4px dashed #d9d9d9;*/

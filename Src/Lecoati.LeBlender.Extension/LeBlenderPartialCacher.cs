@@ -13,7 +13,7 @@ using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Web;
 
-namespace Lecoati.leblender.Extension
+namespace Lecoati.LeBlender.Extension
 {
     public static class LeBlenderPartialCacher
     {

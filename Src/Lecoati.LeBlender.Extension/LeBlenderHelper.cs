@@ -33,5 +33,18 @@ namespace Lecoati.LeBlender.Extension
                 return GetUmbracoHelper().TypedContent(HttpContext.Current.Request["id"].ToString());
             }
         }
+
+        public static BlenderModel DeserializeBlenderModel(dynamic model) {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<BlenderModel>(model.ToString());
+        }
+
+        public static string GetInnerMessage(Exception ex)
+        {
+            if (ex.InnerException != null && !string.IsNullOrEmpty(ex.InnerException.Message))
+                return ex.InnerException.Message;
+
+            return ex.Message;
+        }
+
     }
 }

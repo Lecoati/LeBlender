@@ -1,36 +1,38 @@
 ﻿@using System.Web.Mvc.Html;
-@using Lecoati.leblender.Extension
+@using Lecoati.LeBlender.Extension
 @using Lecoati.LeBlender.Extension.Models
 
 @try
 {
-
-    var cacheEnable = false;
-    string guid = Model.guid != null && Model.guid.Value != null ? Model.guid.Value.ToString() : "";
     
-    BlenderModel blenderModel = Newtonsoft.Json.JsonConvert.DeserializeObject<BlenderModel>(Model.ToString());
+    string guid = Model.guid != null && Model.guid.Value != null ? Model.guid.Value.ToString() : "";
+    BlenderModel blenderModel = Helper.DeserializeBlenderModel(Model);
     
     var frontView = Model.editor.frontView == null || String.IsNullOrEmpty(Model.editor.frontView.Value) ?
         String.Format("/views/partials/grid/editors/{0}.cshtml", Model.editor.alias) : Model.editor.frontView.Value;
 
     ViewDataDictionary datas = new ViewDataDictionary { { "editorAlias", Model.editor.alias }, { "frontView", frontView } };
     
-    if (cacheEnable)
+    @*if (cacheEnable && Helper.IsFrontEnd())
     {
         <text>
             @Html.LeBlenderCachedPartial("/App_Plugins/Lecoati.LeBlender/core/views/Blender.cshtml", blenderModel, 0, guid, datas)
         </text>
     }
     else
-    {
-        <text>
-            @Html.Partial("/App_Plugins/Lecoati.LeBlender/core/views/Blender.cshtml", blenderModel, datas)
-        </text>
-    }
+    {*@
+    <text>
+        @Html.Partial("/App_Plugins/Lecoati.LeBlender/core/views/Blender.cshtml", blenderModel, datas)
+    </text>
+    //}
 
 }
 catch (Exception ex)
 {
-    <pre>@ex.ToString()</pre>
+    if (!Helper.IsFrontEnd())
+    {
+        <p class="red">Something went wrong with this editor, below is the exception detail:</p>
+    }
+    <pre class="leblender-exception">@Helper.GetInnerMessage(ex)</pre>
 } 
 

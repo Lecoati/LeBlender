@@ -12,7 +12,7 @@ using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.UI.Pages;
 
-namespace Lecoati.leblender.Extension.Controllers
+namespace Lecoati.LeBlender.Extension.Controllers
 {
     [PluginController("LeBlenderApi")]
     public class LeBlenderDataTypeController : UmbracoAuthorizedJsonController
