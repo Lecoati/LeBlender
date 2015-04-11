@@ -4,18 +4,22 @@
     <div class="umb-panel-body no-header with-footer">
         <div class="umb-forms-settings">
 
-            <h4>Editor setting</h4>
+            <h4>Grid Editor Properties</h4>
 
             <div class="umb-property">
                 <div class="control-group umb-control-group">
+
+                    <!-- editor type -->
                     <div class="umb-el-wrap">
                         <label class="control-label"><strong>Type</strong></label>
                         <div class="controls">
-                            <select ng-change="update()" ng-options="type.view as type.name for type in defaultEditorList" ng-model="model.value.view">
+                            <select ng-change="propertyGridEditorChanged()" ng-options="type.editor.view as type.name for type in propertyGridEditors" ng-model="model.value.view">
                                 <option value="">- - custom - -</option>
                             </select>
                         </div>
                     </div>
+
+                    <!-- editor icon -->
                     <div class="umb-el-wrap">
                         <label class="control-label"><strong>Icon</strong></label>
                         <div class="controls">
@@ -24,100 +28,88 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- editor name -->
                     <div class="umb-el-wrap">
                         <label class="control-label"><strong>Name</strong></label>
                         <div class="controls">
-                            <input type="text" ng-model="model.value.name" />
+                            <input class="umb-editor umb-textstring" type="text" ng-model="model.value.name" />
                         </div>
                     </div>
-                    <div class="umb-el-wrap">
+
+                    <!-- editor alias -->
+                    <div class="umb-el-wrap" >
                         <label class="control-label"><strong>Alias</strong></label>
                         <div class="controls">
-                            <input type="text" ng-model="model.value.alias" />
+                            <input class="umb-editor umb-textstring" type="text" ng-model="model.value.alias" />
                         </div>
                     </div>
+
+                    <!-- editor custom view -->
                     <div class="umb-el-wrap" ng-show="isCustom()">
-                        <label class="control-label"><strong>View</strong><small>Custom editor's view</small></label>
+                        <label class="control-label"><strong>View</strong></label>
                         <div class="controls">
-                            <input type="text" ng-model="model.value.view" />
+                            <input class="umb-editor umb-textstring" type="text" ng-model="model.value.view" />
                         </div>
                     </div>
+
+                    <!-- editor render -->
                     <div class="umb-el-wrap">
-                        <label class="control-label">Render (optional)<small>MVC Partial view</small></label>
+                        <label class="control-label">Render (optional)</label>
                         <div class="controls">
-                            <input ng-if="isBlenderEditor()" type="text" ng-model="model.value.frontView" />
-                            <input ng-if="!isBlenderEditor()" type="text" ng-model="model.value.render" />
+                            <!--<input class="umb-editor umb-textstring" ng-if="isBlenderEditor()" type="text" ng-model="model.value.frontView" />-->
+                            <input class="umb-editor umb-textstring" type="text" ng-model="model.value.render" />
                         </div>
                     </div>
-
-                    <div class="umb-el-wrap" ng-show="isBlenderEditor()">
-                        <label class="control-label"><strong>Properties</strong><small>LeBlender's set of properties</small></label>
-                        <div class="controls">
-                            <ul class="unstyled list-icons umb-contentpicker" ui-sortable="" ng-model="model.value.config.editors">
-                                <li ng-repeat="parameter in model.value.config.editors track by $index">
-                                    <i class="icon icon-navigation handle"></i>
-                                    <i class="icon icon-delete red pull-right" ng-click="remove($index)"></i>
-                                    <a href="#" prevent-default="" ng-click="openParameterConfig(parameter)">
-                                        {{parameter.name}}
-                                    </a>
-                                    <!--<small clas
-                                </a><!--<small clas
-                                s="ng-binding">({{parameter.propretyType.name}})</small>-->
-                                </li>
-                                </li>
-                            </ul>
-                            <ul class="unstyled list-icons">
-                                <li>
-                                    <i class="icon icon-add blue"></i>
-                                    <a href="#" ng-click="openParameterConfig()" prevent-default="">Add</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="umb-property">
-                <div class="umb-el-wrap" style="margin-bottom: 20px;">
-                    <input type="checkbox" ng-model="model.value.adv" name="adv" id="adv" style="margin-top: 12px;margin-right: 5px;float: left;" />
-                    <label class="control-label" for="adv" style="float: left;"><strong>Advanced settings</strong></label>
-                </div>
-                <div ng-show="model.value.adv" style="clear: both;">
-                    <div ng-show="isBlenderEditor()">
-                        <div class="umb-el-wrap">
-                            <label class="control-label">Render in the grid</label>
-                            <div class="controls" style="overflow: hidden;">
-                                <input type="checkbox" ng-model="model.value.config.renderInGrid" style="float: left;height: 30px;" /><label style="margin-left: 5px;float: left;" class="control-label">Yes</label>
-                            </div>
-                        </div>
-                        <div class="umb-el-wrap">
-                            <label class="control-label">Min<small>Minimum number of items</small></label>
-                            <div class="controls">
-                                <input type="number" ng-model="model.value.config.min" />
-                            </div>
-                        </div>
-                        <div class="umb-el-wrap">
-                            <label class="control-label">Max<small>Maximum number of items</small></label>
-                            <div class="controls">
-                                <input type="number" ng-model="model.value.config.max" />
-                            </div>
-                        </div>
-                        <!--<div class="umb-el-wrap">
-                            <label class="control-label">Cache period<small>Cache period in seconds (by page).<br/>Content publish event clear the cache.</small></label>
-                            <div class="controls">
-                                <input type="number" ng-model="model.value.config.expiration" />
-                            </div>
-                        </div>-->
-                    </div>
-                    <div ng-show="!isBlenderEditor()" class="umb-el-wrap">
-                        <label class="control-label">Config<small>Optional editor config</small></label>
+                    
+                    <!-- config for custom field -->
+                    <div class="umb-el-wrap" ng-show="isCustom()">
+                        <label class="control-label">Config<small>Optional custom editor config (Json)</small></label>
                         <div class="controls">
                             <textarea type="text" style="width: 386px; height: 228px;" ng-model="textAreaconfig" />
                         </div>
                     </div>
+
                 </div>
             </div>
-        
+
+            <div ng-show="selectedPropertyGridEditor.prevalues && selectedPropertyGridEditor.prevalues.fields.length > 0">
+
+                <h4>Grid Editor Configurations</h4>
+
+                <div class="umb-property">
+                    <div class="control-group umb-control-group">
+
+                        <!-- prevalues -->
+                        <div class="umb-el-wrap" ng-repeat="field in selectedPropertyGridEditor.prevalues.fields | advancedProperties:false">
+                            <label class="control-label">{{field.label}}<small>{{field.description}}</small></label>
+                            <propertygrideditorwrapper class="controls"
+                                                       value="model.value"
+                                                       key="field.key"
+                                                       view="getFieldView(field.view)"></propertygrideditorwrapper>
+                        </div>
+
+                        <!-- Advanced prevalues -->
+                        <div ng-show="(selectedPropertyGridEditor.prevalues.fields | advancedProperties:true).length > 0"
+                             ng-click="adv = !adv"
+                             class="umb-el-wrap" style="margin-top: 10px;margin-bottom: 10px;overflow: hidden;">
+                            <i ng-show="!adv" class="icon-navigation-right"></i>
+                            <i ng-show="adv" class="icon-navigation-down"></i>
+                            <label class="control-label" for="adv" style="display: inline-block;"><strong>Advanced</strong></label>
+                        </div>
+                        <div class="umb-el-wrap" ng-show="adv" ng-repeat="field in selectedPropertyGridEditor.prevalues.fields | advancedProperties:true">
+                            <label class="control-label">{{field.label}}<small>{{field.description}}</small></label>
+                            <propertygrideditorwrapper class="controls"
+                                                       value="model.value"
+                                                       key="field.key"
+                                                       view="getFieldView(field.view)"></propertygrideditorwrapper>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 

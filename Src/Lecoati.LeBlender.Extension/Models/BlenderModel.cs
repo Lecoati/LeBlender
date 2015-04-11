@@ -10,6 +10,6 @@ namespace Lecoati.LeBlender.Extension.Models
     public class BlenderModel
     {
         [JsonProperty("value")]
-        public IEnumerable<BlenderValue> Items { get; set; }
+        public IEnumerable<LeBlenderValue> Items { get; set; }
     }
 }

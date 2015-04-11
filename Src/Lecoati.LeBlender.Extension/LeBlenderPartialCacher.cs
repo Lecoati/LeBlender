@@ -18,28 +18,16 @@ namespace Lecoati.LeBlender.Extension
     public static class LeBlenderPartialCacher
     {
 
-        public const string PARTIAL_CACHE_PREFIX = "LeBlender";
-
         public static IHtmlString LeBlenderCachedPartial(
                         this HtmlHelper htmlHelper,
                         string partialViewName,
                         object model,
                         int cachedSeconds,
-                        string customKey,
+                        string guid,
                         ViewDataDictionary viewData = null
             )
         {
-
-            var cacheKey = new StringBuilder();
-            cacheKey.Append(PARTIAL_CACHE_PREFIX);
-
-            cacheKey.Append(HttpContext.Current.Request.Url);
-
-            if (customKey != "")
-                cacheKey.Append("-" + customKey);
-
-            var finalCacheKey = cacheKey.ToString().ToLower();
-
+            var finalCacheKey = Helper.BuildCacheKey(guid);
             return ApplicationContext.Current.ApplicationCache.GetCacheItem(
                     finalCacheKey,
                     CacheItemPriority.NotRemovable, //not removable, the same as macros (apparently issue #27610)

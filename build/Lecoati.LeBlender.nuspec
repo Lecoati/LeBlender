@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Lecoati.LeBlender</id>
-        <version>0.9.18</version>
-        <title>Umbarco LeBlender</title>
+        <version>0.9.19</version>
+        <title>Umbraco LeBlender</title>
         <authors>LECOATI</authors>
         <owners>LECOATI</owners>
         <projectUrl>http://www.lecoati.com/</projectUrl>

@@ -1,96 +1,90 @@
 ﻿angular.module("umbraco").controller("LeBlender.Dialog.EditorConfig.Prevalues.Controller",
     function ($scope, assetsService, $http, LeBlenderRequestHelper, dialogService) {
 
-        $scope.defaultEditorList = [
-	        {
-	            name: "Rich text editor",
-	            view: "rte"
-	        },
-	        {
-	            name: "Image",
-	            view: "media"
-	        },
-	        {
-	            name: "Macro",
-	            view: "macro"
-	        },
-	        {
-	            name: "Embed",
-	            view: "embed"
-	        },
-	        {
-	            name: "Textstring",
-	            view: "textstring",
-	        },
-            {
-            	name: "Blender Editor",
-            	view: "/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html",
+        /***************************************/
+        /* legacy adaptor 0.9.15 */
+        /***************************************/
+
+        if ($scope.dialogData.editor) {
+
+            if ($scope.dialogData.editor.view == "/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html") {
+                $scope.dialogData.editor.view = "/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/LeBlendereditor.html";
+                $scope.dialogData.editor.render = "/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/views/Base.cshtml"
             }
-        ]
 
-        $scope.isCustom = function () {
-            var isCustom = true;
-            angular.forEach($scope.defaultEditorList, function (item, index) {
-                if ($scope.model.value.view != "" && item.view === $scope.model.value.view) {
-                    isCustom = false;
-                }
-            });
-            return isCustom;
-        }
+            if ($scope.dialogData.editor.view == "/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/LeBlendereditor.html") {
 
-        $scope.remove = function ($index) {
-            $scope.model.value.config.editors.splice($index, 1);
-        }
-
-        $scope.isBlenderEditor = function () {
-
-            /***************************************/
-            /* legacy adaptor 0.9.15 */
-            /***************************************/
-            if ($scope.model.value.config) {
-                if ($scope.model.value.config.fixed != undefined &&
-                    $scope.model.value.config.limit &&
-                    !$scope.model.value.config.min &&
-                    !$scope.model.value.config.max) {
-                    if ($scope.model.value.config.fixed) {
-                        $scope.model.value.config.min = $scope.model.value.config.limit;
-                        $scope.model.value.config.max = $scope.model.value.config.limit;
+                if ($scope.dialogData.editor.frontView) {
+                    if (!$scope.dialogData.editor.config) {
+                        $scope.dialogData.editor.config = {};
                     }
-                    else {
-                        $scope.model.value.config.min = 1;
-                        $scope.model.value.config.max = $scope.model.value.config.limit;
+                    $scope.dialogData.editor.config.frontView = $scope.dialogData.editor.frontView;
+                    delete $scope.dialogData.editor.frontView;
+                }
+
+                if ($scope.dialogData.editor.config) {
+
+                    if ($scope.dialogData.editor.config.renderInGrid == true) {
+                        $scope.dialogData.editor.config.renderInGrid = "1";
                     }
-                    delete $scope.model.value.config.fixed;
-                    delete $scope.model.value.config.limit;
+
+                    if ($scope.dialogData.editor.config.renderInGrid == false) {
+                        $scope.dialogData.editor.config.renderInGrid = "0";
+                    }
+
+                    if ($scope.dialogData.editor.config.fixed != undefined &&
+                        $scope.dialogData.editor.config.limit &&
+                        !$scope.dialogData.editor.config.min &&
+                        !$scope.dialogData.editor.config.max) {
+                        if ($scope.dialogData.editor.config.fixed) {
+                            $scope.dialogData.editor.config.min = $scope.dialogData.editor.config.limit;
+                            $scope.dialogData.editor.config.max = $scope.dialogData.editor.config.limit;
+                        }
+                        else {
+                            $scope.dialogData.editor.config.min = 1;
+                            $scope.dialogData.editor.config.max = $scope.dialogData.editor.config.limit;
+                        }
+                        delete $scope.dialogData.editor.config.fixed;
+                        delete $scope.dialogData.editor.config.limit;
+                    }
+
                 }
             }
-
-            if ("/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html" === $scope.model.value.view) {
-                return true;
-            }
-            return false;
         }
 
-        $scope.openIconPicker = function () {
-            var dialog = dialogService.iconPicker({
-                show: true,
-                callback: function (data) {
-                    $scope.model.value.icon = data;
-                }
-            });
-        }
+        /***************************************/
+        /* grid editor */
+        /***************************************/
 
-        $scope.update = function () {
-            $scope.model.value.config = "";
+        // init editor values
+        $scope.initEditorFields = function () {
+            delete $scope.model.value.config;
+            $scope.model.value.render = "";
             $scope.textAreaconfig = "";
-            if ($scope.isBlenderEditor()) {
-                $scope.model.value.config = {
-                    min: 1,
-                    max: 1
-                }
-            }
         }
 
+        // save editor values
+        $scope.save = function () {
+
+            var submitPlease = true;
+            if ($scope.model.value) {
+                $scope.$broadcast('editorConfigSaving');
+                if ($scope.dialogData.editor) {
+                    angular.extend($scope.dialogData.editor, $scope.model.value);
+                    submitPlease = false;
+                }
+            }
+
+            if (submitPlease) {
+                $scope.submit($scope.model.value);
+            }
+            else {
+                $scope.close();
+            }
+
+        }
+
+        // get config value 
         $scope.getConfigAsText = function () {
 
             $scope.textAreaconfig = "";
@@ -105,7 +99,7 @@
                 else {
                     $scope.textAreaconfig = "";
                 }
-                
+
 
             }
             $scope.$watch('textAreaconfig', function () {
@@ -117,40 +111,89 @@
             });
         };
 
-        $scope.openParameterConfig = function (parameter) {
-
-            if (!parameter) {
-
-                if (!$scope.model.value.config.editors) {
-                    $scope.model.value.config.editors = [];
+        // open icon picker
+        $scope.openIconPicker = function () {
+            var dialog = dialogService.iconPicker({
+                show: true,
+                callback: function (data) {
+                    $scope.model.value.icon = data;
                 }
+            });
+        }
 
-                $scope.model.value.config.editors.splice($scope.model.value.config.editors.length + 1, 0, {
-                    name: "",
-                    alias: "",
-                });
-                parameter = $scope.model.value.config.editors[$scope.model.value.config.editors.length - 1];
+
+
+        /***************************************/
+        /* property grid editor */
+        /***************************************/
+
+        // init pge
+        $scope.propertyGridEditors = $scope.dialogData.propertyGridEditors;
+
+        // search a pge by view
+        $scope.searchPropertyGridEditor = function (view) {
+            var sEditor = undefined;
+            _.each($scope.propertyGridEditors, function (propertyGridEditor, editorIndex) {
+                if (propertyGridEditor.editor && propertyGridEditor.editor.view === view) {
+                    sEditor = propertyGridEditor
+                }
+            })
+            return sEditor;
+        }
+
+        // set the selected pge
+        $scope.setSelectedPropertyGridEditor = function () {
+            $scope.selectedPropertyGridEditor = $scope.searchPropertyGridEditor($scope.model.value.view);
+        }
+
+        // init default Editor value for a new pge
+        $scope.propertyGridEditorChanged = function () {
+            $scope.setSelectedPropertyGridEditor();
+            $scope.initEditorFields();
+        }
+
+        // get pge field view
+        $scope.getFieldView = function (view) {
+            if (view.indexOf('/') >= 0) {
+                return view;
             }
-
-            if (parameter) {
-                var dialog = dialogService.open({
-                    template: '/App_Plugins/Lecoati.LeBlender/core/Dialogs/parameterconfig.prevalues.html',
-                    show: true,
-                    dialogData: {
-                        parameter: parameter,
-                        availableDataTypes: $scope.dialogData.availableDataTypes
-                    },
-                    callback: function (data) {
-                    }
-                });
+            else {
+                return '/umbraco/views/prevalueeditors/' + view + '.html';
             }
         }
 
+        // check if current pge is custom 
+        $scope.isCustom = function () {
+            if ($scope.selectedPropertyGridEditor) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+
+
+        /***************************************/
+        /* autoPopulateAlias */
+        /***************************************/
+
+        // main method for autoPopulateAlias
         $scope.autoPopulateAlias = function (name) {
             var s = name.replace(/[^a-zA-Z0-9\s\.-]+/g, ''); 
             return s.toCamelCase();
         }
 
+        // init autoPopulateAlias
+        $scope.initAutoPopulateAlias = function () {
+            if ($scope.model.value.name === "" && $scope.model.value.name === "") {
+                $scope.$watch("model.value.name", function () {
+                    $scope.model.value.alias = $scope.autoPopulateAlias($scope.model.value.name);
+                })
+            }
+        }
+
+        // toCamelCase
         var toCamelCase = function (name) {
             var s = name.toPascalCase();
             if ($.trim(s) == "")
@@ -162,6 +205,7 @@
             return s;
         };
 
+        // toPascalCase
         var toPascalCase = function (name) {
             var s = "";
             angular.each($.trim(name).split(/[\s\.-]+/g), function (val, idx) {
@@ -175,13 +219,11 @@
             return s;
         };
 
-        $scope.save = function () {
-            if ($scope.isBlenderEditor()) {
-                $scope.dialogData.editor.render = "/App_Plugins/Lecoati.LeBlender/core/views/Base.cshtml";
-            }
-            angular.extend($scope.dialogData.editor, $scope.model.value);
-            $scope.close();
-        }
+
+
+        /***************************************/
+        /* init */
+        /***************************************/
 
         angular.extend($scope, {
             model: {
@@ -189,13 +231,17 @@
             }    
         });
 
-        $scope.getConfigAsText();
-
-        if ($scope.model.value.name === "" && $scope.model.value.name === "") {
-            $scope.$watch("model.value.name", function () {
-                $scope.model.value.alias = $scope.autoPopulateAlias($scope.model.value.name);
-                $scope.model.value.alias = $scope.autoPopulateAlias($scope.model.value.name);
-            })
+        if (!$scope.model.value) {
+            $scope.model.value = {
+                name: "",
+                alias: "",
+                view: "",
+                icon: "",
+            };
         }
+
+        $scope.getConfigAsText();
+        $scope.setSelectedPropertyGridEditor();
+        $scope.initAutoPopulateAlias();
 
     });

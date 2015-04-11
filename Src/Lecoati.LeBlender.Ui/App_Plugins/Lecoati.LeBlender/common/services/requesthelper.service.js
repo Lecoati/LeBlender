@@ -2,6 +2,7 @@
     function ($rootScope, $q, $http, $parse, $routeParams, umbRequestHelper) {
 
         var configPath = "/config/grid.editors.config.js";
+        var edidorsConfigPath = "/App_Plugins/Lecoati.LeBlender/config/editors.config.js";
 
         return {
 
@@ -37,41 +38,38 @@
 
             /*********************/
             /*********************/
+            getAllPropertyGridEditors: function () {
+                return umbRequestHelper.resourcePromise($http.get("/umbraco/backoffice/LeBlenderApi/PropertyGridEditor/GetAll"), 'Failed to retrieve datatypes from tree service');
+            },
+
+            /*********************/
+            /*********************/
             setGridEditors: function (data) {
 
                 var url = "/umbraco/surface/Helper/SaveEditorConfig";
                 var resultParameters = { config: JSON.stringify(data, null, 4), configPath: configPath };
 
                 //$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-                var promise = $http.post(url, resultParameters, {
+                return $http.post(url, resultParameters, {
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
                     transformRequest: function (result) {
                         return $.param(result);
                     }
-                })
-                .success(function (Result) {
-
-                    return Result;
-
                 });
+
             },
 
             /*********************/
             /*********************/
             getAllDataTypes: function () {
-                return umbRequestHelper.resourcePromise($http.get("/umbraco/backoffice/LeBlenderApi/LeBlenderDataType/GetAll"), 'Failed to retrieve datatypes from tree service');
+                return umbRequestHelper.resourcePromise($http.get("/umbraco/backoffice/LeBlenderApi/DataType/GetAll"), 'Failed to retrieve datatypes from tree service');
             },
 
+            /*********************/
+            /*********************/
             getDataType: function (guid) {
-            //if(useDeepDatatypeLookup) {
-            //    return umbRequestHelper.resourcePromise(
-            //		$http.get("/umbraco/backoffice/ArchetypeApi/ArchetypeDataType/GetByGuid?guid=" + guid + "&contentTypeAlias=" + contentTypeAlias + "&propertyTypeAlias=" + propertyTypeAlias + "&archetypeAlias=" + archetypeAlias + "&nodeId=" + nodeId), 'Failed to retrieve datatype'
-        	//	);
-            //}
-            //else {
-                return umbRequestHelper.resourcePromise($http.get("/umbraco/backoffice/LeBlenderApi/LeBlenderDataType/GetPropertyEditors?guid=" + guid, { cache: true }), 'Failed to retrieve datatype');
-            //}
-        },
+                return umbRequestHelper.resourcePromise($http.get("/umbraco/backoffice/LeBlenderApi/DataType/GetPropertyEditors?guid=" + guid, { cache: true }), 'Failed to retrieve datatype');
+            },
 
         }
 

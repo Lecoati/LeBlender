@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
@@ -47,7 +48,8 @@ namespace Lecoati.LeBlender.Extension
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static BlenderModel DeserializeBlenderModel(dynamic model) {
+        public static BlenderModel DeserializeBlenderModel(dynamic model)
+        {
             return JsonConvert.DeserializeObject<BlenderModel>(model.ToString());
         }
 
@@ -107,7 +109,8 @@ namespace Lecoati.LeBlender.Extension
                         var arr = JArray.Parse(System.IO.File.ReadAllText(gridConfig));
                         var parsed = JsonConvert.DeserializeObject<IEnumerable<GridEditor>>(arr.ToString()); ;
                         editors.AddRange(parsed);
-                        editors = editors.Where(r => r.View.Equals("/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase)).ToList();
+                        editors = editors.Where(r => r.View.Equals("/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase) ||
+                            r.View.Equals("/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase)).ToList();
                     }
                     catch (Exception ex)
                     {
@@ -175,6 +178,31 @@ namespace Lecoati.LeBlender.Extension
                 result = controllersFilter.Any() ? controllersFilter.First() : null;
             }
             return result;
+        }
+
+        /// <summary>
+        /// Build Cache Key
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <returns></returns>
+        internal static string BuildCacheKey(string guid) {
+            var cacheKey = new StringBuilder();
+            cacheKey.Append("LEBLENDEREDITOR");
+            cacheKey.Append(guid);
+            cacheKey.Append(HttpContext.Current.Request.Url);
+            return cacheKey.ToString().ToLower();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        internal static string FirstCharToUpper(string input)
+        {
+            if (String.IsNullOrEmpty(input))
+                throw new ArgumentException("ARGH!");
+            return input.First().ToString().ToUpper() + input.Substring(1);
         }
 
         #endregion
