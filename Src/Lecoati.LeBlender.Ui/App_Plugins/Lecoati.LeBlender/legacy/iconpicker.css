@@ -1,0 +1,26 @@
+
+#iconPicker i:before {
+    margin-right:0;
+    margin-left:0;
+}
+
+#iconPickerEditor .umb-panel-body {
+    top: 20px;
+}
+
+#iconPickerEditor span  {
+    cursor: pointer;
+    margin: 15px 0;
+    display: inline-block;
+    font-size: 36px;
+    width: 63px;
+}
+
+#iconPicker i.result {
+    font-size: 36px;
+}
+
+#iconPickerEditor span:before, #iconPicker i.result:before  {
+    font-size: 36px;
+    margin:0;
+}
