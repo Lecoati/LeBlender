@@ -77,7 +77,7 @@ namespace Lecoati.LeBlender.Extension
 
             try 
             {
-                var editor = GetLeBlenderGridEditors().FirstOrDefault(r => r.Alias == LeBlenderEditorAlias);
+                var editor = GetLeBlenderGridEditors(true).FirstOrDefault(r => r.Alias == LeBlenderEditorAlias);
                 int.TryParse(editor.Config["expiration"].ToString(), out result);
             }
             catch (Exception ex)
@@ -95,7 +95,7 @@ namespace Lecoati.LeBlender.Extension
         /// Get and cache LeBlender Grid Editor 
         /// </summary>
         /// <returns></returns>
-        internal static IEnumerable<GridEditor> GetLeBlenderGridEditors() 
+        internal static IEnumerable<GridEditor> GetLeBlenderGridEditors(bool onlyLeBlenderEditor) 
         {
             
             Func<List<GridEditor>> getResult = () =>
@@ -109,8 +109,12 @@ namespace Lecoati.LeBlender.Extension
                         var arr = JArray.Parse(System.IO.File.ReadAllText(gridConfig));
                         var parsed = JsonConvert.DeserializeObject<IEnumerable<GridEditor>>(arr.ToString()); ;
                         editors.AddRange(parsed);
-                        editors = editors.Where(r => r.View.Equals("/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase) ||
-                            r.View.Equals("/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase)).ToList();
+
+                        if (onlyLeBlenderEditor)
+                        {
+                            editors = editors.Where(r => r.View.Equals("/App_Plugins/LeBlender/core/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase) ||
+                                r.View.Equals("/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase)).ToList();
+                        }
                     }
                     catch (Exception ex)
                     {
