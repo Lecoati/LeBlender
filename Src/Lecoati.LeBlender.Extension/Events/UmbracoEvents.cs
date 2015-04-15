@@ -28,11 +28,18 @@ namespace Lecoati.leblender.Extension.Events
                 try
                 {
                     string readText = System.IO.File.ReadAllText(gridConfig);
-                    readText = readText.Replace("/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html", "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html")
-                        .Replace("/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/LeBlendereditor.html", "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html")
-                        .Replace("/App_Plugins/Lecoati.LeBlender/core/views/Base.cshtml", "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml")
-                        .Replace("/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/views/Base.cshtml", "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml");
-                    System.IO.File.WriteAllText(gridConfig, readText);
+                    if (readText.IndexOf("/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html") > 0
+                        || readText.IndexOf("/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/LeBlendereditor.html") > 0
+                        || readText.IndexOf("/App_Plugins/Lecoati.LeBlender/core/views/Base.cshtml") > 0
+                        || readText.IndexOf("/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/views/Base.cshtml") > 0
+                        )
+                    {
+                        readText = readText.Replace("/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html", "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html")
+                            .Replace("/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/LeBlendereditor.html", "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html")
+                            .Replace("/App_Plugins/Lecoati.LeBlender/core/views/Base.cshtml", "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml")
+                            .Replace("/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/views/Base.cshtml", "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml");
+                        System.IO.File.WriteAllText(gridConfig, readText);
+                    }
                 }
                 catch (Exception ex)
                 {
