@@ -114,6 +114,6 @@
         $scope.setPreview();
 
     	// Load css asset
-        // assetsService.loadCss("/App_Plugins/LeBlender/editors/leblendereditor/assets/LeBlendereditor.css");
+        assetsService.loadCss("/App_Plugins/LeBlender/views_samples/sample_styles.css");
 
     });

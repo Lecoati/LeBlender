@@ -123,6 +123,12 @@
                 $scope.$broadcast('gridEditorSaving');
             }
 
+            _.each($scope.editors, function (editor, editorIndex) {
+                if (editor.render === "") {
+                    delete editor.render;
+                }
+            });
+
             LeBlenderRequestHelper.setGridEditors($scope.editors).then(function (response) {
                 notificationsService.success("Success", $scope.model.value.name + " has been saved");
                 delete $scope.selectedPropertyGridEditor;
