@@ -7,7 +7,7 @@ using System.Web;
 namespace Lecoati.LeBlender.Extension.Models
 {
     [JsonObject]
-    public class BlenderModel
+    public class LeBlenderModel
     {
         [JsonProperty("value")]
         public IEnumerable<LeBlenderValue> Items { get; set; }

@@ -48,9 +48,9 @@ namespace Lecoati.LeBlender.Extension
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static BlenderModel DeserializeBlenderModel(dynamic model)
+        public static LeBlenderModel DeserializeBlenderModel(dynamic model)
         {
-            return JsonConvert.DeserializeObject<BlenderModel>(model.ToString());
+            return JsonConvert.DeserializeObject<LeBlenderModel>(model.ToString());
         }
 
         /// <summary>
@@ -125,7 +125,8 @@ namespace Lecoati.LeBlender.Extension
             };
 
             var result = (List<GridEditor>)HttpContext.Current.Cache["LeBlenderGridEditorsList"];
-            if (result == null) { 
+            if (result == null || !onlyLeBlenderEditor)
+            { 
                 result = getResult();
                 HttpContext.Current.Cache.Add("LeBlenderGridEditorsList", result, null, DateTime.Now.AddDays(1), System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.High, null);
             }
@@ -145,7 +146,7 @@ namespace Lecoati.LeBlender.Extension
                 var types = new List<Type>();
                 try
                 {
-                    var baseType = typeof(BlenderController);
+                    var baseType = typeof(LeBlenderController);
                     var assemblies = AppDomain.CurrentDomain.GetAssemblies();
                     types = assemblies.SelectMany(a => a.GetTypes().Where(t => t.BaseType == baseType)).ToList();
                 }

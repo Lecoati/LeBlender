@@ -13,10 +13,10 @@ using Umbraco.Core.Logging;
 
 namespace Lecoati.LeBlender.Extension.Controllers
 {
-    public class BlenderController : SurfaceController
+    public class LeBlenderController : SurfaceController
     {
         [ChildActionOnly]
-        public ActionResult RenderEditor(string editorAlias, string frontView, BlenderModel model)
+        public ActionResult RenderEditor(string editorAlias, string frontView, LeBlenderModel model)
         {
 
             // Check if the frontView is a custom path
@@ -37,7 +37,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
                 try
                 {
                     // Load a controller instance
-                    var controllerInstance = (BlenderController)Activator.CreateInstance(controllerType);
+                    var controllerInstance = (LeBlenderController)Activator.CreateInstance(controllerType);
                     controllerInstance.ControllerContext = this.ControllerContext;
 
                     // Take the view name as default method
@@ -57,7 +57,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
                     // Set the specific model
                     var parameter = actionMethod.GetParameters().First();
                     var type = parameter.ParameterType.UnderlyingSystemType;
-                    var typeInstance = (BlenderModel)Activator.CreateInstance(type);
+                    var typeInstance = (LeBlenderModel)Activator.CreateInstance(type);
                     typeInstance.Items = model.Items;
 
                     // Invoke the custom controller
@@ -69,7 +69,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.Error<BlenderController>("Could not load LeBlender invoke the custom controller", ex);
+                    LogHelper.Error<LeBlenderController>("Could not load LeBlender invoke the custom controller", ex);
                 }
 
             }

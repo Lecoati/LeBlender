@@ -6,7 +6,7 @@
 {
     
     string guid = Model.guid != null && Model.guid.Value != null ? Model.guid.Value.ToString() : "";
-    BlenderModel blenderModel = Helper.DeserializeBlenderModel(Model);
+    LeBlenderModel blenderModel = Helper.DeserializeBlenderModel(Model);
 
     var frontView = Model.editor.config == null || Model.editor.config.frontView == null || String.IsNullOrEmpty(Model.editor.config.frontView.Value) ?
         "" : Model.editor.config.frontView.Value;
