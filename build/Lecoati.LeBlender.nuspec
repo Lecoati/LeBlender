@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Lecoati.LeBlender</id>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
         <title>Umbraco LeBlender</title>
         <authors>LECOATI</authors>
         <owners>LECOATI</owners>
@@ -16,7 +16,7 @@
 		<dependencies />
     </metadata>
 	<files>
-		<file src="..\src\Lecoati.LeBlender.Ui\App_Plugins\LeBlender\**\*.*" target="Content\App_Plugins\Lecoati.LeBlender" /> 
+		<file src="..\src\Lecoati.LeBlender.Ui\App_Plugins\LeBlender\**\*.*" target="Content\App_Plugins\LeBlender" /> 
 		<file src="..\src\Lecoati.LeBlender.Extension\bin\Lecoati.LeBlender.Extension.dll" target="lib\Lecoati.LeBlender.Extension.dll" /> 
 	</files>
 </package>
