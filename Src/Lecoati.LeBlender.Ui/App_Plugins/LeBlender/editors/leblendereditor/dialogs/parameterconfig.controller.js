@@ -212,12 +212,24 @@
     	                
     	                if (editor.dataType && !editor.$isLoaded) {
     	                    LeBlenderRequestHelper.getDataType(editor.dataType).then(function (data) {
+    	                        
+                                // Get config prevalues
     	                        var configObj = {};
     	                        _.each(data.preValues, function (p) {
     	                            configObj[p.key] = p.value;
     	                        });
+
+    	                        // Get config default prevalues
+    	                        var defaultConfigObj =  {};
+    	                        if (data.defaultPreValues) {
+    	                            _.extend(defaultConfigObj, data.defaultPreValues);
+    	                        }
+
+    	                        // Merge prevalue and default prevalues
+    	                        var mergedConfig = _.extend(defaultConfigObj, configObj);
+
     	                        editor.$isLoaded = true;
-    	                        editor.propretyType.config = configObj;
+    	                        editor.propretyType.config = mergedConfig;
     	                        editor.propretyType.view = umbPropEditorHelper.getViewPath(data.view);
     	                    });
     	                }
