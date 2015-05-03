@@ -62,6 +62,7 @@
             _.each($scope.config.editors, function (editor, editorIndex) {
     	        var newProperty = {
     	            value: null,
+    	            dataTypeGuid: editor.dataType,
     	            editorAlias: editor.alias,
     	            editorName: editor.name,
     	            $editor: editor,
@@ -118,10 +119,13 @@
     	                if (property) {
     	                    property.$editor = editor;
     	                    property.$order = order;
+    	                    if (!property.dataTypeGuid)
+    	                        property.dataTypeGuid = editor.dataType;
     	                }
     	                else {
     	                    var newProperty = {
     	                        value: null,
+    	                        dataTypeGuid: editor.dataType,
     	                        editorAlias: editor.alias,
     	                        editorName: editor.name,
     	                        $editor: editor,
