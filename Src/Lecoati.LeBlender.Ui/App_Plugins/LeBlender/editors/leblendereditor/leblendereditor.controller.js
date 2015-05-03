@@ -104,7 +104,7 @@
         $scope.setPreview = function () {
             if ($scope.control.editor.config
                 && ($scope.control.value || !$scope.control.editor.config.editors || $scope.control.editor.config.editors.length == 0)
-                && $scope.control.editor.config.renderInGrid) {
+                && $scope.control.editor.config.renderInGrid && $scope.control.editor.config.renderInGrid != "0") {
                 LeBlenderRequestHelper.GetPartialViewResultAsHtmlForEditor($scope.control).success(function (htmlResult) {
                     $scope.preview = htmlResult;
                 });
