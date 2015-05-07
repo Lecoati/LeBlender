@@ -103,7 +103,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
             foreach (var m in manifestFileContents)
             {
 
-                if (m == null) continue;
+                if (string.IsNullOrEmpty(m)) continue;
 
                 //remove any comments first
                 var replaced = CommentsSurround.Replace(m, match => " ");
@@ -121,17 +121,20 @@ namespace Lecoati.LeBlender.Extension.Controllers
                 }
 
                 // validate the grid editor configs section
-                var propEditors = deserialized.Properties().Where(x => x.Name == "propertyEditors").ToArray();
-                if (propEditors.Length > 1)
+                if (deserialized != null)
                 {
-                    throw new FormatException("The manifest is not formatted correctly contains more than one 'gridEditorConfigs' element");
-                }
+                    var propEditors = deserialized.Properties().Where(x => x.Name == "propertyEditors").ToArray();
+                    if (propEditors.Length > 1)
+                    {
+                        throw new FormatException("The manifest is not formatted correctly contains more than one 'gridEditorConfigs' element");
+                    }
 
-                var manifest = new PackageManifest()
-                {
-                    PropertyEditors = propEditors.Any() ? (JArray)deserialized["propertyEditors"] : new JArray(),
-                };
-                result.Add(manifest);
+                    var manifest = new PackageManifest()
+                    {
+                        PropertyEditors = propEditors.Any() ? (JArray)deserialized["propertyEditors"] : new JArray(),
+                    };
+                    result.Add(manifest);
+                }
 
             }
             return result;
