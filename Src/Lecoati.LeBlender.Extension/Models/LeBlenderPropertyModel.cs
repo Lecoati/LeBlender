@@ -29,10 +29,10 @@ namespace Lecoati.LeBlender.Extension.Models
         public T GetValue<T>()
         {
 
-            var currentNode = Helper.GetCurrentContent();
-            var targetDataType = GetTargetDataTypeDefinition(Guid.Parse(DataTypeGuid));
+            //var targetContentType = Helper.GetTargetContentType();
+            var targetDataType = Helper.GetTargetDataTypeDefinition(Guid.Parse(DataTypeGuid));
 
-            var properyType = new PublishedPropertyType(currentNode.ContentType,
+            var properyType = new PublishedPropertyType(Helper.GetTargetContentType(),
                 new PropertyType(new DataTypeDefinition(-1, targetDataType.PropertyEditorAlias)
                 {
                     Id = targetDataType.Id
@@ -73,16 +73,7 @@ namespace Lecoati.LeBlender.Extension.Models
 
         }
 
-        private static IDataTypeDefinition GetTargetDataTypeDefinition(Guid myId)
-        {
-            return (IDataTypeDefinition)ApplicationContext.Current.ApplicationCache.RuntimeCache.GetCacheItem(
-                "LeBlender_GetTargetDataTypeDefinition_" + myId,
-                () => {
-                    var services = ApplicationContext.Current.Services;
-                    var dtd = services.DataTypeService.GetDataTypeDefinitionById(myId);
-                    return dtd;
-                });
-        }
+
 
     }
 }

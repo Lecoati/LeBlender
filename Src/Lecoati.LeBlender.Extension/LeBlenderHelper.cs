@@ -10,6 +10,7 @@ using System.Web;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.Web.Editors;
 
@@ -208,6 +209,52 @@ namespace Lecoati.LeBlender.Extension
             if (String.IsNullOrEmpty(input))
                 throw new ArgumentException("ARGH!");
             return input.First().ToString().ToUpper() + input.Substring(1);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="myId"></param>
+        /// <returns></returns>
+        internal static PublishedContentType GetTargetContentType()
+        {
+            if (UmbracoContext.Current.IsFrontEndUmbracoRequest)
+            {
+                return GetUmbracoHelper().AssignedContentItem.ContentType;
+            }
+            else if (!string.IsNullOrEmpty(HttpContext.Current.Request["doctype"]))
+            {
+                return PublishedContentType.Get(PublishedItemType.Content, HttpContext.Current.Request["doctype"]);
+            }
+            else
+            {
+                int contenId = int.Parse(HttpContext.Current.Request["id"]);
+                return (PublishedContentType)ApplicationContext.Current.ApplicationCache.RuntimeCache.GetCacheItem(
+                    "LeBlender_GetTargetContentType_" + contenId,
+                    () =>
+                    {
+                        var services = ApplicationContext.Current.Services;
+                        var contentType = PublishedContentType.Get(PublishedItemType.Content, services.ContentService.GetById(contenId).ContentType.Alias);
+                        return contentType;
+                    });
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="myId"></param>
+        /// <returns></returns>
+        internal static IDataTypeDefinition GetTargetDataTypeDefinition(Guid myId)
+        {
+            return (IDataTypeDefinition)ApplicationContext.Current.ApplicationCache.RuntimeCache.GetCacheItem(
+                "LeBlender_GetTargetDataTypeDefinition_" + myId,
+                () =>
+                {
+                    var services = ApplicationContext.Current.Services;
+                    var dtd = services.DataTypeService.GetDataTypeDefinitionById(myId);
+                    return dtd;
+                });
         }
 
         #endregion

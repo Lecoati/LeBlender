@@ -12,7 +12,7 @@
 
                 var view = "grid/editors/base";
                 var url = "/umbraco/surface/Helper/GetPartialViewResultAsHtmlForEditor";
-                var resultParameters = { model: angular.toJson(control, false), view: view, id: $routeParams.id };
+                var resultParameters = { model: angular.toJson(control, false), view: view, id: $routeParams.id, doctype: $routeParams.doctype };
 
                 //$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
                 var promise = $http.post(url, resultParameters, {
