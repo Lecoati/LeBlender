@@ -23,6 +23,13 @@
             $scope.selected = $scope.model.value[0];
         }
 
+        if (!$scope.config.min)
+            $scope.config.min = 1;
+
+        if (!$scope.config.max)
+            $scope.config.max = 1;
+
+
         /***************************************/
         /* legacy adaptor 0.9.15 */
         /***************************************/
