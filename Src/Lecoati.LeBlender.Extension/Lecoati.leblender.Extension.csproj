@@ -116,7 +116,6 @@
       <HintPath>..\..\..\..\Bitbucket\lct_dreampeaks\packages\UmbracoCms.Core.7.2.4\lib\Microsoft.ApplicationBlocks.Data.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=14.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Web.Infrastructure">
       <HintPath>..\..\..\..\Bitbucket\lct_dreampeaks\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
