@@ -79,11 +79,14 @@ namespace Lecoati.LeBlender.Extension
             try 
             {
                 var editor = GetLeBlenderGridEditors(true).FirstOrDefault(r => r.Alias == LeBlenderEditorAlias);
-                int.TryParse(editor.Config["expiration"].ToString(), out result);
+                if (editor.Config["expiration"] != null)
+                {
+                    int.TryParse(editor.Config["expiration"].ToString(), out result);
+                }
             }
             catch (Exception ex)
             {
-                LogHelper.Error<Helper>("Could not read Expriration datas", ex);
+                LogHelper.Error<Helper>("Could not read expiration datas", ex);
             }
 
             return result;

@@ -16,6 +16,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Lecoati.BlenderGrid.Ui", "h
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
+		ProjectReferences = "{c1a88503-8062-4992-85ab-8367b2d38630}|Lecoati.leblender.Extension.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_65095"
 		Debug.AspNetCompiler.PhysicalPath = "Src\Lecoati.LeBlender.Ui\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_65095\"
