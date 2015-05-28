@@ -13,7 +13,7 @@ using umbraco.interfaces;
 using System.Web;
 using Lecoati.LeBlender.Extension;
 
-namespace Lecoati.leblender.Extension.Events
+namespace Lecoati.LeBlender.Extension.Events
 {
     public class UmbracoEvents : ApplicationEventHandler
     {

@@ -13,7 +13,7 @@ using Umbraco.Web.Models.Trees;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.Trees;
 
-namespace Lecoati.leblender.Extension.Controllers
+namespace Lecoati.LeBlender.Extension.Controllers
 {
 
     [PluginController("LeBlender")]

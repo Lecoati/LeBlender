@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Lecoati.leblender.Extension.Models.GridEditorsConfig
+namespace Lecoati.LeBlender.Extension.Models.GridEditorsConfig
 {
     class Editor
     {

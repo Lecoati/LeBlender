@@ -79,7 +79,7 @@ namespace Lecoati.LeBlender.Extension
             try 
             {
                 var editor = GetLeBlenderGridEditors(true).FirstOrDefault(r => r.Alias == LeBlenderEditorAlias);
-                if (editor.Config["expiration"] != null)
+                if (editor.Config.ContainsKey("expiration") && editor.Config["expiration"] != null)
                 {
                     int.TryParse(editor.Config["expiration"].ToString(), out result);
                 }

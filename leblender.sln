@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2FD722
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lecoati.leblender.Extension", "Src\Lecoati.LeBlender.Extension\Lecoati.leblender.Extension.csproj", "{C1A88503-8062-4992-85AB-8367B2D38630}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lecoati.LeBlender.Extension", "Src\Lecoati.LeBlender.Extension\Lecoati.LeBlender.Extension.csproj", "{C1A88503-8062-4992-85AB-8367B2D38630}"
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Lecoati.BlenderGrid.Ui", "http://localhost:65095", "{1CDB21CD-FF88-401D-8CB5-281C5048F529}"
 	ProjectSection(WebsiteProperties) = preProject

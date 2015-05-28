@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Lecoati.leblender.Extension.Models.Manifest
+namespace Lecoati.LeBlender.Extension.Models.Manifest
 {
     public class PackageManifest
     {

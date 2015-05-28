@@ -18,7 +18,7 @@ using System.Text.RegularExpressions;
 using Umbraco.Core.IO;
 using Umbraco.Core.Logging;
 using Umbraco.Core.PropertyEditors;
-using Lecoati.leblender.Extension.Models.Manifest;
+using Lecoati.LeBlender.Extension.Models.Manifest;
 
 namespace Lecoati.LeBlender.Extension.Controllers
 {
@@ -37,7 +37,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
         // Get all datatypes
         public object GetAll()
         {
-            var editors = new List<Lecoati.leblender.Extension.Models.Manifest.PropertyEditor>();
+            var editors = new List<Lecoati.LeBlender.Extension.Models.Manifest.PropertyEditor>();
             foreach (var manifest in GetManifests())
             {
                 if (manifest.PropertyEditors != null)
@@ -49,9 +49,9 @@ namespace Lecoati.LeBlender.Extension.Controllers
         }
 
 
-        internal static IEnumerable<Lecoati.leblender.Extension.Models.Manifest.PropertyEditor> GetPropertyGridEditor(JArray jsonEditors)
+        internal static IEnumerable<Lecoati.LeBlender.Extension.Models.Manifest.PropertyEditor> GetPropertyGridEditor(JArray jsonEditors)
         {
-            return JsonConvert.DeserializeObject<IEnumerable<Lecoati.leblender.Extension.Models.Manifest.PropertyEditor>>(jsonEditors.ToString());
+            return JsonConvert.DeserializeObject<IEnumerable<Lecoati.LeBlender.Extension.Models.Manifest.PropertyEditor>>(jsonEditors.ToString());
         }
 
         internal IEnumerable<PackageManifest> GetManifests()
@@ -116,7 +116,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.Error<Lecoati.leblender.Extension.Models.Manifest.PropertyEditor>("An error occurred parsing manifest with contents: " + m, ex);
+                    LogHelper.Error<Lecoati.LeBlender.Extension.Models.Manifest.PropertyEditor>("An error occurred parsing manifest with contents: " + m, ex);
                     continue;
                 }
 
