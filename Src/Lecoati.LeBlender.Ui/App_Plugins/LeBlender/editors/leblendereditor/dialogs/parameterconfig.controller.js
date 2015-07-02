@@ -29,7 +29,6 @@
         if (!$scope.config.max)
             $scope.config.max = 1;
 
-
         /***************************************/
         /* legacy adaptor 0.9.15 */
         /***************************************/
@@ -273,6 +272,17 @@
     	$scope.updateTemplate();
 
     	$scope.updateEditor();
+
+
+    	$scope.save = function () {
+
+    	    $scope.$broadcast("formSubmitting");
+
+    	    $timeout(function () {
+                $scope.submit($scope.model.value);
+    	    }, 250);
+
+    	}
 
     	// Load css asset
     	assetsService.loadCss("/App_Plugins/LeBlender/editors/leblendereditor/assets/parameterconfig.css");
