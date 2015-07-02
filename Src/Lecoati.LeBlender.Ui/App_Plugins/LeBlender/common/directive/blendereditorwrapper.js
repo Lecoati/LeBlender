@@ -31,17 +31,15 @@
                 $scope.validateMandatory = false;
 
                 $scope.$watch("model.value", function (newValue, oldValue) {
-                    if (newValue != undefined) {
 
-                        /* TODO HACK FOR TAG PROPERTY EDITOR */
-                        if ($scope.model.view == "views/propertyeditors/tags/tags.html" && newValue.join) {
-                            $scope.property.value = angular.copy(newValue.join());
-                        }
-                        else {
-                            $scope.property.value = newValue;
-                        }
-
+                    /* TODO HACK FOR TAG PROPERTY EDITOR */
+                    if (newValue != undefined && $scope.model.view == "views/propertyeditors/tags/tags.html" && newValue.join) {
+                        $scope.property.value = angular.copy(newValue.join());
                     }
+                    else {
+                        $scope.property.value = newValue;
+                    }
+
                 }, true);
 
             }
