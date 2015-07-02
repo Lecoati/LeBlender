@@ -25,6 +25,15 @@ namespace Lecoati.LeBlender.Extension.Models
         {
             var property = GetProperty(propertyAlias);
 
+            //******
+            if (property.Value is long)
+            {
+                int newValue;
+                if (Int32.TryParse(property.Value.ToString(), out newValue)) {
+                    property.Value = newValue;
+                }
+            }
+
             if (IsEmptyProperty(property))
             {
                 return default(T);
