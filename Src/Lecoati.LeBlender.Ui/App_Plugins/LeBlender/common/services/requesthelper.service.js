@@ -46,7 +46,7 @@
             /*********************/
             setGridEditors: function (data) {
 
-                var url = "/umbraco/surface/Helper/SaveEditorConfig";
+                var url = "/umbraco/backoffice/leblender/Helper/SaveEditorConfig";
                 var resultParameters = { config: JSON.stringify(data, null, 4), configPath: configPath };
 
                 //$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
