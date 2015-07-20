@@ -15,65 +15,38 @@ using Umbraco.Web.UI.Pages;
 namespace Lecoati.LeBlender.Extension.Controllers
 {
 
-    public class HelperController : SurfaceController
+    public class HelperController : UmbracoAuthorizedController
     {
-
-        //TODO: move this to a secure API controller 
         [ValidateInput(false)]
         [HttpPost]
         public ActionResult GetPartialViewResultAsHtmlForEditor()
         {
-
-            umbraco.BusinessLogic.User u = umbraco.helper.GetCurrentUmbracoUser();
-
-            if (u != null)
-            {
-                var modelStr = Request["model"];
-                var view = Request["view"];
-                dynamic model = JsonConvert.DeserializeObject(modelStr);
-                return View("/views/Partials/" + view + ".cshtml", model);
-            }
-            else
-            {
-                return new HttpUnauthorizedResult();
-            }
-
+            var modelStr = Request["model"];
+            var view = Request["view"];
+            dynamic model = JsonConvert.DeserializeObject(modelStr);
+            return View("/views/Partials/" + view + ".cshtml", model);
         }
 
-        //TODO: move this to a secure API controller 
         [ValidateInput(false)]
         [HttpPost]
         public ActionResult SaveEditorConfig()
         {
+            var config = Request["config"];
+            var configPath = Request["configPath"];
 
-            umbraco.BusinessLogic.User u = umbraco.helper.GetCurrentUmbracoUser();
-
-            if (u != null)
+            // Update
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.Web.HttpContext.Current.Server.MapPath(configPath)))
             {
-
-                var config = Request["config"];
-                var configPath = Request["configPath"];
-
-                // Update
-                using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.Web.HttpContext.Current.Server.MapPath(configPath)))
-                {
-                    file.Write(config);
-                }
-
-                // Refrech GridConfig for next use
-                HttpContext.Cache.Remove("LeBlenderControllers");
-                HttpContext.Cache.Remove("LeBlenderGridEditorsList");
-                ApplicationContext.ApplicationCache.ClearCacheByKeySearch("LEBLENDEREDITOR");
-                ApplicationContext.ApplicationCache.RuntimeCache.ClearCacheItem(typeof(BackOfficeController) + "GetGridConfig");
-
-                return Json(new { Message = "Saved" }); ;
-
-            }
-            else
-            {
-                return new HttpUnauthorizedResult();
+                file.Write(config);
             }
 
+            // Refrech GridConfig for next use
+            HttpContext.Cache.Remove("LeBlenderControllers");
+            HttpContext.Cache.Remove("LeBlenderGridEditorsList");
+            ApplicationContext.ApplicationCache.ClearCacheByKeySearch("LEBLENDEREDITOR");
+            ApplicationContext.ApplicationCache.RuntimeCache.ClearCacheItem(typeof(BackOfficeController) + "GetGridConfig");
+
+            return Json(new { Message = "Saved" });
         }
 
     }

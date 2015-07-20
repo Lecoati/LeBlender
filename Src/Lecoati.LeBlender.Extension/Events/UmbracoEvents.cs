@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
+using System.Web.Routing;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Core.Logging;
@@ -17,6 +19,20 @@ namespace Lecoati.LeBlender.Extension.Events
 {
     public class UmbracoEvents : ApplicationEventHandler
     {
+
+        protected override void ApplicationInitialized(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+        {
+            base.ApplicationInitialized(umbracoApplication, applicationContext);
+
+            RouteTable.Routes.MapRoute(
+                "leblender",
+                "umbraco/backoffice/leblender/helper/{action}",
+                new
+                {
+                    controller = "Helper",
+                }
+            );
+        }
 
         protected override void ApplicationStarting(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
