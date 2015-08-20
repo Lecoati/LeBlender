@@ -9,13 +9,13 @@
 
             if (editor) {
                                     
-                if (editor.view == "/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html" ||
-                    editor.view == "/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/LeBlendereditor.html") {
-                    editor.view = "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html";
-                    editor.render = "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml"
+                if (editor.view == "~/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html" ||
+                    editor.view == "~/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/LeBlendereditor.html") {
+                    editor.view = "~/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html";
+                    editor.render = "~/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml"
                 }
 
-                if (editor.view == "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html") {
+                if (editor.view == "~/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html") {
 
                     if (editor.frontView) {
                         if (!editor.config) {
