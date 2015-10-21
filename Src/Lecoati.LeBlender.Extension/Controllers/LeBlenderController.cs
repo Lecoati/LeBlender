@@ -74,7 +74,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
 
             }
 
-            return View(frontView, model);
+            return PartialView(frontView, model);
             
         }
     }
