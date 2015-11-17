@@ -41,6 +41,11 @@ namespace Lecoati.LeBlender.Extension.Models
             return property.GetValue<T>();
         }
 
+        public bool HasProperty(string propertyAlias)
+        {
+            return GetProperty(propertyAlias) != null;
+        }
+
         private bool IsEmptyProperty(LeBlenderPropertyModel property)
         {
             return (property == null || property.Value == null || string.IsNullOrEmpty(property.Value.ToString()));
@@ -48,7 +53,7 @@ namespace Lecoati.LeBlender.Extension.Models
 
         private LeBlenderPropertyModel GetProperty(string propertyAlias)
         {
-            return Properties.FirstOrDefault(p => p.Alias.ToLower() == propertyAlias.ToLower());
+            return Properties.FirstOrDefault(p => p.Alias.ToLower().Equals(propertyAlias.ToLower()));
         }
 
         #endregion
