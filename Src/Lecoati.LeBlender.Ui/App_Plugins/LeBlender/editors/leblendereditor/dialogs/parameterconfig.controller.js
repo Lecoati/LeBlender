@@ -276,21 +276,24 @@
     	$scope.updateEditor();
 
     	$scope.isValid = function () {
-    		_.each($scope.model.value, function (item, itemIndex) {
-    	         _.each(item, function (property, propertyIndex) {
+			var isValid = true;
+			
+    		_.every($scope.model.value, function (item, itemIndex) {
+    	         _.every(item, function (property, propertyIndex) {
     	            if (!property.$valid) {
-    					return false;
+						isValid = false;
+    					return;
     	            }
     	        })
     	    });
     		
-    		return true;
+    		return isValid;
     	}
 		
     	$scope.save = function () {
+			$scope.$broadcast("formSubmitting");
+			
     		if($scope.isValid()) {
-    			$scope.$broadcast("formSubmitting");
-
     			$timeout(function () {
     				$scope.submit($scope.model.value);
     			}, 250);	
