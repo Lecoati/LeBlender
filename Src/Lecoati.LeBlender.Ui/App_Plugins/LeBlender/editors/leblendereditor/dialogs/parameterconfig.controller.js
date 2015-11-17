@@ -72,7 +72,8 @@
     	            editorAlias: editor.alias,
     	            editorName: editor.name,
     	            $editor: editor,
-    	            $order: editorIndex
+    	            $order: editorIndex,
+    	            $valid: false
     	        };
     	        newItem[editor.alias] = newProperty
     	    })
@@ -135,7 +136,8 @@
     	                        editorAlias: editor.alias,
     	                        editorName: editor.name,
     	                        $editor: editor,
-    	                        $order: order
+    	                        $order: order,
+    	                        $valid: false
     	                    };
     	                    item[editor.alias] = newProperty;
     	                }
@@ -273,15 +275,26 @@
 
     	$scope.updateEditor();
 
-
+    	$scope.isValid = function () {
+    		_.each($scope.model.value, function (item, itemIndex) {
+    	         _.each(item, function (property, propertyIndex) {
+    	            if (!property.$valid) {
+    					return false;
+    	            }
+    	        })
+    	    });
+    		
+    		return true;
+    	}
+		
     	$scope.save = function () {
+    		if($scope.isValid()) {
+    			$scope.$broadcast("formSubmitting");
 
-    	    $scope.$broadcast("formSubmitting");
-
-    	    $timeout(function () {
-                $scope.submit($scope.model.value);
-    	    }, 250);
-
+    			$timeout(function () {
+    				$scope.submit($scope.model.value);
+    			}, 250);	
+    		}
     	}
 
     	// Load css asset
