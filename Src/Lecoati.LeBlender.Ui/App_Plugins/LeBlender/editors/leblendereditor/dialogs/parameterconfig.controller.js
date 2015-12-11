@@ -279,7 +279,7 @@
 			var isValid = true;
 			
     		_.every($scope.model.value, function (item, itemIndex) {
-    	         _.every(item, function (property, propertyIndex) {
+    	         _.forEach(item, function (property, propertyIndex) {
     	            if (!property.$valid) {
 						isValid = false;
     					return;
