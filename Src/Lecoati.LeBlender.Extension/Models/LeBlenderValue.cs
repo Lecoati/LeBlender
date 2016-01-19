@@ -21,6 +21,18 @@ namespace Lecoati.LeBlender.Extension.Models
             return GetValue<string>(propertyAlias);
         }
 
+        public string GetRawValue(string propertyAlias)
+        {
+            var property = GetProperty(propertyAlias);
+
+            if (IsEmptyProperty(property))
+            {
+                return string.Empty;
+            }
+
+            return property.Value.ToString();
+        }
+
         public T GetValue<T>(string propertyAlias)
         {
             var property = GetProperty(propertyAlias);
