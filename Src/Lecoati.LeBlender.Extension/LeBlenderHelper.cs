@@ -147,18 +147,9 @@ namespace Lecoati.LeBlender.Extension
 
             Func<List<Type>> getResult = () =>
             {
-                var types = new List<Type>();
-                try
-                {
-                    var baseType = typeof(LeBlenderController);
-                    var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-                    types = assemblies.SelectMany(a => a.GetTypes().Where(t => t.BaseType == baseType)).ToList();
-                }
-                catch (Exception ex)
-                {
-                    LogHelper.Error<Helper>("Could not load LeBlender controllers", ex);
-                }
-                return types;
+                // https://our.umbraco.org/documentation/Reference/Plugins/finding-types
+                var controllerTypes = PluginManager.Current.ResolveTypes<LeBlenderController>();
+                return controllerTypes.ToList();
             };
 
             var result = (List<Type>)HttpContext.Current.Cache["LeBlenderControllers"];
