@@ -8,7 +8,7 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C1A88503-8062-4992-85AB-8367B2D38630}</ProjectGuid>
-    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Lecoati.LeBlender.Extension</RootNamespace>
@@ -263,6 +263,15 @@
       <HintPath>..\..\packages\UmbracoCms.Core.7.3.4\lib\Umbraco.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Umbraco.Courier.Core">
+      <HintPath>Courier\Dependencies\Umbraco.Courier.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Umbraco.Courier.DataResolvers">
+      <HintPath>Courier\Dependencies\Umbraco.Courier.DataResolvers.dll</HintPath>
+    </Reference>
+    <Reference Include="Umbraco.Courier.Providers">
+      <HintPath>Courier\Dependencies\Umbraco.Courier.Providers.dll</HintPath>
+    </Reference>
     <Reference Include="umbraco.DataLayer, Version=1.0.5820.25373, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\UmbracoCms.Core.7.3.4\lib\umbraco.DataLayer.dll</HintPath>
       <Private>True</Private>
@@ -303,6 +312,7 @@
   <ItemGroup>
     <Compile Include="Controllers\LeBlenderController.cs" />
     <Compile Include="Controllers\LeBlenderEditorManagerTreeController.cs" />
+    <Compile Include="Courier\LeBlenderGridDataResolver.cs" />
     <Compile Include="Models\GridEditorsConfig\Editor.cs" />
     <Compile Include="Models\GridEditorsConfig\GridEditorsConfig.cs" />
     <Compile Include="Models\Manifest\PackageManifest.cs" />
