@@ -17,7 +17,7 @@
 
     /// <summary>
     /// Custom implementation of Courier's GridCellResolverProvider for LeBlender controls in a grid
-    /// 2016-05-02 Heather Floyd, Scandia Consulting
+    /// 2016-05-19 Heather Floyd, Scandia Consulting
     /// </summary>
     public class LeBlenderGridDataResolver : GridCellResolverProvider
     {
@@ -179,18 +179,19 @@
                     //loop through transformed properties and format correct JSON string
                     if (fakeItem.Data != null && fakeItem.Data.Any())
                     {
-                        //var fakeItemData = fakeItem.Data.FirstOrDefault();
                         var fakeItemPropData = fakeItem.Data;
-                        string serializedNewPropertyData = JsonConvert.SerializeObject(fakeItemPropData);
-                        //finalWidgetProps[prop.Alias] = serializedNewPropertyData;
                         
-                        var newjItem = JsonConvert.SerializeObject(fakeItemPropData);
-                        //if (fakeItemPropData != null)
-                        //{
-                        //    
+                        //string serializedNewPropertyData = JsonConvert.SerializeObject(fakeItemPropData);
+                        //CourierLogHelper.Info<LeBlenderGridDataResolver>("SERIALIZING: (" + fakeItem.Name + ") serializedNewPropertyData= " + serializedNewPropertyData);
+
+                        //var newjItem = JsonConvert.SerializeObject(fakeItemPropData);
+                        //CourierLogHelper.Info<LeBlenderGridDataResolver>("SERIALIZING: (" + fakeItem.Name + ") newjItem= " + newjItem);
+
                         string serializedNewValue = fakeItem.Data[0].Value as string ?? JsonConvert.SerializeObject(fakeItem.Data[0].Value);
+                        //CourierLogHelper.Info<LeBlenderGridDataResolver>("SERIALIZING: (" + fakeItem.Name + ") serializedNewValue= " + serializedNewValue);
                         
-                        //}
+                        //We need to preserve "empty string" values from the later cleanup process... 
+                        serializedNewValue = serializedNewValue == "" ? "~~EMPTY~~" : serializedNewValue;
 
                         //var widgetInfo = fakeItem.Data as LeBlenderGridWidget;
                         newJItemSB.AppendFormat("  \"{0}\": {{", prop.Alias);
@@ -204,11 +205,17 @@
 
                 //fix up string format
                 var newJItemString = "{" + newJItemSB.ToString() + "}";
+
+                CourierLogHelper.Info<LeBlenderGridDataResolver>("SERIALIZING + STARTING CLEANUP: (" + leblenderWidget.WidgetName + ") newJItemString= " + newJItemString);
                 newJItemString = newJItemString.Replace("},}", "}}");
                 newJItemString = newJItemString.Replace("\"[", "[");
                 newJItemString = newJItemString.Replace("]\"", "]");
                 newJItemString = newJItemString.Replace("\"\"", "\"");
                 newJItemString = newJItemString.Replace("\"null\"", "null");
+                newJItemString = newJItemString.Replace("\"~~EMPTY~~\"", "\"\"");
+               
+
+                CourierLogHelper.Info<LeBlenderGridDataResolver>("SERIALIZING + CLEANUP COMPLETE: (" + leblenderWidget.WidgetName + ") newJItemString= " + newJItemString);
 
                 var newJToken = JToken.Parse(newJItemString);
                 //add jItem widget back into Array so the data is formatted the same as it came in
@@ -217,9 +224,6 @@
                 //Update the original cell data so that it gets transferred in its "fixed" state
                 //var serializedFinal = JsonConvert.SerializeObject(finalPropValues);
                 cell.Value = newJArray;
-
-
-               // cell.Value = JToken.FromObject(cellWidgets);
 
                 CourierLogHelper.Info<LeBlenderGridDataResolver>("FINISH ProcessCell (" + direction + ") " + editorAlias);
                 CourierLogHelper.Info<LeBlenderGridDataResolver>("*********************** Final cell.Value:");
