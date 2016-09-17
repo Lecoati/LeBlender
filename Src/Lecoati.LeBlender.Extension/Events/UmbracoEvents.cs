@@ -69,7 +69,7 @@ namespace Lecoati.LeBlender.Extension.Events
 
         private void PublishingStrategy_Published(IPublishingStrategy sender, Umbraco.Core.Events.PublishEventArgs<Umbraco.Core.Models.IContent> e)
         {
-            ApplicationContext.Current.ApplicationCache.ClearCacheByKeySearch("LEBLENDEREDITOR");
+            ApplicationContext.Current.ApplicationCache.RuntimeCache.ClearCacheByKeySearch("LEBLENDEREDITOR");
         }
 
     }

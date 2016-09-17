@@ -43,7 +43,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
             // Refrech GridConfig for next use
             HttpContext.Cache.Remove("LeBlenderControllers");
             HttpContext.Cache.Remove("LeBlenderGridEditorsList");
-            ApplicationContext.ApplicationCache.ClearCacheByKeySearch("LEBLENDEREDITOR");
+            ApplicationContext.ApplicationCache.RuntimeCache.ClearCacheByKeySearch("LEBLENDEREDITOR");
             ApplicationContext.ApplicationCache.RuntimeCache.ClearCacheItem(typeof(BackOfficeController) + "GetGridConfig");
 
             return Json(new { Message = "Saved" });
