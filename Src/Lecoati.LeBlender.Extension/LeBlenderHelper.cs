@@ -189,7 +189,7 @@ namespace Lecoati.LeBlender.Extension
             var cacheKey = new StringBuilder();
             cacheKey.Append("LEBLENDEREDITOR");
             cacheKey.Append(guid);
-            cacheKey.Append(HttpContext.Current.Request.Url);
+            cacheKey.Append(HttpContext.Current.Request.Url.PathAndQuery);
             return cacheKey.ToString().ToLower();
         }
 
