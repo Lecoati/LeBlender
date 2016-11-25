@@ -116,8 +116,8 @@ namespace Lecoati.LeBlender.Extension
 
                         if (onlyLeBlenderEditor)
                         {
-                            editors = editors.Where(r => r.View.Equals("/App_Plugins/LeBlender/core/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase) ||
-                                r.View.Equals("/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase)).ToList();
+                            editors = editors.Where(r => r.View.Equals("~/App_Plugins/LeBlender/core/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase) ||
+                                r.View.Equals("~/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase)).ToList();
                         }
                     }
                     catch (Exception ex)

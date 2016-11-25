@@ -301,6 +301,6 @@
     	}
 
     	// Load css asset
-    	assetsService.loadCss("/App_Plugins/LeBlender/editors/leblendereditor/assets/parameterconfig.css");
+    	assetsService.loadCss("~/App_Plugins/LeBlender/editors/leblendereditor/assets/parameterconfig.css");
 
     });

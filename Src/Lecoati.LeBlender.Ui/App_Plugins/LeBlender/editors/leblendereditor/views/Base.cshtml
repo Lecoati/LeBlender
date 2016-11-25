@@ -18,13 +18,13 @@
     if (cacheExpiration > 0 && Helper.IsFrontEnd())
     {
         <text>
-            @Html.LeBlenderCachedPartial("/App_Plugins/LeBlender/editors/leblendereditor/views/LeBlender.cshtml", blenderModel, cacheExpiration, guid, datas)
+            @Html.LeBlenderCachedPartial("~/App_Plugins/LeBlender/editors/leblendereditor/views/LeBlender.cshtml", blenderModel, cacheExpiration, guid, datas)
         </text>
     }
     else
     {
         <text>
-            @Html.Partial("/App_Plugins/LeBlender/editors/leblendereditor/views/LeBlender.cshtml", blenderModel, datas)
+            @Html.Partial("~/App_Plugins/LeBlender/editors/leblendereditor/views/LeBlender.cshtml", blenderModel, datas)
         </text>
     }
 

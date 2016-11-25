@@ -2,7 +2,7 @@
     function ($rootScope, $q, $http, $parse, $routeParams, umbRequestHelper) {
 
         var configPath = "/config/grid.editors.config.js";
-        var edidorsConfigPath = "/App_Plugins/LeBlender/config/editors.config.js";
+        var edidorsConfigPath = "~/App_Plugins/LeBlender/config/editors.config.js";
 
         return {
 

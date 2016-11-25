@@ -11,12 +11,12 @@
 
         if ($scope.dialogData.editor) {
 
-            if ($scope.dialogData.editor.view == "/App_Plugins/LeBlender/core/LeBlendereditor.html") {
-                $scope.dialogData.editor.view = "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html";
-                $scope.dialogData.editor.render = "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml"
+            if ($scope.dialogData.editor.view == "~/App_Plugins/LeBlender/core/LeBlendereditor.html") {
+                $scope.dialogData.editor.view = "~/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html";
+                $scope.dialogData.editor.render = "~/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml"
             }
 
-            if ($scope.dialogData.editor.view == "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html") {
+            if ($scope.dialogData.editor.view == "~/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html") {
 
                 if ($scope.dialogData.editor.frontView) {
                     if (!$scope.dialogData.editor.config) {
@@ -65,7 +65,7 @@
         $scope.openListParameter = function () {
             if ($scope.control.editor.config && $scope.control.editor.config.editors ) {
         		var dialog = dialogService.open({
-        		    template: '/App_Plugins/LeBlender/editors/leblendereditor/dialogs/parameterconfig.html',
+        		    template: '~/App_Plugins/LeBlender/editors/leblendereditor/dialogs/parameterconfig.html',
         			show: true,
         			dialogData: {
         				name: $scope.control.editor.name,
@@ -114,6 +114,6 @@
         $scope.setPreview();
 
     	// Load css asset
-        assetsService.loadCss("/App_Plugins/LeBlender/views_samples/sample_styles.css");
+        assetsService.loadCss("~/App_Plugins/LeBlender/views_samples/sample_styles.css");
 
     });

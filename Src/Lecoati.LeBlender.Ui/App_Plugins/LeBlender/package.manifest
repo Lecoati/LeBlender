@@ -63,7 +63,7 @@
             "alias": "leblenderEditor",
 			"isGridEditor": true,
             "editor": {
-                "view": "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html"
+                "view": "~/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html"
             },
             "prevalues": {
                 "fields": [
@@ -71,7 +71,7 @@
                         "label": "Properties",
                         "key": "editors",
                         "description": "LeBlender Editor properties",
-                        "view": "/App_Plugins/LeBlender/editors/leblendereditor/leblenderproperties.html",
+                        "view": "~/App_Plugins/LeBlender/editors/leblendereditor/leblenderproperties.html",
                         "advanced": false
                     },
                     {

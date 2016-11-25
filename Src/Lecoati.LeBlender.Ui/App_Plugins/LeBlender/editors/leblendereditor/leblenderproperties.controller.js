@@ -10,7 +10,7 @@
         $scope.openPropertyConfig = function (parameter) {
 
             var dialog = dialogService.open({
-                template: '/App_Plugins/LeBlender/editors/leblendereditor/Dialogs/parameterconfig.prevalues.html',
+                template: '~/App_Plugins/LeBlender/editors/leblendereditor/Dialogs/parameterconfig.prevalues.html',
                 show: true,
                 dialogData: {
                     parameter: parameter,
@@ -34,7 +34,7 @@
         // Init again the render and frontView value
         $scope.$on('gridEditorSaving', function () {
             $scope.model.parentValue.config.frontView = $scope.model.parentValue.render;
-            $scope.model.parentValue.render = "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml";
+            $scope.model.parentValue.render = "~/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml";
         });
 
         // Get a list of datatype
