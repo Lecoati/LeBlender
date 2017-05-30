@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using umbraco;
 using umbraco.BusinessLogic.Actions;
 using Umbraco.Core;
+using Umbraco.Core.Configuration.Grid;
 using Umbraco.Web.Models.Trees;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.Trees;
@@ -45,7 +46,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
             var nodes = new TreeNodeCollection();
             if (id == "-1")
             {
-                IList<GridEditor> editors = Helper.GetLeBlenderGridEditors(false).ToList();
+                IList<IGridEditorConfig> editors = Helper.GetLeBlenderGridEditors(false).ToList();
                 foreach (var editor in editors)
                 {
                     nodes.Add(this.CreateTreeNode(editor.Alias, id, queryStrings, editor.Name, editor.Icon, false));

@@ -6,8 +6,8 @@ using System.Web;
 
 namespace Lecoati.LeBlender.Extension.Models
 {
-
-    internal class GridEditor
+    [Obsolete("GridEditor is deprecated. Use Umbraco.Core.Configuration.Grid.IGridEditorConfig instead.")]
+    internal class GridEditor : Umbraco.Core.Configuration.Grid.IGridEditorConfig
     {
 
         public GridEditor()
