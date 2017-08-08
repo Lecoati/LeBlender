@@ -23,7 +23,6 @@ namespace Lecoati.LeBlender.Extension
 {
     public class Helper
     {
-
         /// <summary>
         /// Is Front End
         /// </summary>
