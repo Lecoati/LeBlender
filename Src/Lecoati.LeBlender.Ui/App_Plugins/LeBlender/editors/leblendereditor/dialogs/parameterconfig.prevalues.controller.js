@@ -168,7 +168,7 @@
 
         // Init availableDataTypes
         $scope.availableDataTypes = angular.copy($scope.dialogData.availableDataTypes);
-        $scope.availableDataTypes.push({
+        $scope.availableDataTypes.unshift({
             guid: guidEmpty,
             name: "- - custom - -"
         });
