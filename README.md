@@ -38,7 +38,10 @@ Change your BlenderModel references to LeBlenderModel
 Save and publish the content which uses the LeBlender editor
 
 ### Change logs
- 
+
+#### 1.0.8.4
+- Fix null reference exception if property doesn't exist
+
 #### 1.0.8
 - Important Bug fixed: LeBlender Helper surfase controller return 404 since umb 7.2.7+
 - Numeric property returns 0
