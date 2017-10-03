@@ -10,6 +10,7 @@ using System.Web.Mvc.Html;
 using System.Web.Script.Serialization;
 using System.Text.RegularExpressions;
 using Umbraco.Core;
+using Umbraco.Core.Cache;
 using Umbraco.Core.Logging;
 using Umbraco.Web;
 
@@ -29,7 +30,7 @@ namespace Lecoati.LeBlender.Extension
         {
             var finalCacheKey = Helper.BuildCacheKey(guid);
 
-            return (IHtmlString)ApplicationContext.Current.ApplicationCache.RuntimeCache.GetCacheItem(
+            return ApplicationContext.Current.ApplicationCache.RuntimeCache.GetCacheItem<IHtmlString>(
                 finalCacheKey,
                 () => htmlHelper.Partial(partialViewName, model, viewData),
                 new TimeSpan(0, 0, 0, cachedSeconds),
