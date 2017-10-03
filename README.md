@@ -20,6 +20,7 @@ Its main features are:
 -LeBlenderEditor can be cached
 -Custom controllers can be used
 
+### See it in action
 [![See it in action](https://img.youtube.com/vi/gh_3bP8C28g/0.jpg)](https://www.youtube.com/watch?v=gh_3bP8C28g)
 
 ## How to install
