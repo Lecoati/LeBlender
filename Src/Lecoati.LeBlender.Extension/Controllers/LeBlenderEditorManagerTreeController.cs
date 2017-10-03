@@ -1,14 +1,11 @@
 ﻿using Lecoati.LeBlender.Extension;
 using Lecoati.LeBlender.Extension.Models;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using umbraco;
 using umbraco.BusinessLogic.Actions;
 using Umbraco.Core;
+using Umbraco.Core.Services;
 using Umbraco.Web.Models.Trees;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.Trees;
@@ -23,19 +20,22 @@ namespace Lecoati.LeBlender.Extension.Controllers
 
         protected override Umbraco.Web.Models.Trees.MenuItemCollection GetMenuForNode(string id, System.Net.Http.Formatting.FormDataCollection queryStrings)
         {
+            var textService = ApplicationContext.Services.TextService;
+            var createText = textService.Localize($"actions/{ActionNew.Instance.Alias}");
+            var sortText = textService.Localize($"actions/{ActionSort.Instance.Alias}");
+            var refreshNodeText = textService.Localize($"actions/{ActionRefresh.Instance.Alias}");
+            var deleteText = textService.Localize($"actions/{ActionDelete.Instance.Alias}");
+
             var menu = new MenuItemCollection();
             if (id == Constants.System.Root.ToInvariantString())
             {
                 // root actions              
-                menu.Items.Add<CreateChildEntity, ActionNew>(ui.Text("actions", ActionNew.Instance.Alias));
-                menu.Items.Add<ActionSort>(ui.Text("actions", ActionSort.Instance.Alias));
-                menu.Items.Add<RefreshNode, ActionRefresh>(ui.Text("actions", ActionRefresh.Instance.Alias), true);
+                menu.Items.Add<CreateChildEntity, ActionNew>(createText);
+                menu.Items.Add<ActionSort>(sortText);
+                menu.Items.Add<RefreshNode, ActionRefresh>(refreshNodeText, true);
                 return menu;
             }
-            else
-            {
-                menu.Items.Add<ActionDelete>(ui.Text("actions", ActionDelete.Instance.Alias));
-            }
+            menu.Items.Add<ActionDelete>(deleteText);
             return menu;
         }
 

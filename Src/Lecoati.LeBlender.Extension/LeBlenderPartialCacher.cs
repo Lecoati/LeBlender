@@ -28,12 +28,14 @@ namespace Lecoati.LeBlender.Extension
             )
         {
             var finalCacheKey = Helper.BuildCacheKey(guid);
-            return ApplicationContext.Current.ApplicationCache.GetCacheItem(
-                    finalCacheKey,
-                    CacheItemPriority.NotRemovable, //not removable, the same as macros (apparently issue #27610)
-                    null,
-                    new TimeSpan(0, 0, 0, cachedSeconds),
-                    () => htmlHelper.Partial(partialViewName, model, viewData));
+
+            return (IHtmlString)ApplicationContext.Current.ApplicationCache.RuntimeCache.GetCacheItem(
+                finalCacheKey,
+                () => htmlHelper.Partial(partialViewName, model, viewData),
+                new TimeSpan(0, 0, 0, cachedSeconds),
+                false,
+                CacheItemPriority.NotRemovable //not removable, the same as macros (apparently issue #27610)
+            );
         }
 
     }
