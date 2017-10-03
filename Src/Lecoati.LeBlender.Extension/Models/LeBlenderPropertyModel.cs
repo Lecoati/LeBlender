@@ -33,7 +33,7 @@ namespace Lecoati.LeBlender.Extension.Models
             var targetDataType = Helper.GetTargetDataTypeDefinition(Guid.Parse(DataTypeGuid));
 
             var properyType = new PublishedPropertyType(Helper.GetTargetContentType(),
-                new PropertyType(new DataTypeDefinition(-1, targetDataType.PropertyEditorAlias)
+                new PropertyType(new DataTypeDefinition(targetDataType.PropertyEditorAlias)
                 {
                     Id = targetDataType.Id
                 }));

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31010.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2FD72230-180C-4960-B7B3-7B7BEB43A03A}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2FD722
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lecoati.LeBlender.Extension", "Src\Lecoati.LeBlender.Extension\Lecoati.LeBlender.Extension.csproj", "{C1A88503-8062-4992-85AB-8367B2D38630}"
 EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Lecoati.BlenderGrid.Ui", "http://localhost:65095", "{1CDB21CD-FF88-401D-8CB5-281C5048F529}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Lecoati.LeBlender.Ui", "http://localhost:65095", "{1CDB21CD-FF88-401D-8CB5-281C5048F529}"
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "true"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5"
@@ -45,11 +45,13 @@ Global
 		{C1A88503-8062-4992-85AB-8367B2D38630}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1A88503-8062-4992-85AB-8367B2D38630}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1CDB21CD-FF88-401D-8CB5-281C5048F529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CDB21CD-FF88-401D-8CB5-281C5048F529}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CDB21CD-FF88-401D-8CB5-281C5048F529}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{1CDB21CD-FF88-401D-8CB5-281C5048F529}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {385BFD4F-AB59-4640-9C78-ABA1D9C6B36D}
 	EndGlobalSection
 EndGlobal

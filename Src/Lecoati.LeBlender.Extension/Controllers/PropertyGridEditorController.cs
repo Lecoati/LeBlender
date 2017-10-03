@@ -26,10 +26,6 @@ namespace Lecoati.LeBlender.Extension.Controllers
     [PluginController("LeBlenderApi")]
     public class PropertyGridEditorController : UmbracoAuthorizedJsonController
     {
-
-        //private readonly DirectoryInfo _pluginsDir;
-        private readonly IRuntimeCacheProvider _cache;
-
         //used to strip comments
         private static readonly Regex CommentsSurround = new Regex(@"/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/", RegexOptions.Compiled);
         private static readonly Regex CommentsLine = new Regex(@"^\s*//.*?$", RegexOptions.Compiled | RegexOptions.Multiline);
