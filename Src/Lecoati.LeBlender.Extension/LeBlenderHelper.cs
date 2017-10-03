@@ -4,21 +4,25 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
 using Umbraco.Core;
+using Umbraco.Core.Configuration;
+using Umbraco.Core.Configuration.Grid;
+using Umbraco.Core.IO;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.Web.Editors;
+using Umbraco.Web.Mvc;
 
 namespace Lecoati.LeBlender.Extension
 {
     public class Helper
     {
-
         /// <summary>
         /// Is Front End
         /// </summary>
@@ -72,25 +76,29 @@ namespace Lecoati.LeBlender.Extension
         /// </summary>
         /// <param name="LeBlenderEditorAlias"></param>
         /// <returns></returns>
-        public static int GetCacheExpiration(String LeBlenderEditorAlias) { 
+        public static int GetCacheExpiration(String LeBlenderEditorAlias)
+        {
+            // Set default expiration.
+            var expiration = 0;
 
-            var result = 0;
-
-            try 
+            // Try to get expiration if specified.
+            try
             {
+                // Load editor for this type.
                 var editor = GetLeBlenderGridEditors(true).FirstOrDefault(r => r.Alias == LeBlenderEditorAlias);
+
+                // Attempt to load expiration data for this type.
                 if (editor.Config.ContainsKey("expiration") && editor.Config["expiration"] != null)
                 {
-                    int.TryParse(editor.Config["expiration"].ToString(), out result);
+                    int.TryParse(editor.Config["expiration"].ToString(), out expiration);
                 }
             }
             catch (Exception ex)
             {
-                LogHelper.Error<Helper>("Could not read expiration datas", ex);
+                LogHelper.Error<Helper>("Could not read editor expiration data from configuration.", ex);
             }
 
-            return result;
-
+            return expiration;
         }
 
         #region internal
@@ -99,43 +107,39 @@ namespace Lecoati.LeBlender.Extension
         /// Get and cache LeBlender Grid Editor 
         /// </summary>
         /// <returns></returns>
-        internal static IEnumerable<GridEditor> GetLeBlenderGridEditors(bool onlyLeBlenderEditor) 
+        internal static IEnumerable<IGridEditorConfig> GetLeBlenderGridEditors(bool onlyLeBlenderEditor)
         {
-            
-            Func<List<GridEditor>> getResult = () =>
+            Func<IEnumerable<IGridEditorConfig>> getResult = () =>
             {
-                var editors = new List<GridEditor>();
-                var gridConfig = HttpContext.Current.Server.MapPath("~/Config/grid.editors.config.js");
-                if (System.IO.File.Exists(gridConfig))
-                {
-                    try
-                    {
-                        var arr = JArray.Parse(System.IO.File.ReadAllText(gridConfig));
-                        var parsed = JsonConvert.DeserializeObject<IEnumerable<GridEditor>>(arr.ToString()); ;
-                        editors.AddRange(parsed);
+                // Get Umbraco grid editor config including manifests
+                var gridConfig = UmbracoConfig.For.GridConfig(
+                    UmbracoContext.Current.Application.ProfilingLogger.Logger,
+                    UmbracoContext.Current.Application.ApplicationCache.RuntimeCache,
+                    new DirectoryInfo(UmbracoContext.Current.HttpContext.Server.MapPath(SystemDirectories.AppPlugins)),
+                    new DirectoryInfo(UmbracoContext.Current.HttpContext.Server.MapPath(SystemDirectories.Config)),
+                    UmbracoContext.Current.HttpContext.IsDebuggingEnabled);
 
-                        if (onlyLeBlenderEditor)
-                        {
-                            editors = editors.Where(r => r.View.Equals("/App_Plugins/LeBlender/core/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase) ||
-                                r.View.Equals("/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase)).ToList();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        LogHelper.Error<Helper>("Could not parse the contents of grid.editors.config.js into a JSON array", ex);
-                    }
+                // Get grid editors
+                var gridEditors = gridConfig.EditorsConfig.Editors;
+
+                // Filter to only display LeBlender editors if needed
+                if (onlyLeBlenderEditor)
+                {
+                    gridEditors = gridEditors.Where(x => x.View.Equals("/App_Plugins/LeBlender/core/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase) ||
+                                                         x.View.Equals("/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase));
                 }
-                return editors;
+
+                return gridEditors.ToList();
             };
 
-            var result = (List<GridEditor>)HttpContext.Current.Cache["LeBlenderGridEditorsList"];
+            var result = (IEnumerable<IGridEditorConfig>)HttpContext.Current.Cache["LeBlenderGridEditorsList"];
             if (result == null || !onlyLeBlenderEditor)
-            { 
+            {
                 result = getResult();
                 HttpContext.Current.Cache.Add("LeBlenderGridEditorsList", result, null, DateTime.Now.AddDays(1), System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.High, null);
             }
 
-            return (IEnumerable<GridEditor>)result;
+            return result;
 
         }
 
@@ -143,7 +147,8 @@ namespace Lecoati.LeBlender.Extension
         /// Get and cache LeBlender Controllers
         /// </summary>
         /// <returns></returns>
-        internal static IEnumerable<Type> GetLeBlenderControllers() {
+        internal static IEnumerable<Type> GetLeBlenderControllers()
+        {
 
             Func<List<Type>> getResult = () =>
             {
@@ -173,7 +178,8 @@ namespace Lecoati.LeBlender.Extension
             Type result = null;
             var controllers = GetLeBlenderControllers();
 
-            if (controllers.Any()) {
+            if (controllers.Any())
+            {
                 var controllersFilter = controllers.Where(t => t.Name.Equals(editorAlias + "Controller", StringComparison.InvariantCultureIgnoreCase));
                 result = controllersFilter.Any() ? controllersFilter.First() : null;
             }
@@ -185,7 +191,8 @@ namespace Lecoati.LeBlender.Extension
         /// </summary>
         /// <param name="guid"></param>
         /// <returns></returns>
-        internal static string BuildCacheKey(string guid) {
+        internal static string BuildCacheKey(string guid)
+        {
             var cacheKey = new StringBuilder();
             cacheKey.Append("LEBLENDEREDITOR");
             cacheKey.Append(guid);

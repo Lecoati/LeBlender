@@ -57,12 +57,6 @@ namespace Lecoati.LeBlender.Extension.Controllers
         internal IEnumerable<PackageManifest> GetManifests()
         {
             var plugins = new DirectoryInfo(HttpContext.Current.Server.MapPath("~/App_Plugins"));
-            //return _cache.GetCacheItem<IEnumerable<PackageManifest>>("LeBlenderGetManifests", () =>
-            //{
-            //    //get all Manifest.js files in the appropriate folders
-            //    var manifestFileContents = GetAllManifestFileContents(plugins);
-            //    return CreateManifests(manifestFileContents.ToArray());
-            //}, new TimeSpan(0, 10, 0));
 
             var manifestFileContents = GetAllManifestFileContents(plugins);
             return CreateManifests(manifestFileContents.ToArray());

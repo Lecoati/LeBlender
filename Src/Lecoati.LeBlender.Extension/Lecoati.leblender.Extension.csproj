@@ -297,6 +297,7 @@
   <ItemGroup>
     <Compile Include="Controllers\LeBlenderController.cs" />
     <Compile Include="Controllers\LeBlenderEditorManagerTreeController.cs" />
+    <Compile Include="Models\GridEditor.cs" />
     <Compile Include="Models\GridEditorsConfig\Editor.cs" />
     <Compile Include="Models\GridEditorsConfig\GridEditorsConfig.cs" />
     <Compile Include="Models\Manifest\PackageManifest.cs" />
@@ -310,7 +311,6 @@
     <Compile Include="Events\UmbracoEvents.cs" />
     <Compile Include="JSonPresentationFormatter.cs" />
     <Compile Include="LeBlenderPartialCacher.cs" />
-    <Compile Include="Models\GridEditor.cs" />
     <Compile Include="Models\LeBlenderValue.cs" />
     <Compile Include="Models\LeBlenderModelMatchingConverter.cs" />
     <Compile Include="Models\LeBlenderPropertyModel.cs" />
