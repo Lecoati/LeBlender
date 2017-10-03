@@ -3,7 +3,7 @@
         {
             "name": "Rich text editor",
             "alias": "rte",
-			"isGridEditor": true, 
+			      "isGridEditor": true, 
             "editor": {
                 "view": "rte"
             }
@@ -11,7 +11,7 @@
         {
             "name": "Image",
             "alias": "image",
-			"isGridEditor": true, 
+			      "isGridEditor": true, 
             "editor": {
                 "view": "media"
             }
@@ -19,7 +19,7 @@
         {
             "name": "Macro",
             "alias": "macro",
-			"isGridEditor": true, 
+			      "isGridEditor": true, 
             "editor": {
                 "view": "macro"
             }
@@ -27,7 +27,7 @@
         {
             "name": "Embed",
             "alias": "embed",
-			"isGridEditor": true, 
+			      "isGridEditor": true, 
             "editor": {
                 "view": "embed"
             }
@@ -35,7 +35,7 @@
         {
             "name": "Textstring",
             "alias": "textstring",
-			"isGridEditor": true, 
+			      "isGridEditor": true, 
             "editor": {
                 "view": "textstring"
             },
@@ -61,7 +61,7 @@
         {
             "name": "LeBlender Editor",
             "alias": "leblenderEditor",
-			"isGridEditor": true,
+			      "isGridEditor": true,
             "editor": {
                 "view": "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html"
             },
