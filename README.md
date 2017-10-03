@@ -21,7 +21,7 @@ Its main features are:
 -Custom controllers can be used
 
 ### See it in action
-[![See it in action](https://img.youtube.com/vi/gh_3bP8C28g/0.jpg)](https://www.youtube.com/watch?v=gh_3bP8C28g)
+[![See it in action](https://i.imgur.com/2IO4jCF.png)](https://www.youtube.com/watch?v=gh_3bP8C28g)
 
 ## How to install
 Download LeBender Package
