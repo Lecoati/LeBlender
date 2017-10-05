@@ -3,9 +3,10 @@
         {
             "name": "Rich text editor",
             "alias": "rte",
-			      "isGridEditor": true, 
+			      "isGridEditor": true,
             "editor": {
-                "view": "rte"
+              "view": "rte",
+              "valueType": "TEXT"
             }
         },
         {
