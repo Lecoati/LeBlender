@@ -12,15 +12,15 @@
             controller: function ($scope) {
               
                 var initEditorPath = function (property) {
-                    if (property && property.$editor && property.$editor.propretyType) {
-                        return property.$editor.propretyType.view;
+                    if (property && property.$editor && property.$editor.propertyType) {
+                        return property.$editor.propertyType.view;
                     }
                 };
 
                 $scope.model = {
                     alias: $scope.property.$editor ? angular.copy($scope.property.$editor.alias) : "",
                     label: $scope.property.$editor ? angular.copy($scope.property.$editor.name) : "",
-                    config: $scope.property.$editor ? angular.copy($scope.property.$editor.propretyType.config) : {},
+                    config: $scope.property.$editor ? angular.copy($scope.property.$editor.propertyType.config) : {},
                     validation: {
                         mandatory:false
                     },

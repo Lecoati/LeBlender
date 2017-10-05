@@ -182,35 +182,35 @@
     	        if ($scope.config.editors) {
     	            _.each($scope.config.editors, function (editor, editorIndex) {
 
-    	                if (!$scope.model.value.propretyType) {
-    	                    $scope.model.value.propretyType = {};
+    	                if (!$scope.model.value.propertyType) {
+    	                    $scope.model.value.propertyType = {};
     	                }
 
     	                /***************************************/
     	                /* legacy adaptor 0.9.15 */
     	                /***************************************/
-    	                if (!editor.dataType && editor.propretyType) {
-    	                    switch (editor.propretyType.name) {
+    	                if (!editor.dataType && editor.propertyType) {
+    	                    switch (editor.propertyType.name) {
     	                        case "Textstring": editor.dataType = "0cc0eba1-9960-42c9-bf9b-60e150b429ae";
-    	                            editor.propretyType = {};
+    	                            editor.propertyType = {};
     	                            break;
     	                        case "Textarea": editor.dataType = "c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3";
-    	                            editor.propretyType = {};
+    	                            editor.propertyType = {};
     	                            break;
     	                        case "Rich Text Editor": editor.dataType = "ca90c950-0aff-4e72-b976-a30b1ac57dad";
-    	                            editor.propretyType = {};
+    	                            editor.propertyType = {};
     	                            break;
     	                        case "Boolean": editor.dataType = "92897bc6-a5f3-4ffe-ae27-f2e7e33dda49";
-    	                            editor.propretyType = {};
+    	                            editor.propertyType = {};
     	                            break;
     	                        case "Media Picker": editor.dataType = "93929b9a-93a2-4e2a-b239-d99334440a59";
-    	                            editor.propretyType = {};
+    	                            editor.propertyType = {};
     	                            break;
     	                        case "Multi Media Picker": editor.dataType = "7e3962cc-ce20-4ffc-b661-5897a894ba7e";
-    	                            editor.propretyType = {};
+    	                            editor.propertyType = {};
     	                            break;
     	                        case "Content Picker": editor.dataType = "a6857c73-d6e9-480c-b6e6-f15f6ad11125";
-    	                            editor.propretyType = {};
+    	                            editor.propertyType = {};
     	                            break;
     	                        case "Multi Content Picker":
     	                            editor.dataType = "";
@@ -237,8 +237,8 @@
     	                        var mergedConfig = _.extend(defaultConfigObj, configObj);
 
     	                        editor.$isLoaded = true;
-    	                        editor.propretyType.config = mergedConfig;
-    	                        editor.propretyType.view = umbPropEditorHelper.getViewPath(data.view);
+    	                        editor.propertyType.config = mergedConfig;
+    	                        editor.propertyType.view = umbPropEditorHelper.getViewPath(data.view);
     	                    });
     	                }
     	                else {
