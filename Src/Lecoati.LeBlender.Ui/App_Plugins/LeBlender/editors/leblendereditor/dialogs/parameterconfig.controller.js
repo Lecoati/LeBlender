@@ -64,7 +64,7 @@
         };
 
         $scope.add = function () {
-            newItem = {};
+            var newItem = {};
             _.each($scope.config.editors, function (editor, editorIndex) {
     	        var newProperty = {
     	            value: null,

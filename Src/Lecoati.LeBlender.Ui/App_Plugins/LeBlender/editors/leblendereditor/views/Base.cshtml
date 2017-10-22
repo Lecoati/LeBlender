@@ -1,6 +1,7 @@
 ﻿@using System.Web.Mvc.Html;
 @using Lecoati.LeBlender.Extension
 @using Lecoati.LeBlender.Extension.Models
+@using System.Web.Mvc;
 
 @try
 {
@@ -11,7 +12,7 @@
     var frontView = Model.editor.config == null || Model.editor.config.frontView == null || String.IsNullOrEmpty(Model.editor.config.frontView.Value) ?
         "" : Model.editor.config.frontView.Value;
 
-    ViewDataDictionary datas = new ViewDataDictionary(this.ViewData) { { "editorAlias", Model.editor.alias }, { "frontView", frontView } };
+    ViewDataDictionary datas = new ViewDataDictionary() { { "editorAlias", Model.editor.alias }, { "frontView", frontView } };
 
     int cacheExpiration = Helper.GetCacheExpiration(Model.editor.alias.ToString());
 

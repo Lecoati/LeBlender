@@ -64,7 +64,10 @@ namespace Lecoati.LeBlender.Extension.Controllers
                     var actionResult = (ViewResult)controllerType.GetMethod(method).Invoke(controllerInstance, new[] { typeInstance });
 
                     // Return the action result 
-                    actionResult.ViewName = frontView;
+                    if (string.IsNullOrWhiteSpace(actionResult.ViewName))
+                    {
+                    	actionResult.ViewName = frontView;
+                    }
                     return actionResult;
                 }
                 catch (Exception ex)
