@@ -39,7 +39,14 @@ namespace Lecoati.LeBlender.Extension
             }
             else
             {
-                return GetUmbracoHelper().TypedContent(HttpContext.Current.Request["id"]);
+                var umbracoNodeId = int.Parse(HttpContext.Current.Request["id"].ToString());
+                var umbracoNode = GetUmbracoHelper().TypedContent(umbracoNodeId);
+
+                if (umbracoNode == null) {
+                    umbracoNode = ApplicationContext.Current.Services.ContentService.GetById(umbracoNodeId).ToPublishedContent();
+                }
+
+                return umbracoNode;
             }
         }
 

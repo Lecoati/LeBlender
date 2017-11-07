@@ -297,6 +297,7 @@
   <ItemGroup>
     <Compile Include="Controllers\LeBlenderController.cs" />
     <Compile Include="Controllers\LeBlenderEditorManagerTreeController.cs" />
+    <Compile Include="Extensions\ContentExtensions.cs" />
     <Compile Include="Models\GridEditorsConfig\Editor.cs" />
     <Compile Include="Models\GridEditorsConfig\GridEditorsConfig.cs" />
     <Compile Include="Models\Manifest\PackageManifest.cs" />
