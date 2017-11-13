@@ -1,8 +1,6 @@
 ﻿angular.module("umbraco").controller("LeBlender.Dialog.ParameterConfig.Prevalues.Controller",
     function ($scope, assetsService, $http, LeBlenderRequestHelper, dialogService) {
 
-        var guidEmpty = "00000000-0000-0000-0000-000000000000";
-
         /***************************************/
         /* legacy adaptor 0.9.15 */
         /***************************************/
@@ -10,32 +8,25 @@
         if ($scope.dialogData.parameter && $scope.dialogData.parameter.propretyType) {
 
             switch ($scope.dialogData.parameter.propretyType.name) {
-                case "Textstring":
-                    $scope.dialogData.parameter.dataType = "0cc0eba1-9960-42c9-bf9b-60e150b429ae";
+                case "Textstring": $scope.dialogData.parameter.dataType = "0cc0eba1-9960-42c9-bf9b-60e150b429ae";
                     $scope.dialogData.parameter.propretyType = {};
                     break;
-                case "Textarea":
-                    $scope.model.value.dataType = "c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3";
+                case "Textarea": $scope.model.value.dataType = "c6bac0dd-4ab9-45b1-8e30-e4b619ee5da3";
                     $scope.dialogData.parameter.propretyType = {};
                     break;
-                case "Rich Text Editor":
-                    $scope.dialogData.parameter.dataType = "ca90c950-0aff-4e72-b976-a30b1ac57dad";
+                case "Rich Text Editor": $scope.dialogData.parameter.dataType = "ca90c950-0aff-4e72-b976-a30b1ac57dad";
                     $scope.dialogData.parameter.propretyType = {};
                     break;
-                case "Boolean":
-                    $scope.dialogData.parameter.dataType = "92897bc6-a5f3-4ffe-ae27-f2e7e33dda49";
+                case "Boolean": $scope.dialogData.parameter.dataType = "92897bc6-a5f3-4ffe-ae27-f2e7e33dda49";
                     $scope.dialogData.parameter.propretyType = {};
                     break;
-                case "Media Picker":
-                    $scope.dialogData.parameter.dataType = "93929b9a-93a2-4e2a-b239-d99334440a59";
+                case "Media Picker": $scope.dialogData.parameter.dataType = "93929b9a-93a2-4e2a-b239-d99334440a59";
                     $scope.dialogData.parameter.propretyType = {};
                     break;
-                case "Multi Media Picker":
-                    $scope.dialogData.parameter.dataType = "7e3962cc-ce20-4ffc-b661-5897a894ba7e";
+                case "Multi Media Picker": $scope.dialogData.parameter.dataType = "7e3962cc-ce20-4ffc-b661-5897a894ba7e";
                     $scope.dialogData.parameter.propretyType = {};
                     break;
-                case "Content Picker":
-                    $scope.dialogData.parameter.dataType = "a6857c73-d6e9-480c-b6e6-f15f6ad11125";
+                case "Content Picker": $scope.dialogData.parameter.dataType = "a6857c73-d6e9-480c-b6e6-f15f6ad11125";
                     $scope.dialogData.parameter.propretyType = {};
                     break;
                 case "Multi Content Picker":
@@ -62,7 +53,7 @@
 
         // Control if the property is custom 
         $scope.isCustom = function () {
-            if ($scope.model.value.dataType === guidEmpty) {
+            if ($scope.model.value.dataType === "") {
                 return true;
             }
             else {
@@ -75,12 +66,6 @@
 
             if (!$scope.model.value.propretyType) {
                 $scope.model.value.propretyType = {};
-            }
-
-            if (!$scope.model.value.dataType) {
-                // find "Textstring" datatype from guid and select on init - fallback to first element
-                var datatypeToSelect = _.findWhere($scope.availableDataTypes, { guid: '0cc0eba1-9960-42c9-bf9b-60e150b429ae' }) || $scope.availableDataTypes[0];
-                $scope.model.value.dataType = datatypeToSelect.guid;
             }
 
             if (!$scope.model.value.dataType && $scope.model.value.propretyType) {
@@ -168,10 +153,7 @@
 
         // Init availableDataTypes
         $scope.availableDataTypes = angular.copy($scope.dialogData.availableDataTypes);
-        $scope.availableDataTypes.unshift({
-            guid: guidEmpty,
-            name: "- - custom - -"
-        });
+  
 
         // Extend model
         angular.extend($scope, {
@@ -183,7 +165,9 @@
         if (!$scope.model.value) {
             $scope.model.value = {
                 name: "",
-                alias: ""
+                alias: "",
+                PropertyEditorAlias: "",
+                DataTypeName: ""
             };
         }
 

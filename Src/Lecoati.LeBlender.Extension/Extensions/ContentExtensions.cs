@@ -14,6 +14,7 @@ namespace Lecoati.LeBlender.Extension
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
+    using System.Reflection;
     using System.Xml.Serialization;
 
     using Umbraco.Core;
@@ -42,7 +43,25 @@ namespace Lecoati.LeBlender.Extension
         /// </returns>
         public static IPublishedContent ToPublishedContent(this IContent content, bool isPreview = false)
         {
-            return new PublishedContent(content, isPreview);
+            var publishedContent = new PublishedContent(content, isPreview) as IPublishedContent;
+
+            var types = PluginManager.Current.ResolveTypes<PublishedContentModel>();
+            var _registeredContentModelTypes = types.ToDictionary(t => CreateDocumentTypeAliasFromTypeName(t.Name), t => t);
+
+            Type type = null;
+            if (_registeredContentModelTypes.TryGetValue(publishedContent.DocumentTypeAlias, out type))
+            {
+                return (IPublishedContent)Activator.CreateInstance(type, publishedContent);
+            }
+
+            return publishedContent;
+        }
+
+        private static string CreateDocumentTypeAliasFromTypeName(string typeName)
+        {
+            var firstCharLowerCased = char.ToLowerInvariant(typeName[0]) + typeName.Substring(1);
+
+            return firstCharLowerCased.Replace("ContentModel", string.Empty);
         }
     }
 
@@ -75,7 +94,7 @@ namespace Lecoati.LeBlender.Extension
         /// <param name="isPreviewing">
         /// The is previewing.
         /// </param>
-        public PublishedContent(IContent inner, bool isPreviewing)
+        public PublishedContent(IContent inner, bool isPreviewing) : base()
         {
             if (inner == null)
             {

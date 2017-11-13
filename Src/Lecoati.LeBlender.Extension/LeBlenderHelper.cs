@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using Umbraco.Core;
+using Umbraco.Core.Cache;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
@@ -258,6 +259,30 @@ namespace Lecoati.LeBlender.Extension
                 });
         }
 
+        internal static IDataTypeDefinition GetTargetDataTypeDefinitionByDataTypeName(string dataTypeName)
+        {
+            return (IDataTypeDefinition)ApplicationContext.Current.ApplicationCache.RuntimeCache.GetCacheItem(
+                "LeBlender_GetTargetDataTypeDefinition_" + dataTypeName,
+                () =>
+                {
+                    var services = ApplicationContext.Current.Services;
+                    var dtd = services.DataTypeService.GetDataTypeDefinitionByName(dataTypeName);
+                    return dtd;
+                });
+        }
+
+        internal static IDataTypeDefinition GetTargetDataTypeDefinitionByPropertyAlias(string alias)
+        {
+            return (IDataTypeDefinition)ApplicationContext.Current.ApplicationCache.RuntimeCache.GetCacheItem(
+                "LeBlender_GetTargetDataTypeDefinition_" + alias,
+                () =>
+                {
+                    var services = ApplicationContext.Current.Services;
+                    var dtd = services.DataTypeService.GetDataTypeDefinitionByPropertyEditorAlias(alias).FirstOrDefault<IDataTypeDefinition>();
+                    return dtd;
+                });
+        }
+        
         #endregion
 
         #region private
