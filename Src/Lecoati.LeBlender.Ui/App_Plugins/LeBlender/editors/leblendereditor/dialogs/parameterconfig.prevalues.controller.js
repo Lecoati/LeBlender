@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("LeBlender.Dialog.ParameterConfig.Prevalues.Controller",
-    function ($scope, assetsService, $http, LeBlenderRequestHelper, dialogService) {
+    function ($scope, assetsService, $http, LeBlenderRequestHelper, dialogService, $filter) {
 
         /***************************************/
         /* legacy adaptor 0.9.15 */
@@ -87,7 +87,17 @@
 
             var submitPlease = true;
             if ($scope.model.value) {
+                if ($scope.model.value.dataType) {
+                    var dataTypeModel = $filter('filter')($scope.dialogData.availableDataTypes, { 'guid': $scope.model.value.dataType });
+
+                    if (dataTypeModel.length) {
+                        $scope.model.value.DataTypeName = dataTypeModel[0].DataTypeName;
+                        delete $scope.model.value.dataType;
+                    }
+                }
+
                 if ($scope.dialogData.parameter) {
+                    delete $scope.dialogData.parameter.dataType;
                     angular.extend($scope.dialogData.parameter, $scope.model.value);
                     submitPlease = false;
                 }
