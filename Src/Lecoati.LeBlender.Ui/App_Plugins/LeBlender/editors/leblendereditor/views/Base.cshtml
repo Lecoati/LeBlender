@@ -1,11 +1,10 @@
 ﻿@using System.Web.Mvc.Html;
 @using Lecoati.LeBlender.Extension
 @using Lecoati.LeBlender.Extension.Models
-@using System.Web.Mvc;
 
 @try
 {
-    
+
     string guid = Model.guid != null && Model.guid.Value != null ? Model.guid.Value.ToString() : "";
     LeBlenderModel blenderModel = Helper.DeserializeBlenderModel(Model);
 
@@ -13,6 +12,15 @@
         "" : Model.editor.config.frontView.Value;
 
     ViewDataDictionary datas = new ViewDataDictionary() { { "editorAlias", Model.editor.alias }, { "frontView", frontView } };
+    // Remove all Keys you entered in datas.
+    var keys = ViewData.Keys.Where( k =>
+         !datas.Keys.Any( x => x == k )
+    );
+	// Add the keys from ViewData to the new Dictionary
+    foreach (var key in keys)
+    {
+        datas.Add( key, ViewData["key"] );
+    }
 
     int cacheExpiration = Helper.GetCacheExpiration(Model.editor.alias.ToString());
 
