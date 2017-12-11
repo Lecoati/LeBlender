@@ -11,6 +11,7 @@ using Umbraco.Web.Editors;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.UI.Pages;
+using Umbraco.Web.WebApi;
 
 namespace Lecoati.LeBlender.Extension.Controllers
 {
@@ -33,7 +34,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
             return dataTypes
                 .Where(r => !notAllowed.Contains(r.PropertyEditorAlias.ToString()))
                 .OrderBy(r => r.Name)
-                .Select(t => new { guid = t.Key, name = t.Name });
+                .Select(t => new { guid = t.Key, name = t.Name, DataTypeName = t.Name });
         }
 
         // Get property editor properties
@@ -50,6 +51,38 @@ namespace Lecoati.LeBlender.Extension.Controllers
 
             return new { defaultPreValues = propertyEditor.DefaultPreValues, alias = propertyEditor.Alias, view = propertyEditor.ValueEditor.View, preValues = dataTypeDisplay.PreValues };
 
+        }
+
+        public object GetPropertyEditors(string alias, Guid? guid)
+        {
+            if (string.IsNullOrEmpty(alias) && guid.HasValue)
+                return this.GetPropertyEditors(guid.Value);
+
+            var idataTypeDefinition = Services.DataTypeService.GetDataTypeDefinitionByPropertyEditorAlias(alias).FirstOrDefault();
+            if (idataTypeDefinition == null && guid.HasValue)
+            {
+                return this.GetPropertyEditors(guid.Value);
+            }
+            var dataTypeDisplay = AutoMapper.Mapper.Map<IDataTypeDefinition, Umbraco.Web.Models.ContentEditing.DataTypeDisplay>(idataTypeDefinition);
+            var propertyEditor = global::Umbraco.Core.PropertyEditors.PropertyEditorResolver.Current.PropertyEditors.Where(r => r.Alias == dataTypeDisplay.SelectedEditor).First();
+
+            return new { defaultPreValues = propertyEditor.DefaultPreValues, alias = propertyEditor.Alias, view = propertyEditor.ValueEditor.View, preValues = dataTypeDisplay.PreValues };
+        }
+
+        public object GetPropertyEditors(string DataTypeName, string alias, Guid? guid)
+        {
+            if (string.IsNullOrEmpty(DataTypeName))
+                return this.GetPropertyEditors(alias, guid);
+
+            var definitionByName = Services.DataTypeService.GetDataTypeDefinitionByName(DataTypeName);
+            if (definitionByName == null && alias != null)
+            {
+                return this.GetPropertyEditors(alias, guid);
+            }
+            var dataTypeDisplay = AutoMapper.Mapper.Map<IDataTypeDefinition, Umbraco.Web.Models.ContentEditing.DataTypeDisplay>(definitionByName);
+            var propertyEditor = global::Umbraco.Core.PropertyEditors.PropertyEditorResolver.Current.PropertyEditors.Where(r => r.Alias == dataTypeDisplay.SelectedEditor).First();
+
+            return new { defaultPreValues = propertyEditor.DefaultPreValues, alias = propertyEditor.Alias, view = propertyEditor.ValueEditor.View, preValues = dataTypeDisplay.PreValues };
         }
 
     }
