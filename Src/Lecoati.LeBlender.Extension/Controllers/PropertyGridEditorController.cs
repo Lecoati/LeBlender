@@ -22,7 +22,6 @@ using Lecoati.LeBlender.Extension.Models.Manifest;
 
 namespace Lecoati.LeBlender.Extension.Controllers
 {
-
     [PluginController("LeBlenderApi")]
     public class PropertyGridEditorController : UmbracoAuthorizedJsonController
     {
@@ -44,7 +43,6 @@ namespace Lecoati.LeBlender.Extension.Controllers
             return editors;
         }
 
-
         internal static IEnumerable<Lecoati.LeBlender.Extension.Models.Manifest.PropertyEditor> GetPropertyGridEditor(JArray jsonEditors)
         {
             return JsonConvert.DeserializeObject<IEnumerable<Lecoati.LeBlender.Extension.Models.Manifest.PropertyEditor>>(jsonEditors.ToString());
@@ -62,7 +60,6 @@ namespace Lecoati.LeBlender.Extension.Controllers
 
             var manifestFileContents = GetAllManifestFileContents(plugins);
             return CreateManifests(manifestFileContents.ToArray());
-
         }
 
         private IEnumerable<string> GetAllManifestFileContents(DirectoryInfo currDir)
