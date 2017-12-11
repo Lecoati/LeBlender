@@ -6,6 +6,7 @@ using System.Web;
 using Umbraco.Core;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Core.ObjectResolution;
 using Umbraco.Core.PropertyEditors;
 using Umbraco.Web;
 
@@ -13,9 +14,14 @@ namespace Lecoati.LeBlender.Extension.Models
 {
     public class LeBlenderPropertyModel
     {
-
         [JsonProperty("dataTypeGuid")]
         public String DataTypeGuid { get; set; }
+
+        [JsonProperty("DataTypeName")]
+        public String DataTypeName { get; set; }
+
+        [JsonProperty("PropertyEditorAlias")]
+        public String PropertyEditorAlias { get; set; }
 
         [JsonProperty("editorName")]
         public String Name { get; set; }
@@ -28,15 +34,28 @@ namespace Lecoati.LeBlender.Extension.Models
 
         public T GetValue<T>()
         {
+            IDataTypeDefinition idataTypeDefinition = null;
 
-            //var targetContentType = Helper.GetTargetContentType();
-            var targetDataType = Helper.GetTargetDataTypeDefinition(Guid.Parse(DataTypeGuid));
+            if (!string.IsNullOrEmpty(this.DataTypeName))
+            {
+                idataTypeDefinition = Helper.GetTargetDataTypeDefinitionByDataTypeName(this.DataTypeName);
+            }
+            else if (!string.IsNullOrEmpty(this.PropertyEditorAlias))
+            {
+                idataTypeDefinition = Helper.GetTargetDataTypeDefinitionByPropertyAlias(this.PropertyEditorAlias);
+            }
+            else if (!string.IsNullOrEmpty(this.DataTypeGuid))
+            {
+                idataTypeDefinition = Helper.GetTargetDataTypeDefinition(Guid.Parse(this.DataTypeGuid));
+            }
 
-            var properyType = new PublishedPropertyType(Helper.GetTargetContentType(),
-                new PropertyType(new DataTypeDefinition(targetDataType.PropertyEditorAlias)
-                {
-                    Id = targetDataType.Id
-                }));
+            PublishedContentType targetContentType = Helper.GetTargetContentType();
+            var dataTypeDefinition = new DataTypeDefinition(idataTypeDefinition.PropertyEditorAlias);
+
+            dataTypeDefinition.Id = idataTypeDefinition.Id;
+            var propertyType = new PropertyType(dataTypeDefinition);
+
+            PublishedPropertyType properyType = new PublishedPropertyType(targetContentType, propertyType);
 
             // Try Umbraco's PropertyValueConverters
             var converters = PropertyValueConvertersResolver.Current.Converters.ToArray();
@@ -72,8 +91,5 @@ namespace Lecoati.LeBlender.Extension.Models
             return default(T);
 
         }
-
-
-
     }
 }
