@@ -7,8 +7,8 @@
         <authors>LECOATI</authors>
         <owners>LECOATI</owners>
         <projectUrl>http://www.lecoati.com/</projectUrl>
-        <description>Umbarco LeBlender</description>
-        <summary>Umbarco LeBlender</summary>
+        <description>Umbraco LeBlender</description>
+        <summary>Umbraco LeBlender</summary>
         <language>en-US</language>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
         <tags>LECOATI</tags>
