@@ -10,16 +10,17 @@
 
                 <div ng-if="configLoaded" ui-sortable="sortableOptions" ng-model="model.value">
                     <div class="list list-field" ng-class="{'list-open':selected === item, 'multiple':!(fixed && config.min == 1)}" ng-click="select(item)" ng-repeat="item in model.value track by $index">
-                        
+
                         <span ng-show="!(fixed && config.min == 1)" class="list-number">
                             {{$index + 1}}
                             <i ng-show="model.value.length > 1" class="icon right icon-navigation"></i>
                             <i ng-show="!fixed && model.value.length > config.min" ng-click=" remove(item, $index);$event.stopPropagation()" class="icon right icon-delete"></i>
                         </span>
 
-                        <umb-control-group label="{{property.$editor.name}}" description="{{property.$editor.description}}" 
+                        <umb-control-group label="{{property.$editor.name}}" description="{{property.$editor.description}}"
                                            ng-repeat="property in item | LeBlenderOrderObjectBy:'$order':false">
                             <blender-editor-wrapper property="property" item="item"></blender-editor-wrapper>
+							<div ng-if="property.error">{{property.error}}</div>
                         </umb-control-group>
 
                     </div>

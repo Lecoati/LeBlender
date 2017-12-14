@@ -28,6 +28,12 @@
                             <textarea class="umb-editor umb-textstring" style="height: 100px;" ng-model="model.value.description" />
                         </umb-control-group>
 
+						<umb-control-group label="Required" description="">
+							<div style="text-align: left">
+								<input type="checkbox" ng-model="model.value.required" />
+							</div>
+						</umb-control-group>
+
                         <div ng-show="isCustom()">
                             <umb-control-group label="View" description="">
                                 <input class="umb-editor umb-textstring" type="text" ng-model="model.value.propretyType.view" />
