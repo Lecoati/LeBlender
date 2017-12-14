@@ -10,7 +10,7 @@
                 min: 1,
                 max: 1,
                 editors: []
-            }     
+            }
         });
 
         angular.extend($scope.config,
@@ -217,10 +217,10 @@
     	                            break;
     	                    }
     	                }
-    	                
+
     	                if (editor.dataType && !editor.$isLoaded) {
     	                    LeBlenderRequestHelper.getDataType(editor.dataType).then(function (data) {
-    	                        
+
                                 // Get config prevalues
     	                        var configObj = {};
     	                        _.each(data.preValues, function (p) {
@@ -247,7 +247,7 @@
     	            })
     	        }
     	        /***************************************/
- 
+
     	    }
 
     	}
@@ -277,26 +277,33 @@
 
     	$scope.isValid = function () {
 			var isValid = true;
-			
+
     		_.every($scope.model.value, function (item, itemIndex) {
     	         _.forEach(item, function (property, propertyIndex) {
     	            if (!property.$valid) {
 						isValid = false;
     					return;
     	            }
+					if (property.$editor.required && property.value == null) {
+						isValid = false;
+						property.error = "This field is required";
+						return;
+					} else {
+						property.error = null;
+					}
     	        })
     	    });
-    		
+
     		return isValid;
     	}
-		
+
     	$scope.save = function () {
 			$scope.$broadcast("formSubmitting");
-			
+
     		if($scope.isValid()) {
     			$timeout(function () {
     				$scope.submit($scope.model.value);
-    			}, 250);	
+    			}, 250);
     		}
     	}
 
