@@ -222,7 +222,7 @@ namespace Lecoati.LeBlender.Extension
             }
             else
             {
-                int contenId = int.Parse(HttpContext.Current.Request["id"]);
+	            int contenId = int.Parse((string) (HttpContext.Current.Items["leblender.contentId"]??HttpContext.Current.Request["id"]));
                 return (PublishedContentType)ApplicationContext.Current.ApplicationCache.RuntimeCache.GetCacheItem(
                     "LeBlender_GetTargetContentType_" + contenId,
                     () =>
