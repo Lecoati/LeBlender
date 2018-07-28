@@ -17,9 +17,8 @@ using Lecoati.LeBlender.Extension;
 
 namespace Lecoati.LeBlender.Extension.Events
 {
-    public class UmbracoEvents : ApplicationEventHandler
+    internal class UmbracoEvents : ApplicationEventHandler
     {
-
         protected override void ApplicationInitialized(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
         {
             base.ApplicationInitialized(umbracoApplication, applicationContext);

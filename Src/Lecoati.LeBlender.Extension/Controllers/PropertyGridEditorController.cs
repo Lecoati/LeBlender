@@ -22,7 +22,6 @@ using Lecoati.LeBlender.Extension.Models.Manifest;
 
 namespace Lecoati.LeBlender.Extension.Controllers
 {
-
     [PluginController("LeBlenderApi")]
     public class PropertyGridEditorController : UmbracoAuthorizedJsonController
     {

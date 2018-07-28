@@ -14,7 +14,6 @@ using Umbraco.Web.UI.Pages;
 
 namespace Lecoati.LeBlender.Extension.Controllers
 {
-
     public class HelperController : UmbracoAuthorizedController
     {
         [ValidateInput(false)]
@@ -35,7 +34,8 @@ namespace Lecoati.LeBlender.Extension.Controllers
             var configPath = Request["configPath"];
 
             // Update
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(System.Web.HttpContext.Current.Server.MapPath(configPath)))
+            var mappedConfigPath = Server.MapPath(configPath);
+            using (var file = new System.IO.StreamWriter(mappedConfigPath))
             {
                 file.Write(config);
             }
