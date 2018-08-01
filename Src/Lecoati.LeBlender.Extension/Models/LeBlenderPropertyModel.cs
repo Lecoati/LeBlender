@@ -32,7 +32,7 @@ namespace Lecoati.LeBlender.Extension.Models
             //var targetContentType = Helper.GetTargetContentType();
             var targetDataType = Helper.GetTargetDataTypeDefinition(Guid.Parse(DataTypeGuid));
 
-            var properyType = new PublishedPropertyType(Helper.GetTargetContentType(),
+            var propertyType = new PublishedPropertyType(Helper.GetTargetContentType(),
                 new PropertyType(new DataTypeDefinition(targetDataType.PropertyEditorAlias)
                 {
                     Id = targetDataType.Id
@@ -40,17 +40,17 @@ namespace Lecoati.LeBlender.Extension.Models
 
             // Try Umbraco's PropertyValueConverters
             var converters = PropertyValueConvertersResolver.Current.Converters.ToArray();
-            foreach (var converter in converters.Where(x => x.IsConverter(properyType)))
+            foreach (var converter in converters.Where(x => x.IsConverter(propertyType)))
             {
                 // Convert the type using a found value converter
-                var value2 = converter.ConvertDataToSource(properyType, Value, false);
+                var value2 = converter.ConvertDataToSource(propertyType, Value, false);
 
                 // If the value is of type T, just return it
                 if (value2 is T)
                     return (T)value2;
 
                 // If ConvertDataToSource failed try ConvertSourceToObject.
-                var value3 = converter.ConvertSourceToObject(properyType, value2, false);
+                var value3 = converter.ConvertSourceToObject(propertyType, value2, false);
 
                 // If the value is of type T, just return it
                 if (value3 is T)

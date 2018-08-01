@@ -34,14 +34,14 @@ namespace Lecoati.LeBlender.Extension
         /// <returns></returns>
         public static IPublishedContent GetCurrentContent()
         {
+            var umbraco = new UmbracoHelper(UmbracoContext.Current);
+
             if (UmbracoContext.Current.IsFrontEndUmbracoRequest)
             {
-                return GetUmbracoHelper().AssignedContentItem;
+                return umbraco.AssignedContentItem;
             }
-            else
-            {
-                return GetUmbracoHelper().TypedContent(HttpContext.Current.Request["id"].ToString());
-            }
+
+            return umbraco.TypedContent(HttpContext.Current.Request["id"]);
         }
 
         /// <summary>
@@ -212,26 +212,35 @@ namespace Lecoati.LeBlender.Extension
         /// <returns></returns>
         internal static PublishedContentType GetTargetContentType()
         {
-            if (UmbracoContext.Current.IsFrontEndUmbracoRequest)
+            if (UmbracoContext.Current != null && UmbracoContext.Current.IsFrontEndUmbracoRequest)
             {
-                return GetUmbracoHelper().AssignedContentItem.ContentType;
+                var umbraco = new UmbracoHelper(UmbracoContext.Current);
+
+                return umbraco.AssignedContentItem.ContentType;
             }
-            else if (!string.IsNullOrEmpty(HttpContext.Current.Request["doctype"]))
+
+            var doctype = HttpContext.Current?.Request["doctype"];
+            if (!string.IsNullOrEmpty(doctype))
             {
-                return PublishedContentType.Get(PublishedItemType.Content, HttpContext.Current.Request["doctype"]);
+                return PublishedContentType.Get(PublishedItemType.Content, doctype);
             }
-            else
+
+            var id = HttpContext.Current?.Request["id"];
+            if (int.TryParse(id, out var contentId))
             {
-                int contenId = int.Parse(HttpContext.Current.Request["id"]);
-                return (PublishedContentType)ApplicationContext.Current.ApplicationCache.RuntimeCache.GetCacheItem(
-                    "LeBlender_GetTargetContentType_" + contenId,
+                return (PublishedContentType) ApplicationContext.Current.ApplicationCache.RuntimeCache.GetCacheItem(
+                    "LeBlender_GetTargetContentType_" + contentId,
                     () =>
                     {
                         var services = ApplicationContext.Current.Services;
-                        var contentType = PublishedContentType.Get(PublishedItemType.Content, services.ContentService.GetById(contenId).ContentType.Alias);
+                        var content = services.ContentService.GetById(contentId);
+                        var contentType =
+                            PublishedContentType.Get(PublishedItemType.Content, content.ContentType.Alias);
                         return contentType;
                     });
             }
+
+            return null;
         }
 
         /// <summary>

@@ -18,7 +18,6 @@ namespace Lecoati.LeBlender.Extension.Controllers
         [ChildActionOnly]
         public ActionResult RenderEditor(string editorAlias, string frontView, LeBlenderModel model)
         {
-
             // Check if the frontView is a custom path
             if (string.IsNullOrEmpty(frontView))
             {
@@ -33,7 +32,6 @@ namespace Lecoati.LeBlender.Extension.Controllers
             var controllerType = Helper.GetLeBlenderController(editorAlias);
             if (controllerType != null)
             {
-
                 try
                 {
                     // Load a controller instance
