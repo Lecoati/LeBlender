@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2FD72230-180C-4960-B7B3-7B7BEB43A03A}"
 	ProjectSection(SolutionItems) = preProject
@@ -34,6 +34,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Lecoati.LeBlender.Ui", "htt
 		SlnRelativePath = "Src\Lecoati.LeBlender.Ui\"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lecoati.LeBlender.Web", "Src\Lecoati.LeBlender.Web\Lecoati.LeBlender.Web.csproj", "{7AF50F8E-0DAC-40C6-9327-E7CABEA5F24B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{1CDB21CD-FF88-401D-8CB5-281C5048F529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1CDB21CD-FF88-401D-8CB5-281C5048F529}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{1CDB21CD-FF88-401D-8CB5-281C5048F529}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{7AF50F8E-0DAC-40C6-9327-E7CABEA5F24B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AF50F8E-0DAC-40C6-9327-E7CABEA5F24B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AF50F8E-0DAC-40C6-9327-E7CABEA5F24B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AF50F8E-0DAC-40C6-9327-E7CABEA5F24B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
