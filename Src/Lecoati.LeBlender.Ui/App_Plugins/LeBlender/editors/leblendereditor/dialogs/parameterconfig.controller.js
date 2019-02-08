@@ -30,7 +30,9 @@
             $scope.config.min = 1;
 
         if (!$scope.config.max)
-            $scope.config.max = 1;
+			$scope.config.max = 1;
+
+		$scope.icon = dialogData.icon;
 
         /***************************************/
         /* legacy adaptor 0.9.15 */
@@ -304,6 +306,10 @@
 
 			editorService.close();
     	}
+
+		$scope.close = function () {
+			editorService.close();
+		}
 
     	// Load css asset
     	assetsService.loadCss("/App_Plugins/LeBlender/editors/leblendereditor/assets/parameterconfig.css");

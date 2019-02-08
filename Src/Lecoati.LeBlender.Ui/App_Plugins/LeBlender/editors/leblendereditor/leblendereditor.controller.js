@@ -68,7 +68,8 @@
         		    view: '/App_Plugins/LeBlender/editors/leblendereditor/dialogs/parameterconfig.html',
         			show: true,
         			dialogData: {
-        				name: $scope.control.editor.name,
+						name: $scope.control.editor.name,
+						icon: $scope.control.editor.icon,
         				value: angular.copy($scope.control.value),
         				config: $scope.control.editor.config
         			},

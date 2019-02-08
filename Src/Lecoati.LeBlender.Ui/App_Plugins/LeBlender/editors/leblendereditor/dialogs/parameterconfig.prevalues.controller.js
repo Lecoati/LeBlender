@@ -1,7 +1,8 @@
 ﻿angular.module("umbraco").controller("LeBlender.Dialog.ParameterConfig.Prevalues.Controller",
     function ($scope, editorService) {
 
-        var guidEmpty = "00000000-0000-0000-0000-000000000000";
+		var guidEmpty = "00000000-0000-0000-0000-000000000000";
+		$scope.name = "Property Setting";
 
         /***************************************/
         /* legacy adaptor 0.9.15 */
