@@ -1,22 +1,19 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using Umbraco.Core.Models;
-using Umbraco.Web;
+using Umbraco.Core.PropertyEditors;
 using Umbraco.Web.Editors;
-using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
-using Umbraco.Web.UI.Pages;
 
 namespace Lecoati.LeBlender.Extension.Controllers
 {
     [PluginController("LeBlenderApi")]
     public class DataTypeController : UmbracoAuthorizedJsonController
     {
+		public DataTypeController( PropertyEditorCollection propertyEditors )
+		{
+			this.propertyEditors = propertyEditors;
+		}
 
         // Not allowed datatype because they don't make sense here
         String[] notAllowed = { "LeBlender", 
@@ -25,13 +22,14 @@ namespace Lecoati.LeBlender.Extension.Controllers
                                 "Umbraco.FolderBrowser",
                                 "Umbraco.UploadField", 
                                 "Umbraco.ImageCropper" };
+		private readonly PropertyEditorCollection propertyEditors;
 
-        // Get all datatypes
-        public object GetAll()
+		// Get all datatypes
+		public object GetAll()
         {
-            var dataTypes = Services.DataTypeService.GetAllDataTypeDefinitions();
+            var dataTypes = Services.DataTypeService.GetAll();
             return dataTypes
-                .Where(r => !notAllowed.Contains(r.PropertyEditorAlias.ToString()))
+                .Where(r => !notAllowed.Contains(r.EditorAlias.ToString()))
                 .OrderBy(r => r.Name)
                 .Select(t => new { guid = t.Key, name = t.Name });
         }
@@ -40,15 +38,15 @@ namespace Lecoati.LeBlender.Extension.Controllers
         public object GetPropertyEditors(Guid guid)
         {
 
-            var dataType = Services.DataTypeService.GetDataTypeDefinitionById(guid);
+            var dataType = Services.DataTypeService.GetDataType(guid);
             if (dataType == null)
             {
                 throw new System.Web.Http.HttpResponseException(System.Net.HttpStatusCode.NotFound);
             }
-            var dataTypeDisplay = AutoMapper.Mapper.Map<IDataTypeDefinition, Umbraco.Web.Models.ContentEditing.DataTypeDisplay>(dataType);
-            var propertyEditor = global::Umbraco.Core.PropertyEditors.PropertyEditorResolver.Current.PropertyEditors.Where(r => r.Alias == dataTypeDisplay.SelectedEditor).First();
+            var dataTypeDisplay = AutoMapper.Mapper.Map<IDataType, Umbraco.Web.Models.ContentEditing.DataTypeDisplay>(dataType);
+            var propertyEditor = this.propertyEditors[dataTypeDisplay.SelectedEditor];
 
-            return new { defaultPreValues = propertyEditor.DefaultPreValues, alias = propertyEditor.Alias, view = propertyEditor.ValueEditor.View, preValues = dataTypeDisplay.PreValues };
+            return new { defaultPreValues = propertyEditor.DefaultConfiguration, alias = propertyEditor.Alias, view = propertyEditor.GetValueEditor().View, preValues = dataTypeDisplay.PreValues };
 
         }
 

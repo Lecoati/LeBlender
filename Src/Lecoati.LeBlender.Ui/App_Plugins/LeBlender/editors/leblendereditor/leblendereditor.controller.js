@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("LeBlenderEditor.controller",
-    function ($scope, assetsService, $http, dialogService, $routeParams, umbRequestHelper, LeBlenderRequestHelper) {
+    function ($scope, assetsService, $http, editorService, $routeParams, umbRequestHelper, leBlenderRequestHelper) {
 
         /***************************************/
         /* legacy adaptor 0.9.15 */
@@ -64,15 +64,15 @@
 
         $scope.openListParameter = function () {
             if ($scope.control.editor.config && $scope.control.editor.config.editors ) {
-        		var dialog = dialogService.open({
-        		    template: '/App_Plugins/LeBlender/editors/leblendereditor/dialogs/parameterconfig.html',
+        		var dialog = editorService.open({
+        		    view: '/App_Plugins/LeBlender/editors/leblendereditor/dialogs/parameterconfig.html',
         			show: true,
         			dialogData: {
         				name: $scope.control.editor.name,
         				value: angular.copy($scope.control.value),
         				config: $scope.control.editor.config
         			},
-        			callback: function (data) {
+        			submit: function (data) {
         				$scope.control.value = data;
         				$scope.setPreview();
         				if (!$scope.control.guid)
@@ -105,7 +105,7 @@
             if ($scope.control.editor.config
                 && ($scope.control.value || !$scope.control.editor.config.editors || $scope.control.editor.config.editors.length == 0)
                 && $scope.control.editor.config.renderInGrid && $scope.control.editor.config.renderInGrid != "0") {
-                LeBlenderRequestHelper.GetPartialViewResultAsHtmlForEditor($scope.control).success(function (htmlResult) {
+                leBlenderRequestHelper.GetPartialViewResultAsHtmlForEditor($scope.control).success(function (htmlResult) {
                     $scope.preview = htmlResult;
                 });
             }

@@ -1,4 +1,4 @@
-﻿angular.module("umbraco").factory("LeBlenderRequestHelper",
+﻿angular.module("umbraco").factory("leBlenderRequestHelper",
     function ($rootScope, $q, $http, $parse, $routeParams, umbRequestHelper) {
 
         var configPath = "/config/grid.editors.config.js";

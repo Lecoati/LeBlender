@@ -1,8 +1,11 @@
 ﻿angular.module("umbraco").controller("LeBlender.Dialog.Parameterconfig.Controller",
-    function ($scope, assetsService, $http, dialogService, mediaHelper, $timeout, LeBlenderRequestHelper, umbPropEditorHelper) {
+    function ($scope, assetsService, $timeout, leBlenderRequestHelper, umbPropEditorHelper, editorService) {
+
+		var dialogData = $scope.model.dialogData;
+		$scope.submit = $scope.model.submit;
 
         angular.extend($scope, {
-            name: $scope.dialogData.name,
+            name: dialogData.name,
             model: {
                 value: []
             },
@@ -14,10 +17,10 @@
         });
 
         angular.extend($scope.config,
-            $scope.dialogData.config);
+            dialogData.config);
 
         angular.extend($scope.model.value,
-            $scope.dialogData.value);
+            dialogData.value);
 
         if ($scope.model.value.length > 0) {
             $scope.selected = $scope.model.value[0];
@@ -219,7 +222,7 @@
     	                }
     	                
     	                if (editor.dataType && !editor.$isLoaded) {
-    	                    LeBlenderRequestHelper.getDataType(editor.dataType).then(function (data) {
+    	                    leBlenderRequestHelper.getDataType(editor.dataType).then(function (data) {
     	                        
                                 // Get config prevalues
     	                        var configObj = {};
@@ -297,7 +300,9 @@
     			$timeout(function () {
     				$scope.submit($scope.model.value);
     			}, 250);	
-    		}
+			}
+
+			editorService.close();
     	}
 
     	// Load css asset

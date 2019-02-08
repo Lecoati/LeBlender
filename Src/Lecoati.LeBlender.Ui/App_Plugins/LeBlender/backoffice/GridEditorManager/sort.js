@@ -1,8 +1,8 @@
 ﻿angular.module("umbraco").controller("leblender.editormanager.sort",
-    function ($scope, assetsService, $http, LeBlenderRequestHelper, dialogService, $routeParams, navigationService, treeService) {
+    function ($scope, assetsService, $http, leBlenderRequestHelper, $routeParams, navigationService, treeService) {
 
     $scope.save = function () {
-        LeBlenderRequestHelper.setGridEditors($scope.editors).then(function (response) {
+        leBlenderRequestHelper.setGridEditors($scope.editors).then(function (response) {
             treeService.loadNodeChildren({ node: $scope.currentNode });
             navigationService.hideMenu();
         });
@@ -12,7 +12,7 @@
         navigationService.hideNavigation();
     };
     
-    LeBlenderRequestHelper.getGridEditors().then(function (response) {
+    leBlenderRequestHelper.getGridEditors().then(function (response) {
         $scope.editors = response.data
     });
 

@@ -1,7 +1,9 @@
-# project specific ignores
-
 /Src/Lecoati.BlenderGrid.Ui/umbraco_client
+/Src/Lecoati.BlenderGrid.Ui/umbraco
+/Src/Lecoati.BlenderGrid.Ui/App_Data
+/Src/Lecoati.BlenderGrid.Ui/bin
 /Src/Lecoati.BlenderGrid.Ui/media
+/Src/Lecoati.BlenderGrid.Ui/obj
 /Src/Lecoati.BlenderGrid.Ui/default.aspx
 /Src/Lecoati.BlenderGrid.Ui/Global.asax
 /Src/Lecoati.BlenderGrid.Ui/Lecoati.BlenderGrid.Ui.csproj.user
@@ -17,10 +19,14 @@
 /packages
 /build/*.nupkg
 /*.sln.ide
+*.suo
+/Src/Lecoati.LeBlender.Extension/obj
+/Src/Lecoati.LeBlender.Extension/bin
 /Src/Lecoati.LeBlender.Extension/Lecoati.leblender.Extension.csproj.user
 /Src/Lecoati.LeBlender.Ui/media
 /Src/Lecoati.LeBlender.Ui/xslt
 /Src/Lecoati.LeBlender.Ui/Models
+/Src/Lecoati.LeBlender.Ui/obj
 /Src/Lecoati.LeBlender.Ui/Properties
 /Src/Lecoati.LeBlender.Ui/scripts
 /Src/Lecoati.LeBlender.Ui/umbraco
@@ -38,6 +44,7 @@
 /Src/Lecoati.LeBlender.Ui/App_Data
 /Src/Lecoati.LeBlender.Ui/App_Browsers
 /Src/Lecoati.LeBlender.Ui/App_Code
+/Src/Lecoati.LeBlender.Ui/bin
 /Src/Lecoati.LeBlender.Ui/config
 /Src/Lecoati.LeBlender.Ui/Controllers
 /Src/Lecoati.LeBlender.Ui/css
@@ -47,6 +54,9 @@
 /Src/Lecoati.LeBlender.Ui/App_Plugins/gridStyle
 /Src/Lecoati.LeBlender.Ui/App_Plugins/dummy.txt
 /Src/Lecoati.LeBlender.Extension/App_Data
+/Src/Lecoati.LeBlender.Ui/App_Plugins/Doc_Type_Grid
+/Src/Lecoati.LeBlender.Ui/App_Plugins/DocTypeGridEditor
+/.vs/config
 /PrecompiledWeb/
 
 

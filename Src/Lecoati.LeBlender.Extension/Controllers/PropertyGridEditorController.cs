@@ -12,7 +12,6 @@ using Umbraco.Web;
 using Umbraco.Web.Editors;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
-using Umbraco.Web.UI.Pages;
 
 using System.Text.RegularExpressions;
 using Umbraco.Core.IO;
@@ -22,15 +21,22 @@ using Lecoati.LeBlender.Extension.Models.Manifest;
 
 namespace Lecoati.LeBlender.Extension.Controllers
 {
+
     [PluginController("LeBlenderApi")]
     public class PropertyGridEditorController : UmbracoAuthorizedJsonController
     {
-        //used to strip comments
-        private static readonly Regex CommentsSurround = new Regex(@"/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/", RegexOptions.Compiled);
-        private static readonly Regex CommentsLine = new Regex(@"^\s*//.*?$", RegexOptions.Compiled | RegexOptions.Multiline);
+		public PropertyGridEditorController(ILogger logger)
+		{
+			this.logger = logger;
+		}
 
-        // Get all datatypes
-        public object GetAll()
+		//used to strip comments
+		private static readonly Regex CommentsSurround = new Regex(@"/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/", RegexOptions.Compiled);
+        private static readonly Regex CommentsLine = new Regex(@"^\s*//.*?$", RegexOptions.Compiled | RegexOptions.Multiline);
+		private readonly ILogger logger;
+
+		// Get all datatypes
+		public object GetAll()
         {
             var editors = new List<Lecoati.LeBlender.Extension.Models.Manifest.PropertyEditor>();
             foreach (var manifest in GetManifests())
@@ -52,12 +58,6 @@ namespace Lecoati.LeBlender.Extension.Controllers
         internal IEnumerable<PackageManifest> GetManifests()
         {
             var plugins = new DirectoryInfo(HttpContext.Current.Server.MapPath("~/App_Plugins"));
-            //return _cache.GetCacheItem<IEnumerable<PackageManifest>>("LeBlenderGetManifests", () =>
-            //{
-            //    //get all Manifest.js files in the appropriate folders
-            //    var manifestFileContents = GetAllManifestFileContents(plugins);
-            //    return CreateManifests(manifestFileContents.ToArray());
-            //}, new TimeSpan(0, 10, 0));
 
             var manifestFileContents = GetAllManifestFileContents(plugins);
             return CreateManifests(manifestFileContents.ToArray());
@@ -92,7 +92,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
             return removed.Split(new char[] { '\\' }, StringSplitOptions.RemoveEmptyEntries).Length;
         }
 
-        internal static IEnumerable<PackageManifest> CreateManifests(params string[] manifestFileContents)
+        internal IEnumerable<PackageManifest> CreateManifests(params string[] manifestFileContents)
         {
             var result = new List<PackageManifest>();
             foreach (var m in manifestFileContents)
@@ -111,7 +111,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.Error<Lecoati.LeBlender.Extension.Models.Manifest.PropertyEditor>("An error occurred parsing manifest with contents: " + m, ex);
+                    this.logger.Error<Lecoati.LeBlender.Extension.Models.Manifest.PropertyEditor>("An error occurred parsing manifest with contents: " + m, ex);
                     continue;
                 }
 

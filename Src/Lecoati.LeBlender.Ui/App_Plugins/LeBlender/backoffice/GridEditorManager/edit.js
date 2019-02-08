@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("leblender.editormanager.edit",
-    function ($scope, assetsService, $http, LeBlenderRequestHelper, dialogService, $routeParams, notificationsService, navigationService, contentEditingHelper, editorState) {
+    function ($scope, assetsService, $http, leBlenderRequestHelper, editorService, $routeParams, notificationsService, navigationService, contentEditingHelper, editorState) {
 
 
         /***************************************/
@@ -62,7 +62,7 @@
         /* Init editor data */
         /***************************************/
         $scope.getSetting = function (editorAlias) {
-            LeBlenderRequestHelper.getGridEditors().then(function (response) {
+            leBlenderRequestHelper.getGridEditors().then(function (response) {
 
                 // init model
                 $scope.editors  = response.data
@@ -129,7 +129,7 @@
                 }
             });
 
-            LeBlenderRequestHelper.setGridEditors($scope.editors).then(function (response) {
+            leBlenderRequestHelper.setGridEditors($scope.editors).then(function (response) {
                 notificationsService.success("Success", $scope.model.value.name + " has been saved");
                 delete $scope.selectedPropertyGridEditor;
                 $scope.getSetting($scope.model.value.alias);
@@ -168,7 +168,7 @@
 
         // open icon picker
         $scope.openIconPicker = function () {
-            var dialog = dialogService.iconPicker({
+            var dialog = editorService.iconPicker({
                 show: true,
                 callback: function (data) {
                     $scope.model.value.icon = data;
@@ -291,7 +291,7 @@
 
         $scope.loaded = false;
 
-        LeBlenderRequestHelper.getAllPropertyGridEditors().then(function (data) {
+        leBlenderRequestHelper.getAllPropertyGridEditors().then(function (data) {
             $scope.propertyGridEditors = data;
             $scope.getSetting($routeParams.id);
         });
