@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Umbraco.Core;
-using Umbraco.Core.Components;
+using Umbraco.Core.Composing;
 using Umbraco.Core.Logging;
 using Umbraco.Web;
 using System.Web;
@@ -15,7 +15,7 @@ using Lecoati.LeBlender.Extension;
 
 namespace Lecoati.LeBlender.Extension.Events
 {
-    public class UmbracoEvents : Umbraco.Core.Components.IComponent
+    public class UmbracoEvents : IComponent
     {
 		private readonly ILogger logger;
 

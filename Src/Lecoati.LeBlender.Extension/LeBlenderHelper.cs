@@ -22,11 +22,13 @@ namespace Lecoati.LeBlender.Extension
     {
 		private readonly ILogger logger;
 		private readonly AppCaches appCaches;
+		private readonly UmbracoContext umbracoContext;
 
-		public Helper(/*ILogger logger, UmbracoHelper umbracoHelper, AppCaches appCaches*/)
+		public Helper()
 		{
 			this.logger = Current.Logger;
-			this.appCaches = Umbraco.Core.Composing.Current.AppCaches;
+			this.appCaches = Current.AppCaches;
+			this.umbracoContext = Current.Factory.GetInstance<UmbracoContext>();
 		}
 
         /// <summary>
@@ -35,7 +37,7 @@ namespace Lecoati.LeBlender.Extension
         /// <returns></returns>
         public bool IsFrontEnd()
         {
-            return UmbracoContext.Current.IsFrontEndUmbracoRequest;
+            return umbracoContext.IsFrontEndUmbracoRequest;
         }
 
         /// <summary>
@@ -44,16 +46,16 @@ namespace Lecoati.LeBlender.Extension
         /// <returns></returns>
         public IPublishedContent GetCurrentContent()
         {
-            if (UmbracoContext.Current.IsFrontEndUmbracoRequest)
+            if (umbracoContext.IsFrontEndUmbracoRequest)
             {
-                return UmbracoContext.Current.PublishedRequest.PublishedContent;
+                return umbracoContext.PublishedRequest.PublishedContent;
             }
             else
             {
 				var si = (string)HttpContext.Current.Request["id"];
 				int id = 0;
 				int.TryParse( si, out id );
-				return UmbracoContext.Current.ContentCache.GetById( id );
+				return umbracoContext.ContentCache.GetById( id );
             }
         }
 
@@ -221,7 +223,7 @@ namespace Lecoati.LeBlender.Extension
 
 			// This is the old code. We don't understand the case with "doctype".
 
-            //if (UmbracoContext.Current.IsFrontEndUmbracoRequest)
+            //if (umbracoContext.IsFrontEndUmbracoRequest)
             //{
             //    return this.umbracoHelper.AssignedContentItem.ContentType;
             //}
