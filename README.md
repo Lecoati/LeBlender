@@ -1,3 +1,6 @@
+# Note
+This is a fork of Lecoati/LeBlender to support Umbraco v8. This may result in a PullRequest for the original project.
+
 # LeBlender
 
 LeBlender is an open source Umbraco backoffice extension which made the Grid Canvas Editors management easier and flexible.
