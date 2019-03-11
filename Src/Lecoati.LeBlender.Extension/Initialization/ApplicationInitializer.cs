@@ -15,11 +15,11 @@ using Lecoati.LeBlender.Extension;
 
 namespace Lecoati.LeBlender.Extension.Events
 {
-    public class UmbracoEvents : IComponent
+    public class ApplicationInitializer : IComponent
     {
 		private readonly ILogger logger;
 
-		public UmbracoEvents(ILogger logger)
+		public ApplicationInitializer(ILogger logger)
 		{
 			this.logger = logger;
 		}
