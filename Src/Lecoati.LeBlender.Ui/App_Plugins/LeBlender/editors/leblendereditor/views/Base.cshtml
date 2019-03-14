@@ -1,49 +1,51 @@
 ﻿@using System.Web.Mvc;
+@using System.Web.Mvc.Html;
 @using Lecoati.LeBlender.Extension;
 @using Lecoati.LeBlender.Extension.Models;
+
+@inherits WebViewPage<dynamic>
 
 @try
 {
 	var helper = new Helper();
 	string guid = Model.guid != null && Model.guid.Value != null ? Model.guid.Value.ToString() : "";
-	LeBlenderModel blenderModel = helper.DeserializeBlenderModel(Model);
+	LeBlenderModel blenderModel = helper.DeserializeBlenderModel( Model );
 
-	var frontView = Model.editor.config == null || Model.editor.config.frontView == null || String.IsNullOrEmpty(Model.editor.config.frontView.Value) ?
+	var frontView = Model.editor.config == null || Model.editor.config.frontView == null || String.IsNullOrEmpty( Model.editor.config.frontView.Value ) ?
 		"" : Model.editor.config.frontView.Value;
 
 	ViewDataDictionary datas = new ViewDataDictionary() { { "editorAlias", Model.editor.alias }, { "frontView", frontView } };
-	
-    var keys = ViewData.Keys.Where( k =>
-         !datas.Keys.Any( x => x == k )
-    );
-	// Add the keys from ViewData to the new Dictionary
-    foreach (var key in keys)
-    {
-        datas.Add( key, ViewData[key] );
-    }	
 
-	int cacheExpiration = helper.GetCacheExpiration(Model.editor.alias.ToString());
+	var keys = ViewData.Keys.Where( k =>
+		 !datas.Keys.Any( x => x == k )
+	);
+	// Add the keys from ViewData to the new Dictionary
+	foreach (var key in keys)
+	{
+		datas.Add( key, ViewData[key] );
+	}
+
+	int cacheExpiration = helper.GetCacheExpiration( Model.editor.alias.ToString() );
 
 	if (cacheExpiration > 0 && helper.IsFrontEnd())
 	{
-        <text>
-            @LeBlenderPartialCacher.LeBlenderCachedPartial(Html,"/App_Plugins/LeBlender/editors/leblendereditor/views/LeBlender.cshtml", blenderModel, cacheExpiration, guid, datas)
-        </text>
-    }
-    else
-    {
-        <text>
-            @Html.Partial("/App_Plugins/LeBlender/editors/leblendereditor/views/LeBlender.cshtml", blenderModel, datas)
-        </text>
-    }
+		<text>
+			@LeBlenderPartialCacher.LeBlenderCachedPartial( Html, "/App_Plugins/LeBlender/editors/leblendereditor/views/LeBlender.cshtml", blenderModel, cacheExpiration, guid, datas )
+		</text>
+	}
+	else
+	{
+		<text>
+			@Html.Partial( "/App_Plugins/LeBlender/editors/leblendereditor/views/LeBlender.cshtml", blenderModel, datas )
+		</text>
+	}
 
 }
 catch (Exception ex)
 {
-    if (!new Helper().IsFrontEnd())
-    {
-        <p class="red">Something went wrong with this editor, below is the exception detail:</p>
-    }
-    <p class="leblender-exception">@ex.ToString()</p>
-} 
-
+	if (!new Helper().IsFrontEnd())
+	{
+		<p class="red">Something went wrong with this editor, below is the exception detail:</p>
+	}
+	<p class="leblender-exception">@ex.ToString()</p>
+}
