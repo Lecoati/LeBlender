@@ -130,7 +130,7 @@
             });
 
             leBlenderRequestHelper.setGridEditors($scope.editors).then(function (response) {
-                notificationsService.then("Success", $scope.model.value.name + " has been saved");
+                notificationsService.success("Success", $scope.model.value.name + " has been saved");
                 delete $scope.selectedPropertyGridEditor;
                 $scope.getSetting($scope.model.value.alias);
                 var editormanagerForm = angular.element('form[name=editormanagerForm]').scope().editormanagerForm;
