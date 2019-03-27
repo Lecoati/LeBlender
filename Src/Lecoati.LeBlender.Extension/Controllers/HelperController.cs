@@ -40,7 +40,8 @@ namespace Lecoati.LeBlender.Extension.Controllers
 			{
 				var modelStr = (string)jObj["model"];
 				var view = (string)jObj["view"];
-				dynamic model = JsonConvert.DeserializeObject( modelStr );
+				var model = JsonConvert.DeserializeObject<JObject>( modelStr );
+				model["contentId"] = (int)jObj["id"];
 				var result = new HttpResponseMessage( HttpStatusCode.OK );
 				string viewResult = new ViewRenderer().RenderPartialViewToString( "/views/Partials/" + view + ".cshtml", model );
 				result.Content = new StringContent( viewResult );
