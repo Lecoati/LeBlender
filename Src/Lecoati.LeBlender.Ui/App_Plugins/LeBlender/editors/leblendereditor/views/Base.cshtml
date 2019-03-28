@@ -15,6 +15,10 @@
 		"" : Model.editor.config.frontView.Value;
 
 	ViewDataDictionary datas = new ViewDataDictionary() { { "editorAlias", Model.editor.alias }, { "frontView", frontView } };
+	if (Model.contentId != null)
+	{
+		datas.Add( "contentId", (int)Model.contentId );
+	}
 
 	var keys = ViewData.Keys.Where( k =>
 		 !datas.Keys.Any( x => x == k )

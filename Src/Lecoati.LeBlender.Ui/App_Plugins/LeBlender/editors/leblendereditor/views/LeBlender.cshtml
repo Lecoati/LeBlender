@@ -3,4 +3,4 @@
 
 @inherits WebViewPage<dynamic>
 
-@(Html.Action( "RenderEditor", "LeBlender", new { editorAlias = ViewData["editorAlias"], frontView = ViewData["frontView"], model = Model } ))
+@(Html.Action( "RenderEditor", "LeBlender", new { editorAlias = ViewData["editorAlias"], frontView = ViewData["frontView"], contentId=ViewData["contentId"], model = Model } ))
