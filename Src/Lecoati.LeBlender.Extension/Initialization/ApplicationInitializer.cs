@@ -26,14 +26,14 @@ namespace Lecoati.LeBlender.Extension.Events
 
 		public void Initialize()
 		{
-			RouteTable.Routes.MapRoute(
-				"leblender",
-				"umbraco/backoffice/leblender/helper/{action}",
-				new
-				{
-					controller = "Helper",
-				}
-			);
+			//RouteTable.Routes.MapRoute(
+			//	"leblender",
+			//	"umbraco/backoffice/leblender/helper/{action}",
+			//	new
+			//	{
+			//		controller = "Helper",
+			//	}
+			//);
 
 			// Upgrate default view path for LeBlender 1.0.0
 			var gridConfig = HttpContext.Current.Server.MapPath( "~/Config/grid.editors.config.js" );
