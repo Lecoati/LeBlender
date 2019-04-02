@@ -34,33 +34,16 @@ namespace Lecoati.LeBlender.Extension.Models
             //var targetContentType = Helper.GetTargetContentType();
             var targetDataType = helper.GetTargetDataTypeDefinition(Guid.Parse(DataTypeGuid));
 
-			//This is a mock, where onle the EditorAlias is used in x.IsConverter(propertyType)
-			var propertyType = new PublishedPropertyType( helper.GetTargetContentType(),
-				new PropertyType( targetDataType, targetDataType.EditorAlias ), 
-				new PropertyValueConverterCollection( new List<IPropertyValueConverter>() ), 
-				new PublishedModelFactoryMock(),
-				new PublishedContentTypeFactoryMock() );
+			// This propertyType is a mock, where only the TargetDatatype.EditorAlias is used in x.IsConverter(propertyType)
+			// This constructor is the one with minimal validity checks. See comment in PublishedPropertyType.cs.
+			// But this may change in future, so be prepared to look into the Umbraco source code, if this code fails.
+			var propertyType = new PublishedPropertyType( "pt-" + targetDataType.Id, targetDataType.Id, true, ContentVariation.Nothing, new PropertyValueConverterCollection( new IPropertyValueConverter[] { } ), new PublishedModelFactoryMock(), Current.PublishedContentTypeFactory );
 
-            // Try Umbraco's PropertyValueConverters
-            var converters = Current.Factory.GetInstance<PropertyValueConverterCollection>().ToArray();
-            foreach (var converter in converters.Where(x => x.IsConverter(propertyType)))
-            {
+			var converters = Current.Factory.GetInstance<PropertyValueConverterCollection>().ToArray();
+			foreach (var converter in converters.Where( x => x.IsConverter( propertyType ) ))
+			{
 				// Since the ConvertDataToSource and ConvertSourceToObject methods don't exist anymore,
 				// We skip the code and try to convert the Value property directly.
-
-				//// Convert the type using a found value converter
-				//var value2 = converter.ConvertDataToSource(propertyType, Value, false);
-
-				//// If the value is of type T, just return it
-				//if (value2 is T)
-				//    return (T)value2;
-
-				//// If ConvertDataToSource failed try ConvertSourceToObject.
-				//var value3 = converter.ConvertSourceToObject(propertyType, value2, false);
-
-				//// If the value is of type T, just return it
-				//if (value3 is T)
-				//    return (T)value3;
 
 				// Value is not final value type, so try a regular type conversion aswell
 				var convertAttempt = Value.TryConvertTo<T>();
@@ -95,35 +78,7 @@ namespace Lecoati.LeBlender.Extension.Models
 			{
 				throw new NotImplementedException();
 			}
-		}
-
-		class PublishedContentTypeFactoryMock : IPublishedContentTypeFactory
-		{			
-			public PublishedContentType CreateContentType( IContentTypeComposition contentType )
-			{
-				throw new NotImplementedException();
-			}
-
-			public PublishedPropertyType CreatePropertyType( PublishedContentType contentType, PropertyType propertyType )
-			{
-				throw new NotImplementedException();
-			}
-
-			public PublishedPropertyType CreatePropertyType( PublishedContentType contentType, string propertyTypeAlias, int dataTypeId, ContentVariation variations )
-			{
-				throw new NotImplementedException();
-			}
-
-			public PublishedDataType GetDataType( int id )
-			{
-				return Current.Factory.GetInstance<IPublishedContentTypeFactory>().GetDataType( id );
-			}
-
-			public void NotifyDataTypeChanges( int[] ids )
-			{
-				throw new NotImplementedException();
-			}
-		}
+		}		
 
 	}
 }

@@ -14,7 +14,7 @@ using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.Web.Editors;
-using Umbraco.Core.Composing;
+using Umbraco.Web.Composing;
 
 namespace Lecoati.LeBlender.Extension
 {
@@ -28,7 +28,7 @@ namespace Lecoati.LeBlender.Extension
 		{
 			this.logger = Current.Logger;
 			this.appCaches = Current.AppCaches;
-			this.umbracoContext = Current.Factory.GetInstance<UmbracoContext>();
+			this.umbracoContext = Current.UmbracoContext;
 		}
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Lecoati.LeBlender.Extension
 				var si = (string)HttpContext.Current.Request["id"];
 				int id = 0;
 				int.TryParse( si, out id );
-				return umbracoContext.ContentCache.GetById( id );
+				return Current.UmbracoHelper.Content( id );
             }
         }
 
@@ -161,7 +161,7 @@ namespace Lecoati.LeBlender.Extension
 			var result = appCaches.RequestCache.GetCacheItem<IEnumerable<Type>>( "LeBlenderControllers",
 			() =>
 				{
-					var controllerTypes = TypeFinder.FindClassesOfType<LeBlenderController>();
+					var controllerTypes = Umbraco.Core.Composing.TypeFinder.FindClassesOfType<LeBlenderController>();
 					return controllerTypes.ToList();
 				}
 			);
