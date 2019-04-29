@@ -4,6 +4,12 @@ LeBlender is an open source Umbraco backoffice extension which made the Grid Can
 We can create, order, update, remove and extend Grid editors on the fly, through a very simple and nice user interface.
 LeBlender project brings two main features:
 
+## LeBlender for umbraco v8
+
+We've gotten a lot of questions about what the plans for LeBlender and Umbraco V8 are. It’s great to see that so many of you would like to use LeBlender, and that there’s so much positive feedback about it.
+
+We are currently investigating what the the future of LeBlender should be. We hope for your patience and will make an announcement about the future of LeBlender shortly after CodeGarden ’19.
+
 ## 1. LeBlender editor manager
 
 This part of the project is a user interface tool for managing the grid editor settings.
