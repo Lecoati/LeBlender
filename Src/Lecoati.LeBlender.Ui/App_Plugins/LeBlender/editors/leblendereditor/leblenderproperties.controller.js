@@ -1,11 +1,16 @@
 ﻿angular.module("umbraco").controller("leblenderproperties.controller",
 	function ($scope, leBlenderRequestHelper, editorService) {
 
+        var vm = this;
+
+        vm.openPropertyConfig = openPropertyConfig;
+        vm.remove = remove;
+
 		// Init render with the value of frontView
 		// render have to be always = /App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml
 		$scope.model.parentValue.render = $scope.model.parentValue.config.frontView ? $scope.model.parentValue.config.frontView : "";
 
-        $scope.openPropertyConfig = function (parameter) {
+        function openPropertyConfig(parameter) {
 
             var dialog = {
                 view: '/App_Plugins/LeBlender/editors/leblendereditor/Dialogs/parameterconfig.prevalues.html',
@@ -30,12 +35,11 @@
             };
 
             editorService.open(dialog);
-		};
+        }
 
-		// remove a property
-        $scope.remove = function ($index) {
+        function remove($index) {
             $scope.model.value.splice($index, 1);
-        };
+        }
 
 		// Init again the render and frontView value
 		$scope.$on('gridEditorSaving', function () {

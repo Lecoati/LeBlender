@@ -1,4 +1,4 @@
-<div ng-controller="leblenderproperties.controller">
+<div ng-controller="leblenderproperties.controller as vm">
 
     <div class="umb-property-editor umb-prevalues-multivalues">
 
@@ -6,16 +6,16 @@
             <div class="control-group umb-prevalues-multivalues__listitem" ng-repeat="property in model.value track by $index">
                 <i class="icon icon-navigation handle"></i>
                 <div class="umb-prevalues-multivalues__left">
-                    <a href="#" prevent-default="" style="margin-left: 0;" ng-click="openPropertyConfig(property)">{{property.name}}</a>
+                    <a href="#" prevent-default="" style="margin-left: 0;" ng-click="vm.openPropertyConfig(property)">{{property.name}}</a>
                 </div>
                 <div class="umb-prevalues-multivalues__right">
-                    <a class="umb-node-preview__action" ng-click="openPropertyConfig(property)"><localize key="general_edit" class="ng-isolate-scope">Edit</localize></a>
+                    <a class="umb-node-preview__action" ng-click="vm.openPropertyConfig(property)"><localize key="general_edit" class="ng-isolate-scope">Edit</localize></a>
                     <a class="umb-node-preview__action umb-node-preview__action--red" ng-click="remove($index)"><localize key="general_remove">Remove</localize></a>
                 </div>
             </div>
         </div>
 
-        <button class="btn btn-info" prevent-default ng-click="openPropertyConfig()">Add property</button>
+        <button class="btn btn-info" prevent-default ng-click="vm.openPropertyConfig()">Add property</button>
 
     </div>
     

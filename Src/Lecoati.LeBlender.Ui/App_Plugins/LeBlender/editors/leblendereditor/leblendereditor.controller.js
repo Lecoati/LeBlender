@@ -1,6 +1,8 @@
 ﻿angular.module("umbraco").controller("LeBlenderEditor.controller",
     function ($scope, assetsService, $sce, editorService, leBlenderRequestHelper) {
 
+        var vm = this;
+
         $scope.preview = "";
 
         $scope.openListParameter = function () {
