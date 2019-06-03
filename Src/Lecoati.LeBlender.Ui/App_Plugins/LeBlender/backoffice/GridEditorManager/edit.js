@@ -24,64 +24,6 @@
         vm.page.saveButtonState = "init";
         vm.page.navigation = [];
 
-        /***************************************/
-        /* legacy adaptor 0.9.15 */
-        /***************************************/
-
-        $scope.legacyAdaptor = function (editor) {
-
-            if (editor) {
-
-                if (editor.view === "/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html" ||
-                    editor.view === "/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/LeBlendereditor.html")
-                {
-                    editor.view = "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html";
-                    editor.render = "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml";
-                }
-
-                if (editor.view === "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html")
-                {
-
-                    if (editor.frontView) {
-                        if (!editor.config) {
-                            editor.config = {};
-                        }
-                        editor.config.frontView = editor.frontView;
-                        delete editor.frontView;
-                    }
-
-                    if (editor.config) {
-
-                        if (editor.config.renderInGrid == true) {
-                            editor.config.renderInGrid = "1";
-                        }
-
-                        if (editor.config.renderInGrid == false) {
-                            editor.config.renderInGrid = "0";
-                        }
-
-                        if (editor.config.fixed != undefined &&
-                            editor.config.limit &&
-                            !editor.config.min &&
-                            !editor.config.max) {
-                            if (editor.config.fixed && (editor.config.fixed == true && editor.config.fixed == 1)) {
-                                editor.config.min = editor.config.limit;
-                                editor.config.max = editor.config.limit;
-                            }
-                            else {
-                                editor.config.min = 1;
-                                editor.config.max = editor.config.limit;
-                            }
-                            delete editor.config.fixed;
-                            delete editor.config.limit;
-                        }
-
-                    }
-                }
-            }
-
-        };
-
 
         /***************************************/
         /* Init editor data */
@@ -112,7 +54,6 @@
                 else {
                     _.each($scope.editors, function (editor, editorIndex) {
                         if (editor.alias === editorAlias) {
-                            $scope.legacyAdaptor(editor);
                             angular.extend($scope, {
                                 model: {
                                     value: editor
