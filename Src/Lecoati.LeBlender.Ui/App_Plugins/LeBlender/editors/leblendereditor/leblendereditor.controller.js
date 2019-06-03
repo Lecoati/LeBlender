@@ -19,7 +19,7 @@
                         config: $scope.control.editor.config
                     },
                     submit: function (model) {
-                        $scope.control.value = model;
+                        $scope.control.value = model.value;
                         $scope.setPreview();
                         if (!$scope.control.guid)
                             $scope.control.guid = guid();
