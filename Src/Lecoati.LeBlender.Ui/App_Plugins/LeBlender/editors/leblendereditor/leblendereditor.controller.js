@@ -8,18 +8,22 @@
             {
                 var dialog = {
                     view: '/App_Plugins/LeBlender/editors/leblendereditor/dialogs/parameterconfig.html',
-                    show: true,
                     dialogData: {
                         name: $scope.control.editor.name,
                         icon: $scope.control.editor.icon,
                         value: angular.copy($scope.control.value),
                         config: $scope.control.editor.config
                     },
-                    submit: function (data) {
-                        $scope.control.value = data;
+                    submit: function (model) {
+                        $scope.control.value = model;
                         $scope.setPreview();
                         if (!$scope.control.guid)
                             $scope.control.guid = guid();
+
+                        editorService.close();
+                    },
+                    close: function (model) {
+                        editorService.close();
                     }
                 };
 
