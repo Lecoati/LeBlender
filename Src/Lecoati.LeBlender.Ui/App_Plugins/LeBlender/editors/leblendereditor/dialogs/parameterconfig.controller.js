@@ -222,12 +222,12 @@
             // Clean for fixed config
             if ($scope.model.value.length < $scope.config.min) {
                 while ($scope.model.value.length < $scope.config.min) {
-                    $scope.add();
+                    vm.add();
                 }
             }
             if ($scope.model.value.length > $scope.config.max) {
                 while ($scope.model.value.length > $scope.config.max) {
-                    $scope.remove($scope.model.value.length - 1);
+                    vm.remove($scope.model.value.length - 1);
                 }
             }
             if ($scope.config.max == $scope.config.min) {
