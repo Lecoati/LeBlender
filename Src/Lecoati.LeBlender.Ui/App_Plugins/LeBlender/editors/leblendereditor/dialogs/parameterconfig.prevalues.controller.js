@@ -9,28 +9,9 @@
 		var guidEmpty = "00000000-0000-0000-0000-000000000000";
 		$scope.name = "Property settings";
 
-        /***************************************/
-        /* legacy adaptor 0.9.15 */
-        /***************************************/
-
         var parameter = $scope.model.dialogData.parameter;
 
         console.log("parameter", parameter);
-
-        /***************************************/
-        /* properties */
-        /***************************************/
-
-        // Change property type
-        $scope.change = function () {
-            $scope.model.value.propretyType = $scope.selectedPropertyType;
-            if ($scope.model.value.propretyType.config) {
-                $scope.textAreaconfig = JSON.stringify($scope.model.value.propretyType.config, null, 4);
-            }
-            else {
-                $scope.textAreaconfig = "";
-            }
-        };
 
         // Control if the property is custom 
         $scope.isCustom = function () {
