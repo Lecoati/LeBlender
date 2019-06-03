@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").
-    directive('propertygrideditorwrapper', function ($timeout) {
+    directive('propertygrideditorwrapper', function () {
         return {
             scope: {
                 key: "=",
@@ -19,7 +19,7 @@
                 $scope.model = {
                     value: angular.copy($scope.value.config[$scope.key]),
                     parentValue: $scope.value
-                }
+                };
 
                 $scope.$watch("model.value", function (newValue, oldValue) {
                     $scope.value.config[$scope.key] = $scope.model.value;

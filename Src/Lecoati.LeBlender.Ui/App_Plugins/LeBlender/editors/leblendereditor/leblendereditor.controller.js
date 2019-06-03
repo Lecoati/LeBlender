@@ -99,7 +99,7 @@
         }
         else {
             if (!$scope.control.guid)
-                $scope.control.guid = guid()
+                $scope.control.guid = guid();
         }
 
         $scope.setPreview = function () {

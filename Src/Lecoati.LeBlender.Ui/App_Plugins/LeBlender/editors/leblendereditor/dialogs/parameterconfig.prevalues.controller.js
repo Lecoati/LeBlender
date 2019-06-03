@@ -61,7 +61,7 @@
             else {
                 $scope.textAreaconfig = "";
             }
-        }
+        };
 
         // Control if the property is custom 
         $scope.isCustom = function () {
@@ -71,7 +71,7 @@
             else {
                 return false;
             }
-        }
+        };
 
         // Stringify the current config
         $scope.init = function () {
@@ -95,29 +95,29 @@
                     $scope.model.value.propretyType.config = JSON.parse($scope.textAreaconfig);
                 } catch (exp) {
                     delete $scope.model.value.propretyType.config;
-                };
+                }
             });
 
 		};
 
-		$scope.close = function () {
-			editorService.close();
-		}
+        $scope.close = function () {
+            editorService.close();
+        };
 
         // Save current property
-		$scope.save = function () {
-			if ($scope.model.value && $scope.model.value.name && $scope.model.value.alias) {
-				if (parameter) {
-					parameter.name = $scope.model.value.name;
-					parameter.alias = $scope.model.value.alias;
-					parameter.dataType = $scope.model.value.dataType;
-				}
-				else {
-					$scope.model.submit($scope.model.value);
-				}
-			}
-			editorService.close();
-		}
+        $scope.save = function () {
+            if ($scope.model.value && $scope.model.value.name && $scope.model.value.alias) {
+                if (parameter) {
+                    parameter.name = $scope.model.value.name;
+                    parameter.alias = $scope.model.value.alias;
+                    parameter.dataType = $scope.model.value.dataType;
+                }
+                else {
+                    $scope.model.submit($scope.model.value);
+                }
+            }
+            editorService.close();
+        };
 
         /***************************************/
         /* autoPopulateAlias */
@@ -127,16 +127,16 @@
         $scope.autoPopulateAlias = function (name) {
             var s = name.replace(/[^a-zA-Z0-9\s\.-]+/g, '');
             return s.toCamelCase();
-        }
+        };
 
         // init autoPopulateAlias
         $scope.initAutoPopulateAlias = function () {
             if ($scope.model.value.name === "" && $scope.model.value.name === "") {
                 $scope.$watch("model.value.name", function () {
                     $scope.model.value.alias = $scope.autoPopulateAlias($scope.model.value.name);
-                })
+                });
             }
-        }
+        };
 
         // toCamelCase
         var toCamelCase = function (name) {
@@ -187,7 +187,5 @@
 
         $scope.init();
         $scope.initAutoPopulateAlias();
-
-
 
     });

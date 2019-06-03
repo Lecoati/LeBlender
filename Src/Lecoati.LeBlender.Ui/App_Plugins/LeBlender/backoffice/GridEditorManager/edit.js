@@ -55,7 +55,7 @@
                 }
             }
 
-        }
+        };
 
 
         /***************************************/
@@ -65,11 +65,11 @@
             leBlenderRequestHelper.getGridEditors().then(function (response) {
 
                 // init model
-                $scope.editors  = response.data
+                $scope.editors = response.data;
 
                 // Init model value
                 $scope.model = {
-                    value : {
+                    value: {
                         name: "",
                         alias: "",
                         view: "",
@@ -99,8 +99,7 @@
                 $scope.initAutoPopulateAlias();
                 $scope.loaded = true;
                 $scope.$broadcast('gridEditorLoaded');
-                
-            })
+            });
         };
 
 
@@ -155,7 +154,7 @@
 
             if ($scope.model.value.config) {
 
-                var config = JSON.stringify($scope.model.value.config, null, 4)
+                var config = JSON.stringify($scope.model.value.config, null, 4);
 
                 if (config && config != {}) {
                     $scope.textAreaconfig = config;
@@ -190,22 +189,22 @@
             var sEditor = undefined;
             _.each($scope.propertyGridEditors, function (propertyGridEditor, editorIndex) {
                 if (propertyGridEditor.editor && propertyGridEditor.editor.view === view) {
-                    sEditor = propertyGridEditor
+                    sEditor = propertyGridEditor;
                 }
-            })
+            });
             return sEditor;
-        }
+        };
 
         // set the selected pge
         $scope.setSelectedPropertyGridEditor = function () {
             $scope.selectedPropertyGridEditor = $scope.searchPropertyGridEditor($scope.model.value.view);
-        }
+        };
 
         // init default Editor value for a new pge
         $scope.propertyGridEditorChanged = function () {
             $scope.setSelectedPropertyGridEditor();
             $scope.initEditorFields();
-        }
+        };
 
         // get pge field view
         $scope.getFieldView = function (view) {
@@ -215,7 +214,7 @@
             else {
                 return '/umbraco/views/prevalueeditors/' + view + '.html';
             }
-        }
+        };
 
         // check if current pge is custom 
         $scope.isCustom = function () {
@@ -225,7 +224,7 @@
             else {
                 return true;
             }
-        }
+        };
 
         /***************************************/
         /* autoPopulateAlias */
@@ -233,7 +232,7 @@
 
         // main method for autoPopulateAlias
         $scope.autoPopulateAlias = function (name) {
-            var s = name.replace(/[^a-zA-Z0-9\s\.-]+/g, ''); 
+            var s = name.replace(/[^a-zA-Z0-9\s\.-]+/g, '');
             return s.toCamelCase();
         }
 
@@ -288,7 +287,6 @@
         /***************************************/
 
         // Init
-
         $scope.loaded = false;
 
         leBlenderRequestHelper.getAllPropertyGridEditors().then(function (data) {

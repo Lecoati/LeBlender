@@ -27,9 +27,9 @@
 		}
 
 		// remove a property
-		$scope.remove = function ($index) {
-			$scope.model.value.splice($index, 1);
-		}
+        $scope.remove = function ($index) {
+            $scope.model.value.splice($index, 1);
+        };
 
 		// Init again the render and frontView value
 		$scope.$on('gridEditorSaving', function () {
