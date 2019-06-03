@@ -10,7 +10,6 @@
             var dialog = {
                 view: '/App_Plugins/LeBlender/editors/leblendereditor/Dialogs/parameterconfig.prevalues.html',
                 size: "small",
-                show: true,
                 dialogData: {
                     parameter: parameter,
                     availableDataTypes: $scope.availableDataTypes
@@ -20,6 +19,11 @@
                         $scope.model.value = [];
                     }
                     $scope.model.value.splice($scope.model.value.length + 1, 0, data);
+
+                    editorService.close();
+                },
+                close: function (model) {
+                    editorService.close();
                 }
             };
 
