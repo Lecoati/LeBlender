@@ -3,7 +3,7 @@
 
 
 
-		// Inir render with the value of frontView
+		// Init render with the value of frontView
 		// render have to be always = /App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml
 		$scope.model.parentValue.render = $scope.model.parentValue.config.frontView ? $scope.model.parentValue.config.frontView : "";
 
