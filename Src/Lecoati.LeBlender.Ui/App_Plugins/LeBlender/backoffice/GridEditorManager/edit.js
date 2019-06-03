@@ -3,7 +3,8 @@
 
         var vm = this;
 
-        var infiniteMode = $scope.model && $scope.model.infiniteMode;
+        var create = $routeParams.create;
+        //var infiniteMode = $scope.model && $scope.model.infiniteMode;
 
         vm.save = save;
         vm.close = close;
@@ -26,6 +27,7 @@
         /***************************************/
         /* legacy adaptor 0.9.15 */
         /***************************************/
+
         $scope.legacyAdaptor = function (editor) {
 
             if (editor) {
@@ -84,6 +86,7 @@
         /***************************************/
         /* Init editor data */
         /***************************************/
+
         $scope.getSetting = function (editorAlias) {
 
             vm.page.loading = true;
@@ -171,7 +174,7 @@
                     editormanagerForm.$dirty = false;
                 }
 
-                if ($routeParams.id === -1) {                    
+                if (create) {         
                     editormanagerForm.$dirty = false;
                     contentEditingHelper.redirectToCreatedContent($scope.model.value.alias, true);
                 }
@@ -198,23 +201,9 @@
             }
         };
 
-        // open icon picker
-        //$scope.openIconPicker = function () {
-        //    var dialog = editorService.iconPicker({
-        //        show: true,
-        //        callback: function (data) {
-        //            $scope.model.value.icon = data;
-        //        }
-        //    });
-        //};
-
-
         /***************************************/
         /* property grid editor */
         /***************************************/
-
-        //// init pge
-        //$scope.propertyGridEditors = $scope.dialogData.propertyGridEditors;
 
         // search a pge by view
         $scope.searchPropertyGridEditor = function (view) {
@@ -257,16 +246,6 @@
                 return true;
             }
         };
-
-        /***************************************/
-        /* autoPopulateAlias */
-        /***************************************/
-
-        // main method for autoPopulateAlias
-        $scope.autoPopulateAlias = function (name) {
-            var s = name.replace(/[^a-zA-Z0-9\s\.-]+/g, '');
-            return s.toCamelCase();
-        };
         
         $scope.configChanged = function (textAreaconfig) {
             try {
@@ -277,32 +256,6 @@
             {
                 console.error("Could not parse json", e);
             }
-        };
-
-        // toCamelCase
-        var toCamelCase = function (name) {
-            var s = name.toPascalCase();
-            if ($.trim(s) == "")
-                return "";
-            if (s.length > 1)
-                s = s.substr(0, 1).toLowerCase() + s.substr(1);
-            else
-                s = s.toLowerCase();
-            return s;
-        };
-
-        // toPascalCase
-        var toPascalCase = function (name) {
-            var s = "";
-            angular.each($.trim(name).split(/[\s\.-]+/g), function (val, idx) {
-                if ($.trim(val) == "")
-                    return;
-                if (val.length > 1)
-                    s += val.substr(0, 1).toUpperCase() + val.substr(1);
-                else
-                    s += val.toUpperCase();
-            });
-            return s;
         };
 
         /***************************************/
