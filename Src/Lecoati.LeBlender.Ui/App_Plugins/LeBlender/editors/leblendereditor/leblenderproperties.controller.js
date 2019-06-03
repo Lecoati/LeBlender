@@ -14,7 +14,9 @@
                     parameter: parameter,
                     availableDataTypes: $scope.availableDataTypes
                 },
-                submit: function (data) {
+                submit: function (model) {
+                    console.log("model", model);
+
                     if (!$scope.model.value) {
                         $scope.model.value = [];
                     }

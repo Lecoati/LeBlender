@@ -1,13 +1,14 @@
-<div class="list-panel" ng-controller="LeBlender.Dialog.Parameterconfig.Controller">
+<div class="list-panel" ng-controller="LeBlender.Dialog.Parameterconfig.Controller as vm">
 
     <umb-editor-view>
 
-		<umb-editor-header name="name"
-						    icon="icon"
-						    name-locked="true"
-						    hide-alias="true"
-                            hide-icon="true"
-						    hide-description="true">
+		<umb-editor-header
+            name="name"
+			icon="icon"
+			name-locked="true"
+			hide-alias="true"
+            hide-icon="true"
+			hide-description="true">
 		</umb-editor-header>
 
         <umb-editor-container class="form-horizontal" id="blender-grid-editor-parameter">
@@ -44,14 +45,14 @@
 							button-style="link"
 							label-key="general_close"
 							shortcut="esc"
-							action="close()">
+							action="vm.close()">
 				</umb-button>
 				<umb-button alias="submit"
 							type="button"
 							    button-style="success"
 							    label-key="general_submit"
 							    state="vm.saveButtonState"
-							    action="save()">
+							    action="vm.save()">
 				    </umb-button>
 			    </umb-editor-footer-content-right>
 		    </umb-editor-footer>

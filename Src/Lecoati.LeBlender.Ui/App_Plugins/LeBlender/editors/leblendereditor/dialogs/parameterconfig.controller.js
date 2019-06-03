@@ -1,6 +1,11 @@
 ﻿angular.module("umbraco").controller("LeBlender.Dialog.Parameterconfig.Controller",
     function ($scope, assetsService, $timeout, leBlenderRequestHelper, umbPropEditorHelper, editorService) {
 
+        var vm = this;
+
+        vm.save = save;
+        vm.close = close;
+
 		var dialogData = $scope.model.dialogData;
 		$scope.submit = $scope.model.submit;
 
@@ -259,7 +264,7 @@
 			editorService.close();
     	}
 
-		$scope.close = function () {
+        function close() {
 			editorService.close();
 		}
 
