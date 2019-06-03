@@ -11,13 +11,14 @@
 
         if ($scope.dialogData.editor) {
 
-            if ($scope.dialogData.editor.view == "/App_Plugins/LeBlender/core/LeBlendereditor.html") {
+            if ($scope.dialogData.editor.view === "/App_Plugins/LeBlender/core/LeBlendereditor.html")
+            {
                 $scope.dialogData.editor.view = "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html";
-                $scope.dialogData.editor.render = "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml"
+                $scope.dialogData.editor.render = "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml";
             }
 
-            if ($scope.dialogData.editor.view == "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html") {
-
+            if ($scope.dialogData.editor.view === "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html")
+            {
                 if ($scope.dialogData.editor.frontView) {
                     if (!$scope.dialogData.editor.config) {
                         $scope.dialogData.editor.config = {};
@@ -63,35 +64,38 @@
         $scope.preview = "";
 
         $scope.openListParameter = function () {
-            if ($scope.control.editor.config && $scope.control.editor.config.editors ) {
-        		var dialog = editorService.open({
-        		    view: '/App_Plugins/LeBlender/editors/leblendereditor/dialogs/parameterconfig.html',
-        			show: true,
-        			dialogData: {
-						name: $scope.control.editor.name,
-						icon: $scope.control.editor.icon,
-        				value: angular.copy($scope.control.value),
-        				config: $scope.control.editor.config
-        			},
-        			submit: function (data) {
-        				$scope.control.value = data;
-        				$scope.setPreview();
-        				if (!$scope.control.guid)
-        				    $scope.control.guid = guid()
-        			}
-        		});
-        	}
-        }
+            if ($scope.control.editor.config && $scope.control.editor.config.editors)
+            {
+                var dialog = {
+                    view: '/App_Plugins/LeBlender/editors/leblendereditor/dialogs/parameterconfig.html',
+                    show: true,
+                    dialogData: {
+                        name: $scope.control.editor.name,
+                        icon: $scope.control.editor.icon,
+                        value: angular.copy($scope.control.value),
+                        config: $scope.control.editor.config
+                    },
+                    submit: function (data) {
+                        $scope.control.value = data;
+                        $scope.setPreview();
+                        if (!$scope.control.guid)
+                            $scope.control.guid = guid();
+                    }
+                };
+
+                editorService.open(dialog);
+            }
+        };
 
         var guid = function () {
             function s4() {
                 return Math.floor((1 + Math.random()) * 0x10000)
-                  .toString(16)
-                  .substring(1);
+                    .toString(16)
+                    .substring(1);
             }
             return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-              s4() + '-' + s4() + s4() + s4();
-        }
+                s4() + '-' + s4() + s4() + s4();
+        };
 
         if ((!$scope.control.value || $scope.control.value.length == 0) &&
             ($scope.control.editor.config && $scope.control.editor.config.editors && $scope.control.editor.config.editors.length > 0)) {
