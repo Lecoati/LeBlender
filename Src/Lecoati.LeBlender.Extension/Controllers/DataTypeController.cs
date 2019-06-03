@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net.Http;
 using Umbraco.Core.Models;
 using Umbraco.Core.PropertyEditors;
 using Umbraco.Web.Editors;
@@ -41,7 +42,9 @@ namespace Lecoati.LeBlender.Extension.Controllers
             var dataType = Services.DataTypeService.GetDataType(guid);
             if (dataType == null)
             {
-                throw new System.Web.Http.HttpResponseException(System.Net.HttpStatusCode.NotFound);
+				HttpResponseMessage response = new HttpResponseMessage( System.Net.HttpStatusCode.NotFound );
+				response.Content = new StringContent( $"Datatype with Guid {guid} not found." );
+				return response;
             }
             var dataTypeDisplay = AutoMapper.Mapper.Map<IDataType, Umbraco.Web.Models.ContentEditing.DataTypeDisplay>(dataType);
             var propertyEditor = this.propertyEditors[dataTypeDisplay.SelectedEditor];
