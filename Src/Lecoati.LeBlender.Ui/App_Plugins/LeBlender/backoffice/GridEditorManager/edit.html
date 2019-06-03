@@ -5,7 +5,8 @@
     <form name="editormanagerForm"
 	      ng-show="loaded"
 	      ng-submit="vm.save()"
-	      val-form-manager>
+          novalidate
+          val-form-manager>
 
         <umb-editor-view ng-if="!vm.page.loading">
 
@@ -80,13 +81,11 @@
                     </umb-button>
 
                     <umb-button
-                        alias="save"
-                        type="button" 
+                        type="submit" 
                         button-style="success"
                         state="vm.page.saveButtonState"
                         label-key="{{vm.submitButtonKey}}"
-                        shortcut="ctrl+s"
-                        action="vm.save()">
+                        shortcut="ctrl+s">
                     </umb-button>
 
                 </umb-editor-footer-content-right>
