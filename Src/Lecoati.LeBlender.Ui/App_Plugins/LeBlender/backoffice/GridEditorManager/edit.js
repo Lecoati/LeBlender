@@ -1,6 +1,27 @@
 ﻿angular.module("umbraco").controller("leblender.editormanager.edit",
     function ($scope, assetsService, $http, leBlenderRequestHelper, editorService, $routeParams, notificationsService, navigationService, contentEditingHelper, editorState) {
 
+        var vm = this;
+
+        var infiniteMode = $scope.model && $scope.model.infiniteMode;
+
+        vm.save = save;
+        vm.close = close;
+
+        vm.content = {
+            name: "",
+            alias: "",
+            description: "",
+            icon: "icon-settings-alt"
+        };
+
+        vm.labels = {};
+        vm.submitButtonKey = "buttons_save";
+
+        vm.page = {};
+        vm.page.loading = false;
+        vm.page.saveButtonState = "init";
+        vm.page.navigation = [];
 
         /***************************************/
         /* legacy adaptor 0.9.15 */
@@ -8,14 +29,16 @@
         $scope.legacyAdaptor = function (editor) {
 
             if (editor) {
-                                    
-                if (editor.view == "/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html" ||
-                    editor.view == "/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/LeBlendereditor.html") {
+
+                if (editor.view === "/App_Plugins/Lecoati.LeBlender/core/LeBlendereditor.html" ||
+                    editor.view === "/App_Plugins/Lecoati.LeBlender/editors/leblendereditor/LeBlendereditor.html")
+                {
                     editor.view = "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html";
-                    editor.render = "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml"
+                    editor.render = "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml";
                 }
 
-                if (editor.view == "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html") {
+                if (editor.view === "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html")
+                {
 
                     if (editor.frontView) {
                         if (!editor.config) {
@@ -62,6 +85,9 @@
         /* Init editor data */
         /***************************************/
         $scope.getSetting = function (editorAlias) {
+
+            vm.page.loading = true;
+
             leBlenderRequestHelper.getGridEditors().then(function (response) {
 
                 // init model
@@ -77,7 +103,7 @@
                     }
                 };
 
-                if (editorAlias == -1) {
+                if (editorAlias === -1) {
                     $scope.editors.push($scope.model.value);
                 }
                 else {
@@ -96,8 +122,10 @@
 
                 $scope.getConfigAsText();
                 $scope.setSelectedPropertyGridEditor();
-                $scope.initAutoPopulateAlias();
+
                 $scope.loaded = true;
+                vm.page.loading = false;
+
                 $scope.$broadcast('gridEditorLoaded');
             });
         };
@@ -112,12 +140,17 @@
             delete $scope.model.value.config;
             $scope.model.value.render = "";
             $scope.textAreaconfig = "";
+        };
+
+        function close() {
+            if ($scope.model.close) {
+                $scope.model.close($scope.model);
+            }
         }
 
         // save editor values
-        $scope.save = function () {
-
-            var submitPlease = true;
+        function save() {
+            
             if ($scope.model.value) {
                 $scope.$broadcast('gridEditorSaving');
             }
@@ -138,7 +171,7 @@
                     editormanagerForm.$dirty = false;
                 }
 
-                if ($routeParams.id == -1) {                    
+                if ($routeParams.id === -1) {                    
                     editormanagerForm.$dirty = false;
                     contentEditingHelper.redirectToCreatedContent($scope.model.value.alias, true);
                 }
@@ -166,15 +199,14 @@
         };
 
         // open icon picker
-        $scope.openIconPicker = function () {
-            var dialog = editorService.iconPicker({
-                show: true,
-                callback: function (data) {
-                    $scope.model.value.icon = data;
-                }
-            });
-        }
-
+        //$scope.openIconPicker = function () {
+        //    var dialog = editorService.iconPicker({
+        //        show: true,
+        //        callback: function (data) {
+        //            $scope.model.value.icon = data;
+        //        }
+        //    });
+        //};
 
 
         /***************************************/
@@ -234,16 +266,7 @@
         $scope.autoPopulateAlias = function (name) {
             var s = name.replace(/[^a-zA-Z0-9\s\.-]+/g, '');
             return s.toCamelCase();
-        }
-
-        // init autoPopulateAlias
-        $scope.initAutoPopulateAlias = function () {
-            if ($scope.model.value.name === "" && $scope.model.value.name === "") {
-                $scope.$watch("model.value.name", function () {
-                    $scope.model.value.alias = $scope.autoPopulateAlias($scope.model.value.name);
-                })
-            }
-        }
+        };
         
         $scope.configChanged = function (textAreaconfig) {
             try {

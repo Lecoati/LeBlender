@@ -1,30 +1,30 @@
 ﻿angular.module("umbraco").controller("leblenderproperties.controller",
-	function ($scope, $rootScope, assetsService, $http, leBlenderRequestHelper, editorService) {
-
-
+	function ($scope, leBlenderRequestHelper, editorService) {
 
 		// Init render with the value of frontView
 		// render have to be always = /App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml
 		$scope.model.parentValue.render = $scope.model.parentValue.config.frontView ? $scope.model.parentValue.config.frontView : "";
 
-		$scope.openPropertyConfig = function (parameter) {
+        $scope.openPropertyConfig = function (parameter) {
 
-			var dialog = editorService.open({
-				view: '/App_Plugins/LeBlender/editors/leblendereditor/Dialogs/parameterconfig.prevalues.html',
-				show: true,
-				dialogData: {
-					parameter: parameter,
-					availableDataTypes: $scope.availableDataTypes
-				},
-				submit: function (data) {
-					if (!$scope.model.value) {
-						$scope.model.value = [];
-					}
-					$scope.model.value.splice($scope.model.value.length + 1, 0, data);
-				}
-			});
+            var dialog = {
+                view: '/App_Plugins/LeBlender/editors/leblendereditor/Dialogs/parameterconfig.prevalues.html',
+                size: "small",
+                show: true,
+                dialogData: {
+                    parameter: parameter,
+                    availableDataTypes: $scope.availableDataTypes
+                },
+                submit: function (data) {
+                    if (!$scope.model.value) {
+                        $scope.model.value = [];
+                    }
+                    $scope.model.value.splice($scope.model.value.length + 1, 0, data);
+                }
+            };
 
-		}
+            editorService.open(dialog);
+		};
 
 		// remove a property
         $scope.remove = function ($index) {
