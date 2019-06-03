@@ -1,184 +1,187 @@
-﻿
-<form name="editormanagerForm"
-	  ng-controller="leblender.editormanager.edit as vm"
-	  ng-show="loaded"
-	  ng-submit="save()"
-	  val-form-manager>
+﻿<div ng-controller="leblender.editormanager.edit as vm">
 
-    <umb-editor-view ng-if="!vm.page.loading">
+    <umb-load-indicator ng-if="vm.page.loading"></umb-load-indicator>
 
-        <umb-editor-header
-            name="model.value.name"
-            alias="model.value.alias"
-            description="model.value.description"
-            navigation="vm.page.navigation"
-            icon="model.value.icon">
-        </umb-editor-header>
+    <form name="editormanagerForm"
+	      ng-show="loaded"
+	      ng-submit="save()"
+	      val-form-manager>
 
-        <umb-editor-container class="form-horizontal">
+        <umb-editor-view ng-if="!vm.page.loading">
 
-            {{vm.content | json}}
+            <umb-editor-header
+                name="model.value.name"
+                alias="model.value.alias"
+                description="model.value.description"
+                navigation="vm.page.navigation"
+                icon="model.value.icon">
+            </umb-editor-header>
 
-            <!--<div class="editors-document-type-canvas">
-                <umb-editor-sub-views
-                    ng-if="!vm.page.loading"
-                    sub-views="vm.page.navigation"
-                    model="vm.contentType">
-                </umb-editor-sub-views>
-            </div>-->
+            <umb-editor-container class="form-horizontal">
 
-            <umb-box>
-                <umb-box-content>
+                {{vm.content | json}}
 
-                    <umb-control-group label="Grid editor" description="Select a grid editor">
-                        <select ng-change="propertyGridEditorChanged()" ng-options="type.editor.view as type.name for type in propertyGridEditors" ng-model="model.value.view">
-                            <option value="">- - custom - -</option>
-                        </select>
-                    </umb-control-group>
+                <!--<div class="editors-document-type-canvas">
+                    <umb-editor-sub-views
+                        ng-if="!vm.page.loading"
+                        sub-views="vm.page.navigation"
+                        model="vm.contentType">
+                    </umb-editor-sub-views>
+                </div>-->
 
-                    <div ng-show="isCustom()">
-                        <umb-control-group label="View" description="Grid editor view">
-                            <input class="umb-property-editor umb-textstring" type="text" ng-model="model.value.view" required />
+                <umb-box>
+                    <umb-box-content>
+
+                        <umb-control-group label="Grid editor" description="Select a grid editor">
+                            <select ng-change="propertyGridEditorChanged()" ng-options="type.editor.view as type.name for type in propertyGridEditors" ng-model="model.value.view">
+                                <option value="">- - custom - -</option>
+                            </select>
                         </umb-control-group>
-                    </div>
 
-                    <umb-control-group label="Render" description="Optional grid editor render">
-                        <input class="umb-property-editor umb-textstring" type="text" ng-model="model.value.render" />
-                    </umb-control-group>
+                        <div ng-show="isCustom()">
+                            <umb-control-group label="View" description="Grid editor view">
+                                <input class="umb-property-editor umb-textstring" type="text" ng-model="model.value.view" required />
+                            </umb-control-group>
+                        </div>
 
-                    <div ng-show="isCustom()">
-                        <umb-control-group label="Config" description="Optional custom editor config">
-                            <textarea style="min-width: 66.6%; height: 100px;" type="text" ng-change="configChanged(textAreaconfig)" ng-model="textAreaconfig" />
+                        <umb-control-group label="Render" description="Optional grid editor render">
+                            <input class="umb-property-editor umb-textstring" type="text" ng-model="model.value.render" />
                         </umb-control-group>
-                    </div>
 
-                    <div ng-show="selectedPropertyGridEditor.prevalues && selectedPropertyGridEditor.prevalues.fields.length > 0">
-                        <umb-control-group label="{{field.label}}" description="{{field.description}}"
-                                           ng-repeat="field in selectedPropertyGridEditor.prevalues.fields">
-                            <propertygrideditorwrapper value="model.value"
-                                                       key="field.key"
-                                                       view="getFieldView(field.view)"></propertygrideditorwrapper>
-                        </umb-control-group>
-                    </div>
+                        <div ng-show="isCustom()">
+                            <umb-control-group label="Config" description="Optional custom editor config">
+                                <textarea style="min-width: 66.6%; height: 100px;" type="text" ng-change="configChanged(textAreaconfig)" ng-model="textAreaconfig" />
+                            </umb-control-group>
+                        </div>
 
-                </umb-box-content>
-            </umb-box>
+                        <div ng-show="selectedPropertyGridEditor.prevalues && selectedPropertyGridEditor.prevalues.fields.length > 0">
+                            <umb-control-group label="{{field.label}}" description="{{field.description}}"
+                                               ng-repeat="field in selectedPropertyGridEditor.prevalues.fields">
+                                <propertygrideditorwrapper value="model.value"
+                                                           key="field.key"
+                                                           view="getFieldView(field.view)"></propertygrideditorwrapper>
+                            </umb-control-group>
+                        </div>
 
-        </umb-editor-container>
+                    </umb-box-content>
+                </umb-box>
 
-        <umb-editor-footer>
+            </umb-editor-container>
 
-            <umb-editor-footer-content-left>
+            <umb-editor-footer>
 
-                <!--<umb-keyboard-shortcuts-overview
-                    model="vm.page.keyboardShortcutsOverview">
-                </umb-keyboard-shortcuts-overview>-->
+                <umb-editor-footer-content-left>
 
-            </umb-editor-footer-content-left>
+                    <!--<umb-keyboard-shortcuts-overview
+                        model="vm.page.keyboardShortcutsOverview">
+                    </umb-keyboard-shortcuts-overview>-->
 
-            <umb-editor-footer-content-right>
+                </umb-editor-footer-content-left>
 
-                <umb-button
-                    ng-if="model.infiniteMode"
-                    type="button"
-                    button-style="link"
-                    label-key="general_close"
-                    shortcut="esc"
-                    action="vm.close()">
-                </umb-button>
+                <umb-editor-footer-content-right>
 
-                <umb-button
-                    alias="save"
-                    type="button" 
-                    button-style="success"
-                    state="vm.page.saveButtonState"
-                    label-key="{{vm.submitButtonKey}}"
-                    shortcut="ctrl+s"
-                    action="vm.save()">
-                </umb-button>
+                    <umb-button
+                        ng-if="model.infiniteMode"
+                        type="button"
+                        button-style="link"
+                        label-key="general_close"
+                        shortcut="esc"
+                        action="vm.close()">
+                    </umb-button>
 
-            </umb-editor-footer-content-right>
+                    <umb-button
+                        alias="save"
+                        type="button" 
+                        button-style="success"
+                        state="vm.page.saveButtonState"
+                        label-key="{{vm.submitButtonKey}}"
+                        shortcut="ctrl+s"
+                        action="vm.save()">
+                    </umb-button>
 
-        </umb-editor-footer>
+                </umb-editor-footer-content-right>
 
-    </umb-editor-view>
+            </umb-editor-footer>
 
-	<!--<umb-panel>
-		<div class="umb-editor-header" style="margin-top:10px">
-			<div class="flex items-center" style="flex:1">
-				<span title="icon-document" class="umb-panel-header-icon">
-					<i class="icon {{model.value.icon}}" ng-if="model.value.icon"></i>
-				</span>
-				<input type="text" class="umb-editor-header__name-input ng-not-empty" placeholder="Name" ng-model="model.value.name" />
-			</div>
-		</div>
-		<div class="umb-panel-body umb-scrollable row-fluid">
-			<div class="tab-content form-horizontal" style="padding-bottom: 90px">
-				<div class="umb-pane">
+        </umb-editor-view>
 
-					
-					<umb-control-group label="Grid editor" description="Select a grid editor">
-						<select ng-change="propertyGridEditorChanged()" ng-options="type.editor.view as type.name for type in propertyGridEditors" ng-model="model.value.view">
-							<option value="">- - custom - -</option>
-						</select>
-					</umb-control-group>
+	    <!--<umb-panel>
+		    <div class="umb-editor-header" style="margin-top:10px">
+			    <div class="flex items-center" style="flex:1">
+				    <span title="icon-document" class="umb-panel-header-icon">
+					    <i class="icon {{model.value.icon}}" ng-if="model.value.icon"></i>
+				    </span>
+				    <input type="text" class="umb-editor-header__name-input ng-not-empty" placeholder="Name" ng-model="model.value.name" />
+			    </div>
+		    </div>
+		    <div class="umb-panel-body umb-scrollable row-fluid">
+			    <div class="tab-content form-horizontal" style="padding-bottom: 90px">
+				    <div class="umb-pane">
 
 					
-					<umb-control-group label="Grid editor alias" description="">
-						<input class="umb-property-editor umb-textstring" type="text" ng-model="model.value.alias" required />
-					</umb-control-group>
+					    <umb-control-group label="Grid editor" description="Select a grid editor">
+						    <select ng-change="propertyGridEditorChanged()" ng-options="type.editor.view as type.name for type in propertyGridEditors" ng-model="model.value.view">
+							    <option value="">- - custom - -</option>
+						    </select>
+					    </umb-control-group>
 
 					
-					<umb-control-group label="Editor icon" description="">
-						<div class="umbIconDropdownList">
-							<i class="icon {{model.value.icon}}"></i>
-							<a href="#" prevent-default ng-click="openIconPicker()" class="picker-icons">
-								<localize key="general_choose">Choose</localize>...
-							</a>
-						</div>
-					</umb-control-group>
+					    <umb-control-group label="Grid editor alias" description="">
+						    <input class="umb-property-editor umb-textstring" type="text" ng-model="model.value.alias" required />
+					    </umb-control-group>
 
 					
-					<div ng-show="isCustom()">
-						<umb-control-group label="View" description="Grid editor view">
-							<input class="umb-property-editor umb-textstring" type="text" ng-model="model.value.view" required />
-						</umb-control-group>
-					</div>
+					    <umb-control-group label="Editor icon" description="">
+						    <div class="umbIconDropdownList">
+							    <i class="icon {{model.value.icon}}"></i>
+							    <a href="#" prevent-default ng-click="openIconPicker()" class="picker-icons">
+								    <localize key="general_choose">Choose</localize>...
+							    </a>
+						    </div>
+					    </umb-control-group>
 
 					
-					<umb-control-group label="Render" description="Optional grid editor render">
-						<input class="umb-property-editor umb-textstring" type="text" ng-model="model.value.render" />
-					</umb-control-group>
+					    <div ng-show="isCustom()">
+						    <umb-control-group label="View" description="Grid editor view">
+							    <input class="umb-property-editor umb-textstring" type="text" ng-model="model.value.view" required />
+						    </umb-control-group>
+					    </div>
 
 					
-					<div ng-show="isCustom()">
-						<umb-control-group label="Config" description="Optional custom editor config">
-							<textarea style="min-width: 66.6%; height: 100px;" type="text" ng-change="configChanged(textAreaconfig)" ng-model="textAreaconfig" />
-						</umb-control-group>
-					</div>
+					    <umb-control-group label="Render" description="Optional grid editor render">
+						    <input class="umb-property-editor umb-textstring" type="text" ng-model="model.value.render" />
+					    </umb-control-group>
 
 					
-					<div ng-show="selectedPropertyGridEditor.prevalues && selectedPropertyGridEditor.prevalues.fields.length > 0">
-						<umb-control-group label="{{field.label}}" description="{{field.description}}"
-										   ng-repeat="field in selectedPropertyGridEditor.prevalues.fields">
-							<propertygrideditorwrapper value="model.value"
-													   key="field.key"
-													   view="getFieldView(field.view)"></propertygrideditorwrapper>
-						</umb-control-group>
-					</div>
+					    <div ng-show="isCustom()">
+						    <umb-control-group label="Config" description="Optional custom editor config">
+							    <textarea style="min-width: 66.6%; height: 100px;" type="text" ng-change="configChanged(textAreaconfig)" ng-model="textAreaconfig" />
+						    </umb-control-group>
+					    </div>
 
 					
-					<div class="umb-tab-buttons" detect-fold>
-						<div class="btn-group">
-							<button type="submit" data-hotkey="ctrl+s" class="btn btn-success">
-								<localize key="buttons_save">Save</localize>
-							</button>
-						</div>
-					</div>
+					    <div ng-show="selectedPropertyGridEditor.prevalues && selectedPropertyGridEditor.prevalues.fields.length > 0">
+						    <umb-control-group label="{{field.label}}" description="{{field.description}}"
+										       ng-repeat="field in selectedPropertyGridEditor.prevalues.fields">
+							    <propertygrideditorwrapper value="model.value"
+													       key="field.key"
+													       view="getFieldView(field.view)"></propertygrideditorwrapper>
+						    </umb-control-group>
+					    </div>
 
-				</div>
-			</div>
-		</div>
-	</umb-panel>-->
+					
+					    <div class="umb-tab-buttons" detect-fold>
+						    <div class="btn-group">
+							    <button type="submit" data-hotkey="ctrl+s" class="btn btn-success">
+								    <localize key="buttons_save">Save</localize>
+							    </button>
+						    </div>
+					    </div>
 
-</form>
+				    </div>
+			    </div>
+		    </div>
+	    </umb-panel>-->
+
+    </form>
+</div>
