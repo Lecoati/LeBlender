@@ -3,9 +3,11 @@
 
         var vm = this;
 
+        vm.openListParameter = openListParameter;
+
         $scope.preview = "";
 
-        $scope.openListParameter = function () {
+        function openListParameter() {
             if ($scope.control.editor.config && $scope.control.editor.config.editors)
             {
                 var dialog = {
@@ -31,7 +33,7 @@
 
                 editorService.open(dialog);
             }
-        };
+        }
 
         var guid = function () {
             function s4() {
@@ -52,7 +54,7 @@
                 $scope.control.guid = guid();
         }
 
-        $scope.setPreview = function () {
+        function setPreview() {
             if ($scope.control.editor.config
                 && ($scope.control.value || !$scope.control.editor.config.editors || $scope.control.editor.config.editors.length == 0)
                 && $scope.control.editor.config.renderInGrid && $scope.control.editor.config.renderInGrid != "0") {
@@ -61,9 +63,9 @@
 					$scope.allowedPreview = $sce.trustAsHtml($scope.preview);
                 });
             }
-        };
+        }
 
-        $scope.setPreview();
+        setPreview();
 
     	// Load css asset
         assetsService.loadCss("/App_Plugins/LeBlender/views_samples/sample_styles.css");
