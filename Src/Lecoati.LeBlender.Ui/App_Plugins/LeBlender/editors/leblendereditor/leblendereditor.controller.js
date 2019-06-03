@@ -47,7 +47,7 @@
 
         if ((!$scope.control.value || $scope.control.value.length == 0) &&
             ($scope.control.editor.config && $scope.control.editor.config.editors && $scope.control.editor.config.editors.length > 0)) {
-            $scope.openListParameter();
+            openListParameter();
         }
         else {
             if (!$scope.control.guid)
