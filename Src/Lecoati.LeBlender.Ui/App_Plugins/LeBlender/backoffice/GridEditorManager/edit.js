@@ -252,7 +252,7 @@
             }
             catch (e)
             {
-
+                console.error("Could not parse json", e);
             }
         };
 
