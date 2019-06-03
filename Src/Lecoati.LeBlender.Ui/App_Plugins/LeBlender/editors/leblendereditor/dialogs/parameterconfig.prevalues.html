@@ -1,6 +1,6 @@
 <form name="editoreditorForm"
-      ng-controller="LeBlender.Dialog.ParameterConfig.Prevalues.Controller"
-      ng-submit="save()"
+      ng-controller="LeBlender.Dialog.ParameterConfig.Prevalues.Controller as vm"
+      novalidate 
       val-form-manager>
 
     <umb-editor-view>
@@ -53,14 +53,14 @@
                             button-style="link"
                             label-key="general_close"
                             shortcut="esc"
-                            action="close()">
+                            action="vm.close()">
                 </umb-button>
                 <umb-button alias="submit"
                             type="button"
                             button-style="success"
                             label-key="general_submit"
                             state="vm.saveButtonState"
-                            action="save()">
+                            action="vm.submit(model)">
                 </umb-button>
             </umb-editor-footer-content-right>
         </umb-editor-footer>

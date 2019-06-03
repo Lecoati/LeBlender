@@ -1,5 +1,10 @@
 ﻿angular.module("umbraco").controller("LeBlender.Dialog.ParameterConfig.Prevalues.Controller",
-    function ($scope, editorService) {
+    function ($scope, formHelper) {
+
+        var vm = this;
+
+        vm.submit = submit;
+        vm.close = close;
 
 		var guidEmpty = "00000000-0000-0000-0000-000000000000";
 		$scope.name = "Property settings";
@@ -62,26 +67,19 @@
                 }
             });
 
-		};
-
-        $scope.close = function () {
-            editorService.close();
         };
 
-        // Save current property
-        $scope.save = function () {
-            if ($scope.model.value && $scope.model.value.name && $scope.model.value.alias) {
-                if (parameter) {
-                    parameter.name = $scope.model.value.name;
-                    parameter.alias = $scope.model.value.alias;
-                    parameter.dataType = $scope.model.value.dataType;
-                }
-                else {
-                    $scope.model.submit($scope.model.value);
-                }
+        function submit() {
+            if ($scope.model && $scope.model.submit && formHelper.submitForm({ scope: $scope })) {
+                $scope.model.submit($scope.model);
             }
-            editorService.close();
-        };
+        }
+
+        function close() {
+            if ($scope.model && $scope.model.close) {
+                $scope.model.close();
+            }
+        }
 
         /***************************************/
         /* autoPopulateAlias */
