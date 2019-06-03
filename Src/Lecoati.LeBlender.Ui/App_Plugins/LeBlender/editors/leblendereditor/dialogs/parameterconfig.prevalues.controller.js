@@ -131,7 +131,7 @@
 
         // init autoPopulateAlias
         $scope.initAutoPopulateAlias = function () {
-            if ($scope.model.value.name === "" && $scope.model.value.name === "") {
+            if ($scope.model.value.name === "") {
                 $scope.$watch("model.value.name", function () {
                     $scope.model.value.alias = $scope.autoPopulateAlias($scope.model.value.name);
                 });
