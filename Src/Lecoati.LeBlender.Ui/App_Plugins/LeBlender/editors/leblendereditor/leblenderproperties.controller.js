@@ -25,7 +25,7 @@
                     if (!$scope.model.value) {
                         $scope.model.value = [];
                     }
-                    $scope.model.value.splice($scope.model.value.length + 1, 0, data);
+                    $scope.model.value.splice($scope.model.value.length + 1, 0, model);
 
                     editorService.close();
                 },

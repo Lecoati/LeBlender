@@ -3,11 +3,15 @@
 
         var vm = this;
 
-        vm.save = save;
+        vm.submit = submit;
         vm.close = close;
 
+        vm.select = select;
+        vm.remove = remove;
+        vm.add = add;
+
 		var dialogData = $scope.model.dialogData;
-		$scope.submit = $scope.model.submit;
+		//$scope.submit = $scope.model.submit;
 
         angular.extend($scope, {
             name: dialogData.name,
@@ -39,11 +43,11 @@
 
 		$scope.icon = dialogData.icon;
 
-        $scope.select = function (index) {
+        function select(index) {
             $scope.selected = index;
-        };
+        }
 
-        $scope.remove = function (item, $index, $event) {
+        function remove(item, $index, $event) {
 
             if (item === $scope.selected) {
                 if ($index === 0) {
@@ -54,10 +58,9 @@
                 }
             }
             $scope.model.value.splice($index, 1);
+        }
 
-        };
-
-        $scope.add = function () {
+        function add() {
             var newItem = {};
             _.each($scope.config.editors, function (editor, editorIndex) {
                 var newProperty = {
@@ -73,20 +76,20 @@
             });
     		$scope.model.value.splice($scope.model.value.length + 1, 0, newItem);
     		$scope.selected = $scope.model.value[$scope.model.value.length - 1];
-    	};
+    	}
 
-    	$scope.sortableOptions = {
-    		handle: ".icon-navigation",
-    		axis: "y",
-    		delay: 150,
-    		distance: 5,
-    		stop: function (e, ui) {
-    		    ui.item.parents("#blender-grid-editor-parameter").find('.mceNoEditor').each(function () {
+        $scope.sortableOptions = {
+            handle: ".icon-navigation",
+            axis: "y",
+            delay: 150,
+            distance: 5,
+            stop: function (e, ui) {
+    	        ui.item.parents("#blender-grid-editor-parameter").find('.mceNoEditor').each(function () {
     		        tinyMCE.execCommand('mceRemoveEditor', false, $(this).attr('id'));
     		        tinyMCE.execCommand('mceAddEditor', false, $(this).attr('id'));
-    		    });
-    		}
-    	};
+    	        });
+            }
+        };
 
         $scope.searchEditor = function (alias) {
             var sEditor = undefined;
@@ -252,20 +255,26 @@
     		return isValid;
     	};
 		
-        function save() {
-			$scope.$broadcast("formSubmitting");
+        function submit() {
+            //$scope.$broadcast("formSubmitting");
 			
-    		if($scope.isValid()) {
-    			$timeout(function () {
-    				$scope.submit($scope.model.value);
-    			}, 250);	
-			}
+            //if($scope.isValid()) {
+            //    $timeout(function () {
+    	       //     $scope.submit($scope.model.value);
+            //    }, 250);	
+            //}
 
-			editorService.close();
+            //editorService.close();
+
+            if ($scope.model.submit) {
+                $scope.model.submit($scope.model);
+            }
     	}
 
         function close() {
-			editorService.close();
+            if ($scope.model.close) {
+                $scope.model.close();
+            }
 		}
 
     	// Load css asset
