@@ -48,17 +48,13 @@
                     }
                 };
 
-                if (editorAlias === -1) {
+                if (create) {
                     $scope.editors.push($scope.model.value);
                 }
                 else {
                     _.each($scope.editors, function (editor, editorIndex) {
                         if (editor.alias === editorAlias) {
-                            angular.extend($scope, {
-                                model: {
-                                    value: editor
-                                }
-                            });
+							$scope.model.value = editor;
                             navigationService.syncTree({ tree: "GridEditorManager", path: [$scope.model.value.alias], forceReload: false });
                         }
                     });
