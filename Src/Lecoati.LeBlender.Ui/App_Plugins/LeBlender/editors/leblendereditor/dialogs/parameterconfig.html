@@ -1,37 +1,43 @@
-<div class="list-panel" ng-controller="LeBlender.Dialog.Parameterconfig.Controller">
+<div class="list-panel" ng-controller="LeBlender.Dialog.Parameterconfig.Controller as vm">
 
-	<div id="blender-grid-editor-parameter" class="umb-panel">
+    <umb-editor-view>
 
-		<umb-editor-header name="name"
-						   icon="icon"
-						   name-locked="true"
-						   hide-alias="true"
-						   hide-description="true">
+		<umb-editor-header
+            name="name"
+			icon="icon"
+			name-locked="true"
+			hide-alias="true"
+            hide-icon="true"
+			hide-description="true">
 		</umb-editor-header>
 
-		<div class="umb-editor-container umb-panel-body umb-scrollable">
-			<div class="umb-pane">
-				<div class="umb-box">
-					<div ng-if="configLoaded" ui-sortable="sortableOptions" ng-model="model.value">
-						<div class="list list-field" ng-class="{'list-open':selected === item, 'multiple':!(fixed && config.min == 1)}" ng-click="select(item)" ng-repeat="item in model.value track by $index">
+        <umb-editor-container class="form-horizontal" id="blender-grid-editor-parameter">
 
-							<span ng-show="!(fixed && config.min == 1)" class="list-number">
-								{{$index + 1}}
-								<i ng-show="model.value.length > 1" class="icon right icon-navigation"></i>
-								<i ng-show="!fixed && model.value.length > config.min" ng-click=" remove(item, $index);$event.stopPropagation()" class="icon right icon-delete"></i>
-							</span>
-							<umb-control-group label="{{property.$editor.name}}" description="{{property.$editor.description}}"
-											   ng-repeat="property in item | LeBlenderOrderObjectBy:'$order':false">
-								<blender-editor-wrapper property="property" item="item"></blender-editor-wrapper>
-							</umb-control-group>
-						</div>
-					</div>
-					<div ng-show="!fixed && config.max > model.value.length" class="list-add-row">
-						<i ng-click="add()" class="icon right icon-add"></i>
-					</div>
-				</div>
-			</div>
-		</div>
+            <umb-box>
+                <umb-box-content>
+
+                    <div ng-if="configLoaded" ui-sortable="sortableOptions" ng-model="model.value">
+                        <div class="list list-field" ng-class="{'list-open':selected === item, 'multiple':!(fixed && config.min == 1)}" ng-click="vm.select(item)" ng-repeat="item in model.value track by $index">
+
+                            <span ng-show="!(fixed && config.min == 1)" class="list-number">
+                                {{$index + 1}}
+                                <i ng-show="model.value.length > 1" class="icon right icon-navigation"></i>
+                                <i ng-show="!fixed && model.value.length > config.min" ng-click="vm.remove(item, $index);$event.stopPropagation()" class="icon right icon-delete"></i>
+                            </span>
+                            <umb-control-group label="{{property.$editor.name}}" description="{{property.$editor.description}}"
+                                                ng-repeat="property in item | LeBlenderOrderObjectBy:'$order':false">
+                                <blender-editor-wrapper property="property" item="item"></blender-editor-wrapper>
+                            </umb-control-group>
+                        </div>
+                    </div>
+                    <div ng-show="!fixed && config.max > model.value.length" class="list-add-row">
+                        <i ng-click="vm.add()" class="icon right icon-add"></i>
+                    </div>
+
+                </umb-box-content>
+            </umb-box>
+
+        </umb-editor-container>
 
 		<umb-editor-footer>
 			<umb-editor-footer-content-right>
@@ -39,18 +45,16 @@
 							button-style="link"
 							label-key="general_close"
 							shortcut="esc"
-							action="close()">
+							action="vm.close()">
 				</umb-button>
-				<umb-button alias="submit"
-							type="button"
+				<umb-button type="button"
 							button-style="success"
 							label-key="general_submit"
 							state="vm.saveButtonState"
-							action="save()">
-				</umb-button>
+							action="vm.submit(model)">
+				    </umb-button>
 			</umb-editor-footer-content-right>
 		</umb-editor-footer>
 
-	</div>
-
+    </umb-editor-view>
 </div>

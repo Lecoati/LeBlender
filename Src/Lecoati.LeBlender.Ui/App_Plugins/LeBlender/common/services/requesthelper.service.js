@@ -1,13 +1,10 @@
 ﻿angular.module("umbraco").factory("leBlenderRequestHelper",
-    function ($rootScope, $q, $http, $parse, $routeParams, umbRequestHelper) {
+    function ($http, $routeParams, umbRequestHelper) {
 
         var configPath = "/config/grid.editors.config.js";
-        var edidorsConfigPath = "/App_Plugins/LeBlender/config/editors.config.js";
 
         return {
 
-            /*********************/
-            /*********************/
             GetPartialViewResultAsHtmlForEditor: function (control) {
 
                 var view = "grid/editors/base";
@@ -20,23 +17,17 @@
                     transformRequest: function (result) {
                         return $.param(result);
                     }
-                })
+                });
             },
 
-            /*********************/
-            /*********************/
             getGridEditors: function () {
                 return $http.get(configPath + "?" + ((Math.random() * 100) + 1));
             },
 
-            /*********************/
-            /*********************/
             getAllPropertyGridEditors: function () {
                 return umbRequestHelper.resourcePromise($http.get("/umbraco/backoffice/LeBlenderApi/PropertyGridEditor/GetAll"), 'Failed to retrieve datatypes from tree service');
             },
 
-            /*********************/
-            /*********************/
             setGridEditors: function (data) {
 
                 var url = "/umbraco/backoffice/leblender/Helper/SaveEditorConfig";
@@ -52,18 +43,14 @@
 
             },
 
-            /*********************/
-            /*********************/
             getAllDataTypes: function () {
                 return umbRequestHelper.resourcePromise($http.get("/umbraco/backoffice/LeBlenderApi/DataType/GetAll"), 'Failed to retrieve datatypes from tree service');
             },
 
-            /*********************/
-            /*********************/
             getDataType: function (guid) {
                 return umbRequestHelper.resourcePromise($http.get("/umbraco/backoffice/LeBlenderApi/DataType/GetPropertyEditors?guid=" + guid, { cache: true }), 'Failed to retrieve datatype');
-            },
+            }
 
-        }
+        };
 
     });

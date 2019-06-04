@@ -1,10 +1,14 @@
-<div class="list-editor list-editor-{{control.editor.alias}}" ng-click="openListParameter()" ng-controller="LeBlenderEditor.controller">
+<div class="list-editor list-editor-{{control.editor.alias}}" ng-click="vm.openListParameter()" ng-controller="LeBlenderEditor.controller as vm">
 
-    <div ng-if="preview" ng-bind-html="allowedPreview"></div>
-
-    <div class="usky-editor-placeholder preview-LeBlender" ng-hide="preview">
+    <div ng-if="!preview"
+         class="umb-editor-placeholder leblender-editor-placeholder">
         <i class="icon {{control.editor.icon}}"></i>
         <div class="help-text">{{control.editor.name}}</div>
+        <div class="description-text" ng-if="control.editor.description">
+            <small>{{control.editor.description}}</small>
+        </div>
     </div>
+
+    <div ng-if="preview" ng-bind-html="allowedPreview"></div>
 
 </div>

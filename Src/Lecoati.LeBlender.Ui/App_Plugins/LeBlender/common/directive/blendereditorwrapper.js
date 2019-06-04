@@ -22,11 +22,11 @@
                     label: $scope.property.$editor ? angular.copy($scope.property.$editor.name) : "",
                     config: $scope.property.$editor ? angular.copy($scope.property.$editor.propretyType.config) : {},
                     validation: {
-                        mandatory:false
+                        mandatory: false
                     },
                     value: angular.copy($scope.property.value),
                     view: initEditorPath($scope.property)
-                }
+                };
 
                 $scope.validateMandatory = false;
 
