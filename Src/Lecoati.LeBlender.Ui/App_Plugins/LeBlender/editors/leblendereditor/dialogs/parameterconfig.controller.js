@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("LeBlender.Dialog.Parameterconfig.Controller",
-    function ($scope, assetsService, $timeout, leBlenderRequestHelper, umbPropEditorHelper, editorService) {
+    function ($scope, assetsService, $timeout, leBlenderRequestHelper, umbPropEditorHelper) {
 
         var vm = this;
 
@@ -10,20 +10,19 @@
         vm.remove = remove;
         vm.add = add;
 
-		var dialogData = $scope.model.dialogData;
-		//$scope.submit = $scope.model.submit;
+        var dialogData = $scope.model.dialogData;
 
         angular.extend($scope, {
             name: dialogData.name,
-            model: {
-                value: []
-            },
             config:{
                 min: 1,
                 max: 1,
                 editors: []
             }     
         });
+
+        if (!$scope.model.value)
+            $scope.model.value = [];
 
         angular.extend($scope.config,
             dialogData.config);
@@ -256,19 +255,20 @@
     	};
 		
         function submit() {
-            //$scope.$broadcast("formSubmitting");
+
+            $scope.$broadcast("formSubmitting");
 			
-            //if($scope.isValid()) {
-            //    $timeout(function () {
-    	       //     $scope.submit($scope.model.value);
-            //    }, 250);	
-            //}
-
-            //editorService.close();
-
-            if ($scope.model.submit) {
-                $scope.model.submit($scope.model);
+            if($scope.isValid()) {
+                $timeout(function () {
+                    if ($scope.model.submit) {
+                        $scope.model.submit($scope.model);
+                    }
+                }, 250);	
             }
+
+            //if ($scope.model.submit) {
+            //    $scope.model.submit($scope.model);
+            //}
     	}
 
         function close() {
