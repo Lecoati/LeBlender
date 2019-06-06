@@ -91,7 +91,7 @@
         // save editor values
         function save() {
 
-            if (formHelper.submitForm({ scope: $scope, statusMessage: "Saving..." })) {
+            if (formHelper.submitForm({ scope: $scope, formCtrl: this.editormanagerForm, statusMessage: "Saving..." })) {
 
                 if ($scope.model.value) {
                     $scope.$broadcast('gridEditorSaving');
