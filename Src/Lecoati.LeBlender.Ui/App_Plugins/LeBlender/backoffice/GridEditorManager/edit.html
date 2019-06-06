@@ -24,7 +24,7 @@
                     <umb-box-content>
 
                         <umb-control-group label="Grid editor" description="Select a grid editor">
-                            <select ng-change="propertyGridEditorChanged()" ng-options="type.editor.view as type.name for type in propertyGridEditors" ng-model="model.value.view">
+                            <select ng-change="propertyGridEditorChanged()" ng-options="type.editor.view as type.name for type in propertyGridEditors" ng-model="model.value.view" required>
                                 <option value="">- - custom - -</option>
                             </select>
                         </umb-control-group>
