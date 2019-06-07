@@ -92,14 +92,8 @@
               s4() + '-' + s4() + s4() + s4();
         }
 
-        if ((!$scope.control.value || $scope.control.value.length == 0) &&
-            ($scope.control.editor.config && $scope.control.editor.config.editors && $scope.control.editor.config.editors.length > 0)) {
-            $scope.openListParameter();
-        }
-        else {
-            if (!$scope.control.guid)
-                $scope.control.guid = guid()
-        }
+        if (!$scope.control.guid)
+            $scope.control.guid = guid()
 
         $scope.setPreview = function () {
             if ($scope.control.editor.config
