@@ -25,7 +25,7 @@
                         </div>
                         <i ng-show="model.value.length > 1" class="icon icon-navigation handle" style="margin-right: 5px;"></i>
                         <i ng-show="!fixed && model.value.length > config.min" ng-click="vm.showPrompt(item); $event.stopPropagation();" class="icon icon-delete" style="margin-right: 5px;"></i>
-                        <ins class="umb-expansion-panel__expand" ng-show="!fixed && config.max > model.value.length" ng-class="{'icon-navigation-down': !item.propertiesOpen, 'icon-navigation-up': item.propertiesOpen}">&nbsp;</ins>
+                        <ins class="umb-expansion-panel__expand" ng-class="{'icon-navigation-down': !item.propertiesOpen, 'icon-navigation-up': item.propertiesOpen}">&nbsp;</ins>
                         
                         <umb-confirm-action ng-if="item.deletePrompt"
                                             on-confirm="vm.remove(item)"
