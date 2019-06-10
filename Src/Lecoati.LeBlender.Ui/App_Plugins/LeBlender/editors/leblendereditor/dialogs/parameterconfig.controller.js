@@ -50,19 +50,20 @@
             $scope.selected = index;
         }
 
-        function remove(item, $index) {
+        function remove(item, event, index) {
 
             if (item === $scope.selected) {
-                if ($index === 0) {
+                if (index === 0) {
                     $scope.selected = $scope.model.value[1];
                 }
-                else if ($index >= 0) {
-                    $scope.selected = $scope.model.value[$index - 1];
+                else if (index >= 0) {
+                    $scope.selected = $scope.model.value[index - 1];
                 }
             }
-            $scope.model.value.splice($index, 1);
+            $scope.model.value.splice(index, 1);
 
             item.deletePrompt = false;
+            event.stopPropagation();
         }
 
         function add() {
@@ -283,15 +284,17 @@
             }
         }
 
-        function showPrompt(item) {
+        function showPrompt(item, event) {
             item.deletePrompt = true;
+            event.stopPropagation();
         }
 
-        function hidePrompt(item) {
+        function hidePrompt(item, event) {
             item.deletePrompt = false;
+            event.stopPropagation();
         }
 
-    	// Load css asset
-    	assetsService.loadCss("/App_Plugins/LeBlender/editors/leblendereditor/assets/parameterconfig.css");
+        // Load css asset
+        assetsService.loadCss("/App_Plugins/LeBlender/editors/leblendereditor/assets/parameterconfig.css");
 
     });
