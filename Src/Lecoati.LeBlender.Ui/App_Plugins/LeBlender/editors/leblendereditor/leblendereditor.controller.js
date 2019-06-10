@@ -58,7 +58,7 @@
             if ($scope.control.editor.config
                 && ($scope.control.value || !$scope.control.editor.config.editors || $scope.control.editor.config.editors.length == 0)
                 && $scope.control.editor.config.renderInGrid && $scope.control.editor.config.renderInGrid != "0") {
-                leBlenderRequestHelper.GetPartialViewResultAsHtmlForEditor($scope.control).then(function (htmlResult) {
+                leBlenderRequestHelper.getPartialViewResultAsHtmlForEditor($scope.control).then(function (htmlResult) {
                     $scope.preview = htmlResult.data.trim();
                     $scope.allowedPreview = $sce.trustAsHtml($scope.preview);
                 });
