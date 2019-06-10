@@ -15,7 +15,7 @@
 
             <div ng-if="configLoaded" ui-sortable="sortableOptions" ng-model="model.value">
 
-                <div class="umb-expansion-panel" ng-class="{'multiple':!(fixed && config.min == 1)}" ng-repeat="item in model.value track by $index">
+                <div class="umb-expansion-panel" ng-class="{'multiple':!(fixed && config.min == 1)}" ng-repeat="item in model.value track by $id(item)">
 
                     <div class="umb-expansion-panel__header" ng-show="!(fixed && config.min == 1)" ng-click="vm.select(item, $index)">
                         <div class="flex-auto">

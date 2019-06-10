@@ -52,18 +52,24 @@
 
         function remove(item, event, index) {
 
-            if (item === $scope.selected) {
-                if (index === 0) {
-                    $scope.selected = $scope.model.value[1];
+            if (item) {
+                if (item === $scope.selected) {
+                    if (index === 0) {
+                        $scope.selected = $scope.model.value[1];
+                    }
+                    else if (index >= 0) {
+                        $scope.selected = $scope.model.value[index - 1];
+                    }
                 }
-                else if (index >= 0) {
-                    $scope.selected = $scope.model.value[index - 1];
-                }
-            }
-            $scope.model.value.splice(index, 1);
 
-            item.deletePrompt = false;
-            event.stopPropagation();
+                item.deletePrompt = false;
+            }
+
+            if (event) {
+                event.stopPropagation();
+            }
+
+            $scope.model.value.splice(index, 1);
         }
 
         function add() {
@@ -228,12 +234,12 @@
             // Clean for fixed config
             if ($scope.model.value.length < $scope.config.min) {
                 while ($scope.model.value.length < $scope.config.min) {
-                    vm.add();
+                    add();
                 }
             }
             if ($scope.model.value.length > $scope.config.max) {
                 while ($scope.model.value.length > $scope.config.max) {
-                    vm.remove($scope.model.value.length - 1);
+                    remove(null, null, $scope.model.value.length - 1);
                 }
             }
             if ($scope.config.max == $scope.config.min) {
