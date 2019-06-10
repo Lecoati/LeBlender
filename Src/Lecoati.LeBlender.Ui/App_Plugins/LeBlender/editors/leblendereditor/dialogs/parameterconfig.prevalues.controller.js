@@ -3,6 +3,8 @@
 
         var vm = this;
 
+        vm.promptIsVisible = false;
+
         vm.submit = submit;
         vm.close = close;
 
@@ -10,8 +12,6 @@
 		$scope.name = "Property settings";
 
         var parameter = $scope.model.dialogData.parameter;
-
-        console.log("parameter", parameter);
 
         // Control if the property is custom 
         $scope.isCustom = function () {
@@ -119,7 +119,7 @@
         });
 
 		if (parameter)
-			$scope.model.value = parameter;
+            $scope.model.value = parameter;
 
         if (!$scope.model.value) {
             $scope.model.value = {

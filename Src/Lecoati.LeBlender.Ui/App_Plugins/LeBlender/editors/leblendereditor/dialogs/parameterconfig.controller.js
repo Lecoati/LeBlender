@@ -10,6 +10,9 @@
         vm.remove = remove;
         vm.add = add;
 
+        vm.showPrompt = showPrompt;
+        vm.hidePrompt = hidePrompt;
+
         var dialogData = $scope.model.dialogData;
 
         angular.extend($scope, {
@@ -42,11 +45,12 @@
 
 		$scope.icon = dialogData.icon;
 
-        function select(index) {
+        function select(item, index) {
+            item.propertiesOpen = !item.propertiesOpen;
             $scope.selected = index;
         }
 
-        function remove(item, $index, $event) {
+        function remove(item, $index) {
 
             if (item === $scope.selected) {
                 if ($index === 0) {
@@ -57,6 +61,8 @@
                 }
             }
             $scope.model.value.splice($index, 1);
+
+            item.deletePrompt = false;
         }
 
         function add() {
@@ -78,7 +84,7 @@
     	}
 
         $scope.sortableOptions = {
-            handle: ".icon-navigation",
+            handle: ".handle",
             axis: "y",
             delay: 150,
             distance: 5,
@@ -275,7 +281,15 @@
             if ($scope.model.close) {
                 $scope.model.close();
             }
-		}
+        }
+
+        function showPrompt(item) {
+            item.deletePrompt = true;
+        }
+
+        function hidePrompt(item) {
+            item.deletePrompt = false;
+        }
 
     	// Load css asset
     	assetsService.loadCss("/App_Plugins/LeBlender/editors/leblendereditor/assets/parameterconfig.css");

@@ -9,12 +9,6 @@
     cursor:pointer;
 }
 
-#blender-grid-editor-parameter .multiple {
-    border: 1px solid #DBDBDB;
-    padding: 22px 0 5px 0;
-    margin-bottom: 5px;
-}
-
 #blender-grid-editor-parameter .multiple .umb-control-group {
     padding: 0 15px 15px 15px;
 }
@@ -29,52 +23,31 @@
 }
 
 #blender-grid-editor-parameter .list-number {
-    right: 0;
-    left: 0;
-    font-weight: bolder;
-    margin-bottom: 10px;
-    display: block;
+    font-weight: 900;
+    display: inline-block;
     padding: 4px 10px;
     color: #555;
     background: #f8f8f8;
 }
 
-
-#blender-grid-editor-parameter .list-number span {
-    width: 80%;
-    display: inline-block;
-    overflow: hidden;
-    display: inline-block;
-    width: 280px;
-    white-space: nowrap;
-    overflow: hidden !important;
-    text-overflow: ellipsis;
-}
-
-#blender-grid-editor-parameter .list-number i {
-    float:right;
-}
-
-#blender-grid-editor-parameter .list .list-number:hover {
-    background-color:#ebebeb;
-}
-
 #blender-grid-editor-parameter .list-add-row {
-    padding: 5px;
-    color: #aaa;
-    text-align: right;
+    min-height: 86px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px dashed #bbbabf;
+    background-color: transparent;
+    color: #1b264f;
+    font-weight: 700;
+    position: relative;
+    box-shadow: none;
 }
 
-#blender-grid-editor-parameter .list-add-row i {
-    cursor:pointer;
-}
-
-#blender-grid-editor-parameter .list-add-row i:hover {
-    color: #2e8aea;
-}
-
-#blender-grid-editor-parameter .umb-sortable-thumbnails {
-    text-align:center;
+#blender-grid-editor-parameter .list-add-row:hover {
+    color: #2152a3;
+    text-decoration: none;
+    border-color: #2152a3;
 }
 
 #blender-grid-editor-parameter .mce-container,
