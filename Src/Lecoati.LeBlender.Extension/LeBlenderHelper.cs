@@ -217,7 +217,7 @@ namespace Lecoati.LeBlender.Extension
         /// </summary>
         /// <param name="myId"></param>
         /// <returns></returns>
-        internal PublishedContentType GetTargetContentType()
+        internal IPublishedContentType GetTargetContentType()
         {
 			return GetCurrentContent()?.ContentType;
 
