@@ -46,7 +46,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
 				response.Content = new StringContent( $"Datatype with Guid {guid} not found." );
 				return response;
             }
-            var dataTypeDisplay = AutoMapper.Mapper.Map<IDataType, Umbraco.Web.Models.ContentEditing.DataTypeDisplay>(dataType);
+            var dataTypeDisplay = Mapper.Map<IDataType, Umbraco.Web.Models.ContentEditing.DataTypeDisplay>(dataType);
             var propertyEditor = this.propertyEditors[dataTypeDisplay.SelectedEditor];
 
             return new { defaultPreValues = propertyEditor.DefaultConfiguration, alias = propertyEditor.Alias, view = propertyEditor.GetValueEditor().View, preValues = dataTypeDisplay.PreValues };
