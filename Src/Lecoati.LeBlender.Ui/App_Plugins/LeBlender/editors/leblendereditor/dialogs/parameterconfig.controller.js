@@ -256,8 +256,9 @@
 			var isValid = true;
 			
     		_.every($scope.model.value, function (item, itemIndex) {
-    	         _.forEach(item, function (property, propertyIndex) {
-    	            if (!property.$valid) {
+				_.forEach( item, function ( property, propertyIndex ) {
+					var isEditorProperty = property.editorAlias;  // avoid including members like $$cache
+					if ( isEditorProperty && !property.$valid ) {
 						isValid = false;
     					return;
     	            }
