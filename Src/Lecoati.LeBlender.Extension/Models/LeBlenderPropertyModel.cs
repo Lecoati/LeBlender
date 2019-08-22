@@ -30,6 +30,9 @@ namespace Lecoati.LeBlender.Extension.Models
 
         public T GetValue<T>()
         {
+			// if already the requested type, return
+			if (Value is T) return (T) Value;
+
 			var helper = new Helper();
             //var targetContentType = Helper.GetTargetContentType();
             var targetDataType = helper.GetTargetDataTypeDefinition(Guid.Parse(DataTypeGuid));
@@ -42,21 +45,45 @@ namespace Lecoati.LeBlender.Extension.Models
 			var converters = Current.Factory.GetInstance<PropertyValueConverterCollection>().ToArray();
 			foreach (var converter in converters.Where( x => x.IsConverter( propertyType ) ))
 			{
-				// Since the ConvertDataToSource and ConvertSourceToObject methods don't exist anymore,
-				// We skip the code and try to convert the Value property directly.
+				object intermediate = null;
+				// We need to catch the exception without consequences, since we have no IPublishedElement at hand and provide null as parameter.
+				// That might fail in the converter and we can try again with another converter.
+				try
+				{
+					intermediate = converter.ConvertSourceToIntermediate( null, propertyType, Value, false );
+				}
+				catch (Exception)
+				{
+				}
 
-				// Value is not final value type, so try a regular type conversion aswell
-				var convertAttempt = Value.TryConvertTo<T>();
-                if (convertAttempt.Success)
-                    return convertAttempt.Result;
+				if (intermediate == null)
+					continue;
+
+				if (intermediate.GetType() == typeof( T ))
+					return (T) intermediate;
+
+				object targetObject = null;
+
+				try
+				{
+					targetObject = converter.ConvertIntermediateToObject( null, propertyType, PropertyCacheLevel.None, intermediate, false );
+				}
+				catch (Exception)
+				{
+				}
+
+				if (targetObject == null)
+					continue;
+
+				if (typeof( T ).IsAssignableFrom( targetObject.GetType() ))
+					return (T) targetObject;
+
             }
 
-            // if already the requested type, return
-            if (Value is T) return (T)Value;
-
-            // if can convert to requested type, return
-            var convert = Value.TryConvertTo<T>();
-            if (convert.Success) return convert.Result;
+			// Value is not final value type, so try a regular type conversion aswell
+			var convertAttempt = Value.TryConvertTo<T>();
+			if (convertAttempt.Success)
+				return convertAttempt.Result;
 
             return default(T);
 
