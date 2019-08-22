@@ -86,16 +86,16 @@ namespace Lecoati.LeBlender.Extension
 		/// <summary>
 		/// Get Cache expiration 
 		/// </summary>
-		/// <param name="LeBlenderEditorAlias"></param>
+		/// <param name="leBlenderEditorAlias"></param>
 		/// <returns></returns>
-		public int GetCacheExpiration( String LeBlenderEditorAlias )
+		public int GetCacheExpiration( String leBlenderEditorAlias )
 		{
 
 			var result = 0;
 
 			try
 			{
-				var editor = GetLeBlenderGridEditors( true ).FirstOrDefault( r => r.Alias == LeBlenderEditorAlias );
+				var editor = GetLeBlenderGridEditors( true ).FirstOrDefault( r => r.Alias == leBlenderEditorAlias );
 				if (editor.Config.ContainsKey( "expiration" ) && editor.Config["expiration"] != null)
 				{
 					int.TryParse( editor.Config["expiration"].ToString(), out result );
@@ -103,7 +103,7 @@ namespace Lecoati.LeBlender.Extension
 			}
 			catch (Exception ex)
 			{
-				this.logger.Error<Helper>( "Could not read expiration datas", ex );
+				this.logger.Error<Helper>( "Could not read expiration datas for alias " + leBlenderEditorAlias, ex );
 			}
 
 			return result;
