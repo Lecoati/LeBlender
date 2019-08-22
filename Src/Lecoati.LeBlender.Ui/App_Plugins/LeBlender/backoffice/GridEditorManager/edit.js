@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("leblender.editormanager.edit",
-    function ($scope, assetsService, $http, leBlenderRequestHelper, editorService, $routeParams, notificationsService, navigationService, contentEditingHelper, editorState) {
+    function ($scope, $http, $routeParams, leBlenderRequestHelper, assetsService, editorService, notificationsService, navigationService, contentEditingHelper, editorState, formHelper) {
 
         var vm = this;
 
@@ -90,33 +90,36 @@
 
         // save editor values
         function save() {
-            
-            if ($scope.model.value) {
-                $scope.$broadcast('gridEditorSaving');
-            }
 
-            _.each($scope.editors, function (editor, editorIndex) {
-                if (editor.render === "") {
-                    delete editor.render;
-                }
-            });
+            if (formHelper.submitForm({ scope: $scope, formCtrl: this.editormanagerForm, statusMessage: "Saving..." })) {
 
-            leBlenderRequestHelper.setGridEditors($scope.editors).then(function (response) {
-                notificationsService.success("Success", $scope.model.value.name + " has been saved");
-                delete $scope.selectedPropertyGridEditor;
-                $scope.getSetting($scope.model.value.alias);
-                var editormanagerForm = angular.element('form[name=editormanagerForm]').scope().editormanagerForm;
                 if ($scope.model.value) {
-                    $scope.$broadcast('gridEditorSaved');
-                    editormanagerForm.$dirty = false;
+                    $scope.$broadcast('gridEditorSaving');
                 }
 
-                if (create) {         
-                    editormanagerForm.$dirty = false;
-                    contentEditingHelper.redirectToCreatedContent($scope.model.value.alias, true);
-                }
+                _.each($scope.editors, function (editor, editorIndex) {
+                    if (editor.render === "") {
+                        delete editor.render;
+                    }
+                });
 
-            });
+                leBlenderRequestHelper.setGridEditors($scope.editors).then(function (response) {
+                    notificationsService.success("Success", $scope.model.value.name + " has been saved");
+                    delete $scope.selectedPropertyGridEditor;
+                    $scope.getSetting($scope.model.value.alias);
+                    var editormanagerForm = angular.element('form[name=editormanagerForm]').scope().editormanagerForm;
+                    if ($scope.model.value) {
+                        $scope.$broadcast('gridEditorSaved');
+                        editormanagerForm.$dirty = false;
+                    }
+
+                    if (create) {
+                        editormanagerForm.$dirty = false;
+                        contentEditingHelper.redirectToCreatedContent($scope.model.value.alias, true);
+                    }
+
+                });
+            }
 
         }
 

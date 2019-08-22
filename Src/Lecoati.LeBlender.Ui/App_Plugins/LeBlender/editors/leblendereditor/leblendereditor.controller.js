@@ -45,7 +45,7 @@
                 s4() + '-' + s4() + s4() + s4();
         };
 
-        if ((!$scope.control.value || $scope.control.value.length == 0) &&
+        if ((!$scope.control.value || $scope.control.value.length === 0) &&
             ($scope.control.editor.config && $scope.control.editor.config.editors && $scope.control.editor.config.editors.length > 0)) {
             openListParameter();
         }
@@ -54,18 +54,18 @@
                 $scope.control.guid = guid();
         }
 
-        function setPreview() {
+        $scope.setPreview = function () {
             if ($scope.control.editor.config
                 && ($scope.control.value || !$scope.control.editor.config.editors || $scope.control.editor.config.editors.length == 0)
                 && $scope.control.editor.config.renderInGrid && $scope.control.editor.config.renderInGrid != "0") {
-                leBlenderRequestHelper.GetPartialViewResultAsHtmlForEditor($scope.control).then(function (htmlResult) {
-					$scope.preview = htmlResult.data.trim();
-					$scope.allowedPreview = $sce.trustAsHtml($scope.preview);
+                leBlenderRequestHelper.getPartialViewResultAsHtmlForEditor($scope.control).then(function (htmlResult) {
+                    $scope.preview = htmlResult.data.trim();
+                    $scope.allowedPreview = $sce.trustAsHtml($scope.preview);
                 });
             }
-        }
+        };
 
-        setPreview();
+        $scope.setPreview();
 
     	// Load css asset
         assetsService.loadCss("/App_Plugins/LeBlender/views_samples/sample_styles.css");

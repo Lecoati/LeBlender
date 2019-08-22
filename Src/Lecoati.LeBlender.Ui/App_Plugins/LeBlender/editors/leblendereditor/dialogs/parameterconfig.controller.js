@@ -1,5 +1,5 @@
 ﻿angular.module("umbraco").controller("LeBlender.Dialog.Parameterconfig.Controller",
-    function ($scope, assetsService, $timeout, leBlenderRequestHelper, umbPropEditorHelper, editorService) {
+    function ($scope, assetsService, $timeout, leBlenderRequestHelper, umbPropEditorHelper) {
 
         var vm = this;
 
@@ -10,20 +10,22 @@
         vm.remove = remove;
         vm.add = add;
 
-		var dialogData = $scope.model.dialogData;
-		//$scope.submit = $scope.model.submit;
+        vm.showPrompt = showPrompt;
+        vm.hidePrompt = hidePrompt;
+
+        var dialogData = $scope.model.dialogData;
 
         angular.extend($scope, {
             name: dialogData.name,
-            model: {
-                value: []
-            },
             config:{
                 min: 1,
                 max: 1,
                 editors: []
             }     
         });
+
+        if (!$scope.model.value)
+            $scope.model.value = [];
 
         angular.extend($scope.config,
             dialogData.config);
@@ -43,21 +45,31 @@
 
 		$scope.icon = dialogData.icon;
 
-        function select(index) {
+        function select(item, index) {
+            item.propertiesOpen = !item.propertiesOpen;
             $scope.selected = index;
         }
 
-        function remove(item, $index, $event) {
+        function remove(item, event, index) {
 
-            if (item === $scope.selected) {
-                if ($index === 0) {
-                    $scope.selected = $scope.model.value[1];
+            if (item) {
+                if (item === $scope.selected) {
+                    if (index === 0) {
+                        $scope.selected = $scope.model.value[1];
+                    }
+                    else if (index >= 0) {
+                        $scope.selected = $scope.model.value[index - 1];
+                    }
                 }
-                else if ($index >= 0) {
-                    $scope.selected = $scope.model.value[$index - 1];
-                }
+
+                item.deletePrompt = false;
             }
-            $scope.model.value.splice($index, 1);
+
+            if (event) {
+                event.stopPropagation();
+            }
+
+            $scope.model.value.splice(index, 1);
         }
 
         function add() {
@@ -79,7 +91,7 @@
     	}
 
         $scope.sortableOptions = {
-            handle: ".icon-navigation",
+            handle: ".handle",
             axis: "y",
             delay: 150,
             distance: 5,
@@ -222,12 +234,12 @@
             // Clean for fixed config
             if ($scope.model.value.length < $scope.config.min) {
                 while ($scope.model.value.length < $scope.config.min) {
-                    vm.add();
+                    add();
                 }
             }
             if ($scope.model.value.length > $scope.config.max) {
                 while ($scope.model.value.length > $scope.config.max) {
-                    vm.remove($scope.model.value.length - 1);
+                    remove(null, null, $scope.model.value.length - 1);
                 }
             }
             if ($scope.config.max == $scope.config.min) {
@@ -256,28 +268,39 @@
     	};
 		
         function submit() {
-            //$scope.$broadcast("formSubmitting");
+
+            $scope.$broadcast("formSubmitting");
 			
-            //if($scope.isValid()) {
-            //    $timeout(function () {
-    	       //     $scope.submit($scope.model.value);
-            //    }, 250);	
-            //}
-
-            //editorService.close();
-
-            if ($scope.model.submit) {
-                $scope.model.submit($scope.model);
+            if($scope.isValid()) {
+                $timeout(function () {
+                    if ($scope.model.submit) {
+                        $scope.model.submit($scope.model);
+                    }
+                }, 250);	
             }
+
+            //if ($scope.model.submit) {
+            //    $scope.model.submit($scope.model);
+            //}
     	}
 
         function close() {
             if ($scope.model.close) {
                 $scope.model.close();
             }
-		}
+        }
 
-    	// Load css asset
-    	assetsService.loadCss("/App_Plugins/LeBlender/editors/leblendereditor/assets/parameterconfig.css");
+        function showPrompt(item, event) {
+            item.deletePrompt = true;
+            event.stopPropagation();
+        }
+
+        function hidePrompt(item, event) {
+            item.deletePrompt = false;
+            event.stopPropagation();
+        }
+
+        // Load css asset
+        assetsService.loadCss("/App_Plugins/LeBlender/editors/leblendereditor/assets/parameterconfig.css");
 
     });

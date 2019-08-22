@@ -5,7 +5,7 @@
 
         return {
 
-            GetPartialViewResultAsHtmlForEditor: function (control) {
+            getPartialViewResultAsHtmlForEditor: function (control) {
 
                 var view = "grid/editors/base";
                 var url = "/umbraco/backoffice/leblender/Helper/GetPartialViewResultAsHtmlForEditor";
