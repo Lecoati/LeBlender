@@ -66,7 +66,11 @@ namespace Lecoati.LeBlender.Extension
         /// <returns></returns>
         public LeBlenderModel DeserializeBlenderModel(dynamic model)
         {
-            return JsonConvert.DeserializeObject<LeBlenderModel>(model.ToString());
+			// We need to remove the propertiesOpen value, because this causes the deserialization to crash.
+			// It's only needed for editing, so it's not necessary to have it in the model.
+			// To keep the removal simple: model is always a JObject, so we are sure that ToString always delivers the exact format.
+			// Otherwise we would need to analyze the JObject and remove propertiesOpen in every item.
+			return JsonConvert.DeserializeObject<LeBlenderModel>(model.ToString().Replace( "\"propertiesOpen\": true", "" ) );
         }
 
         /// <summary>
