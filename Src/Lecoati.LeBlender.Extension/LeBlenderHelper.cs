@@ -70,7 +70,7 @@ namespace Lecoati.LeBlender.Extension
 			// It's only needed for editing, so it's not necessary to have it in the model.
 			// To keep the removal simple: model is always a JObject, so we are sure that ToString always delivers the exact format.
 			// Otherwise we would need to analyze the JObject and remove propertiesOpen in every item.
-			return JsonConvert.DeserializeObject<LeBlenderModel>(model.ToString().Replace( "\"propertiesOpen\": true", "" ) );
+			return JsonConvert.DeserializeObject<LeBlenderModel>(model.ToString());
         }
 
         /// <summary>
