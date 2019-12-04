@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Linq;
 using System.Net.Http;
 using Umbraco.Core.Models;
 using Umbraco.Core.PropertyEditors;
 using Umbraco.Web.Editors;
+using Umbraco.Web.Models.ContentEditing;
 using Umbraco.Web.Mvc;
+using Umbraco.Web.PropertyEditors;
 
 namespace Lecoati.LeBlender.Extension.Controllers
 {
@@ -49,7 +52,26 @@ namespace Lecoati.LeBlender.Extension.Controllers
             var dataTypeDisplay = Mapper.Map<IDataType, Umbraco.Web.Models.ContentEditing.DataTypeDisplay>(dataType);
             var propertyEditor = this.propertyEditors[dataTypeDisplay.SelectedEditor];
 
-            return new { defaultPreValues = propertyEditor.DefaultConfiguration, alias = propertyEditor.Alias, view = propertyEditor.GetValueEditor().View, preValues = dataTypeDisplay.PreValues };
+            object configuration = dataTypeDisplay.PreValues;
+			// Quick Hack for a Bug in Umbraco, which doesn't deliver the "multiPicker" property in case of MultiNodeTreePicker.
+            if (propertyEditor.Alias == "Umbraco.MultiNodeTreePicker")
+            {
+                var originConfig = dataType.Configuration as MultiNodePickerConfiguration;
+                JArray jArr = JArray.FromObject(configuration);
+
+                if (originConfig.MaxNumber != 1)
+                {
+                    jArr.Add(JObject.FromObject(new DataTypeConfigurationFieldDisplay
+                    {
+                        Key = "multiPicker",
+                        Value = true
+                    }));
+                }
+                              
+                configuration = jArr;
+            }
+
+            return new { defaultPreValues = propertyEditor.DefaultConfiguration, alias = propertyEditor.Alias, view = propertyEditor.GetValueEditor().View, preValues = configuration};
 
         }
 
