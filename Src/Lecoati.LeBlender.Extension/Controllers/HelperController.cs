@@ -74,10 +74,11 @@ namespace Lecoati.LeBlender.Extension.Controllers
 				appCaches.RequestCache.ClearByKey( "LeBlenderGridEditorsList" );
 
 				appCaches.RuntimeCache.ClearByRegex( @"LEBLENDEREDITOR\.*" );
+                appCaches.RuntimeCache.ClearByRegex( @"Leblender.EditorConfig\.*" );
 
-				// See GridEditorsConfig.cs in Umbraco.Core
-				// We need to invalidate the cache, in order to load the change configs during next use.
-				appCaches.RuntimeCache.ClearByKey( "Umbraco.Core.Configuration.Grid.GridEditorsConfig.Editors" );
+                // See GridEditorsConfig.cs in Umbraco.Core
+                // We need to invalidate the cache, in order to load the change configs during next use.
+                appCaches.RuntimeCache.ClearByKey( "Umbraco.Core.Configuration.Grid.GridEditorsConfig.Editors" );
 
 				return new { Message = "Saved" };
 			}
