@@ -68,12 +68,5 @@ namespace Lecoati.LeBlender.Extension.Events
 		public void Terminate()
 		{
 		}
-
-		// We don't know, what this is for, so we just disable the code.
-        //private void PublishingStrategy_Published(IPublishingStrategy sender, Umbraco.Core.Events.PublishEventArgs<Umbraco.Core.Models.IContent> e)
-        //{
-        //    ApplicationContext.Current.ApplicationCache.RuntimeCache.ClearCacheByKeySearch("LEBLENDEREDITOR");
-        //}
-
     }
 }

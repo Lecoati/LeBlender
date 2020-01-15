@@ -2,16 +2,16 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Lecoati.LeBlender</id>
-        <version>2.0.0-beta6</version>
+        <version>2.0.0-beta8</version>
         <title>Umbraco LeBlender</title>
-        <authors>LECOATI</authors>
-        <owners>LECOATI</owners>
+        <authors>Mirko Matytschak</authors>
+        <owners>FORMFAKTEN</owners>
         <projectUrl>https://github.com/mirkomaty/LeBlender/tree/umbraco-v8</projectUrl>
         <description>Umbraco LeBlender</description>
         <summary>Umbraco LeBlender</summary>
         <language>en-US</language>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <tags>LECOATI</tags>
+        <tags>LeBlender</tags>
 		<iconUrl>http://lecoati.com/images/Logo_BlenderGrid.png</iconUrl>
 		<dependencies />
     </metadata>

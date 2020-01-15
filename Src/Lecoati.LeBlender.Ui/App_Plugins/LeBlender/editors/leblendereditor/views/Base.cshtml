@@ -1,4 +1,7 @@
-﻿@using System.Web.Mvc;
+﻿@using Umbraco.Core;
+@using Umbraco.Core.Composing;
+@using Umbraco.Core.Cache;
+@using System.Web.Mvc;
 @using System.Web.Mvc.Html;
 @using Lecoati.LeBlender.Extension;
 @using Lecoati.LeBlender.Extension.Models;
@@ -7,49 +10,54 @@
 
 @try
 {
-	var helper = new Helper();
-	string guid = Model.guid != null && Model.guid.Value != null ? Model.guid.Value.ToString() : "";
-	LeBlenderModel blenderModel = helper.DeserializeBlenderModel( Model );
+    var helper = new Helper();
+    string guid = Model.guid != null && Model.guid.Value != null ? Model.guid.Value.ToString() : "";
+    LeBlenderModel blenderModel = helper.DeserializeBlenderModel( Model );
+    var editorAlias = (string)Model.editor.alias;
+    var gridEditorConfig = Current.AppCaches.RuntimeCache.GetCacheItem( "Leblender.EditorConfig." + editorAlias, () =>
+    {
+        var gridConfig = Current.Configs.Grids().EditorsConfig;
+        return gridConfig.Editors.FirstOrDefault( ge => ge.Alias == editorAlias );
+    }, TimeSpan.FromMinutes( 15 ) );
 
-	var frontView = Model.editor.config == null || Model.editor.config.frontView == null || String.IsNullOrEmpty( Model.editor.config.frontView.Value ) ?
-		"" : Model.editor.config.frontView.Value;
+    var frontView = gridEditorConfig?.Config["frontView"] ?? editorAlias;
 
-	ViewDataDictionary datas = new ViewDataDictionary() { { "editorAlias", Model.editor.alias }, { "frontView", frontView } };
-	if (Model.contentId != null)
-	{
-		datas.Add( "contentId", (int)Model.contentId );
-	}
+    ViewDataDictionary datas = new ViewDataDictionary() { { "editorAlias", editorAlias }, { "frontView", frontView } };
+    if (Model.contentId != null)
+    {
+        datas.Add( "contentId", (int)Model.contentId );
+    }
 
-	var keys = ViewData.Keys.Where( k =>
-		 !datas.Keys.Any( x => x == k )
-	);
-	// Add the keys from ViewData to the new Dictionary
-	foreach (var key in keys)
-	{
-		datas.Add( key, ViewData[key] );
-	}
+    var keys = ViewData.Keys.Where( k =>
+         !datas.Keys.Any( x => x == k )
+    );
+    // Add the keys from ViewData to the new Dictionary
+    foreach (var key in keys)
+    {
+        datas.Add( key, ViewData[key] );
+    }
 
-	int cacheExpiration = helper.GetCacheExpiration( Model.editor.alias.ToString() );
+    int cacheExpiration = helper.GetCacheExpiration( editorAlias );
 
-	if (cacheExpiration > 0 && helper.IsFrontEnd())
-	{
-		<text>
-			@LeBlenderPartialCacher.LeBlenderCachedPartial( Html, "/App_Plugins/LeBlender/editors/leblendereditor/views/LeBlender.cshtml", blenderModel, cacheExpiration, guid, datas )
-		</text>
-	}
-	else
-	{
-		<text>
-			@Html.Partial( "/App_Plugins/LeBlender/editors/leblendereditor/views/LeBlender.cshtml", blenderModel, datas )
-		</text>
-	}
+    if (cacheExpiration > 0 && helper.IsFrontEnd())
+    {
+        <text>
+            @LeBlenderPartialCacher.LeBlenderCachedPartial( Html, "/App_Plugins/LeBlender/editors/leblendereditor/views/LeBlender.cshtml", blenderModel, cacheExpiration, guid, datas )
+        </text>
+    }
+    else
+    {
+        <text>
+            @Html.Partial( "/App_Plugins/LeBlender/editors/leblendereditor/views/LeBlender.cshtml", blenderModel, datas )
+        </text>
+    }
 
 }
 catch (Exception ex)
 {
-	if (!new Helper().IsFrontEnd())
-	{
-		<p class="red">Something went wrong with this editor, below is the exception detail:</p>
-	}
-	<p class="leblender-exception">@ex.ToString()</p>
+    if (!new Helper().IsFrontEnd())
+    {
+        <p class="red">Something went wrong with this editor, below is the exception detail:</p>
+    }
+    <p class="leblender-exception">@ex.ToString()</p>
 }

@@ -99,10 +99,15 @@ namespace Lecoati.LeBlender.Extension
 
 			try
 			{
-				var editor = GetLeBlenderGridEditors( true ).FirstOrDefault( r => r.Alias == leBlenderEditorAlias );
-				if (editor.Config.ContainsKey( "expiration" ) && editor.Config["expiration"] != null)
+                var gridEditorConfig = Current.AppCaches.RuntimeCache.GetCacheItem( "Leblender.EditorConfig." + leBlenderEditorAlias, () =>
+                {
+                    var gridConfig = Current.Configs.Grids().EditorsConfig;
+                    return gridConfig.Editors.FirstOrDefault( ge => ge.Alias == leBlenderEditorAlias );
+                }, TimeSpan.FromMinutes( 15 ) );
+                var config = gridEditorConfig.Config;
+				if (config.ContainsKey( "expiration" ) && config["expiration"] != null)
 				{
-					int.TryParse( editor.Config["expiration"].ToString(), out result );
+					int.TryParse( config["expiration"].ToString(), out result );
 				}
 			}
 			catch (Exception ex)
@@ -224,29 +229,6 @@ namespace Lecoati.LeBlender.Extension
         internal IPublishedContentType GetTargetContentType()
         {
 			return GetCurrentContent()?.ContentType;
-
-			// This is the old code. We don't understand the case with "doctype".
-
-            //if (umbracoContext.IsFrontEndUmbracoRequest)
-            //{
-            //    return this.umbracoHelper.AssignedContentItem.ContentType;
-            //}
-            //else if (!string.IsNullOrEmpty(HttpContext.Current.Request["doctype"]))
-            //{
-            //    return PublishedContentType.Get(PublishedItemType.Content, HttpContext.Current.Request["doctype"]);
-            //}
-            //else
-            //{
-            //    int contenId = int.Parse(HttpContext.Current.Request["id"]);
-            //    return (PublishedContentType)appCaches.RuntimeCache.GetCacheItem(
-            //        "LeBlender_GetTargetContentType_" + contenId,
-            //        () =>
-            //        {
-            //            var services = ApplicationContext.Current.Services;
-            //            var contentType = PublishedContentType.Get(PublishedItemType.Content, services.ContentService.GetById(contenId).ContentType.Alias);
-            //            return contentType;
-            //        });
-            //}
         }
 
         /// <summary>
