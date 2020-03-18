@@ -24,49 +24,20 @@ Its main features are:
 -Custom controllers can be used
 
 ### See it in action
-[![See it in action](https://i.imgur.com/2IO4jCF.png)](https://www.youtube.com/watch?v=gh_3bP8C28g)
+
 
 ## How to install
-Download LeBender Package
-Install it through the Umbraco Backend
-Documentation: LeBlender_0.9.x.pdf
-Nuget package: https://www.nuget.org/packages/Lecoati.LeBlender/
-Upgrade to 1.0.0
-We have tried to make LeBlender 1.0.0 compatible with previous versions.
-Nevertheless there are some breaking changes regarding the LeBlender editor. The most relevant is that the default LeBlender model name has changed. On the previous version it was called BlenderModel, it has been changed for LeBlenderModel.
-Follow those steps to upgrade your project
-Remove LeBlender Datatype
-Uninstall previous version (delete "/App_plugin/Lecoati.LeBlender/" folder and "/bin/Lecoati.leblender.Extension.dll")
-Install LeBlender 1.0.0
-Change your BlenderModel references to LeBlenderModel
-Save and publish the content which uses the LeBlender editor
+- Checkout the umbraco-v8 branch. 
+- Recompile LeBlender.Extensions. The other projects will give you compiler errors which can be ignored.
+- Open a console to the directory your repo\build. Edit build.bat and remove the lines, which will push the package to nuget.
+- Execute build.bat.
+- You have now a package which you can copy to a package source. Package sources can be a local directory, network share or a nuget implementation on a web server.
+- Now you can install the package in your solutions.
 
 ### Change logs
 
-#### 1.0.8.4
-- Fix null reference exception if property doesn't exist
+#### 2.1
+- Support for Element Content Types.
 
-#### 1.0.8
-- Important Bug fixed: LeBlender Helper surfase controller return 404 since umb 7.2.7+
-- Numeric property returns 0
-- Dropdown can't be deselected
-- Broadcast formSubmitting on closing the right side bar
-
-#### 1.0.5 / 1.0.6 / 1.0.7
-- Bugs fixing
-
-#### 1.0.3 / 1.0.4
-- Property value converter
-- Bugs fixing
-
-#### 1.0.2
-- Nuget package fixed with the right plugin path
-
-#### 1.0.1
-- Bug fixed: remove empty render property
-
-#### 1.0.0
-- LeBlender as a tree
-- LeBlender editor manager extension
-- LeBlender editor caching
-- LeBlender editor custom controller
+#### 1.x
+- See the change logs in the source repository https://github.com/Lecoati/LeBlender
