@@ -1,38 +1,43 @@
 ﻿angular.module("umbraco").controller("LeBlenderEditor.controller",
-    function ($scope, assetsService, $sce, editorService, leBlenderRequestHelper) {
+    function ($scope, $http, assetsService, $sce, editorService, leBlenderRequestHelper) {
 
         var vm = this;
 
         vm.openListParameter = openListParameter;
 
-        $scope.preview = "";
+        $scope.preview = "";        
 
         function openListParameter() {
-            if ($scope.control.editor.config && $scope.control.editor.config.editors)
-            {
-                var dialog = {
-                    view: '/App_Plugins/LeBlender/editors/leblendereditor/dialogs/parameterconfig.html',
-                    dialogData: {
-                        name: $scope.control.editor.name,
-                        icon: $scope.control.editor.icon,
-                        value: angular.copy($scope.control.value),
-                        config: $scope.control.editor.config
-                    },
-                    submit: function (model) {
-                        $scope.control.value = model.value;
-                        $scope.setPreview();
-                        if (!$scope.control.guid)
-                            $scope.control.guid = guid();
+            $http.get("/umbraco/backoffice/LeBlenderApi/PropertyGridEditor/GetConfigForElementType?key=" + $scope.control.editor.config.documentType).then(function (response) {
+                var data = response.data;
+                if (data && data.length)
+                    $scope.control.editor.config.editors = data;
 
-                        editorService.close();
-                    },
-                    close: function (model) {
-                        editorService.close();
-                    }
-                };
+                if ($scope.control.editor.config && $scope.control.editor.config.editors) {
+                    var dialog = {
+                        view: '/App_Plugins/LeBlender/editors/leblendereditor/dialogs/parameterconfig.html',
+                        dialogData: {
+                            name: $scope.control.editor.name,
+                            icon: $scope.control.editor.icon,
+                            value: angular.copy($scope.control.value),
+                            config: $scope.control.editor.config
+                        },
+                        submit: function (model) {
+                            $scope.control.value = model.value;
+                            $scope.setPreview();
+                            if (!$scope.control.guid)
+                                $scope.control.guid = guid();
 
-                editorService.open(dialog);
-            }
+                            editorService.close();
+                        },
+                        close: function (model) {
+                            editorService.close();
+                        }
+                    };
+
+                    editorService.open(dialog);
+                }
+            });
         }
 
         var guid = function () {
@@ -46,8 +51,10 @@
         };
 
         if ((!$scope.control.value || $scope.control.value.length === 0) &&
-            ($scope.control.editor.config && $scope.control.editor.config.editors && $scope.control.editor.config.editors.length > 0)) {
+            ($scope.control.editor.config && $scope.control.editor.config.documentType)) {
+
             openListParameter();
+
         }
         else {
             if (!$scope.control.guid)

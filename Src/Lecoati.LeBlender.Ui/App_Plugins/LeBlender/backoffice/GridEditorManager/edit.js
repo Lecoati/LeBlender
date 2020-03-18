@@ -159,6 +159,9 @@
         // set the selected pge
         $scope.setSelectedPropertyGridEditor = function () {
             $scope.selectedPropertyGridEditor = $scope.searchPropertyGridEditor($scope.model.value.view);
+            if ($scope.selectedPropertyGridEditor.alias === 'leblenderEditor') {
+                $scope.model.value.render = "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml";
+            }
         };
 
         // init default Editor value for a new pge

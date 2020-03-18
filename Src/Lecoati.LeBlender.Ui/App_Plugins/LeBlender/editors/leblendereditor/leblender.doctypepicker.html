@@ -1,0 +1,19 @@
+<div id="{{model.alias}}" class="umb-nested-content__doctypepicker" ng-controller="leblender.doctypepicker.controller">
+    <div>
+        <span class="umb-nested-content__placeholder-icon-holder" ng-if="currentType">
+            <i class="umb-nested-content__placeholder-icon {{ currentType.icon }}"></i>
+        </span>
+        <span class="umb-nested-content__placeholder-name" ng-if="currentType">
+            {{ currentType.name }}
+        </span>
+    </div>
+
+    <div>
+        <a title="Change Document Type" ng-if="currentType" ng-click="openElemTypeModal($event)">Change</a>
+
+        <a title="Open Document Type" ng-if="currentType" ng-click="openDocType($event)">Open</a>
+
+        <a title="Select Document Type" ng-click="openElemTypeModal($event)" ng-if="!currentType"><localize key="content_nestedContentAddElementType" >Add element type</localize></a>
+    </div>
+
+</div>

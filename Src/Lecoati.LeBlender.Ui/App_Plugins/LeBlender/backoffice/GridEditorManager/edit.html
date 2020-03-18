@@ -35,9 +35,14 @@
                             </umb-control-group>
                         </div>
 
-                        <umb-control-group label="Render" description="Optional grid editor render">
+                        <umb-control-group ng-if="selectedPropertyGridEditor.alias !== 'leblenderEditor'" label="Render" description="Optional grid editor render">
                             <input class="umb-property-editor umb-textstring" type="text" ng-model="model.value.render" />
                         </umb-control-group>
+
+                        <umb-control-group ng-if="selectedPropertyGridEditor.alias === 'leblenderEditor'" label="Front View" description="View name for rendering">
+                            <input class="umb-property-editor umb-textstring" type="text" ng-model="model.value.config.frontView" />
+                        </umb-control-group>
+
 
                         <div ng-show="isCustom()">
                             <umb-control-group label="Config" description="Optional custom editor config">

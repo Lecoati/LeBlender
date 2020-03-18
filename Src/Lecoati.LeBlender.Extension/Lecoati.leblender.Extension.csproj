@@ -364,6 +364,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>copy $(TargetName).dll "C:\Users\Mirko Matytschak\source\repos\Umbraco854\packages\Lecoati.LeBlender.2.1.0-beta1\lib\net472"
+copy $(TargetName).pdb "C:\Users\Mirko Matytschak\source\repos\Umbraco854\packages\Lecoati.LeBlender.2.1.0-beta1\lib\net472"
+</PostBuildEvent>
+  </PropertyGroup>
   <!--Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" /-->
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
