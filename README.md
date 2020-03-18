@@ -29,9 +29,9 @@ Its main features are:
 ## How to install
 - Checkout the umbraco-v8 branch. 
 - Recompile LeBlender.Extensions. The other projects will give you compiler errors which can be ignored.
-- Open a console to the directory your repo\build. Edit build.bat and remove the lines, which will push the package to nuget.
+- Open a console to the directory "your repo\build". Edit build.bat and remove the lines, which will push the package to nuget.
 - Execute build.bat.
-- You have now a package which you can copy to a package source. Package sources can be a local directory, network share or a nuget implementation on a web server.
+- Now you have a package which can be copied to a package source. Package sources can be a local directory, a network share or a nuget implementation on a web server.
 - Now you can install the package in your solutions.
 
 ### Change logs
