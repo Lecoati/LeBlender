@@ -115,7 +115,7 @@
 
                     if (create) {
                         editormanagerForm.$dirty = false;
-                        contentEditingHelper.redirectToCreatedContent($scope.model.value.alias, true);
+                        window.location = "/umbraco#/settings/GridEditorManager/edit/" + $scope.model.value.alias;
                     }
 
                 });
@@ -159,15 +159,15 @@
         // set the selected pge
         $scope.setSelectedPropertyGridEditor = function () {
             $scope.selectedPropertyGridEditor = $scope.searchPropertyGridEditor($scope.model.value.view);
-            if ($scope.selectedPropertyGridEditor.alias === 'leblenderEditor') {
+            if ($scope.selectedPropertyGridEditor && $scope.selectedPropertyGridEditor.alias === 'leblenderEditor') {
                 $scope.model.value.render = "/App_Plugins/LeBlender/editors/leblendereditor/views/Base.cshtml";
             }
         };
 
         // init default Editor value for a new pge
         $scope.propertyGridEditorChanged = function () {
-            $scope.setSelectedPropertyGridEditor();
             $scope.initEditorFields();
+            $scope.setSelectedPropertyGridEditor();
         };
 
         // get pge field view
