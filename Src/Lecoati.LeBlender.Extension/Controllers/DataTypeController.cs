@@ -14,19 +14,30 @@ namespace Lecoati.LeBlender.Extension.Controllers
     [PluginController("LeBlenderApi")]
     public class DataTypeController : UmbracoAuthorizedJsonController
     {
-		public DataTypeController( PropertyEditorCollection propertyEditors )
-		{
-			this.propertyEditors = propertyEditors;
-		}
+        public DataTypeController( PropertyEditorCollection propertyEditors )
+        {
+            this.propertyEditors = propertyEditors;
+        }
+
+        private readonly PropertyEditorCollection propertyEditors;
+
+        static readonly string[] editorsWithIdType =
+        {
+            "Umbraco.MediaPicker" ,
+            "Umbraco.ContentPicker",
+            "Umbraco.MultiNodeTreePicker",
+            "Umbraco.MemberPicker",
+            "Umbraco.MultiUrlPicker"
+        };
+
 
         // Not allowed datatype because they don't make sense here
-        String[] notAllowed = { "LeBlender", 
+        static readonly string[] notAllowed = { "LeBlender", 
                                 "Umbraco.ListView", 
                                 "Umbraco.Grid", 
                                 "Umbraco.FolderBrowser",
                                 "Umbraco.UploadField", 
                                 "Umbraco.ImageCropper" };
-		private readonly PropertyEditorCollection propertyEditors;
 
 		// Get all datatypes
 		public object GetAll()
@@ -68,6 +79,18 @@ namespace Lecoati.LeBlender.Extension.Controllers
                     }));
                 }
                               
+                configuration = jArr;
+            }
+
+            if ( editorsWithIdType.Contains( propertyEditor.Alias ) )
+            {
+                JArray jArr = JArray.FromObject(configuration);
+                jArr.Add( JObject.FromObject( new DataTypeConfigurationFieldDisplay
+                {
+                    Key = "idType",
+                    Value = "udi"
+                } ) );
+
                 configuration = jArr;
             }
 

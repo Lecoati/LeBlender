@@ -51,8 +51,13 @@ namespace Lecoati.LeBlender.Extension.Events
 						continue;
 					}
 					var container = GetLeblenderContainer();
-					var contentType = new ContentType(container.Id);
-					contentType.Alias = "leblender" + alias;
+					var ctalias = "leblender" + alias;
+					var contentType = contentTypeService.Get(ctalias);
+					if (contentType == null)
+					{
+						contentType = new ContentType( container.Id );
+						contentType.Alias = "leblender" + alias;
+					}
 					contentType.Name = name;
 					contentType.Icon = (string) editor["icon"];
 					contentType.IsElement = true;
@@ -100,7 +105,14 @@ namespace Lecoati.LeBlender.Extension.Events
 				unknownDatatype = true;
 			}
 
-			PropertyType pt = new PropertyType( dt );
+			var pt = contentType.CompositionPropertyTypes.FirstOrDefault(p=>p.Alias == alias);
+			bool isNew = false;
+			if (pt == null)
+			{
+				pt = new PropertyType( dt );
+				isNew = true;
+			}
+
 			pt.Name = propertyName;
 			pt.Alias = alias;
 			pt.Mandatory = false;
@@ -108,13 +120,14 @@ namespace Lecoati.LeBlender.Extension.Events
 			if (unknownDatatype)
 				pt.Description = $"{description} / Unknown datatype: {dataTypeKey}";
 			pt.SortOrder = sortOrder;
-
-			contentType.AddPropertyType( pt, "Data" );
+			if (isNew)
+				contentType.AddPropertyType( pt, "Data" );
 		}
 
 		private EntityContainer GetLeblenderContainer()
 		{
-			var container = contentTypeService.GetContainer(containerId);
+			var container = contentTypeService.GetContainers( "LeBlender", 1 ).FirstOrDefault();
+			
 			if (container == null)
 			{
 				container = new EntityContainer( Umbraco.Core.Constants.ObjectTypes.DocumentType );
