@@ -56,7 +56,7 @@ namespace Lecoati.LeBlender.Extension.Events
 					if (contentType == null)
 					{
 						contentType = new ContentType( container.Id );
-						contentType.Alias = "leblender" + alias;
+						contentType.Alias = ctalias;
 					}
 					contentType.Name = name;
 					contentType.Icon = (string) editor["icon"];

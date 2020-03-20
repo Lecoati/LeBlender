@@ -107,46 +107,52 @@ namespace Lecoati.LeBlender.Extension.Controllers
         [System.Web.Http.HttpGet]
         public object GetConfigForElementType(string key)
         {
-            Guid guidKey;
-            if (!Guid.TryParse( key, out guidKey ))
-                throw new Exception( $"Guid expected: {key}" );
             List<object> result = new List<object>();
-            var contentTypeService = Services.ContentTypeService;
-            var dataTypeService = Services.DataTypeService;
 
-            var contentType = contentTypeService.Get(guidKey);
-            if (contentType == null)
+            try
             {
-                logger.Error( GetType(), null, $"Content type {guidKey} not found" );
-                return result;
-            }
+                Guid guidKey;
+                if (!Guid.TryParse( key, out guidKey ))
+                    throw new Exception( $"Guid expected: {key}" );
+                var contentTypeService = Services.ContentTypeService;
+                var dataTypeService = Services.DataTypeService;
 
-            foreach (var prop in contentType.CompositionPropertyTypes)
-            {
-                /*
+                var contentType = contentTypeService.Get(guidKey);
+
+                if (contentType == null)
+                    throw new Exception( $"Content type {guidKey} not found" );
+
+                foreach (var prop in contentType.CompositionPropertyTypes)
                 {
-	                "config": {
-		                "showOpenButton": false,
-		                "startNodeId": "umb://document/4589c61e907e4203b83b0de1beff1a08",
-		                "ignoreUserStartNodes": false
-	                },
-	                "view": "views/propertyeditors/contentpicker/contentpicker.html"
+                    /*
+                    {
+                        "config": {
+                            "showOpenButton": false,
+                            "startNodeId": "umb://document/4589c61e907e4203b83b0de1beff1a08",
+                            "ignoreUserStartNodes": false
+                        },
+                        "view": "views/propertyeditors/contentpicker/contentpicker.html"
+                    }
+                     */
+
+                    object propretyType = GetDataTypeConfig( prop.DataTypeKey );
+
+                    result.Add(
+                    new
+                    {
+                        name = prop.Name,
+                        alias = prop.Alias,
+                        dataType = prop.DataTypeKey,
+                        description = prop.Description,
+                        propretyType
+                    } );
                 }
-                 */
-                
-                object propretyType = GetDataTypeConfig( prop.DataTypeKey );
 
-                result.Add(
-                new
-                {
-                    name = prop.Name,
-                    alias = prop.Alias,
-                    dataType = prop.DataTypeKey,
-                    description = prop.Description,
-                    propretyType
-                } );
             }
-
+            catch (Exception ex)
+            {
+                this.logger.Error( GetType(), ex, "Error in GetConfigForElementType" );
+            }
             return result;
         }
 
