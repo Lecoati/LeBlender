@@ -23,7 +23,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
             var modelStr = Request["model"];
             var view = Request["view"];
             dynamic model = JsonConvert.DeserializeObject(modelStr);
-            return View("/views/Partials/" + view + ".cshtml", model);
+            return View("~/views/Partials/" + view + ".cshtml", model);
         }
 
         [ValidateInput(false)]

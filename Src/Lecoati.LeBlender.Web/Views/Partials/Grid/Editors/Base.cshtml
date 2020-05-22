@@ -6,9 +6,15 @@
     {
         string view = contentItem.editor.render != null ? contentItem.editor.render.ToString() : contentItem.editor.view.ToString();
         view = view.ToLower().Replace(".html", ".cshtml");
-        
-        if (!view.Contains("/")) {
+
+        if (!view.Contains("/"))
+        {
             view = "grid/editors/" + view;
+        }
+        else
+        {
+            //fix relative paths when using a virtual directory
+            view = "~" + view;
         }
 
         return view;
