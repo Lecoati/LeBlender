@@ -21,11 +21,11 @@ namespace Lecoati.LeBlender.Extension.Controllers
             // Check if the frontView is a custom path
             if (string.IsNullOrEmpty(frontView))
             {
-                frontView = String.Format("/views/partials/grid/editors/{0}.cshtml", Helper.FirstCharToUpper(editorAlias));
+                frontView = String.Format("~/views/partials/grid/editors/{0}.cshtml", Helper.FirstCharToUpper(editorAlias));
             }
             else if (frontView.IndexOf("/") < 0)
             {
-                frontView = string.Format("/Views/Partials/Grid/Editors/{0}.cshtml", frontView);
+                frontView = string.Format("~/Views/Partials/Grid/Editors/{0}.cshtml", frontView);
             }
 
             // Look for a custom controller
