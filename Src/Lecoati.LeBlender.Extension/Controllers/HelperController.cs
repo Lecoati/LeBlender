@@ -1,54 +1,94 @@
-﻿using Newtonsoft.Json;
+﻿using LightInject;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Net;
 using Umbraco.Core.Models;
 using Umbraco.Web;
 using Umbraco.Web.Editors;
 using Umbraco.Web.Models;
 using Umbraco.Web.Mvc;
-using Umbraco.Web.UI.Pages;
+using Umbraco.Core;
+using Umbraco.Core.Cache;
+using Umbraco.Core.Logging;
+using Umbraco.Core.Composing;
+using Umbraco.Web.WebApi;
+using System.Web.Http;
+using Newtonsoft.Json.Linq;
+using System.Net.Http;
 
 namespace Lecoati.LeBlender.Extension.Controllers
 {
-    public class HelperController : UmbracoAuthorizedController
+	[PluginController("LeBlender")]
+    public class HelperController : UmbracoAuthorizedApiController
     {
-        [ValidateInput(false)]
+		private readonly ILogger logger;
+		private readonly AppCaches appCaches;
+
+		public HelperController(ILogger logger)
+		{
+			this.appCaches = Current.Factory.GetInstance<AppCaches>();
+			this.logger = logger;
+		}
+
         [HttpPost]
-        public ActionResult GetPartialViewResultAsHtmlForEditor()
+        public HttpResponseMessage GetPartialViewResultAsHtmlForEditor([FromBody]JObject jObj)
         {
-            var modelStr = Request["model"];
-            var view = Request["view"];
-            dynamic model = JsonConvert.DeserializeObject(modelStr);
-            return View("/views/Partials/" + view + ".cshtml", model);
-        }
+			try
+			{
+				var modelStr = (string)jObj["model"];
+				var view = (string)jObj["view"];
+				var model = JsonConvert.DeserializeObject<JObject>( modelStr );
+				model["contentId"] = (int)jObj["id"];
+				var result = new HttpResponseMessage( HttpStatusCode.OK );
+				string viewResult = new ViewRenderer().RenderPartialViewToString( "/views/Partials/" + view + ".cshtml", model );
+				result.Content = new StringContent( viewResult );
+				return result;
+			}
+			catch (Exception ex)
+			{
+				this.logger.Error<HelperController>( ex );
+				throw;  // returns a 500
+			}
+		}
 
-        [ValidateInput(false)]
-        [HttpPost]
-        public ActionResult SaveEditorConfig()
-        {
-            var config = Request["config"];
-            var configPath = Request["configPath"];
+		[HttpPost]
+		public object SaveEditorConfig([FromBody] JObject jObj)
+		{
+			try
+			{
+				var config = jObj["config"];
+				var configPath = (string)jObj["configPath"];
 
-            // Update
-            var mappedConfigPath = Server.MapPath(configPath);
-            using (var file = new System.IO.StreamWriter(mappedConfigPath))
-            {
-                file.Write(config);
-            }
+				// Update
+				using (System.IO.StreamWriter file = new System.IO.StreamWriter( System.Web.HttpContext.Current.Server.MapPath( configPath ) ))
+				{
+					file.Write( config.ToString() );
+				}
 
-            // Refrech GridConfig for next use
-            HttpContext.Cache.Remove("LeBlenderControllers");
-            HttpContext.Cache.Remove("LeBlenderGridEditorsList");
-            ApplicationContext.ApplicationCache.RuntimeCache.ClearCacheByKeySearch("LEBLENDEREDITOR");
-            ApplicationContext.ApplicationCache.RuntimeCache.ClearCacheItem(typeof(BackOfficeController) + "GetGridConfig");
+				// Refrech GridConfig for next use
 
-            return Json(new { Message = "Saved" });
-        }
+				appCaches.RequestCache.ClearByKey( "LeBlenderControllers" );
+				appCaches.RequestCache.ClearByKey( "LeBlenderGridEditorsList" );
 
-    }
+				appCaches.RuntimeCache.ClearByRegex( @"LEBLENDEREDITOR\.*" );
+                appCaches.RuntimeCache.ClearByRegex( @"Leblender.EditorConfig\.*" );
+
+                // See GridEditorsConfig.cs in Umbraco.Core
+                // We need to invalidate the cache, in order to load the change configs during next use.
+                appCaches.RuntimeCache.ClearByKey( "Umbraco.Core.Configuration.Grid.GridEditorsConfig.Editors" );
+
+				return new { Message = "Saved" };
+			}
+			catch (Exception ex)
+			{
+				this.logger.Error<HelperController>( ex );
+				throw;  // returns a 500
+			}
+		}
+
+	}
 
 }

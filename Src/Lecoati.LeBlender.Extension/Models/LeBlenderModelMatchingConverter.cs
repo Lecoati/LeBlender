@@ -30,7 +30,7 @@ namespace Lecoati.LeBlender.Extension.Models
 
             foreach (var property in properties)
             {
-                if (property.Any())
+                if (property.Any() && property.Name != "propertiesOpen")
                 {
                     bpml.Add(JsonConvert.DeserializeObject<LeBlenderPropertyModel>(property.First().ToString()));
                 }

@@ -1,62 +1,84 @@
-﻿using System.Linq;
-using umbraco.BusinessLogic.Actions;
+﻿using Lecoati.LeBlender.Extension;
+using Lecoati.LeBlender.Extension.Models;
+using System.Collections.Generic;
+using System.Linq;
 using Umbraco.Core;
+using Umbraco.Core.Cache;
+using Umbraco.Core.Logging;
 using Umbraco.Core.Services;
+using Umbraco.Web;
+using Umbraco.Web.Actions;
 using Umbraco.Web.Models.Trees;
 using Umbraco.Web.Mvc;
 using Umbraco.Web.Trees;
+using Umbraco.Web.WebApi.Filters;
 
 namespace Lecoati.LeBlender.Extension.Controllers
 {
-    [PluginController("LeBlender")]
-    [Tree("developer", "GridEditorManager", "Grid Editors", iconClosed: "icon-doc")]
-    public class LeBlenderEditorManagerTreeController : TreeController
-    {
 
-        protected override MenuItemCollection GetMenuForNode(string id, System.Net.Http.Formatting.FormDataCollection queryStrings)
+    [PluginController("LeBlender")]
+	[UmbracoTreeAuthorize( Constants.Trees.DataTypes)]
+	//[Tree( Constants.Applications.Settings, Constants.Trees.DocumentTypes, SortOrder = 0, TreeGroup = Constants.Trees.Groups.Settings )]
+	[Tree( Constants.Applications.Settings, "GridEditorManager", TreeTitle ="Grid Editors", SortOrder = 4, TreeGroup = Constants.Trees.Groups.Settings )]
+	public class LeBlenderEditorManagerTreeController : TreeController
+    {
+		private readonly ILogger mainLogger;
+		private readonly UmbracoHelper umbracoHelper;
+		private readonly AppCaches appCaches;
+
+		public LeBlenderEditorManagerTreeController(ILogger logger, UmbracoHelper umbracoHelper, AppCaches appCaches)
+		{
+			this.mainLogger = logger;
+			this.umbracoHelper = umbracoHelper;
+			this.appCaches = appCaches;
+		}
+
+		protected override Umbraco.Web.Models.Trees.MenuItemCollection GetMenuForNode(string id, System.Net.Http.Formatting.FormDataCollection queryStrings)
         {
-            var textService = ApplicationContext.Services.TextService;
+            var textService = Services.TextService;
+            var createText = textService.Localize($"actions/{ActionNew.ActionAlias}");
+            var sortText = textService.Localize($"actions/{new ActionSort().Alias}");
+            //var refreshNodeText = textService.Localize($"actions/{ActionRefresh.Instance.Alias}");
+            var deleteText = textService.Localize($"actions/{ActionDelete.ActionAlias}");
 
             var menu = new MenuItemCollection();
-            if (IsRoot(id))
+            if (id == Constants.System.Root.ToInvariantString())
             {
-                // root actions              
-                var createText = textService.Localize($"actions/{ActionNew.Instance.Alias}");
-                menu.Items.Add<CreateChildEntity, ActionNew>(createText);
-
-                var sortText = textService.Localize($"actions/{ActionSort.Instance.Alias}");
-                menu.Items.Add<ActionSort>(sortText);
-                
-                var refreshNodeText = textService.Localize($"actions/{ActionRefresh.Instance.Alias}");
-                menu.Items.Add<RefreshNode, ActionRefresh>(refreshNodeText, true);
-                return menu;
+				// root actions              
+				//menu.Items.Add<ActionNew>(createText, false, true);
+				menu.Items.Add( new CreateChildEntity( Services.TextService, true ) );
+				menu.Items.Add<ActionSort>(sortText, false, true);
+				menu.Items.Add( new RefreshNode( Services.TextService, true ) );
+				return menu;
             }
-            
-            var deleteText = textService.Localize($"actions/{ActionDelete.Instance.Alias}");
             menu.Items.Add<ActionDelete>(deleteText);
-
             return menu;
         }
 
         protected override TreeNodeCollection GetTreeNodes(string id, System.Net.Http.Formatting.FormDataCollection queryStrings)
         {
+
             var nodes = new TreeNodeCollection();
-            if (!IsRoot(id))
-                 return nodes;
 
-            var editors = Helper.GetLeBlenderGridEditors(false).ToList();
-            foreach (var editor in editors)
-            {
-                nodes.Add(base.CreateTreeNode(editor.Alias, id, queryStrings, editor.Name, editor.Icon, false));
-            }
+			try
+			{
+				if (id == "-1")
+				{
+					IList<GridEditor> editors = new Helper().GetLeBlenderGridEditors( false ).ToList();
+					foreach (var editor in editors)
+					{
+						nodes.Add( this.CreateTreeNode( editor.Alias, id, queryStrings, editor.Name, editor.Icon, false ) );
+					}
 
-            return nodes;
-            
-        }
+					return nodes;
+				}
+			}
+			catch (System.Exception ex)
+			{
+				this.mainLogger.Error( GetType(), nameof( GetTreeNodes ), ex );
+			}
 
-        private static bool IsRoot(string id)
-        {
-            return id == Constants.System.Root.ToInvariantString();
+            return nodes;            
         }
     }
 }

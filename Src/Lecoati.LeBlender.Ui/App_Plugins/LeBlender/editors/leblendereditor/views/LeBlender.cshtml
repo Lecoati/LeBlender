@@ -1,3 +1,6 @@
-﻿@using System.Web.Mvc.Html;
-   
-@(Html.Action("RenderEditor", "LeBlender", new { area="", editorAlias = ViewData["editorAlias"], frontView = ViewData["frontView"], model = Model }))
+﻿@using System.Web.Mvc;
+@using System.Web.Mvc.Html;
+
+@inherits WebViewPage<dynamic>
+
+@(Html.Action( "RenderEditor", "LeBlender", new { editorAlias = ViewData["editorAlias"], frontView = ViewData["frontView"], contentId=ViewData["contentId"], model = Model } ))

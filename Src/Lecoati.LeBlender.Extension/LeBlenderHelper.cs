@@ -8,40 +8,55 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using Umbraco.Core;
+using Umbraco.Core.Cache;
 using Umbraco.Core.Logging;
 using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 using Umbraco.Web.Editors;
+using Umbraco.Web.Composing;
 
 namespace Lecoati.LeBlender.Extension
 {
     public class Helper
     {
+		private readonly ILogger logger;
+		private readonly AppCaches appCaches;
+		private readonly UmbracoContext umbracoContext;
+
+		public Helper()
+		{
+			this.logger = Current.Logger;
+			this.appCaches = Current.AppCaches;
+			this.umbracoContext = Current.UmbracoContext;
+		}
 
         /// <summary>
         /// Is Front End
         /// </summary>
         /// <returns></returns>
-        public static bool IsFrontEnd()
+        public bool IsFrontEnd()
         {
-            return UmbracoContext.Current.IsFrontEndUmbracoRequest;
+            return umbracoContext.IsFrontEndUmbracoRequest;
         }
 
         /// <summary>
         /// Get Current Content, takes into account frontend and backend
         /// </summary>
         /// <returns></returns>
-        public static IPublishedContent GetCurrentContent()
+        public IPublishedContent GetCurrentContent()
         {
-            var umbraco = new UmbracoHelper(UmbracoContext.Current);
-
-            if (UmbracoContext.Current.IsFrontEndUmbracoRequest)
+            if (umbracoContext.IsFrontEndUmbracoRequest)
             {
-                return umbraco.AssignedContentItem;
+                return umbracoContext.PublishedRequest.PublishedContent;
             }
-
-            return umbraco.TypedContent(HttpContext.Current.Request["id"]);
+            else
+            {
+				var si = (string)HttpContext.Current.Request["id"];
+				int id = 0;
+				int.TryParse( si, out id );
+				return Current.UmbracoHelper.Content( id );
+            }
         }
 
         /// <summary>
@@ -49,9 +64,16 @@ namespace Lecoati.LeBlender.Extension
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static LeBlenderModel DeserializeBlenderModel(dynamic model)
+        public LeBlenderModel DeserializeBlenderModel(dynamic model)
         {
-            return JsonConvert.DeserializeObject<LeBlenderModel>(model.ToString());
+			// We need to remove the propertiesOpen value, because this causes the deserialization to crash.
+			// It's only needed for editing, so it's not necessary to have it in the model.
+			// To keep the removal simple: model is always a JObject, so we are sure that ToString always delivers the exact format.
+			// Otherwise we would need to analyze the JObject and remove propertiesOpen in every item.
+			var result = JsonConvert.DeserializeObject<LeBlenderModel>(model.ToString());
+            if (result.Items == null)
+                result.Items = Enumerable.Empty<LeBlenderValue>();
+            return result;
         }
 
         /// <summary>
@@ -67,75 +89,77 @@ namespace Lecoati.LeBlender.Extension
             return ex.Message;
         }
 
-        /// <summary>
-        /// Get Cache expiration 
-        /// </summary>
-        /// <param name="LeBlenderEditorAlias"></param>
-        /// <returns></returns>
-        public static int GetCacheExpiration(String LeBlenderEditorAlias) { 
 
-            var result = 0;
+		/// <summary>
+		/// Get Cache expiration 
+		/// </summary>
+		/// <param name="leBlenderEditorAlias"></param>
+		/// <returns></returns>
+		public int GetCacheExpiration( String leBlenderEditorAlias )
+		{
 
-            try 
-            {
-                var editor = GetLeBlenderGridEditors(true).FirstOrDefault(r => r.Alias == LeBlenderEditorAlias);
-                if (editor.Config.ContainsKey("expiration") && editor.Config["expiration"] != null)
+			var result = 0;
+
+			try
+			{
+                var gridEditorConfig = Current.AppCaches.RuntimeCache.GetCacheItem( "Leblender.EditorConfig." + leBlenderEditorAlias, () =>
                 {
-                    int.TryParse(editor.Config["expiration"].ToString(), out result);
-                }
-            }
-            catch (Exception ex)
-            {
-                LogHelper.Error<Helper>("Could not read expiration datas", ex);
-            }
+                    var gridConfig = Current.Configs.Grids().EditorsConfig;
+                    return gridConfig.Editors.FirstOrDefault( ge => ge.Alias == leBlenderEditorAlias );
+                }, TimeSpan.FromMinutes( 15 ) );
+                var config = gridEditorConfig.Config;
+				if (config.ContainsKey( "expiration" ) && config["expiration"] != null)
+				{
+					int.TryParse( config["expiration"].ToString(), out result );
+				}
+			}
+			catch (Exception ex)
+			{
+				this.logger.Error<Helper>( "Could not read expiration datas for alias " + leBlenderEditorAlias, ex );
+			}
 
-            return result;
+			return result;
 
-        }
+		}
 
-        #region internal
+		#region internal
 
-        /// <summary>
-        /// Get and cache LeBlender Grid Editor 
-        /// </summary>
-        /// <returns></returns>
-        internal static IEnumerable<GridEditor> GetLeBlenderGridEditors(bool onlyLeBlenderEditor) 
-        {
-            
+		/// <summary>
+		/// Get and cache LeBlender Grid Editor 
+		/// </summary>
+		/// <returns></returns>
+		internal IEnumerable<GridEditor> GetLeBlenderGridEditors(bool onlyLeBlenderEditor) 
+        {            
             Func<List<GridEditor>> getResult = () =>
             {
                 var editors = new List<GridEditor>();
                 var gridConfig = HttpContext.Current.Server.MapPath("~/Config/grid.editors.config.js");
                 if (System.IO.File.Exists(gridConfig))
                 {
-                    try
-                    {
-                        var arr = JArray.Parse(System.IO.File.ReadAllText(gridConfig));
-                        var parsed = JsonConvert.DeserializeObject<IEnumerable<GridEditor>>(arr.ToString()); ;
-                        editors.AddRange(parsed);
+					try
+					{
+						var arr = JArray.Parse( System.IO.File.ReadAllText( gridConfig ) );
+						var parsed = JsonConvert.DeserializeObject<IEnumerable<GridEditor>>( arr.ToString() ); ;
+						editors.AddRange( parsed );
 
-                        if (onlyLeBlenderEditor)
-                        {
-                            editors = editors.Where(r => r.View.Equals("/App_Plugins/LeBlender/core/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase) ||
-                                r.View.Equals("/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase)).ToList();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        LogHelper.Error<Helper>("Could not parse the contents of grid.editors.config.js into a JSON array", ex);
-                    }
-                }
+						if (onlyLeBlenderEditor)
+						{
+							editors = editors.Where( r => r.View.Equals( "/App_Plugins/LeBlender/core/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase ) ||
+								 r.View.Equals( "/App_Plugins/LeBlender/editors/leblendereditor/LeBlendereditor.html", StringComparison.InvariantCultureIgnoreCase ) ).ToList();
+						}
+					}
+					catch (Exception ex)
+					{
+						this.logger.Error<Helper>( "Could not parse the contents of grid.editors.config.js into a JSON array", ex );
+					}
+				}
+
                 return editors;
             };
 
-            var result = (List<GridEditor>)HttpContext.Current.Cache["LeBlenderGridEditorsList"];
-            if (result == null || !onlyLeBlenderEditor)
-            { 
-                result = getResult();
-                HttpContext.Current.Cache.Add("LeBlenderGridEditorsList", result, null, DateTime.Now.AddDays(1), System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.High, null);
-            }
+			var result = appCaches.RequestCache.GetCacheItem<List<GridEditor>>( "LeBlenderGridEditorsList", getResult );
 
-            return (IEnumerable<GridEditor>)result;
+            return result;
 
         }
 
@@ -143,23 +167,18 @@ namespace Lecoati.LeBlender.Extension
         /// Get and cache LeBlender Controllers
         /// </summary>
         /// <returns></returns>
-        internal static IEnumerable<Type> GetLeBlenderControllers() {
+        internal IEnumerable<Type> GetLeBlenderControllers()
+		{
 
-            Func<List<Type>> getResult = () =>
-            {
-                // https://our.umbraco.org/documentation/Reference/Plugins/finding-types
-                var controllerTypes = PluginManager.Current.ResolveTypes<LeBlenderController>();
-                return controllerTypes.ToList();
-            };
+			var result = appCaches.RequestCache.GetCacheItem<IEnumerable<Type>>( "LeBlenderControllers",
+			() =>
+				{
+					var controllerTypes = Umbraco.Core.Composing.TypeFinder.FindClassesOfType<LeBlenderController>();
+					return controllerTypes.ToList();
+				}
+			);
 
-            var result = (List<Type>)HttpContext.Current.Cache["LeBlenderControllers"];
-            if (result == null)
-            {
-                result = getResult();
-                HttpContext.Current.Cache.Add("LeBlenderControllers", result, null, DateTime.Now.AddDays(1), System.Web.Caching.Cache.NoSlidingExpiration, System.Web.Caching.CacheItemPriority.High, null);
-            }
-
-            return (IEnumerable<Type>)result;
+            return result;
 
         }
 
@@ -168,7 +187,7 @@ namespace Lecoati.LeBlender.Extension
         /// </summary>
         /// <param name="editorAlias"></param>
         /// <returns></returns>
-        internal static Type GetLeBlenderController(string editorAlias)
+        internal Type GetLeBlenderController(string editorAlias)
         {
             Type result = null;
             var controllers = GetLeBlenderControllers();
@@ -210,37 +229,9 @@ namespace Lecoati.LeBlender.Extension
         /// </summary>
         /// <param name="myId"></param>
         /// <returns></returns>
-        internal static PublishedContentType GetTargetContentType()
+        internal IPublishedContentType GetTargetContentType()
         {
-            if (UmbracoContext.Current != null && UmbracoContext.Current.IsFrontEndUmbracoRequest)
-            {
-                var umbraco = new UmbracoHelper(UmbracoContext.Current);
-
-                return umbraco.AssignedContentItem.ContentType;
-            }
-
-            var doctype = HttpContext.Current?.Request["doctype"];
-            if (!string.IsNullOrEmpty(doctype))
-            {
-                return PublishedContentType.Get(PublishedItemType.Content, doctype);
-            }
-
-            var id = HttpContext.Current?.Request["id"];
-            if (int.TryParse(id, out var contentId))
-            {
-                return (PublishedContentType) ApplicationContext.Current.ApplicationCache.RuntimeCache.GetCacheItem(
-                    "LeBlender_GetTargetContentType_" + contentId,
-                    () =>
-                    {
-                        var services = ApplicationContext.Current.Services;
-                        var content = services.ContentService.GetById(contentId);
-                        var contentType =
-                            PublishedContentType.Get(PublishedItemType.Content, content.ContentType.Alias);
-                        return contentType;
-                    });
-            }
-
-            return null;
+			return GetCurrentContent()?.ContentType;
         }
 
         /// <summary>
@@ -248,25 +239,16 @@ namespace Lecoati.LeBlender.Extension
         /// </summary>
         /// <param name="myId"></param>
         /// <returns></returns>
-        internal static IDataTypeDefinition GetTargetDataTypeDefinition(Guid myId)
+        internal IDataType GetTargetDataTypeDefinition(Guid myId)
         {
-            return (IDataTypeDefinition)ApplicationContext.Current.ApplicationCache.RuntimeCache.GetCacheItem(
+            return (IDataType)this.appCaches.RuntimeCache.GetCacheItem(
                 "LeBlender_GetTargetDataTypeDefinition_" + myId,
                 () =>
                 {
-                    var services = ApplicationContext.Current.Services;
-                    var dtd = services.DataTypeService.GetDataTypeDefinitionById(myId);
+					var services = Current.Services;
+                    var dtd = services.DataTypeService.GetDataType(myId);
                     return dtd;
                 });
-        }
-
-        #endregion
-
-        #region private
-
-        private static UmbracoHelper GetUmbracoHelper()
-        {
-            return new UmbracoHelper(UmbracoContext.Current);
         }
 
         #endregion

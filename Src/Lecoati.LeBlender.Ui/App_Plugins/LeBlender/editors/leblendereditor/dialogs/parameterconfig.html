@@ -1,50 +1,77 @@
-<div class="list-panel" ng-controller="LeBlender.Dialog.Parameterconfig.Controller">
+<div class="list-panel" ng-controller="LeBlender.Dialog.Parameterconfig.Controller as vm">
 
-    <div id="blender-grid-editor-parameter" class="umb-panel">
+    <umb-editor-view>
 
-        <div class="umb-panel-body no-header with-footer">
-            <div class="umb-forms-settings">
+		<umb-editor-header
+            name="name"
+			icon="icon"
+			name-locked="true"
+			hide-alias="true"
+            hide-icon="true"
+			hide-description="true">
+		</umb-editor-header>
 
-                <h3>{{name}}</h3>
-                <em>Edit your content here</em>
+        <umb-editor-container class="form-horizontal" id="blender-grid-editor-parameter">
 
-                <div ng-if="configLoaded" ui-sortable="sortableOptions" ng-model="model.value">
-                    <div class="list list-field" ng-class="{'list-open':selected === item, 'multiple':!(fixed && config.min == 1)}" ng-click="select(item)" ng-repeat="item in model.value track by $index">
-                        
-                        <span ng-show="!(fixed && config.min == 1)" class="list-number">
-                            {{$index + 1}}
-                            <i ng-show="model.value.length > 1" class="icon right icon-navigation"></i>
-                            <i ng-show="!fixed && model.value.length > config.min" ng-click=" remove(item, $index);$event.stopPropagation()" class="icon right icon-delete"></i>
-                        </span>
+            <div ng-if="configLoaded" ui-sortable="sortableOptions" ng-model="model.value">
 
-                        <umb-control-group label="{{property.$editor.name}}" description="{{property.$editor.description}}" 
-                                           ng-repeat="property in item | LeBlenderOrderObjectBy:'$order':false">
-                            <blender-editor-wrapper property="property" item="item"></blender-editor-wrapper>
-                        </umb-control-group>
+                <div class="umb-expansion-panel" ng-class="{'multiple':!(fixed && config.min == 1)}" ng-repeat="item in model.value track by $id(item)">
+
+                    <div class="umb-expansion-panel__header" ng-show="!(fixed && config.min == 1)" ng-click="vm.select(item, $index)">
+                        <div class="flex-auto">
+                            <span ng-show="!(fixed && config.min == 1)" class="list-number">
+                                {{$index + 1}}
+                            </span>
+                        </div>
+                        <i ng-show="model.value.length > 1" class="icon icon-navigation handle" style="margin-right: 5px;"></i>
+                        <div style="position: relative;">
+                            <i ng-show="!fixed && model.value.length > config.min" ng-click="vm.showPrompt(item, $event)" class="icon icon-delete" style="margin-right: 5px;"></i>
+                            <umb-confirm-action ng-if="item.deletePrompt"
+                                                direction="left"
+                                                on-confirm="vm.remove(item, $event, $index)"
+                                                on-cancel="vm.hidePrompt(item, $event)">
+                            </umb-confirm-action>
+                        </div>
+                        <ins class="umb-expansion-panel__expand" ng-class="{'icon-navigation-down': !item.propertiesOpen, 'icon-navigation-up': item.propertiesOpen}">&nbsp;</ins>
+                    </div>
+
+                    <div class="umb-expansion-panel__content" ng-show="item.propertiesOpen || (fixed && config.min == 1)">
+
+                        <div>
+                            <umb-control-group label="{{property.$editor.name}}" description="{{property.$editor.description}}"
+                                               ng-repeat="property in item | LeBlenderOrderObjectBy:'$order':false">
+                                <blender-editor-wrapper property="property" item="item"></blender-editor-wrapper>
+                            </umb-control-group>
+                        </div>
 
                     </div>
+
                 </div>
+
             </div>
 
-            <div ng-show="!fixed && config.max > model.value.length" class="list-add-row">
-                <i ng-click="add()" class="icon right icon-add"></i>
+            <div ng-show="!fixed && config.max > model.value.length" ng-click="vm.add()" class="list-add-row">
+                <localize key="grid_addElement">Add element</localize>
             </div>
 
-        </div>
+        </umb-editor-container>
 
-        <div class="umb-panel-footer">
-            <div class="umb-el-wrap umb-panel-buttons">
-                <div class="btn-toolbar umb-btn-toolbar pull-right">
-                    <a ng-click="close()" class="btn btn-link">
-                        <localize key="general_cancel">Cancel</localize>
-                    </a>
-                    <a ng-click="save()" class="btn btn-primary">
-                        <localize key="actions_update">Update</localize>
-                    </a>
-                </div>
-            </div>
-        </div>
+		<umb-editor-footer>
+			<umb-editor-footer-content-right>
+				<umb-button type="button"
+							button-style="link"
+							label-key="general_close"
+							shortcut="esc"
+							action="vm.close()">
+				</umb-button>
+				<umb-button type="button"
+							button-style="success"
+							label-key="general_submit"
+							state="vm.saveButtonState"
+							action="vm.submit(model)">
+				    </umb-button>
+			</umb-editor-footer-content-right>
+		</umb-editor-footer>
 
-    </div>
-
+    </umb-editor-view>
 </div>

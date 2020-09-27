@@ -10,14 +10,28 @@ using Lecoati.LeBlender.Extension.Models;
 using Newtonsoft.Json;
 using Umbraco.Web.Editors;
 using Umbraco.Core.Logging;
+using Umbraco.Web;
+using Umbraco.Core.Cache;
 
 namespace Lecoati.LeBlender.Extension.Controllers
 {
     public class LeBlenderController : SurfaceController
     {
-        [ChildActionOnly]
+		private readonly ILogger logger;
+		private readonly UmbracoHelper umbracoHelper;
+		private readonly AppCaches appCaches;
+
+		public LeBlenderController( ILogger logger, UmbracoHelper umbracoHelper, AppCaches appCaches )
+		{
+			this.logger = logger;
+			this.umbracoHelper = umbracoHelper;
+			this.appCaches = appCaches;
+		}
+
+		[ChildActionOnly]
         public ActionResult RenderEditor(string editorAlias, string frontView, LeBlenderModel model)
         {
+
             // Check if the frontView is a custom path
             if (string.IsNullOrEmpty(frontView))
             {
@@ -29,9 +43,10 @@ namespace Lecoati.LeBlender.Extension.Controllers
             }
 
             // Look for a custom controller
-            var controllerType = Helper.GetLeBlenderController(editorAlias);
+            var controllerType = new Helper().GetLeBlenderController(editorAlias);
             if (controllerType != null)
             {
+
                 try
                 {
                     // Load a controller instance
@@ -70,7 +85,7 @@ namespace Lecoati.LeBlender.Extension.Controllers
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.Error<LeBlenderController>("Could not load LeBlender invoke the custom controller", ex);
+                    this.logger.Error<LeBlenderController>("Could not load LeBlender invoke the custom controller", ex);
                 }
 
             }

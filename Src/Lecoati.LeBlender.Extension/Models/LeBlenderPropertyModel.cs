@@ -5,9 +5,11 @@ using System.Linq;
 using System.Web;
 using Umbraco.Core;
 using Umbraco.Core.Models;
+using Umbraco.Core.Composing;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;
 using Umbraco.Web;
+using System.Collections;
 
 namespace Lecoati.LeBlender.Extension.Models
 {
@@ -28,52 +30,82 @@ namespace Lecoati.LeBlender.Extension.Models
 
         public T GetValue<T>()
         {
+			// if already the requested type, return
+			if (Value is T) return (T) Value;
 
+			var helper = new Helper();
             //var targetContentType = Helper.GetTargetContentType();
-            var targetDataType = Helper.GetTargetDataTypeDefinition(Guid.Parse(DataTypeGuid));
+            var targetDataType = helper.GetTargetDataTypeDefinition(Guid.Parse(DataTypeGuid));
 
-            var propertyType = new PublishedPropertyType(Helper.GetTargetContentType(),
-                new PropertyType(new DataTypeDefinition(targetDataType.PropertyEditorAlias)
-                {
-                    Id = targetDataType.Id
-                }));
+			// This propertyType is a mock, where only the TargetDatatype.EditorAlias is used in x.IsConverter(propertyType)
+			// This constructor is the one with minimal validity checks. See comment in PublishedPropertyType.cs.
+			// But this may change in future, so be prepared to look into the Umbraco source code, if this code fails.
+			var propertyType = new PublishedPropertyType( "pt-" + targetDataType.Id, targetDataType.Id, true, ContentVariation.Nothing, new PropertyValueConverterCollection( new IPropertyValueConverter[] { } ), new PublishedModelFactoryMock(), Current.PublishedContentTypeFactory );
 
-            // Try Umbraco's PropertyValueConverters
-            var converters = PropertyValueConvertersResolver.Current.Converters.ToArray();
-            foreach (var converter in converters.Where(x => x.IsConverter(propertyType)))
-            {
-                // Convert the type using a found value converter
-                var value2 = converter.ConvertDataToSource(propertyType, Value, false);
+			var converters = Current.Factory.GetInstance<PropertyValueConverterCollection>().ToArray();
+			foreach (var converter in converters.Where( x => x.IsConverter( propertyType ) ))
+			{
+				object intermediate = null;
+				// We need to catch the exception without consequences, since we have no IPublishedElement at hand and provide null as parameter.
+				// That might fail in the converter and we can try again with another converter.
+				try
+				{
+					intermediate = converter.ConvertSourceToIntermediate( null, propertyType, Value, false );
+				}
+				catch (Exception)
+				{
+				}
 
-                // If the value is of type T, just return it
-                if (value2 is T)
-                    return (T)value2;
+				if (intermediate == null)
+					continue;
 
-                // If ConvertDataToSource failed try ConvertSourceToObject.
-                var value3 = converter.ConvertSourceToObject(propertyType, value2, false);
+				if (intermediate.GetType() == typeof( T ))
+					return (T) intermediate;
 
-                // If the value is of type T, just return it
-                if (value3 is T)
-                    return (T)value3;
+				object targetObject = null;
 
-                // Value is not final value type, so try a regular type conversion aswell
-                var convertAttempt = value2.TryConvertTo<T>();
-                if (convertAttempt.Success)
-                    return convertAttempt.Result;
+				try
+				{
+					targetObject = converter.ConvertIntermediateToObject( null, propertyType, PropertyCacheLevel.None, intermediate, false );
+				}
+				catch (Exception)
+				{
+				}
+
+				if (targetObject == null)
+					continue;
+
+				if (typeof( T ).IsAssignableFrom( targetObject.GetType() ))
+					return (T) targetObject;
+
             }
 
-            // if already the requested type, return
-            if (Value is T) return (T)Value;
-
-            // if can convert to requested type, return
-            var convert = Value.TryConvertTo<T>();
-            if (convert.Success) return convert.Result;
+			// Value is not final value type, so try a regular type conversion aswell
+			var convertAttempt = Value.TryConvertTo<T>();
+			if (convertAttempt.Success)
+				return convertAttempt.Result;
 
             return default(T);
 
         }
 
+		class PublishedModelFactoryMock : IPublishedModelFactory
+		{
+			public IPublishedElement CreateModel( IPublishedElement element )
+			{
+				throw new NotImplementedException();
+			}
 
+			public IList CreateModelList( string alias )
+			{
+				throw new NotImplementedException();
+			}
 
-    }
+			public Type MapModelType( Type type )
+			{
+				throw new NotImplementedException();
+			}
+		}		
+
+	}
 }
